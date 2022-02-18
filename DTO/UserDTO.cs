@@ -1,6 +1,8 @@
 
 public class UserDTO
 {
+    public static List<UserDTO> UserDTOList = new List<UserDTO>(); 
+
     public int Id { get; set; }
     public string? Name { get; set; }
     public string? Surname { get; set; }
