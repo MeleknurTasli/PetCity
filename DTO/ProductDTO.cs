@@ -1,6 +1,41 @@
 public class ProductDTO{
 
-    public static List<ProductDTO> staticList = new List<ProductDTO>();
+    public static List<ProductDTO> staticList = new List<ProductDTO>
+    {
+        new ProductDTO() 
+        {
+            ID = 1,
+            Name = "Minnak",
+            Detail = "fdsfsdf",
+            Price = 12.45m,
+            Stock = 12,
+            SupplierId = 10,
+            Brand = "sadsad",
+            CategoryId = 3
+        },
+         new ProductDTO() 
+        {
+            ID = 2,
+            Name = "Test",
+            Detail = "fdsfsdf",
+            Price = 22.45m,
+            Stock = 10,
+            SupplierId = 15,
+            Brand = "sadsad",
+            CategoryId = 2
+        },
+         new ProductDTO() 
+        {
+            ID = 3,
+            Name = "Minnak",
+            Detail = "fdsfsdf",
+            Price = 20.45m,
+            Stock = 45,
+            SupplierId = 4,
+            Brand = "sadsad",
+            CategoryId = 1
+        }
+    };
 
     public int ID {get;set;}
     public string Name { get; set; }
