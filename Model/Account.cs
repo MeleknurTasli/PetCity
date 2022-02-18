@@ -1,19 +1,16 @@
-public class AccountDTO
+public class Account
 {
-    //For Test
-
-    public static List<AccountDTO> AccountDTOList = new List<AccountDTO>(); 
-
     public int Id { get; set; }
     public string? Email { get; set; }
     public string? Password { get; set; }
+    public bool isBlocked { get; set; }
 
-    public AccountDTO()
+    public Account()
     {
-        
+
     }
 
-    public AccountDTO(int Id, string Email, string Password)
+    public Account(int Id, string Email, string Password)
     {
         this.Id = Id;
         this.Email = Email;

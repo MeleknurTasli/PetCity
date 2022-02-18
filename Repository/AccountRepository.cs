@@ -1,13 +1,13 @@
 public class AccountRepository
 {
-    public List<AccountDTO> GetAccount()
+    public List<Account> getAccount()
     {
-        return AccountDTO.AccountDTOList;
+        return MockData.AccountMockDataList;
     }
   
-    public AccountDTO getAccountByEmail(string email)
+    public Account getAccountByEmail(string email)
     {
-        var user = AccountDTO.AccountDTOList.FirstOrDefault(h => h.Email == email);
+        var user = MockData.AccountMockDataList.FirstOrDefault(h => h.Email == email);
         if (user != null)
         {
             return user;
@@ -15,11 +15,11 @@ public class AccountRepository
         return null;
     }
 
-    public string SetAccount(AccountDTO account)
+    public string setAccount(Account account)
     {
         if(getAccountByEmail(account.Email) == null)
         {
-            AccountDTO.AccountDTOList.Add(account);
+            MockData.AccountMockDataList.Add(account);
         }else{
             return "Kullanıcı Emaili Kayıtlıdır.!!!";
         }

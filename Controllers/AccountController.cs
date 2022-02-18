@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation.Results; 
 
 namespace PetCity.Controllers;
 
@@ -7,26 +8,34 @@ namespace PetCity.Controllers;
 public class AccountController : ControllerBase
 {
 
-    private AccountService service = new AccountService();
+    private readonly IAccountService _accountService;
 
-    [HttpPost]
-
-    public string SetAccount(AccountDTO account)
+    public AccountController(IAccountService accountService)
     {
-        
-        return service.SetAccount(account);
+        _accountService = accountService;
     }
 
     [HttpGet]
-    public List<AccountDTO> getAccount()
+    public List<Account> getAccount()
     {
-        return service.getAccount();
+        return _accountService.getAccount();
     }
 
     [HttpGet("{email}")]
-    public AccountDTO getAccountByEmail(string email)
+    public Account getAccountByEmail(string email)
     {
-        return service.getAccountByEmail(email);
+        return _accountService.getAccountByEmail(email);
+    }
+
+    
+    [HttpPost]
+    public string setAccount(Account account)
+    {
+        AccountValidator validator = new AccountValidator();
+        ValidationResult results = validator.Validate(account);
+        if(!results.IsValid) return _accountService.setAccount(account);
+        return "Lütfen geçerli bir değer girin.";
+        
     }
 
 }
