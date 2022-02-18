@@ -7,15 +7,15 @@ namespace PetCity.Controllers;
 public class ProductController : ControllerBase
 {
     [HttpGet]
-    public List<ProductDTO> GetProduct()
+    public List<Product> GetProduct()
     {
-        return ProductDTO.staticList;
+        return MockData.ProductMockDataList;
     }
 
     [HttpPost]
-    public string Create(ProductDTO product)
+    public string Create(Product product)
     {
-        ProductDTO.staticList.Add(product);
+        MockData.ProductMockDataList.Add(product);
         return "Ok";
     }
 
