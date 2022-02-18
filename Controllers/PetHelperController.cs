@@ -20,7 +20,7 @@ public class PetHelperController : ControllerBase
     }
     [HttpGet("{latitude}/{longtitude}")]
     public PetHelperDTO FindPetHelperByLatLong(string latitude,string longtitude){
-        var result = FindPetHelperByLatLong(latitude,longtitude);
+        var result = PetHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
         return result;
     }
 }
