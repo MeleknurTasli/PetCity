@@ -13,6 +13,6 @@ public class ProductDTO{
 
     public ProductDTO(int Id)
     {
-        this.ID = Id;
+      
     }
 }
