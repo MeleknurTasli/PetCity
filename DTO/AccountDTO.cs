@@ -1,5 +1,8 @@
 public class AccountDTO
 {
+
+    public static List<AccountDTO> AccountDTOList = new List<AccountDTO>(); 
+
     public int Id { get; set; }
     public string? Email { get; set; }
     public string? Password { get; set; }
