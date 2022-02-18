@@ -11,6 +11,10 @@ public class ProductController : ControllerBase
     {
         return ProductDTO.staticList;
     }
-    
+    [HttpPost]
+    public string setProduct(ProductDTO product){
+        ProductDTO.staticList.Add(product);
+        return "OK";
+    }
 
 }
