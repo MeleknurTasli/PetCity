@@ -12,3 +12,13 @@ public class ProductDTO{
     public int CategoryId { get; set; }
     
 }
+/*
+{"id":1,
+ "Name": "Minnak",
+ "Detail":"fdsfsdf",
+ "Price":12.45,
+ "Stock":12,
+ "SupplierId":10,
+ "Brand":"sadsad",
+ "CategoryId":2}
+ */
