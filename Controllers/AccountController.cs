@@ -7,23 +7,22 @@ namespace PetCity.Controllers;
 public class AccountController : ControllerBase
 {
     [HttpPost]
-
-    public string SetAccount(AccountDTO account)
+    public string SetAccount(Account account)
     {
-        AccountDTO.AccountDTOList.Add(account);
+        MockData.AccountMockDataList.Add(account);
         return "Ok";
     }
 
     [HttpGet]
-    public List<AccountDTO> getAccount()
+    public List<Account> getAccount()
     {
-        return AccountDTO.AccountDTOList;
+        return MockData.AccountMockDataList;
     }
 
     [HttpGet("{email}")]
-    public AccountDTO getAccountByEmail(string email)
+    public Account getAccountByEmail(string email)
     {
-        var user = AccountDTO.AccountDTOList.FirstOrDefault(h => h.Email == email);
+        var user = MockData.AccountMockDataList.FirstOrDefault(h => h.Email == email);
         if (user != null)
         {
             return user;
