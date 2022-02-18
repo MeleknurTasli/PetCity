@@ -1,12 +1,18 @@
-public class AccountService { 
+public class AccountService : IAccountService{ 
 
-    private AccountRepository accountRepository = new AccountRepository();
-    public List<AccountDTO> getAccount()
+    private AccountRepository accountRepository;
+
+    public AccountService()
+    {
+        accountRepository = new AccountRepository();
+    }
+    
+    public List<Account> getAccount()
     {
         return accountRepository.getAccount();
     }
 
-   public AccountDTO getAccountByEmail(string email)
+   public Account getAccountByEmail(string email)
     {
         var user = accountRepository.getAccountByEmail(email);
         if (user != null)
@@ -16,7 +22,7 @@ public class AccountService {
         return null;
     }
 
-    public string setAccount(AccountDTO account)
+    public string setAccount(Account account)
     {
        if(getAccountByEmail(account.Email) == null)
         {
