@@ -26,10 +26,7 @@ public class AccountController : ControllerBase
     [HttpGet("{email}")]
     public AccountDTO getAccountByEmail(string email)
     {
-        
-
         return service.getAccountByEmail(email);
-
     }
 
 }

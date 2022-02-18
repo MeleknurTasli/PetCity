@@ -1,3 +1,4 @@
-public interface IExampleService {
+public interface IExampleService 
+{
     
 }

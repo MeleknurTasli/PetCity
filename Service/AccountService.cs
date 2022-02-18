@@ -17,7 +17,13 @@ public class AccountService {
 
     public string SetAccount(AccountDTO account)
     {
-        AccountDTO.AccountDTOList.Add(account);
+       if(getAccountByEmail(account.Email) == null)
+        {
+            AccountDTO.AccountDTOList.Add(account);
+        }else{
+            return "Kullanıcı Emaili Kayıtlıdır.!!!";
+        }
+        
         return "Ok";
     }
 
