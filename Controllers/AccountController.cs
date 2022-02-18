@@ -31,11 +31,13 @@ public class AccountController : ControllerBase
     [HttpPost]
     public string setAccount(Account account)
     {
+
         AccountValidator validator = new AccountValidator();
         ValidationResult results = validator.Validate(account);
         if(!results.IsValid) return _accountService.setAccount(account);
         return "Lütfen geçerli bir değer girin.";
         
+
     }
 
 }
