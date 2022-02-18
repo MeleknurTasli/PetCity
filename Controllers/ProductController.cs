@@ -18,6 +18,13 @@ public class ProductController : ControllerBase
         ProductDTO.staticList.Add(product);
         return "Ok";
     }
+
+    [HttpGet("{name}")]
+    public ProductDTO? GetProductByName(string name)
+    {
+        ProductDTO? product = ProductDTO.staticList.FirstOrDefault(x => x.Name == name);
+        return product;
+    }
 }
 /*
 {"id":1,
