@@ -1,13 +1,14 @@
 public class AccountService { 
 
+    private AccountRepository accountRepository = new AccountRepository();
     public List<AccountDTO> getAccount()
     {
-        return AccountDTO.AccountDTOList;
+        return accountRepository.getAccount();
     }
 
    public AccountDTO getAccountByEmail(string email)
     {
-        var user = AccountDTO.AccountDTOList.FirstOrDefault(h => h.Email == email);
+        var user = accountRepository.getAccountByEmail(email);
         if (user != null)
         {
             return user;
@@ -15,11 +16,11 @@ public class AccountService {
         return null;
     }
 
-    public string SetAccount(AccountDTO account)
+    public string setAccount(AccountDTO account)
     {
        if(getAccountByEmail(account.Email) == null)
         {
-            AccountDTO.AccountDTOList.Add(account);
+            accountRepository.setAccount(account);
         }else{
             return "Kullanıcı Emaili Kayıtlıdır.!!!";
         }

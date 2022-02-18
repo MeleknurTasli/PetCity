@@ -1,6 +1,6 @@
 public class AccountRepository
 {
-    public List<AccountDTO> GetAccount()
+    public List<AccountDTO> getAccount()
     {
         return AccountDTO.AccountDTOList;
     }
@@ -15,7 +15,7 @@ public class AccountRepository
         return null;
     }
 
-    public string SetAccount(AccountDTO account)
+    public string setAccount(AccountDTO account)
     {
         if(getAccountByEmail(account.Email) == null)
         {

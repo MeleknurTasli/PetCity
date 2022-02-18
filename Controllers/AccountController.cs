@@ -14,7 +14,7 @@ public class AccountController : ControllerBase
     public string SetAccount(AccountDTO account)
     {
         
-        return service.SetAccount(account);
+        return service.setAccount(account);
     }
 
     [HttpGet]
