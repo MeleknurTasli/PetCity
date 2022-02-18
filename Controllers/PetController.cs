@@ -36,19 +36,21 @@ public class PetController : ControllerBase
     }
 
 
-    [HttpPut]
-    public PetDTO Put([FromBody] PetDTO petDTO)
+    [HttpPut("{id}")]
+    public void Put(PetDTO petDTO,int id)
     {
-        var editedPet = PetDTO.PetList.FirstOrDefault(x=>x.id == petDTO.id);
-        editedPet.name = petDTO.name;
-        editedPet.About = petDTO.About;
-        editedPet.BirthDate = petDTO.BirthDate;
-        editedPet.Family = petDTO.Family;
-        editedPet.Gender = petDTO.Gender;
-        editedPet.Genus = petDTO.Genus;
-        editedPet.UserID = petDTO.UserID;
+        PetRepository pet =new PetRepository(); 
+        pet.PetEdit(petDTO,id);    
+        //var editedPet = PetDTO.PetList.FirstOrDefault(x=>x.id ==id);
+        // editedPet.name = petDTO.name;
+        // editedPet.About = petDTO.About;
+        // editedPet.BirthDate = petDTO.BirthDate;
+        // editedPet.Family = petDTO.Family;
+        // editedPet.Gender = petDTO.Gender;
+        // editedPet.Genus = petDTO.Genus;
+        // editedPet.UserID = petDTO.UserID;
 
-        return editedPet;
+        //return editedPet ;
 
     }
 }

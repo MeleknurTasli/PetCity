@@ -6,7 +6,7 @@ public class PetDTO {
     public Family Family { get; set; }
     public Gender Gender { get; set; }
     public string Genus { get; set; }
-        public int UserID { get; set; }
+    public int UserID { get; set; }
     public string About { get; set; }
 
 
