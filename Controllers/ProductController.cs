@@ -20,9 +20,9 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("{name}")]
-    public ProductDTO? GetProductByName(string name)
+    public Product? GetProductByName(string name)
     {
-        ProductDTO? product = ProductDTO.staticList.FirstOrDefault(x => x.Name == name);
+        Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name);
         return product;
     }
 }
