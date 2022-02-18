@@ -7,15 +7,16 @@ namespace PetCity.Controllers;
 public class PetHelperController : ControllerBase
 {
 
-    
+
     [HttpGet]
-    public List<PetHelperDTO> Get()
+    public List<PetHelper> Get()
     {
-        return PetHelperDTO.petHelperStatic;        
+        return MockData.PetHelperMockDataList;
     }
     [HttpPost]
-    public string Add(PetHelperDTO petHelper){
-        PetHelperDTO.petHelperStatic.Add(petHelper);
+    public string Add(PetHelper petHelper)
+    {
+        MockData.PetHelperMockDataList.Add(petHelper);
         return "Ok";
     }
     [HttpGet("{latitude}/{longtitude}")]
