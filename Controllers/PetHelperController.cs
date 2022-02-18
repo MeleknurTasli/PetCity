@@ -18,4 +18,9 @@ public class PetHelperController : ControllerBase
         PetHelperDTO.petHelperStatic.Add(petHelper);
         return "Ok";
     }
+    [HttpGet("{latitude}/{longtitude}")]
+    public PetHelperDTO FindPetHelperByLatLong(string latitude,string longtitude){
+        var result = PetHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
+        return result;
+    }
 }
