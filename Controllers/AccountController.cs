@@ -6,28 +6,30 @@ namespace PetCity.Controllers;
 [Route("[controller]")]
 public class AccountController : ControllerBase
 {
+
+    private AccountService service = new AccountService();
+
     [HttpPost]
 
     public string SetAccount(AccountDTO account)
     {
-        AccountDTO.AccountDTOList.Add(account);
-        return "Ok";
+        
+        return service.SetAccount(account);
     }
 
     [HttpGet]
     public List<AccountDTO> getAccount()
     {
-        return AccountDTO.AccountDTOList;
+        return service.getAccount();
     }
 
     [HttpGet("{email}")]
     public AccountDTO getAccountByEmail(string email)
     {
-        var user = AccountDTO.AccountDTOList.FirstOrDefault(h => h.Email == email);
-        if (user != null)
-        {
-            return user;
-        }
-        return null;
+        
+
+        return service.getAccountByEmail(email);
+
     }
+
 }
