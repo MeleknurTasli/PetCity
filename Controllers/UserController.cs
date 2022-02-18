@@ -14,4 +14,10 @@ public class UserController : ControllerBase
         return "Ok";
     }
 
+    [HttpGet]
+    public List<UserDTO> GetUser()
+    {
+        return UserDTO.UserDTOList;
+    }
+
 }
