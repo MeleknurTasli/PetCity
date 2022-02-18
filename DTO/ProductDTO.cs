@@ -5,16 +5,14 @@ public class ProductDTO{
     public int ID {get;set;}
     public string Name { get; set; }
     public string Detail { get; set; }
-    public string Price { get; set; }
-    public string Stock { get; set; }
-    public string Supplier { get; set; }
+    public decimal Price { get; set; }
+    public int Stock { get; set; }
+    public int SupplierId { get; set; }
     public string Brand { get; set; }
-    public string Category { get; set; }
+    public int CategoryId { get; set; }
 
     public ProductDTO(int Id)
     {
         this.ID = Id;
     }
-
-
 }
