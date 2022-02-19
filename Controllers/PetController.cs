@@ -1,3 +1,4 @@
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PetCity.Controllers;
@@ -8,25 +9,51 @@ public class PetController : ControllerBase
 {
 
 
+
+ private readonly IPetService _IPetService;
+ public PetController(IPetService petService)
+    {
+        _IPetService = petService;
+    }
+
+
+
     [HttpGet]
     public List<Pet> Get()
     {
-        return MockData.PetMockDataList;
+        return _IPetService.GetPets();
     }
 
     [HttpGet("{id}")]
-    public Pet GetUser(int id)
+    public Pet GetPet(int id)
     {
-        var pet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
-        return pet;
+        // var pet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
+        // return pet;
+        return _IPetService.getPetsByPetId(id);
     }
 
 
     [HttpPost]
-    public string Add(Pet pet)
+    public string PetAdd(Pet pet)
     {
-        MockData.PetMockDataList.Add(pet);
-        return "Ok";
+        // MockData.PetMockDataList.Add(pet);
+        // return "Ok";
+
+
+    string eror ="";
+       PetValidator validator =new PetValidator();
+        ValidationResult results = validator.Validate(pet);
+        if (results.IsValid)
+        {
+            return _IPetService.PetAdd(pet);
+        }
+        foreach(var Errors in results.Errors)
+        {
+            eror += Errors.ErrorMessage + "\n";
+        }
+        return eror;
+
+
     }
 
     [HttpDelete("{id}")]
