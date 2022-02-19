@@ -9,8 +9,19 @@ public class Product
     public string Brand { get; set; }
     public int CategoryId { get; set; }
 
-    public Product(int Id)
+    public Product(){
+
+    }
+    public Product(int ID, string Name, string Detail, decimal Price,
+    int Stock, int SupplierId, string Brand, int CategoryId)
     {
-        this.ID = Id;
+        this.ID = ID;
+        this.Name = Name;
+        this.Detail = Detail;
+        this.Price = Price;
+        this.Stock = Stock;
+        this.SupplierId = SupplierId;
+        this.Brand = Brand;
+        this.CategoryId = CategoryId;
     }
 }
