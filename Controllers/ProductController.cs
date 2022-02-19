@@ -26,7 +26,8 @@ public class ProductController : ControllerBase
       if(p!=null){
           return "Ekleme başarılı";
       }
-        return "Başarısız";
+        
+       return "Başarısız";
     }
 
     [HttpGet("{name}")]
@@ -39,14 +40,28 @@ public class ProductController : ControllerBase
         return _productService.GetProductByBrand(Brand);
     }
 
+    // [HttpPost("{val}")]
+    // public string GetProductsOrderByPrice(bool val)
+    // {
+    //     bool test = val;
+    //     if (test) 
+    //     {
+    //         return "true";
+    //     }
+
+    //     return "false";
+    // }
+
 }
 /*
-{"id":1,
+{
+    "id":1,
  "Name": "Minnak",
  "Detail":"fdsfsdf",
  "Price":12.45,
  "Stock":12,
  "SupplierId":10,
  "Brand":"sadsad",
- "CategoryId":2}
+ "CategoryId":2
+ }
 */

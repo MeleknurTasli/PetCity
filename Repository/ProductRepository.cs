@@ -20,5 +20,8 @@ public class ProductRepository {
         return product;
     }
     
-    
+     public List<Product> GetProductOrderByPrice(bool IsDescending)
+    {
+        return IsDescending ? GetAll().OrderByDescending(x => x.Price).ToList() : GetAll(); 
+    }
 }
