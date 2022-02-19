@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation.Results;
 
 namespace PetCity.Controllers;
 
@@ -26,11 +27,23 @@ public class AccountController : ControllerBase
         return _accountService.getAccountByEmail(email);
     }
 
-    
+
     [HttpPost]
     public string setAccount(Account account)
-    {
-        return _accountService.setAccount(account);
+    {   
+        string err ="";
+        AccountValidator validator = new AccountValidator();
+        ValidationResult results = validator.Validate(account);
+        if (results.IsValid)
+        {
+            return _accountService.setAccount(account);
+        }
+        foreach(var Errors in results.Errors)
+        {
+            err += Errors.ErrorMessage + "\n";
+        }
+        return err;
+
     }
 
 }
