@@ -19,9 +19,9 @@ public class PetController : ControllerBase
 
 
     [HttpGet]
-    public List<Pet> Get()
+    public List<Pet> GetAll()
     {
-        return _IPetService.GetPets();
+        return _IPetService.GetAll();
     }
 
     [HttpGet("{id}")]
@@ -61,24 +61,33 @@ public class PetController : ControllerBase
     {
         var deletePet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
         MockData.PetMockDataList.Remove(deletePet);
+        _IPetService.Delete(id);
     }
 
 
     [HttpPut("{id}")]
-    public void Put(Pet petDTO, int id)
+    public Pet Put(Pet pet, int id)
     {
-        PetRepository pet = new PetRepository();
-        pet.PetEdit(petDTO, id);
-        //var editedPet = PetDTO.PetList.FirstOrDefault(x=>x.id ==id);
-        // editedPet.name = petDTO.name;
-        // editedPet.About = petDTO.About;
-        // editedPet.BirthDate = petDTO.BirthDate;
-        // editedPet.Family = petDTO.Family;
-        // editedPet.Gender = petDTO.Gender;
-        // editedPet.Genus = petDTO.Genus;
-        // editedPet.UserID = petDTO.UserID;
 
-        //return editedPet ;
+        // PetRepository pet = new PetRepository();
+        //  pet.PetEdit(petDTO, id);
+
+        return _IPetService.PetEdit(pet, id);
+
 
     }
+
+
+    //var editedPet = PetDTO.PetList.FirstOrDefault(x=>x.id ==id);
+    // editedPet.name = petDTO.name;
+    // editedPet.About = petDTO.About;
+    // editedPet.BirthDate = petDTO.BirthDate;
+    // editedPet.Family = petDTO.Family;
+    // editedPet.Gender = petDTO.Gender;
+    // editedPet.Genus = petDTO.Genus;
+    // editedPet.UserID = petDTO.UserID;
+
+    //return editedPet ;
+
 }
+

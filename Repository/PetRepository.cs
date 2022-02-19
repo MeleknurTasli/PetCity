@@ -1,15 +1,49 @@
 public class PetRepository
 {
-    public Pet PetEdit(Pet petDTO, int id)
+    public List<Pet> GetAll()
+    {
+
+        return MockData.PetMockDataList;
+    }
+
+    public Pet GetPet(int id)
+    {
+
+        var petController = MockData.PetMockDataList.First(x => x.id == id);
+        if (petController != null)
+        {
+            return petController;
+
+        }
+        else
+        {
+            return null;
+        }
+
+    }
+
+    /*Update*/
+    public string PetEdit(Pet pet, int id)
     {
         var editedPet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
-        editedPet.name = petDTO.name;
-        editedPet.About = petDTO.About;
-        editedPet.BirthDate = petDTO.BirthDate;
-        editedPet.Family = petDTO.Family;
-        editedPet.Gender = petDTO.Gender;
-        editedPet.Genus = petDTO.Genus;
-        editedPet.UserID = petDTO.UserID;
-        return editedPet;
+        if (editedPet != null)
+        {
+            editedPet.name = pet.name;
+            editedPet.About = pet.About;
+            editedPet.BirthDate = pet.BirthDate;
+            editedPet.Family = pet.Family;
+            editedPet.Gender = pet.Gender;
+            editedPet.Genus = pet.Genus;
+            editedPet.UserID = pet.UserID;
+
+            return "Kayıt Başarılı";
+        }
+        else
+        {
+            return "BÖyle Id Bulunamadı";
+        }
+
     }
+
+
 }

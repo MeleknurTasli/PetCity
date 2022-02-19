@@ -1,6 +1,11 @@
 public interface IPetService
 {
-    List<Pet> GetPets();
-    Pet getPetsByUserId(int id);
+    List<Pet> GetAll();
+    Pet getPetsByPetId(int id);
     string PetAdd(Pet  pet);
+    string Delete(int id);
+
+    Pet PetEdit(Pet pet,int id);
+
+
 }
