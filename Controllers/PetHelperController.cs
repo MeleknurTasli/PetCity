@@ -1,3 +1,4 @@
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PetCity.Controllers;
@@ -21,12 +22,16 @@ public class PetHelperController : ControllerBase
         return _petHelperService.GetPetHelper();
     }
     [HttpPost]
-    public string Add(PetHelper petHelper)
+    public IActionResult Add(PetHelper petHelper)
     {
-        
-        _validator.Validate(petHelper);
-        _petHelperService.Add(petHelper);
-        return "Ok";
+       ValidationResult results = _validator.Validate(petHelper);
+       if(results.IsValid){
+       var result = _petHelperService.Add(petHelper);
+        if(result.Success){
+            return Ok(result);
+        }
+       }
+        return BadRequest();
     }
     [HttpGet("{latitude}/{longtitude}")]
     public PetHelper FindPetHelperByLatLong(string latitude,string longtitude){

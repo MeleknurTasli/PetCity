@@ -1,15 +1,15 @@
 public class PetHelperService : IPetHelperService
 {
-    private PetHelperRepository _petHelperRepository;
-    public PetHelperService(PetHelperRepository _petHelperRepository)
+    private IPetHelperRepository _petHelperRepository;
+    public PetHelperService(IPetHelperRepository petHelperRepository)
     {
-        this._petHelperRepository = _petHelperRepository;
+        this._petHelperRepository = petHelperRepository;
     }
 
-    public string Add(PetHelper petHelper)
+    public IResult Add(PetHelper petHelper)
     {
         _petHelperRepository.Add(petHelper);
-        return "Ok";
+        return new SuccessResult();
     }
 
     public PetHelper FindPetHelperByLatLong(string latitude, string longtitude)
