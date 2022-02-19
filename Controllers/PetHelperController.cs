@@ -7,10 +7,12 @@ namespace PetCity.Controllers;
 public class PetHelperController : ControllerBase
 {
     private readonly IPetHelperService _petHelperService;
+    private PetHelperValidator _validator;
 
-    public PetHelperController(IPetHelperService petHelperService)
+    public PetHelperController(IPetHelperService petHelperService, PetHelperValidator validator)
     {
         _petHelperService = petHelperService;
+        _validator = validator;
     }
 
     [HttpGet]
@@ -21,6 +23,8 @@ public class PetHelperController : ControllerBase
     [HttpPost]
     public string Add(PetHelper petHelper)
     {
+        
+        _validator.Validate(petHelper);
         _petHelperService.Add(petHelper);
         return "Ok";
     }

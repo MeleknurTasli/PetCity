@@ -15,7 +15,11 @@ public class PetHelperService : IPetHelperService
     public PetHelper FindPetHelperByLatLong(string latitude, string longtitude)
     {
         var petHelper = _petHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
+        if (latitude != null && longtitude != null)
+        {
         return petHelper;
+        }
+        return null;
     }
 
     public List<PetHelper> GetPetHelper()
