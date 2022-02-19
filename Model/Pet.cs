@@ -1,5 +1,4 @@
-public class PetDTO {
-    public static List<PetDTO> PetList=new List<PetDTO>();
+public class Pet {
     public int id { get; set; }
     public string  name { get; set; }
     public DateTime BirthDate { get; set; }
@@ -10,7 +9,7 @@ public class PetDTO {
     public string About { get; set; }
 
 
-public PetDTO(int id){
+public Pet(int id){
 
     this.id=id;
 }

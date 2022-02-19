@@ -5,42 +5,43 @@ namespace PetCity.Controllers;
 [ApiController]
 [Route("[controller]")]
 public class PetController : ControllerBase
-{    
+{
 
 
     [HttpGet]
-    public List<PetDTO> Get()
+    public List<Pet> Get()
     {
-        return PetDTO.PetList;        
+        return MockData.PetMockDataList;
     }
 
- [HttpGet("{id}")]
-    public PetDTO GetUser(int id)
+    [HttpGet("{id}")]
+    public Pet GetUser(int id)
     {
-        var pet = PetDTO.PetList.FirstOrDefault(x=>x.id == id);
-        return pet;       
+        var pet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
+        return pet;
     }
 
 
     [HttpPost]
-    public string Add(PetDTO pet){
-        PetDTO.PetList.Add(pet);
+    public string Add(Pet pet)
+    {
+        MockData.PetMockDataList.Add(pet);
         return "Ok";
     }
 
-    [HttpDelete ("{id}")]
+    [HttpDelete("{id}")]
     public void Delete(int id)
     {
-        var deletePet = PetDTO.PetList.FirstOrDefault(x=>x.id ==id);
-        PetDTO.PetList.Remove(deletePet);
+        var deletePet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
+        MockData.PetMockDataList.Remove(deletePet);
     }
 
 
     [HttpPut("{id}")]
-    public void Put(PetDTO petDTO,int id)
+    public void Put(Pet petDTO, int id)
     {
-        PetRepository pet =new PetRepository(); 
-        pet.PetEdit(petDTO,id);    
+        PetRepository pet = new PetRepository();
+        pet.PetEdit(petDTO, id);
         //var editedPet = PetDTO.PetList.FirstOrDefault(x=>x.id ==id);
         // editedPet.name = petDTO.name;
         // editedPet.About = petDTO.About;
