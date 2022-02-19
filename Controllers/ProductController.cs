@@ -30,14 +30,17 @@ public class ProductController : ControllerBase
        return "Başarısız";
     }
 
-    [HttpGet("{name}")]
+    [HttpGet]
+    [Route("product/productName/{name}")]
     public Product? GetProductByName(string name)
     {
        return _productService.GetProductByName(name);
     }
-    [HttpGet("{Brand}")]
-    public Product? GetProductByBrand(string Brand){
-        return _productService.GetProductByBrand(Brand);
+
+    [HttpGet]
+    [Route("product/brandName/{name}")]
+    public Product? GetProductByBrand(string name){
+        return _productService.GetProductByBrandName(name);
     }
 
     // [HttpPost("{val}")]
@@ -56,12 +59,12 @@ public class ProductController : ControllerBase
 /*
 {
     "id":1,
- "Name": "Minnak",
- "Detail":"fdsfsdf",
- "Price":12.45,
- "Stock":12,
- "SupplierId":10,
- "Brand":"sadsad",
- "CategoryId":2
+    "Name": "Minnak",
+    "Detail":"fdsfsdf",
+    "Price":12.45,
+    "Stock":12,
+    "SupplierId":10,
+    "Brand":"sadsad",
+    "CategoryId":2
  }
 */

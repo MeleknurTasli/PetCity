@@ -20,12 +20,15 @@ public class ProductService : IProductService
     {
         return productRepository.GetProductByName(name);
     }
-    public Product? GetProductByBrand(string Brand){
+    public Product? GetProductByBrandName(string Brand){
         return productRepository.GetProductByBrand(Brand);
     }
 
-    public List<Product> GetProductOrderByPrice(bool IsDescending)
-    {
+    public List<Product> GetProductOrderByName(bool IsDescending) {
+         return productRepository.GetProductOrderByName(IsDescending);
+    }
+
+    public List<Product> GetProductOrderByPrice(bool IsDescending) {
         return productRepository.GetProductOrderByPrice(IsDescending); 
     }
 
@@ -50,6 +53,11 @@ public class ProductService : IProductService
     }
 
     public List<Product> GetProductsInStock()
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Product> GetProductsByCategory(int CategoryId)
     {
         throw new NotImplementedException();
     }
