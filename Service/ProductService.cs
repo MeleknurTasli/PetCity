@@ -9,11 +9,14 @@ public class ProductService : IProductService
     {
         Product? p = productRepository.GetProductByName(product.Name);
 
-        if (p != null) {
+        if (p ==null ) {
             productRepository.Create(product);
+            return product;
         }
+            return null;    
+        
+        
 
-        return product;
     }
 
     public List<Product> GetAll()
@@ -23,7 +26,7 @@ public class ProductService : IProductService
 
     public Product? GetProductByName(string name)
     {
-        throw new NotImplementedException();
+        return productRepository.GetProductByName(name);
     }
     public Product? GetProductByBrand(string Brand){
         return productRepository.GetProductByBrand(Brand);

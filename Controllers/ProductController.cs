@@ -22,15 +22,17 @@ public class ProductController : ControllerBase
     [HttpPost]
     public string Create(Product product)
     {
-        MockData.ProductMockDataList.Add(product);
-        return "Ok";
+      Product p= _productService.Create(product);
+      if(p!=null){
+          return "Ekleme başarılı";
+      }
+        return "Başarısız";
     }
 
     [HttpGet("{name}")]
     public Product? GetProductByName(string name)
     {
-        Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name);
-        return product;
+       return _productService.GetProductByName(name);
     }
     [HttpGet("{Brand}")]
     public Product? GetProductByBrand(string Brand){
