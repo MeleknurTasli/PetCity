@@ -29,7 +29,7 @@ public class PetController : ControllerBase
     {
         // var pet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
         // return pet;
-        return _IPetService.getPetsByPetId(id);
+        return _IPetService.GetPet(id);
     }
 
 

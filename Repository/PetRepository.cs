@@ -46,4 +46,17 @@ public class PetRepository
     }
 
 
+    public string PetAdd(Pet pet)
+    {
+          if(GetPet(pet.id) == null)
+        {
+            MockData.PetMockDataList.Add(pet);
+        }else{
+            return "kayıtlı pet";
+        }
+        
+        return "Ok";
+    }
+
+
 }

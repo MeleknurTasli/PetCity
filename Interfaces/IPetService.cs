@@ -1,7 +1,7 @@
 public interface IPetService
 {
     List<Pet> GetAll();
-    Pet getPetsByPetId(int id);
+    Pet GetPet(int id);
     string PetAdd(Pet  pet);
     string Delete(int id);
 

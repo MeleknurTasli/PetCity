@@ -16,14 +16,26 @@ public class PetService : IPetService
         return petRepository.GetAll();
     }
 
-    Pet IPetService.getPetsByPetId(int id)
+    public Pet GetPet(int id)
     {
-        throw new NotImplementedException();
+        var user = petRepository.GetPet(id);
+        if (user != null)
+        {
+            return user;
+        }
+        return null;
     }
 
-    string IPetService.PetAdd(Pet pet)
+    public string PetAdd(Pet pet)
     {
-        throw new NotImplementedException();
+     if(GetPet(pet.id) == null)
+        {
+            petRepository.PetAdd(pet);
+        }else{
+            return "Kayıtlı pet!";
+        }
+        
+        return "Ok";
     }
 
     Pet IPetService.PetEdit(Pet pet, int id)
