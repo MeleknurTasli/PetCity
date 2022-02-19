@@ -9,7 +9,7 @@ public class PetRepository
     public Pet GetPet(int id)
     {
 
-        var petController = MockData.PetMockDataList.First(x => x.id == id);
+        var petController = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
         if (petController != null)
         {
             return petController;
@@ -21,9 +21,8 @@ public class PetRepository
         }
 
     }
-
     /*Update*/
-    public string PetEdit(Pet pet, int id)
+    public Pet PetEdit(Pet pet, int id)
     {
         var editedPet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
         if (editedPet != null)
@@ -36,11 +35,11 @@ public class PetRepository
             editedPet.Genus = pet.Genus;
             editedPet.UserID = pet.UserID;
 
-            return "Kayıt Başarılı";
+            return editedPet;
         }
         else
         {
-            return "BÖyle Id Bulunamadı";
+            return null;
         }
 
     }
@@ -56,6 +55,15 @@ public class PetRepository
         }
         
         return "Ok";
+    }
+
+    public string Delete(int id)
+    {
+
+        var deletePet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
+        MockData.PetMockDataList.Remove(deletePet);
+        return "Veri Silindi";
+
     }
 
 

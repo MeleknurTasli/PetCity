@@ -6,9 +6,15 @@ public class PetService : IPetService
         petRepository = new PetRepository();
     }
 
-    string IPetService.Delete(int id)
+     string IPetService.Delete(int id)
     {
-        throw new NotImplementedException();
+        if (id != null)
+        {
+             petRepository.Delete(id);
+             return"Kayıt Silindi";
+        }
+        return "Girilen id ile eşleşen kayıt yok";
+        
     }
 
     List<Pet> IPetService.GetAll()
@@ -18,10 +24,10 @@ public class PetService : IPetService
 
     public Pet GetPet(int id)
     {
-        var user = petRepository.GetPet(id);
-        if (user != null)
+        var pet = petRepository.GetPet(id);
+        if (pet != null)
         {
-            return user;
+            return pet;
         }
         return null;
     }
@@ -32,14 +38,15 @@ public class PetService : IPetService
         {
             petRepository.PetAdd(pet);
         }else{
-            return "Kayıtlı pet!";
+            return "Aynı id'ye sahip pet bulunmkatadır";
         }
         
-        return "Ok";
+        return "Yeni Kayıt Oluşturuldu.";
     }
 
     Pet IPetService.PetEdit(Pet pet, int id)
     {
-        throw new NotImplementedException();
+       return petRepository.PetEdit(pet,id);
     }
+
 }
