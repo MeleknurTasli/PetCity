@@ -1,8 +1,6 @@
-public class ProductDTO{
-
-    public static List<ProductDTO> staticList = new List<ProductDTO>();
-
-    public int ID {get;set;}
+public class Product
+{
+    public int ID { get; set; }
     public string Name { get; set; }
     public string Detail { get; set; }
     public decimal Price { get; set; }
@@ -11,7 +9,7 @@ public class ProductDTO{
     public string Brand { get; set; }
     public int CategoryId { get; set; }
 
-    public ProductDTO(int Id)
+    public Product(int Id)
     {
         this.ID = Id;
     }
