@@ -3,4 +3,5 @@ public interface IProductService {
     public Product Create(Product product);
     public Product? GetProductByName(string name);
     public Product? GetProductByBrand(string Brand);
+
 }

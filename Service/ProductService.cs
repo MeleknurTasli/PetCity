@@ -18,7 +18,7 @@ public class ProductService : IProductService
 
     public List<Product> GetAll()
     {
-        throw new NotImplementedException();
+        return productRepository.GetAll();
     }
 
     public Product? GetProductByName(string name)
