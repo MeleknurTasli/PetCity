@@ -17,10 +17,15 @@ public class PetHelperController : ControllerBase
     }
 
     [HttpGet]
-    public List<PetHelper> Get()
-    {
-        return _petHelperService.GetPetHelper();
-    }
+    public IActionResult GetAll()
+        {
+            var result = _petHelperService.GetPetHelper();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     [HttpPost]
     public IActionResult Add(PetHelper petHelper)
     {
@@ -34,8 +39,13 @@ public class PetHelperController : ControllerBase
         return BadRequest();
     }
     [HttpGet("{latitude}/{longtitude}")]
-    public PetHelper FindPetHelperByLatLong(string latitude,string longtitude){
+    public IActionResult FindPetHelperByLatLong(string latitude,string longtitude){
         var result = _petHelperService.FindPetHelperByLatLong(latitude,longtitude);
-        return result;
-    }
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 }
+

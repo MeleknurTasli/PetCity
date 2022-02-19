@@ -7,13 +7,13 @@ public class PetHelperRepository : IPetHelperRepository
         
         return new SuccessResult();
     }
-    public List<PetHelper> GetPetHelper()
+    public IDataResult <List<PetHelper>> GetPetHelper()
     {
-        return MockData.PetHelperMockDataList;
+        return new SuccessDataResult<List<PetHelper>>( MockData.PetHelperMockDataList);
     }
-    public PetHelper FindPetHelperByLatLong(string latitude, string longtitude){
+    public  IDataResult<PetHelper> FindPetHelperByLatLong(string latitude, string longtitude){
         var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Latitude == latitude && p.Longtitude == longtitude);
-        return result;
+        return new SuccessDataResult<PetHelper>( result);
 
     }
 
