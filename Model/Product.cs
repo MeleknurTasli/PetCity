@@ -1,3 +1,4 @@
+<<<<<<< HEAD:DTO/ProductDTO.cs
 public class ProductDTO{
 
     public static List<ProductDTO> staticList = new List<ProductDTO>
@@ -38,6 +39,11 @@ public class ProductDTO{
     };
 
     public int ID {get;set;}
+=======
+public class Product
+{
+    public int ID { get; set; }
+>>>>>>> dev/main:Model/Product.cs
     public string Name { get; set; }
     public string Detail { get; set; }
     public decimal Price { get; set; }
@@ -45,6 +51,7 @@ public class ProductDTO{
     public int SupplierId { get; set; }
     public string Brand { get; set; }
     public int CategoryId { get; set; }
+<<<<<<< HEAD:DTO/ProductDTO.cs
     
 }
 /*
@@ -57,3 +64,11 @@ public class ProductDTO{
  "Brand":"sadsad",
  "CategoryId":2}
  */
+=======
+
+    public Product(int Id)
+    {
+        this.ID = Id;
+    }
+}
+>>>>>>> dev/main:Model/Product.cs

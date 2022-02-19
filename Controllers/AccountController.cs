@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using FluentValidation.Results;
 
 namespace PetCity.Controllers;
 
@@ -6,28 +7,43 @@ namespace PetCity.Controllers;
 [Route("[controller]")]
 public class AccountController : ControllerBase
 {
-    [HttpPost]
 
-    public string SetAccount(AccountDTO account)
+    private readonly IAccountService _accountService;
+
+    public AccountController(IAccountService accountService)
     {
-        AccountDTO.AccountDTOList.Add(account);
-        return "Ok";
+        _accountService = accountService;
     }
 
     [HttpGet]
-    public List<AccountDTO> getAccount()
+    public List<Account> getAccount()
     {
-        return AccountDTO.AccountDTOList;
+        return _accountService.getAccount();
     }
 
     [HttpGet("{email}")]
-    public AccountDTO getAccountByEmail(string email)
+    public Account getAccountByEmail(string email)
     {
-        var user = AccountDTO.AccountDTOList.FirstOrDefault(h => h.Email == email);
-        if (user != null)
-        {
-            return user;
-        }
-        return null;
+        return _accountService.getAccountByEmail(email);
     }
+
+
+    [HttpPost]
+    public string setAccount(Account account)
+    {   
+        string err ="";
+        AccountValidator validator = new AccountValidator();
+        ValidationResult results = validator.Validate(account);
+        if (results.IsValid)
+        {
+            return _accountService.setAccount(account);
+        }
+        foreach(var Errors in results.Errors)
+        {
+            err += Errors.ErrorMessage + "\n";
+        }
+        return err;
+
+    }
+
 }
