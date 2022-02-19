@@ -14,5 +14,10 @@ public class ProductRepository {
     {
         Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name);
         return product;
+    }      
+    public Product? GetProductByBrand(string Brand){
+        Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Brand == Brand);
+        return product;
     }
+    
 }

@@ -32,6 +32,11 @@ public class ProductController : ControllerBase
         Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name);
         return product;
     }
+    [HttpGet("{Brand}")]
+    public Product? GetProductByBrand(string Brand){
+        return _productService.GetProductByBrand(Brand);
+    }
+
 }
 /*
 {"id":1,
