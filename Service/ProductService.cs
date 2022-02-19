@@ -25,4 +25,7 @@ public class ProductService : IProductService
     {
         throw new NotImplementedException();
     }
+    public Product? GetProductByBrand(string Brand){
+        return productRepository.GetProductByBrand(Brand);
+    }
 }
