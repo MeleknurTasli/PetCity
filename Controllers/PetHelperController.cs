@@ -19,9 +19,9 @@ public class PetHelperController : ControllerBase
         MockData.PetHelperMockDataList.Add(petHelper);
         return "Ok";
     }
-    [HttpGet("{latitude}/{longtitude}")]
-    public PetHelper FindPetHelperByLatLong(string latitude,string longtitude){
-        var result = PetHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
-        return result;
-    }
+    //[HttpGet("{latitude}/{longtitude}")]
+    // public PetHelper FindPetHelperByLatLong(string latitude,string longtitude){
+    //     var result = PetHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
+    //     return result;
+    // }
 }
