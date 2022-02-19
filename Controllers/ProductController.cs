@@ -6,10 +6,17 @@ namespace PetCity.Controllers;
 [Route("[controller]")]
 public class ProductController : ControllerBase
 {
-    [HttpGet]
-    public List<Product> GetProduct()
+    private readonly IProductService _productService;
+
+    public ProductController(IProductService productService)
     {
-        return MockData.ProductMockDataList;
+        _productService = productService;
+    }
+
+    [HttpGet]
+    public List<Product> GetAllProducts()
+    {
+        return _productService.GetAll();
     }
 
     [HttpPost]
