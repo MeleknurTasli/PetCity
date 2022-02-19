@@ -7,6 +7,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAccountService,AccountService>();//Bu işlemden sonra AccountService yerine IAccountService kullnılacak.
+builder.Services.AddScoped<IPetHelperService,PetHelperService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -23,3 +24,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
