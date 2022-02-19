@@ -15,7 +15,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
-    public List<User> getUser()
+    public List<User> GetUser()
     {
         return MockData.UserMockDataList;
     }
