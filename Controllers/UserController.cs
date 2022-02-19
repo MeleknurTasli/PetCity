@@ -8,16 +8,16 @@ public class UserController : ControllerBase
 {
     [HttpPost]
 
-    public string SetUser(UserDTO user)
+    public string SetUser(User user)
     {
-        UserDTO.UserDTOList.Add(user);
+        MockData.UserMockDataList.Add(user);
         return "Ok";
     }
 
     [HttpGet]
-    public List<UserDTO> getUser()
+    public List<User> getUser()
     {
-        return UserDTO.UserDTOList;
+        return MockData.UserMockDataList;
     }
-    
+
 }
