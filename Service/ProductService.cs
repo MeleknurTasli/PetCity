@@ -34,31 +34,42 @@ public class ProductService : IProductService
 
     public List<Product> GetProductsByCategoryName(int CategoryId)
     {
-        throw new NotImplementedException();
+        return productRepository.GetProductsByCategoryName(CategoryId);
     }
 
-    public List<Product> GetProductsGreaterThen(decimal min)
+    public List<Product> GetProductsGreaterOrEqualsThen(decimal min)
     {
-        throw new NotImplementedException();
+        return productRepository.GetProductsGreaterOrEqualsThen(min);
     }
 
-    public List<Product> GetProductsLessThen(decimal max)
+    public List<Product> GetProductsLessOrEqualsThen(decimal max)
     {
-        throw new NotImplementedException();
+        return productRepository.GetProductsLessOrEqualsThen(max);
     }
 
     public List<Product> GetProductsBetweenMinMaxPrice(decimal min, decimal max)
     {
-        throw new NotImplementedException();
+        return productRepository.GetProductsBetweenMinMaxPrice(min, max);
     }
 
     public List<Product> GetProductsInStock()
     {
-        throw new NotImplementedException();
+        return GetProductsInStock();
     }
 
     public List<Product> GetProductsByCategory(int CategoryId)
     {
-        throw new NotImplementedException();
+        return productRepository.GetProductsByCategoryName(CategoryId);
+    }
+
+    public Product Update(int id, Product product)
+    {
+        return productRepository.Update(id, product);
+    }
+
+    public bool Delete(int id)
+    {
+        Product product = productRepository.GetProductById(id);
+        return productRepository.Delete(id);
     }
 }

@@ -10,6 +10,10 @@ public class ProductRepository {
         return product;
     }
 
+    public Product GetProductById(int id) {
+        Product p = MockData.ProductMockDataList.First(x => x.ID == id);
+        return p;
+    }
     public Product? GetProductByName(string name)
     {
         Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name);
@@ -29,7 +33,7 @@ public class ProductRepository {
     {
         return IsDescending ? GetAll().OrderByDescending(x => x.Price).ToList() : GetAll().OrderBy(x => x.Price).ToList(); 
     }
-    public List<Product> GetProductsGreaterorEqualsThen(decimal min) {
+    public List<Product> GetProductsGreaterOrEqualsThen(decimal min) {
         return MockData.ProductMockDataList.Where(x => x.Price >= min).ToList();
     }
     public List<Product> GetProductsLessOrEqualsThen(decimal max) {
@@ -46,4 +50,14 @@ public class ProductRepository {
         return MockData.ProductMockDataList.Where(x => x.CategoryId == CategoryId).ToList();
     }
 
+    public bool Delete(int id) {
+        Product product = GetProductById(id);
+        return MockData.ProductMockDataList.Remove(product);
+    }
+
+    public Product Update(int id, Product product) {
+        Product p = GetProductById(id);
+        p = product;
+        return p;
+    }
 }
