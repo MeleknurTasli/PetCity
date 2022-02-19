@@ -7,22 +7,22 @@ namespace PetCity.Controllers;
 public class ProductController : ControllerBase
 {
     [HttpGet]
-    public List<ProductDTO> GetProduct()
+    public List<Product> GetProduct()
     {
-        return ProductDTO.staticList;
+        return MockData.ProductMockDataList;
     }
 
     [HttpPost]
-    public string Create(ProductDTO product)
+    public string Create(Product product)
     {
-        ProductDTO.staticList.Add(product);
+        MockData.ProductMockDataList.Add(product);
         return "Ok";
     }
 
     [HttpGet("{name}")]
-    public ProductDTO? GetProductByName(string name)
+    public Product? GetProductByName(string name)
     {
-        ProductDTO? product = ProductDTO.staticList.FirstOrDefault(x => x.Name == name);
+        Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name);
         return product;
     }
 }

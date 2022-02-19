@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <<<<<<< HEAD:DTO/ProductDTO.cs
 public class ProductDTO{
 
@@ -44,6 +45,11 @@ public class Product
 {
     public int ID { get; set; }
 >>>>>>> dev/main:Model/Product.cs
+=======
+public class Product
+{
+    public int ID { get; set; }
+>>>>>>> e5aea4f57f0693131edec9e92897945d9912b4c6
     public string Name { get; set; }
     public string Detail { get; set; }
     public decimal Price { get; set; }
@@ -51,6 +57,7 @@ public class Product
     public int SupplierId { get; set; }
     public string Brand { get; set; }
     public int CategoryId { get; set; }
+<<<<<<< HEAD
 <<<<<<< HEAD:DTO/ProductDTO.cs
     
 }
@@ -65,10 +72,26 @@ public class Product
  "CategoryId":2}
  */
 =======
+=======
+>>>>>>> e5aea4f57f0693131edec9e92897945d9912b4c6
 
-    public Product(int Id)
+    public Product(){
+
+    }
+    public Product(int ID, string Name, string Detail, decimal Price,
+    int Stock, int SupplierId, string Brand, int CategoryId)
     {
-        this.ID = Id;
+        this.ID = ID;
+        this.Name = Name;
+        this.Detail = Detail;
+        this.Price = Price;
+        this.Stock = Stock;
+        this.SupplierId = SupplierId;
+        this.Brand = Brand;
+        this.CategoryId = CategoryId;
     }
 }
+<<<<<<< HEAD
 >>>>>>> dev/main:Model/Product.cs
+=======
+>>>>>>> e5aea4f57f0693131edec9e92897945d9912b4c6
