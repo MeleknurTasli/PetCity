@@ -14,33 +14,43 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    public List<Product> GetAllProducts()
+    public IActionResult GetAllProducts()
     {
-        return _productService.GetAll();
+        
+        return Ok(_productService.GetAll());
     }
 
     [HttpPost]
-    public string Create(Product product)
+    public IActionResult Create(Product product)
     {
       Product p= _productService.Create(product);
       if(p!=null){
-          return "Ekleme başarılı";
+          return Ok("Ekleme Başarılı");
       }
         
-       return "Başarısız";
+       return BadRequest("Ekleme Başarısız");
+       
     }
 
     [HttpGet]
     [Route("product/productName/{name}")]
-    public Product? GetProductByName(string name)
-    {
-       return _productService.GetProductByName(name);
+    public IActionResult GetProductByName(string name)
+    {   
+        Product? InComingProduct = _productService.GetProductByName(name);
+        if(InComingProduct == null){
+            return BadRequest("Ürün bulunamadı");
+        }
+        return Ok(InComingProduct);
     }
 
     [HttpGet]
     [Route("product/brandName/{name}")]
-    public Product? GetProductByBrand(string name){
-        return _productService.GetProductByBrandName(name);
+    public IActionResult GetProductByBrand(string name){
+        Product? IncomingProduct = _productService.GetProductByBrandName(name);
+        if(IncomingProduct == null){
+            return BadRequest("Marka bulunamadı");
+        }
+        return Ok(IncomingProduct);
     }
 
     // [HttpPost("{val}")]
@@ -57,7 +67,7 @@ public class ProductController : ControllerBase
 
 }
 /*
-{
+
     "id":1,
     "Name": "Minnak",
     "Detail":"fdsfsdf",
