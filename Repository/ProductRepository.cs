@@ -24,6 +24,11 @@ public class ProductRepository {
         return product;
     }
 
+    public Product? GetProductByNameAndBrandName(string name, string brand){
+        Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name && x.Brand == brand);
+        return product;
+    }
+
     public List<Product> GetProductOrderByName(bool IsDescending)
     {
         return IsDescending ? GetAll().OrderByDescending(x => x.Name).ToList() : GetAll().OrderBy(x => x.Name).ToList(); 

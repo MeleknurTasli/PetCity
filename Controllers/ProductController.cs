@@ -23,7 +23,7 @@ public class ProductController : ControllerBase
     [HttpPost]
     public IActionResult Create(Product product)
     {
-      Product p= _productService.Create(product);
+      Product? p = _productService.Create(product);
       if(p!=null){
           return Ok("Ekleme Başarılı");
       }
@@ -51,6 +51,16 @@ public class ProductController : ControllerBase
             return BadRequest("Marka bulunamadı");
         }
         return Ok(IncomingProduct);
+    }
+
+    [HttpGet]
+    [Route("orderByName")]
+    public IActionResult GetProductOrderByName(Boolean IsDescending){
+        List<Product> InComingList = _productService.GetProductOrderByName(IsDescending);
+        if(InComingList == null){
+            return BadRequest("Ürünler listelenemedi");
+        }
+        return Ok(InComingList);
     }
 
     // [HttpPost("{val}")]

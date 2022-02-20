@@ -5,10 +5,14 @@ public class ProductService : IProductService
     {
        productRepository = new ProductRepository();   
     }
-    public Product Create(Product product)
+    public Product? Create(Product product)
     {
-        Product? p = productRepository.GetProductByName(product.Name);
-        return productRepository.Create(product);
+        Product? p = productRepository.GetProductByNameAndBrandName(product.Name, product.Brand);
+
+        if(p == null){
+            return productRepository.Create(product);
+        }
+        return null;
     }
 
     public List<Product> GetAll()
