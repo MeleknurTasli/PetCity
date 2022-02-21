@@ -25,19 +25,12 @@ public class PetHelperController : ControllerBase
         }
         
     [HttpPost]
-    public IActionResult Add(PetHelper petHelper)
+    public ActionResult<ServiceResponse<PetHelper>> Add(PetHelper petHelper)
     {
-       ValidationResult results = _validator.Validate(petHelper);
-       if(results.IsValid){
-       var result = _petHelperService.Add(petHelper);
-        if(result.Success){
-            return Ok(result);
-        }
-       }
-        return BadRequest();
+       return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.Add(petHelper));
     }
     [HttpGet("{latitude}/{longtitude}")]
-    public IActionResult FindPetHelperByLatLong(string latitude,string longtitude){
+    public ActionResult<ServiceResponse<PetHelper>> FindPetHelperByLatLong(string latitude,string longtitude){
        return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.FindPetHelperByLatLong(latitude,longtitude));
     }
 }

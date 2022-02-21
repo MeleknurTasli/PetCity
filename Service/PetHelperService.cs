@@ -6,10 +6,19 @@ public class PetHelperService : IPetHelperService
         petHelperRepository = new PetHelperRepository();
     }
 
-    public IResult Add(PetHelper petHelper)
+    public ServiceResponse<PetHelper> Add(PetHelper petHelper)
     {
-        petHelperRepository.Add(petHelper);
-        return new SuccessResult();
+         ServiceResponse<PetHelper> response = new ServiceResponse<PetHelper>();
+         var petHelperData = petHelperRepository.FindPetHelperByLatLong(petHelper.Latitude,petHelper.Longtitude);
+        if (petHelperData==null)
+        {
+            petHelperRepository.Add(petHelper);
+            response.ResponseCode = ResponseCodeEnum.PetHelperAddSuccess;
+            response.Data = petHelper;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.PetHelperAddFail;
+        return response;
     }
 
     public ServiceResponse<PetHelper> FindPetHelperByLatLong(string latitude, string longtitude)

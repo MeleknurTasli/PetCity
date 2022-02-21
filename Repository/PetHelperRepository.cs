@@ -1,11 +1,11 @@
 public class PetHelperRepository
 {
 
-    public IResult Add(PetHelper petHelper)
+    public PetHelper Add(PetHelper petHelper)
     {
         MockData.PetHelperMockDataList.Add(petHelper);
         
-        return new SuccessResult();
+        return petHelper;
     }
     public List<PetHelper> GetPetHelper()
     {

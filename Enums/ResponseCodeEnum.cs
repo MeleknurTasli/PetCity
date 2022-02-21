@@ -12,6 +12,8 @@ public enum ResponseCodeEnum
     GetAllPetHelperFail,
     FindPetHelperByLatLongSuccess,
     FindPetHelperByLatLongFail,
+    PetHelperAddSuccess,
+    PetHelperAddFail,
     BadRequest = 400,
     
 
