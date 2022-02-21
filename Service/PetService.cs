@@ -1,22 +1,22 @@
 public class PetService : IPetService
 {
-      private PetRepository petRepository;
+    private PetRepository petRepository;
     public PetService()
     {
         petRepository = new PetRepository();
     }
 
-     string IPetService.Delete(int id)
+    string IPetService.Delete(int id)
     {
         if (id != null)
         {
-             petRepository.Delete(id);
-             return"Kayıt Silindi";
+            petRepository.Delete(id);
+            return "Kayıt Silindi";
         }
         return "Girilen id ile eşleşen kayıt yok";
-        
+
     }
-    
+
 
     List<Pet> IPetService.GetAll()
     {
@@ -35,29 +35,33 @@ public class PetService : IPetService
 
     public string PetAdd(Pet pet)
     {
-     if(GetPet(pet.id) == null)
+        if (GetPet(pet.id) == null)
         {
             petRepository.PetAdd(pet);
-        }else{
+        }
+        else
+        {
             return "Aynı id'ye sahip pet bulunmkatadır";
         }
-        
+
         return "Yeni Kayıt Oluşturuldu.";
     }
 
     Pet IPetService.PetEdit(Pet pet, int id)
     {
-        var edited = petRepository.PetEdit(pet,id);
-        if(edited !=null){
+        var edited = petRepository.PetEdit(pet, id);
+        if (edited != null)
+        {
 
-return edited;
+            return edited;
 
 
         }
-        else{
+        else
+        {
             return null;
         }
-     
+
     }
 
 }
