@@ -18,7 +18,7 @@ public class PetHelperController : ControllerBase
         ResponseGeneratorHelper = new ResponseGeneratorHelper();
     }
 
-    [HttpGet]
+    [HttpGet ("getall")]
     public ActionResult<ServiceResponse<List<PetHelper>>> GetAll()
         {
             return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.GetPetHelper());
@@ -32,6 +32,17 @@ public class PetHelperController : ControllerBase
     [HttpGet("{latitude}/{longtitude}")]
     public ActionResult<ServiceResponse<PetHelper>> FindPetHelperByLatLong(string latitude,string longtitude){
        return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.FindPetHelperByLatLong(latitude,longtitude));
+    }
+
+    // [HttpPut]
+    // public PetHelper Update([FromQuery] int id, PetHelper petHelper)
+    // {
+
+    // }
+    [HttpGet]
+    public ActionResult<ServiceResponse<PetHelper>> GetById([FromQuery] int id)
+    {
+        return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.GetById(id));
     }
 }
 
