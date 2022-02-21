@@ -44,7 +44,11 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
+<<<<<<< HEAD
     [Route("branName")]
+=======
+    [Route("brandName")]
+>>>>>>> dab3b93dbc1c6fc7eb4961c6d00ea2faeef53d8a
     public IActionResult GetProductByBrand(string name){
         Product? IncomingProduct = _productService.GetProductByBrandName(name);
         if(IncomingProduct == null){
