@@ -16,6 +16,7 @@ public class PetService : IPetService
         return "Girilen id ile eşleşen kayıt yok";
         
     }
+    
 
     List<Pet> IPetService.GetAll()
     {
@@ -46,7 +47,17 @@ public class PetService : IPetService
 
     Pet IPetService.PetEdit(Pet pet, int id)
     {
-       return petRepository.PetEdit(pet,id);
+        var edited = petRepository.PetEdit(pet,id);
+        if(edited !=null){
+
+return edited;
+
+
+        }
+        else{
+            return null;
+        }
+     
     }
 
 }
