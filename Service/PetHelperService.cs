@@ -12,14 +12,18 @@ public class PetHelperService : IPetHelperService
         return new SuccessResult();
     }
 
-    public IDataResult<PetHelper> FindPetHelperByLatLong(string latitude, string longtitude)
+    public ServiceResponse<PetHelper> FindPetHelperByLatLong(string latitude, string longtitude)
     {
+        ServiceResponse<PetHelper> response = new ServiceResponse<PetHelper>();
         var petHelper = petHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
         if (latitude != null && longtitude != null)
         {
-        return new SuccessDataResult<PetHelper>(petHelper.Data);
+            response.ResponseCode = ResponseCodeEnum.FindPetHelperByLatLongSuccess;
+            response.Data = petHelper;
+            return response;
         }
-        return null;
+        response.ResponseCode = ResponseCodeEnum.FindPetHelperByLatLongFail;
+        return response;
     }
 
     public ServiceResponse<List<PetHelper>> GetPetHelper()

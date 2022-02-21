@@ -11,9 +11,9 @@ public class PetHelperRepository
     {
         return  MockData.PetHelperMockDataList;
     }
-    public  IDataResult<PetHelper> FindPetHelperByLatLong(string latitude, string longtitude){
+    public  PetHelper FindPetHelperByLatLong(string latitude, string longtitude){
         var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Latitude == latitude && p.Longtitude == longtitude);
-        return new SuccessDataResult<PetHelper>( result);
+        return result;
 
     }
 
