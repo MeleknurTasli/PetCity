@@ -62,7 +62,11 @@ public class ProductRepository {
 
     public Product Update(int id, Product product) {
         Product p = GetProductById(id);
-        p = product;
+        p.Name = product.Name;
+        p.Brand = product.Brand;
+        p.Detail = product.Detail;
+        p.Price = product.Price;
+        p.Stock = product.Stock;
         return p;
     }
 }

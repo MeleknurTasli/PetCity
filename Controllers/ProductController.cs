@@ -63,21 +63,29 @@ public class ProductController : ControllerBase
         return Ok(InComingList);
     }
 
-    // [HttpPost("{val}")]
-    // public string GetProductsOrderByPrice(bool val)
-    // {
-    //     bool test = val;
-    //     if (test) 
-    //     {
-    //         return "true";
-    //     }
+   [HttpDelete("{id}")]
+   public IActionResult Delete(int id) {
+       bool IsDeleted =_productService.Delete(id);
 
-    //     return "false";
-    // }
+       if (IsDeleted) {
+           return NoContent();
+       }
 
+       return BadRequest("Kayıt silinemedi");
+   }
+
+   [HttpPut("{id}")]
+   public IActionResult Update([FromRoute]int id, [FromBody]Product p) {
+       Product product = _productService.Update(id, p);
+        if (p != null) {
+            return Ok(product);
+        }
+
+        return BadRequest("Güncelleme işlemi başarısız");
+   }
 }
 /*
-
+{
     "id":1,
     "Name": "Minnak",
     "Detail":"fdsfsdf",
