@@ -8,5 +8,10 @@ public enum ResponseCodeEnum
     GetAllAccountOperationFail,
     GetAccountByEmailOperationSuccess,
     GetAccountByEmailOperationFail,
+    GetProductByNameOperationSuccess,
+    GetProductByNameOperationFail,
+    ProductNotFound,
+    GetAllProductOperationSuccess,
+    GetAllProductOperationFail,
     BadRequest = 400,
 }

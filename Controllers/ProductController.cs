@@ -7,17 +7,17 @@ namespace PetCity.Controllers;
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
-
+    private ResponseGeneratorHelper ResponseGeneratorHelper;
     public ProductController(IProductService productService)
     {
         _productService = productService;
+        ResponseGeneratorHelper = new ResponseGeneratorHelper();
     }
 
     [HttpGet]
-    public IActionResult GetAllProducts()
+    public ActionResult<ServiceResponse<List<Product>>> GetAllProducts()
     {
-        
-        return Ok(_productService.GetAll());
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetAll());
     }
 
     [HttpPost]
@@ -32,35 +32,19 @@ public class ProductController : ControllerBase
        
     }
 
-    [HttpGet]
-    [Route("productName")]
-    public IActionResult GetProductByName(string name)
+    [HttpGet("ProductByName")]
+    public ActionResult<ServiceResponse<Product>> GetProductByName([FromQuery]string name)
     {   
-        Product? InComingProduct = _productService.GetProductByName(name);
-        if(InComingProduct == null){
-            return BadRequest("Ürün bulunamadı");
-        }
-        return Ok(InComingProduct);
+        return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.GetProductByName(name));
     }
 
-    [HttpGet]
-    [Route("branName")]
+    [HttpGet("ProductByBrand")]
     public IActionResult GetProductByBrand(string name){
         Product? IncomingProduct = _productService.GetProductByBrandName(name);
         if(IncomingProduct == null){
             return BadRequest("Marka bulunamadı");
         }
         return Ok(IncomingProduct);
-    }
-
-    [HttpGet]
-    [Route("orderByName")]
-    public IActionResult GetProductOrderByName(Boolean IsDescending){
-        List<Product> InComingList = _productService.GetProductOrderByName(IsDescending);
-        if(InComingList == null){
-            return BadRequest("Ürünler listelenemedi");
-        }
-        return Ok(InComingList);
     }
 
    [HttpDelete("{id}")]

@@ -29,14 +29,20 @@ public class ProductRepository {
         return product;
     }
 
-    public List<Product> GetProductOrderByName(bool IsDescending)
-    {
-        return IsDescending ? GetAll().OrderByDescending(x => x.Name).ToList() : GetAll().OrderBy(x => x.Name).ToList(); 
+    public List<Product> GetProductsOrderByNameDescending() {
+        return GetAll().OrderByDescending(x => x.Name).ToList();
+    }
+
+     public List<Product> GetProductsOrderByNameAscending() {
+        return GetAll().OrderBy(x => x.Name).ToList();
     }
     
-     public List<Product> GetProductOrderByPrice(bool IsDescending)
-    {
-        return IsDescending ? GetAll().OrderByDescending(x => x.Price).ToList() : GetAll().OrderBy(x => x.Price).ToList(); 
+     public List<Product> GetProductsOrderByPriceDescending() {
+        return GetAll().OrderByDescending(x => x.Price).ToList(); 
+    }
+
+    public List<Product> GetProductsOrderByPriceAscending() {
+        return GetAll().OrderBy(x => x.Price).ToList(); 
     }
     public List<Product> GetProductsGreaterOrEqualsThen(decimal min) {
         return MockData.ProductMockDataList.Where(x => x.Price >= min).ToList();

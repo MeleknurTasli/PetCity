@@ -5,10 +5,12 @@ public static class MessageGenarator
     {
     { ResponseCodeEnum.Success, "Ok" },
     { ResponseCodeEnum.GetAllAccountOperationSuccess,"Ok" },
+    { ResponseCodeEnum.GetAllProductOperationSuccess,"Ok" },
      {ResponseCodeEnum.DuplicateAccountError,"Girilen e mail sistemde kayıtlı" },
 {ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
 { ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
-
+{ResponseCodeEnum.GetProductByNameOperationSuccess, "Girilen isimde ürün başarılı bir şekilde bulundu"},
+{ResponseCodeEnum.GetProductByNameOperationFail, "Girilen isimde ürün bulunamadı"}
 
     };
 
