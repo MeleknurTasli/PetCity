@@ -20,6 +20,9 @@ public enum ResponseCodeEnum
     PetHelperGetByIdFail,
     PetHelperUpdateSuccess,
     PetHelperUpdateFail,
+    GetPetHelperDeleteSuccess,
+    GetPetHelperDeleteFail,
+
 
     //PetHelper end here
 

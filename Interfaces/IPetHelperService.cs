@@ -4,4 +4,7 @@ public interface IPetHelperService{
     ServiceResponse <PetHelper> FindPetHelperByLatLong(string latitude, string longtitude);
     ServiceResponse<PetHelper> GetById (int id);
     ServiceResponse<PetHelper> UpdatePetHelper(int id, PetHelper petHelper);
+    ServiceResponse<string> GetPetHelperDelete(int id);
+
+
 }

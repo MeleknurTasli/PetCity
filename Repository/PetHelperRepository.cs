@@ -37,6 +37,13 @@ public class PetHelperRepository
          return result;
     }
    
-
+    public string GetPetHelperDelete(int id)
+    {
+        var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);
+       int index=MockData.PetHelperMockDataList.IndexOf(result);
+       MockData.PetHelperMockDataList.RemoveAt(index);
+       return "ok";
+        
+    }
 
 }

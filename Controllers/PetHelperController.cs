@@ -35,7 +35,7 @@ public class PetHelperController : ControllerBase
     }
 
     [HttpPut]
-    public ActionResult<ServiceResponse<PetHelper>> Update([FromQuery] int id, [FromBody]PetHelper petHelper)
+    public ActionResult<ServiceResponse<PetHelper>> UpdatePetHelper([FromQuery] int id, [FromBody]PetHelper petHelper)
     {
         return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.UpdatePetHelper(id,petHelper)); 
     }
@@ -43,6 +43,12 @@ public class PetHelperController : ControllerBase
     public ActionResult<ServiceResponse<PetHelper>> GetById([FromQuery] int id)
     {
         return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.GetById(id));
+    }
+
+    [HttpDelete]
+    public ActionResult<ServiceResponse<string>> GetPetHelperDelete([FromQuery]int id)
+    {
+        return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.GetPetHelperDelete(id));
     }
 }
 

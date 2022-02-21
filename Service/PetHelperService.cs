@@ -85,5 +85,20 @@ public class PetHelperService : IPetHelperService
 
     }
 
+    public ServiceResponse<string> GetPetHelperDelete(int id)
+    {
+        
+         ServiceResponse<string> response = new ServiceResponse<string>();
+         var petHelperData = petHelperRepository.GetById(id);
+        if (petHelperData!=null)
+        {
+            petHelperRepository.GetPetHelperDelete(id);
+            response.ResponseCode = ResponseCodeEnum.GetPetHelperDeleteSuccess;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.GetPetHelperDeleteFail;
+        return response;
+    }
+
 
 }

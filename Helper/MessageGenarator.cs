@@ -24,7 +24,9 @@ public static class MessageGenarator
     {ResponseCodeEnum.PetHelperGetByIdSuccess, "Ok"},
     {ResponseCodeEnum.PetHelperGetByIdFail, "Verilen Id'ye ait PetHelper bulunamadı."},
     {ResponseCodeEnum.PetHelperUpdateSuccess, "Ok"},
-    {ResponseCodeEnum.PetHelperUpdateFail,"Güncellenecek veri bulunamadı."}
+    {ResponseCodeEnum.PetHelperUpdateFail,"Güncellenecek veri bulunamadı."},
+    {ResponseCodeEnum.GetPetHelperDeleteSuccess,"ok"},
+    {ResponseCodeEnum.GetPetHelperDeleteFail,"Silinecek Veri Bulunamadı"}
 
 
 
