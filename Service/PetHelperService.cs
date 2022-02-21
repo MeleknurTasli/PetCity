@@ -1,29 +1,57 @@
 public class PetHelperService : IPetHelperService
 {
-    private PetHelperRepository _petHelperRepository;
-    public PetHelperService(PetHelperRepository _petHelperRepository)
+    private PetHelperRepository petHelperRepository;
+    public PetHelperService()
     {
-        this._petHelperRepository = _petHelperRepository;
+        petHelperRepository = new PetHelperRepository();
     }
 
-    public string Add(PetHelper petHelper)
+    public ServiceResponse<PetHelper> Add(PetHelper petHelper)
     {
-        _petHelperRepository.Add(petHelper);
-        return "Ok";
+         ServiceResponse<PetHelper> response = new ServiceResponse<PetHelper>();
+         var petHelperData = petHelperRepository.FindPetHelperByLatLong(petHelper.Latitude,petHelper.Longtitude);
+        if (petHelperData==null)
+        {
+            petHelperRepository.Add(petHelper);
+            response.ResponseCode = ResponseCodeEnum.PetHelperAddSuccess;
+            response.Data = petHelper;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.PetHelperAddFail;
+        return response;
     }
 
-    public PetHelper FindPetHelperByLatLong(string latitude, string longtitude)
+    public ServiceResponse<PetHelper> FindPetHelperByLatLong(string latitude, string longtitude)
     {
-        var petHelper = _petHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
+        ServiceResponse<PetHelper> response = new ServiceResponse<PetHelper>();
+        var petHelper = petHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
         if (latitude != null && longtitude != null)
         {
-        return petHelper;
+            response.ResponseCode = ResponseCodeEnum.FindPetHelperByLatLongSuccess;
+            response.Data = petHelper;
+            return response;
         }
-        return null;
+        response.ResponseCode = ResponseCodeEnum.FindPetHelperByLatLongFail;
+        return response;
     }
 
-    public List<PetHelper> GetPetHelper()
+    public ServiceResponse<List<PetHelper>> GetPetHelper()
     {
-        return _petHelperRepository.GetPetHelper();
+        ServiceResponse<List<PetHelper>> response = new ServiceResponse<List<PetHelper>>();
+
+        try
+        {
+            response.Data = petHelperRepository.GetPetHelper();
+            response.ResponseCode = ResponseCodeEnum.GetAllPetHelperSuccess;
+            return response;
+        }
+        catch (Exception e)
+        {
+            response.Data = null;
+            response.ResponseCode = ResponseCodeEnum.GetAllPetHelperFail;
+            return response;
+        }
     }
+
+
 }

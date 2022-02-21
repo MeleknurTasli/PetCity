@@ -1,3 +1,4 @@
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PetCity.Controllers;
@@ -8,29 +9,29 @@ public class PetHelperController : ControllerBase
 {
     private readonly IPetHelperService _petHelperService;
     private PetHelperValidator _validator;
+    private ResponseGeneratorHelper ResponseGeneratorHelper;
 
     public PetHelperController(IPetHelperService petHelperService, PetHelperValidator validator)
     {
         _petHelperService = petHelperService;
         _validator = validator;
+        ResponseGeneratorHelper = new ResponseGeneratorHelper();
     }
 
     [HttpGet]
-    public List<PetHelper> Get()
-    {
-        return _petHelperService.GetPetHelper();
-    }
-    [HttpPost]
-    public string Add(PetHelper petHelper)
-    {
+    public ActionResult<ServiceResponse<List<PetHelper>>> GetAll()
+        {
+            return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.GetPetHelper());
+        }
         
-        _validator.Validate(petHelper);
-        _petHelperService.Add(petHelper);
-        return "Ok";
+    [HttpPost]
+    public ActionResult<ServiceResponse<PetHelper>> Add(PetHelper petHelper)
+    {
+       return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.Add(petHelper));
     }
     [HttpGet("{latitude}/{longtitude}")]
-    public PetHelper FindPetHelperByLatLong(string latitude,string longtitude){
-        var result = _petHelperService.FindPetHelperByLatLong(latitude,longtitude);
-        return result;
+    public ActionResult<ServiceResponse<PetHelper>> FindPetHelperByLatLong(string latitude,string longtitude){
+       return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.FindPetHelperByLatLong(latitude,longtitude));
     }
 }
+

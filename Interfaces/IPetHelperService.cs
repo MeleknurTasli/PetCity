@@ -1,5 +1,5 @@
 public interface IPetHelperService{
-    List<PetHelper> GetPetHelper();
-    string Add(PetHelper petHelper);
-    PetHelper FindPetHelperByLatLong(string latitude, string longtitude);
+    ServiceResponse<List<PetHelper>> GetPetHelper();
+    ServiceResponse<PetHelper> Add(PetHelper petHelper);
+    ServiceResponse <PetHelper> FindPetHelperByLatLong(string latitude, string longtitude);
 }
