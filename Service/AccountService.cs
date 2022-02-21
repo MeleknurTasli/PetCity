@@ -1,4 +1,7 @@
-public class AccountService : IAccountService{ 
+using Microsoft.AspNetCore.Mvc;
+
+public class AccountService : IAccountService
+{
 
     private AccountRepository accountRepository;
 
@@ -6,31 +9,50 @@ public class AccountService : IAccountService{
     {
         accountRepository = new AccountRepository();
     }
-    
-    public List<Account> getAccount()
+
+    public ServiceResponse<List<Account>> getAccount()
     {
-        return accountRepository.getAccount();
+        ServiceResponse<List<Account>> response = new ServiceResponse<List<Account>>();
+
+        try
+        {
+            response.Data = accountRepository.getAccount();
+            response.ResponseCode = ResponseCodeEnum.GetAllAccountOperationSuccess;
+            return response;
+        }
+        catch (Exception e)
+        {
+            response.Data = null;
+            response.ResponseCode = ResponseCodeEnum.GetAllAccountOperationFail;
+            return response;
+        }
+
     }
 
-   public Account getAccountByEmail(string email)
+    public ServiceResponse<Account> getAccountByEmail(string email)
     {
+        ServiceResponse<Account> response = new ServiceResponse<Account>();
         var user = accountRepository.getAccountByEmail(email);
         if (user != null)
         {
-            return user;
+            response.ResponseCode = ResponseCodeEnum.GetAccountByEmailOperationSuccess;
+            response.Data = user;
+            return response;
         }
-        return null;
+        response.ResponseCode = ResponseCodeEnum.GetAccountByEmailOperationFail;
+        return response;
     }
 
-    public string setAccount(Account account)
+    public ServiceResponse<string> setAccount(Account account)
     {
-       if(getAccountByEmail(account.Email) == null)
+        ServiceResponse<string> response = new ServiceResponse<string>();
+        if (accountRepository.getAccountByEmail(account.Email) == null)
         {
             accountRepository.setAccount(account);
-        }else{
-            return "Kullanıcı Emaili Kayıtlıdır.!!!";
+            response.ResponseCode = ResponseCodeEnum.Success;
+            return response;
         }
-        
-        return "Ok";
+        response.ResponseCode = ResponseCodeEnum.DuplicateAccountError;
+        return response;
     }
 }
