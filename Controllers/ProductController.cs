@@ -33,7 +33,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    [Route("product/productName/{name}")]
+    [Route("productName")]
     public IActionResult GetProductByName(string name)
     {   
         Product? InComingProduct = _productService.GetProductByName(name);
@@ -44,7 +44,7 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet]
-    [Route("product/brandName/{name}")]
+    [Route("branName")]
     public IActionResult GetProductByBrand(string name){
         Product? IncomingProduct = _productService.GetProductByBrandName(name);
         if(IncomingProduct == null){
