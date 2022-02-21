@@ -17,20 +17,20 @@ public class PetHelperRepository
 
     }
 
-    // public PetHelper UpdatePetHelper (int id, PetHelper petHelper)
-    // {
-    //     var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);
-    //     if(result != null)
-    //     {
-    //         result.UserId = petHelper.UserId;
-    //         result.Image = petHelper.Image;
-    //         result.Date = petHelper.Date;
-    //         result.Description = petHelper.Description;
-    //         result.Latitude = petHelper.Latitude;
-    //         result.Longtitude = petHelper.Longtitude;
-    //     }
-    //     return result;
-    // }
+    public PetHelper UpdatePetHelper (int id, PetHelper petHelper)
+    {
+        var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);
+        if(result != null)
+        {
+            result.UserId = petHelper.UserId;
+            result.Image = petHelper.Image;
+            result.Date = petHelper.Date;
+            result.Description = petHelper.Description;
+            result.Latitude = petHelper.Latitude;
+            result.Longtitude = petHelper.Longtitude;
+        }
+        return result;
+    }
     public PetHelper GetById (int id)
     {
         var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);

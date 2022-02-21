@@ -34,11 +34,11 @@ public class PetHelperController : ControllerBase
        return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.FindPetHelperByLatLong(latitude,longtitude));
     }
 
-    // [HttpPut]
-    // public PetHelper Update([FromQuery] int id, PetHelper petHelper)
-    // {
-
-    // }
+    [HttpPut]
+    public ActionResult<ServiceResponse<PetHelper>> Update([FromQuery] int id, [FromBody]PetHelper petHelper)
+    {
+        return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.UpdatePetHelper(id,petHelper)); 
+    }
     [HttpGet]
     public ActionResult<ServiceResponse<PetHelper>> GetById([FromQuery] int id)
     {

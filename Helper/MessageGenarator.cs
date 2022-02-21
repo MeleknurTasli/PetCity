@@ -22,7 +22,9 @@ public static class MessageGenarator
     {ResponseCodeEnum.PetHelperAddSuccess,"Ok"},
     {ResponseCodeEnum.PetHelperAddFail,"Aynı Id'de veri bulundu."},
     {ResponseCodeEnum.PetHelperGetByIdSuccess, "Ok"},
-    {ResponseCodeEnum.PetHelperGetByIdFail, "Verilen Id'ye ait PetHelper bulunamadı."}
+    {ResponseCodeEnum.PetHelperGetByIdFail, "Verilen Id'ye ait PetHelper bulunamadı."},
+    {ResponseCodeEnum.PetHelperUpdateSuccess, "Ok"},
+    {ResponseCodeEnum.PetHelperUpdateFail,"Güncellenecek veri bulunamadı."}
 
 
 

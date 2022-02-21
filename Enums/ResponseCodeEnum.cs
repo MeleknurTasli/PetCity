@@ -18,8 +18,10 @@ public enum ResponseCodeEnum
     PetHelperAddFail,
     PetHelperGetByIdSuccess,
     PetHelperGetByIdFail,
+    PetHelperUpdateSuccess,
+    PetHelperUpdateFail,
 
-    //PetHelper
+    //PetHelper end here
 
     //pet Operations
     GetPetByIDOperationFail,

@@ -52,20 +52,20 @@ public class PetHelperService : IPetHelperService
             return response;
         }
     }
-    // public ServiceResponse<PetHelper> Update(int id, PetHelper petHelper)
-    // {
-    //      ServiceResponse<PetHelper> response = new ServiceResponse<PetHelper>();
-    //      var petHelperData = petHelperRepository.FindPetHelperByLatLong(petHelper.Latitude,petHelper.Longtitude);
-    //     if (petHelperData==null)
-    //     {
-    //         petHelperRepository.Add(petHelper);
-    //         response.ResponseCode = ResponseCodeEnum.PetHelperAddSuccess;
-    //         response.Data = petHelper;
-    //         return response;
-    //     }
-    //     response.ResponseCode = ResponseCodeEnum.PetHelperAddFail;
-    //     return response;
-    // }
+    public ServiceResponse<PetHelper> UpdatePetHelper(int id, PetHelper petHelper)
+    {
+         ServiceResponse<PetHelper> response = new ServiceResponse<PetHelper>();
+         var petHelperData = petHelperRepository.GetById(id);
+        if (petHelperData!=null)
+        {
+            petHelperRepository.UpdatePetHelper(id,petHelper);
+            response.ResponseCode = ResponseCodeEnum.PetHelperUpdateSuccess;
+            response.Data = petHelper;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.PetHelperUpdateFail;
+        return response;
+    }
     public ServiceResponse<PetHelper> GetById (int id)
     {
         ServiceResponse<PetHelper> response = new ServiceResponse<PetHelper>();
