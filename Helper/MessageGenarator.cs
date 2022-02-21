@@ -6,10 +6,12 @@ public static class MessageGenarator
     { ResponseCodeEnum.Success, "Ok" },
     { ResponseCodeEnum.GetAllAccountOperationSuccess,"Ok" },
      {ResponseCodeEnum.DuplicateAccountError,"Girilen e mail sistemde kayıtlı" },
-{ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
-{ ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
-{ResponseCodeEnum.GetAllPetHelperSuccess,"Ok"},
-{ResponseCodeEnum.GetAllPetHelperFail,"Pethelper bulunamadı."}
+    {ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
+    { ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
+    {ResponseCodeEnum.GetAllPetHelperSuccess,"Ok"},
+    {ResponseCodeEnum.GetAllPetHelperFail,"Pethelper bulunamadı."},
+    {ResponseCodeEnum.FindPetHelperByLatLongSuccess,"Koordinat bulundu."},
+    {ResponseCodeEnum.FindPetHelperByLatLongFail,"Koordinat bulunamadı."},
 
     };
 

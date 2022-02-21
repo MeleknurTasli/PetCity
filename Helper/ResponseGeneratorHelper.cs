@@ -11,6 +11,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetAllAccountOperationSuccess:
             case ResponseCodeEnum.GetAccountByEmailOperationSuccess:
             case ResponseCodeEnum.GetAllPetHelperSuccess:
+            case ResponseCodeEnum.FindPetHelperByLatLongSuccess:
                 {
                     return Ok(incomingResponse);
                 }
@@ -20,6 +21,7 @@ public class ResponseGeneratorHelper : ControllerBase
                     return NotFound(incomingResponse);
                 }
                 case ResponseCodeEnum.GetAllPetHelperFail:
+                case ResponseCodeEnum.FindPetHelperByLatLongFail:
                 {
                     return NotFound(incomingResponse);
                 }

@@ -38,12 +38,7 @@ public class PetHelperController : ControllerBase
     }
     [HttpGet("{latitude}/{longtitude}")]
     public IActionResult FindPetHelperByLatLong(string latitude,string longtitude){
-        var result = _petHelperService.FindPetHelperByLatLong(latitude,longtitude);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+       return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.FindPetHelperByLatLong(latitude,longtitude));
+    }
 }
 
