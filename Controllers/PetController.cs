@@ -1,64 +1,66 @@
-using FluentValidation.Results;
-using Microsoft.AspNetCore.Mvc;
+// using FluentValidation.Results;
+// using Microsoft.AspNetCore.Mvc;
 
-namespace PetCity.Controllers;
+// namespace PetCity.Controllers;
 
-[ApiController]
-[Route("[controller]")]
-public class PetController : ControllerBase
-{
-
-
-
-    private readonly IPetService _IPetService;
-    public PetController(IPetService petService)
-    {
-        _IPetService = petService;
-    }
+// [ApiController]
+// [Route("[controller]")]
+// public class PetController : ControllerBase
+// {
+//     private readonly IPetService _IPetService;
+//     public PetController(IPetService petService)
+//     {
+//         _IPetService = petService;
+//     }
 
 
-    [HttpGet]
-    public List<Pet> GetAll()
-    {
-        return _IPetService.GetAll();
-    }
+//     [HttpGet]
+//     public ActionResult<ServiceResponse<List<Pet>>> GetAll()
+//     {
+//         return ResponseGeneratorHelper.ResponseGenerator(_IPetService.GetAll());
+//     }
 
-    [HttpGet("{id}")]
-    public Pet GetPet(int id)
-    {
-        return _IPetService.GetPet(id);
-    }
-    [HttpPost]
-    public string PetAdd(Pet pet)
-    {
-        string eror = "";
-        PetValidator validator = new PetValidator();
-        ValidationResult results = validator.Validate(pet);
-        if (results.IsValid)
-        {
-            return _IPetService.PetAdd(pet);
-        }
-        foreach (var Errors in results.Errors)
-        {
-            eror += Errors.ErrorMessage + "\n";
-        }
-        return eror;
+//     [HttpGet("{id}")]
+//     public ActionResult<ServiceResponse<Pet>> GetPet(int id)
+//     {
+//         // return _IPetService.GetPet(id);
+//     }
 
-    }
+//     [HttpPost]
+//     public ActionResult<ServiceResponse<string>> PetAdd(Pet pet)
+//     {
 
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
-        _IPetService.Delete(id);
-    }
+//         return ResponseGeneratorHelper.ResponseGenerator(_IPetService.PetAdd(pet));
 
-    [HttpPut("{id}")]
-    public Pet Put(Pet pet, int id)
-    {
+//         // string eror = "";
+//         // PetValidator validator = new PetValidator();
+//         // ValidationResult results = validator.Validate(pet);
+//         // if (results.IsValid)
+//         // {
+//         //     return _IPetService.PetAdd(pet);
+//         // }
+//         // foreach (var Errors in results.Errors)
+//         // {
+//         //     eror += Errors.ErrorMessage + "\n";
+//         // }
+//         // return eror;
 
-        return _IPetService.PetEdit(pet, id);
-     
+//     }
 
-    }
-}
+//     [HttpDelete("{id}")]
+//     public ActionResult<ServiceResponse<string>> PetAdd(int id)
+//     {
+
+//         return ResponseGeneratorHelper.ResponseGenerator(_IPetService.Delete(id));
+
+//         // _IPetService.Delete(id);
+//     }
+
+//     [HttpPut("{id}")]
+//     public Pet Put(Pet pet, int id)
+//     {
+//         return ResponseGeneratorHelper.ResponseGenerator(_IPetService.PetEdit(pet, id));
+//         // return _IPetService.PetEdit(pet, id);
+//     }
+// }
 
