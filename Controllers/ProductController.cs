@@ -41,36 +41,20 @@ public class ProductController : ControllerBase
         return Ok(IncomingProduct);
     }
 
-   [HttpDelete("{id}")]
-   public IActionResult Delete(int id) {
-       bool IsDeleted =_productService.Delete(id);
-
-       if (IsDeleted) {
-           return NoContent();
-       }
-
-       return BadRequest("Kayıt silinemedi");
+   [HttpDelete("id")]
+   public ActionResult<ServiceResponse<Product>> Delete(int id) {
+       return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Delete(id));
    }
 
-   [HttpPut("{id}")]
+    [HttpPut("{id}")]
    public IActionResult Update([FromQuery]int id, [FromBody]Product p) {
        Product product = _productService.Update(id, p);
-        if (p != null) {
+        if (p != null){
             return Ok(product);
         }
 
         return BadRequest("Güncelleme işlemi başarısız");
    }
+
+  
 }
-/*
-{
-    "id":1,
-    "Name": "Minnak",
-    "Detail":"fdsfsdf",
-    "Price":12.45,
-    "Stock":12,
-    "SupplierId":10,
-    "Brand":"sadsad",
-    "CategoryId":2
- }
-*/

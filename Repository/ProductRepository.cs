@@ -62,8 +62,7 @@ public class ProductRepository {
     }
 
     public void Delete(int id) {
-        Product product = GetProductById(id);
-        MockData.ProductMockDataList.Remove(product);
+        MockData.ProductMockDataList.Remove(GetProductById(id));      
     }
 
     public Product Update(int id, Product product) {

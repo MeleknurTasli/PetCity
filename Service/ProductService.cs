@@ -105,7 +105,7 @@ public class ProductService : IProductService
     public ServiceResponse<Product> Delete(int id)
     {   
         ServiceResponse<Product> response = new ServiceResponse<Product>();
-        Product product = productRepository.GetProductById(id);
+        productRepository.Delete(id);
         response.ResponseCode = ResponseCodeEnum.ProductDeletedSuccess;
         return response;
         

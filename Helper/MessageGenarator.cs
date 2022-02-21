@@ -12,7 +12,8 @@ public static class MessageGenarator
 {ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
 { ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
 {ResponseCodeEnum.GetProductByNameOperationSuccess, "Girilen isimde ürün başarılı bir şekilde bulundu"},
-{ResponseCodeEnum.GetProductByNameOperationFail, "Girilen isimde ürün bulunamadı"}
+{ResponseCodeEnum.GetProductByNameOperationFail, "Girilen isimde ürün bulunamadı"},
+    {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"}
 
     };
 
