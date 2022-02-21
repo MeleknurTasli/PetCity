@@ -8,5 +8,17 @@ public enum ResponseCodeEnum
     GetAllAccountOperationFail,
     GetAccountByEmailOperationSuccess,
     GetAccountByEmailOperationFail,
+
+    //pet Operations
+    GetPetByIDOperationFail,
+    GetPetByIDOperationOperationSuccess,
+    GetAllPetOperationSuccess,
+    GetAllPetOperationFail,
+    DuplicatePetError,
+    PetIDNotFoundError,
+
+
+    
+
     BadRequest = 400,
 }

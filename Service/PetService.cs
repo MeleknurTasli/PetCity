@@ -6,7 +6,7 @@ public class PetService : IPetService
         petRepository = new PetRepository();
     }
 
-    string IPetService.Delete(int id)
+    public string Delete(int id)
     {
         if (id != null)
         {
@@ -18,48 +18,67 @@ public class PetService : IPetService
     }
 
 
-    List<Pet> IPetService.GetAll()
+    public ServiceResponse<List<Pet>> GetAll()
     {
-        return petRepository.GetAll();
+        ServiceResponse<List<Pet>> response = new ServiceResponse<List<Pet>>();
+
+        try
+        {
+            response.Data = petRepository.GetAll();
+            response.ResponseCode = ResponseCodeEnum.GetAllPetOperationSuccess;
+            return response;
+        }
+        catch (Exception e)
+        {
+            response.Data = null;
+            response.ResponseCode = ResponseCodeEnum.GetAllAccountOperationFail;
+            return response;
+        }
     }
 
-    public Pet GetPet(int id)
+    public ServiceResponse<Pet> GetPet(int id)
     {
+        ServiceResponse<Pet> response = new ServiceResponse<Pet>();
         var pet = petRepository.GetPet(id);
         if (pet != null)
         {
-            return pet;
+            response.ResponseCode = ResponseCodeEnum.GetPetByIDOperationOperationSuccess;
+            response.Data = pet;
+            return response;
         }
-        return null;
+        response.ResponseCode = ResponseCodeEnum.GetPetByIDOperationFail;
+        return response;
+
     }
 
-    public string PetAdd(Pet pet)
+    public ServiceResponse<string> PetAdd(Pet pet)
     {
-        if (GetPet(pet.id) == null)
+        ServiceResponse<string> response = new ServiceResponse<string>();
+        if (petRepository.GetPet(pet.id) == null)
         {
             petRepository.PetAdd(pet);
+            response.ResponseCode = ResponseCodeEnum.Success;
+            return response;
         }
-        else
-        {
-            return "Aynı id'ye sahip pet bulunmkatadır";
-        }
-
-        return "Yeni Kayıt Oluşturuldu.";
+        response.ResponseCode = ResponseCodeEnum.DuplicatePetError;
+        return response;
     }
 
-    Pet IPetService.PetEdit(Pet pet, int id)
+    public ServiceResponse<Pet> PetEdit(Pet pet, int id)
     {
+        ServiceResponse<Pet> response = new ServiceResponse<Pet>();
         var edited = petRepository.PetEdit(pet, id);
+
         if (edited != null)
         {
-
-            return edited;
-
-
+            petRepository.PetEdit(pet, id);
+            response.ResponseCode = ResponseCodeEnum.Success;
+            return response;
         }
         else
         {
-            return null;
+            response.ResponseCode = ResponseCodeEnum.PetIDNotFoundError;
+            return response;
         }
 
     }
