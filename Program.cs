@@ -9,7 +9,6 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAccountService,AccountService>();//Bu işlemden sonra AccountService yerine IAccountService kullnılacak.
 builder.Services.AddScoped<PetHelperValidator>();
 builder.Services.AddScoped<IPetHelperService,PetHelperService>();
-builder.Services.AddScoped<IPetHelperRepository,PetHelperRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

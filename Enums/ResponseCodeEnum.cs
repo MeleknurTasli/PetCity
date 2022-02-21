@@ -8,5 +8,9 @@ public enum ResponseCodeEnum
     GetAllAccountOperationFail,
     GetAccountByEmailOperationSuccess,
     GetAccountByEmailOperationFail,
+    GetAllPetHelperSuccess,
+    GetAllPetHelperFail,
     BadRequest = 400,
+    
+
 }

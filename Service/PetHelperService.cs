@@ -1,20 +1,20 @@
 public class PetHelperService : IPetHelperService
 {
-    private IPetHelperRepository _petHelperRepository;
-    public PetHelperService(IPetHelperRepository petHelperRepository)
+    private PetHelperRepository petHelperRepository;
+    public PetHelperService()
     {
-        this._petHelperRepository = petHelperRepository;
+        petHelperRepository = new PetHelperRepository();
     }
 
     public IResult Add(PetHelper petHelper)
     {
-        _petHelperRepository.Add(petHelper);
+        petHelperRepository.Add(petHelper);
         return new SuccessResult();
     }
 
     public IDataResult<PetHelper> FindPetHelperByLatLong(string latitude, string longtitude)
     {
-        var petHelper = _petHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
+        var petHelper = petHelperRepository.FindPetHelperByLatLong(latitude,longtitude);
         if (latitude != null && longtitude != null)
         {
         return new SuccessDataResult<PetHelper>(petHelper.Data);
@@ -22,9 +22,22 @@ public class PetHelperService : IPetHelperService
         return null;
     }
 
-    public IDataResult<List<PetHelper>> GetPetHelper()
+    public ServiceResponse<List<PetHelper>> GetPetHelper()
     {
-        return new SuccessDataResult<List<PetHelper>>(_petHelperRepository.GetPetHelper().Data) ;
+        ServiceResponse<List<PetHelper>> response = new ServiceResponse<List<PetHelper>>();
+
+        try
+        {
+            response.Data = petHelperRepository.GetPetHelper();
+            response.ResponseCode = ResponseCodeEnum.GetAllPetHelperSuccess;
+            return response;
+        }
+        catch (Exception e)
+        {
+            response.Data = null;
+            response.ResponseCode = ResponseCodeEnum.GetAllPetHelperFail;
+            return response;
+        }
     }
 
 

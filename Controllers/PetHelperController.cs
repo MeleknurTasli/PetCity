@@ -9,23 +9,21 @@ public class PetHelperController : ControllerBase
 {
     private readonly IPetHelperService _petHelperService;
     private PetHelperValidator _validator;
+    private ResponseGeneratorHelper ResponseGeneratorHelper;
 
     public PetHelperController(IPetHelperService petHelperService, PetHelperValidator validator)
     {
         _petHelperService = petHelperService;
         _validator = validator;
+        ResponseGeneratorHelper = new ResponseGeneratorHelper();
     }
 
     [HttpGet]
-    public IActionResult GetAll()
+    public ActionResult<ServiceResponse<List<PetHelper>>> GetAll()
         {
-            var result = _petHelperService.GetPetHelper();
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
+            return ResponseGeneratorHelper.ResponseGenerator(_petHelperService.GetPetHelper());
         }
+        
     [HttpPost]
     public IActionResult Add(PetHelper petHelper)
     {

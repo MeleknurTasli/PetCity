@@ -1,4 +1,4 @@
-public class PetHelperRepository : IPetHelperRepository
+public class PetHelperRepository
 {
 
     public IResult Add(PetHelper petHelper)
@@ -7,9 +7,9 @@ public class PetHelperRepository : IPetHelperRepository
         
         return new SuccessResult();
     }
-    public IDataResult <List<PetHelper>> GetPetHelper()
+    public List<PetHelper> GetPetHelper()
     {
-        return new SuccessDataResult<List<PetHelper>>( MockData.PetHelperMockDataList);
+        return  MockData.PetHelperMockDataList;
     }
     public  IDataResult<PetHelper> FindPetHelperByLatLong(string latitude, string longtitude){
         var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Latitude == latitude && p.Longtitude == longtitude);
