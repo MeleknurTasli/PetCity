@@ -1,3 +1,4 @@
+
 public class Product
 {
     public int ID { get; set; }
@@ -9,8 +10,4 @@ public class Product
     public string Brand { get; set; }
     public int CategoryId { get; set; }
 
-    public Product(int Id)
-    {
-        this.ID = Id;
-    }
 }
