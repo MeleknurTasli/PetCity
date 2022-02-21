@@ -55,6 +55,4 @@ public class AccountService : IAccountService
         response.ResponseCode = ResponseCodeEnum.DuplicateAccountError;
         return response;
     }
-
-
 }
