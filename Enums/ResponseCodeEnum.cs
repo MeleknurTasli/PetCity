@@ -8,12 +8,18 @@ public enum ResponseCodeEnum
     GetAllAccountOperationFail,
     GetAccountByEmailOperationSuccess,
     GetAccountByEmailOperationFail,
+
+    //PetHelper
     GetAllPetHelperSuccess,
     GetAllPetHelperFail,
     FindPetHelperByLatLongSuccess,
     FindPetHelperByLatLongFail,
     PetHelperAddSuccess,
     PetHelperAddFail,
+    PetHelperGetByIdSuccess,
+    PetHelperGetByIdFail,
+
+    //PetHelper
 
     //pet Operations
     GetPetByIDOperationFail,
@@ -22,6 +28,7 @@ public enum ResponseCodeEnum
     GetAllPetOperationFail,
     DuplicatePetError,
     PetIDNotFoundError,
+
 
 
     
