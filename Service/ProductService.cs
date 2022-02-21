@@ -5,14 +5,19 @@ public class ProductService : IProductService
     {
        productRepository = new ProductRepository();   
     }
-    public Product? Create(Product product)
+    public ServiceResponse<Product> Create(Product product)
     {
-        Product? p = productRepository.GetProductByNameAndBrandName(product.Name, product.Brand);
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
+        var p = productRepository.GetProductByName(product.Name);
 
         if(p == null){
-            return productRepository.Create(product);
+            response.ResponseCode = ResponseCodeEnum.ProductCreated;
+            response.Data = productRepository.Create(product);
+            return response;
         }
-        return null;
+
+        response.ResponseCode = ResponseCodeEnum.DuplicateProductError;
+        return response;
     }
 
     public ServiceResponse<List<Product>> GetAll()

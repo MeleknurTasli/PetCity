@@ -14,5 +14,7 @@ public enum ResponseCodeEnum
     ProductDeletedSuccess,
     GetAllProductOperationSuccess,
     GetAllProductOperationFail,
+    DuplicateProductError,
+    ProductCreated,
     BadRequest = 400,
 }
