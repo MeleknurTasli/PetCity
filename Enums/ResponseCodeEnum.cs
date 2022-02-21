@@ -11,6 +11,7 @@ public enum ResponseCodeEnum
     GetProductByNameOperationSuccess,
     GetProductByNameOperationFail,
     ProductNotFound,
+    ProductDeletedSuccess,
     GetAllProductOperationSuccess,
     GetAllProductOperationFail,
     BadRequest = 400,

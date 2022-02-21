@@ -97,9 +97,12 @@ public class ProductService : IProductService
         return productRepository.Update(id, product);
     }
 
-    public bool Delete(int id)
-    {
+    public ServiceResponse<Product> Delete(int id)
+    {   
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
         Product product = productRepository.GetProductById(id);
-        return productRepository.Delete(id);
+        response.ResponseCode = ResponseCodeEnum.ProductDeletedSuccess;
+        return response;
+        
     }
 }

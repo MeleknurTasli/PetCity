@@ -61,9 +61,9 @@ public class ProductRepository {
         return MockData.ProductMockDataList.Where(x => x.CategoryId == CategoryId).ToList();
     }
 
-    public bool Delete(int id) {
+    public void Delete(int id) {
         Product product = GetProductById(id);
-        return MockData.ProductMockDataList.Remove(product);
+        MockData.ProductMockDataList.Remove(product);
     }
 
     public Product Update(int id, Product product) {
