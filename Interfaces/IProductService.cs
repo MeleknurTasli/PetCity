@@ -1,7 +1,7 @@
 public interface IProductService {
     public ServiceResponse<List<Product>> GetAll();
     public List<Product> GetProductsByCategory(int CategoryId);
-    public Product? Create(Product product);
+    public ServiceResponse<Product> Create(Product product);
     public Product Update(int id, Product product);
     public bool Delete(int id);
     public ServiceResponse<Product> GetProductByName(string name);

@@ -21,15 +21,9 @@ public class ProductController : ControllerBase
     }
 
     [HttpPost]
-    public IActionResult Create(Product product)
+    public ActionResult<ServiceResponse<Product>> Create(Product product)
     {
-      Product? p = _productService.Create(product);
-      if(p!=null){
-          return Ok("Ekleme Başarılı");
-      }
-        
-       return BadRequest("Ekleme Başarısız");
-       
+        return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Create(product));
     }
 
     [HttpGet("ProductByName")]
@@ -59,7 +53,7 @@ public class ProductController : ControllerBase
    }
 
    [HttpPut("{id}")]
-   public IActionResult Update([FromRoute]int id, [FromBody]Product p) {
+   public IActionResult Update([FromQuery]int id, [FromBody]Product p) {
        Product product = _productService.Update(id, p);
         if (p != null) {
             return Ok(product);

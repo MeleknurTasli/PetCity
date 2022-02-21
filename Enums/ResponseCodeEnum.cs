@@ -13,5 +13,7 @@ public enum ResponseCodeEnum
     ProductNotFound,
     GetAllProductOperationSuccess,
     GetAllProductOperationFail,
+    DuplicateProductError,
+    ProductCreated,
     BadRequest = 400,
 }

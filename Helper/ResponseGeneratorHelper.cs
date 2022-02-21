@@ -8,6 +8,7 @@ public class ResponseGeneratorHelper : ControllerBase
         {
             case ResponseCodeEnum.Success:
             case ResponseCodeEnum.AccountCreated:
+            case ResponseCodeEnum.ProductCreated:
             case ResponseCodeEnum.GetAllAccountOperationSuccess:
             case ResponseCodeEnum.GetAllProductOperationSuccess:
             case ResponseCodeEnum.GetAccountByEmailOperationSuccess:
@@ -21,6 +22,10 @@ public class ResponseGeneratorHelper : ControllerBase
                 {
                     return NotFound(incomingResponse);
                 }
+            case ResponseCodeEnum.GetAllProductOperationFail:
+            {
+                return NoContent();
+            }
             default:
                 {
                     return BadRequest(incomingResponse);
