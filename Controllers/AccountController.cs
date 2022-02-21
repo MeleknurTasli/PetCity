@@ -9,41 +9,33 @@ public class AccountController : ControllerBase
 {
 
     private readonly IAccountService _accountService;
+    private ResponseGeneratorHelper ResponseGeneratorHelper;
 
     public AccountController(IAccountService accountService)
     {
         _accountService = accountService;
+        ResponseGeneratorHelper = new ResponseGeneratorHelper();
+
     }
 
     [HttpGet]
-    public List<Account> getAccount()
+
+    public ActionResult<ServiceResponse<List<Account>>> getAccount()
     {
-        return _accountService.getAccount();
+        return ResponseGeneratorHelper.ResponseGenerator(_accountService.getAccount());
     }
 
     [HttpGet("{email}")]
-    public Account getAccountByEmail(string email)
+    public  ActionResult<ServiceResponse<Account>> getAccountByEmail(string email)
     {
         return _accountService.getAccountByEmail(email);
     }
 
 
     [HttpPost]
-    public string setAccount(Account account)
-    {   
-        string err ="";
-        AccountValidator validator = new AccountValidator();
-        ValidationResult results = validator.Validate(account);
-        if (results.IsValid)
-        {
-            return _accountService.setAccount(account);
-        }
-        foreach(var Errors in results.Errors)
-        {
-            err += Errors.ErrorMessage + "\n";
-        }
-        return err;
-
+    public ActionResult<ServiceResponse<string>> setAccount(Account account)
+    {
+        return ResponseGeneratorHelper.ResponseGenerator(_accountService.setAccount(account));
     }
 
 }

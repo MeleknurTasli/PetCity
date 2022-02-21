@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Mvc;
+
 public interface IAccountService
 {
-    List<Account> getAccount();
-    Account getAccountByEmail(string email);
-    string setAccount(Account account);
+    ServiceResponse<List<Account>> getAccount();
+    ServiceResponse<Account> getAccountByEmail(string email);
+    ServiceResponse<string> setAccount(Account account);
 }
