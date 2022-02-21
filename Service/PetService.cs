@@ -6,14 +6,17 @@ public class PetService : IPetService
         petRepository = new PetRepository();
     }
 
-    public string Delete(int id)
+    public ServiceResponse<string> Delete(int id)
     {
+        ServiceResponse<string> response = new ServiceResponse<string>();
         if (id != null)
         {
             petRepository.Delete(id);
-            return "Kayıt Silindi";
+            response.ResponseCode = ResponseCodeEnum.Success;
+            return response;
         }
-        return "Girilen id ile eşleşen kayıt yok";
+        response.ResponseCode = ResponseCodeEnum.PetIDNotFoundError;
+        return response;
 
     }
 
@@ -42,7 +45,7 @@ public class PetService : IPetService
         var pet = petRepository.GetPet(id);
         if (pet != null)
         {
-            response.ResponseCode = ResponseCodeEnum.GetPetByIDOperationOperationSuccess;
+            response.ResponseCode = ResponseCodeEnum.GetPetByIDOperationSuccess;
             response.Data = pet;
             return response;
         }

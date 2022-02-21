@@ -11,7 +11,7 @@ public enum ResponseCodeEnum
 
     //pet Operations
     GetPetByIDOperationFail,
-    GetPetByIDOperationOperationSuccess,
+    GetPetByIDOperationSuccess,
     GetAllPetOperationSuccess,
     GetAllPetOperationFail,
     DuplicatePetError,
