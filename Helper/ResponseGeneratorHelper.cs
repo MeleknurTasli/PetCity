@@ -30,7 +30,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetAllPetOperationFail:
             case ResponseCodeEnum.DuplicateAccountError:
             case ResponseCodeEnum.PetIDNotFoundError:
-
+            case ResponseCodeEnum.ProductNotFound:
             case ResponseCodeEnum.GetAllPetHelperFail:
             case ResponseCodeEnum.FindPetHelperByLatLongFail:
                 {
