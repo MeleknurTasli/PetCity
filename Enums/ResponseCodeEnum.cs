@@ -13,6 +13,7 @@ public enum ResponseCodeEnum
     GetProductsByBrandNameOperationSuccess,
     GetProductsByBrandNameOperationFail,
     ProductNotFound,
+    ProductUpdatedSuccess,
     ProductDeletedSuccess,
     GetAllProductOperationSuccess,
     GetAllProductOperationFail,

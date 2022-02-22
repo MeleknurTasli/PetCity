@@ -43,13 +43,8 @@ public class ProductController : ControllerBase
    }
 
     [HttpPut("{id}")]
-   public IActionResult Update([FromQuery]int id, [FromBody]Product p) {
-       Product product = _productService.Update(id, p);
-        if (p != null){
-            return Ok(product);
-        }
-
-        return BadRequest("Güncelleme işlemi başarısız");
+   public ActionResult<ServiceResponse<Product>> Update([FromQuery]int id, [FromBody]Product p) {
+       return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Update(id, p));
    }
 
   

@@ -38,21 +38,7 @@ public class ProductService : IProductService
         }
     }
 
-    public ServiceResponse<Product> GetProductByName(string name)
-    {
-        ServiceResponse<Product> response = new ServiceResponse<Product>();
-        var product = productRepository.GetProductByName(name);
-        if (product != null)
-        {
-            response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationSuccess;
-            response.Data = product;
-            return response;
-        }
-        response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationFail;
-        return response;
-    }
-
-    public ServiceResponse<List<Product>> GetProductByBrandName(string name)
+    public ServiceResponse<List<Product>> GetProductsByBrandName(string name)
     {
         ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
         var products = productRepository.GetProductsByBrandName(name);
@@ -65,6 +51,7 @@ public class ProductService : IProductService
         response.ResponseCode = ResponseCodeEnum.GetProductsByBrandNameOperationFail;
         return response;
     }
+
     public List<Product> GetProductsOrderByNameDescending() {
         return productRepository.GetProductsOrderByNameDescending();
     }
@@ -108,9 +95,11 @@ public class ProductService : IProductService
         return productRepository.GetProductsByCategoryName(CategoryId);
     }
 
-    public Product Update(int id, Product product)
-    {
-        return productRepository.Update(id, product);
+    public ServiceResponse<Product> Update(int id, Product product)
+    {   ServiceResponse<Product> response = new ServiceResponse<Product>();
+        productRepository.Update(id, product);
+        response.ResponseCode = ResponseCodeEnum.ProductUpdatedSuccess;
+        return response;
     }
 
     public ServiceResponse<Product> Delete(int id)
@@ -120,5 +109,10 @@ public class ProductService : IProductService
         response.ResponseCode = ResponseCodeEnum.ProductDeletedSuccess;
         return response;
         
+    }
+
+    public ServiceResponse<Product> GetProductByName(string name)
+    {
+        throw new NotImplementedException();
     }
 }

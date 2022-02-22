@@ -2,7 +2,7 @@ public interface IProductService {
     public ServiceResponse<List<Product>> GetAll();
     public List<Product> GetProductsByCategory(int CategoryId);
     public ServiceResponse<Product> Create(Product product);
-    public Product Update(int id, Product product);
+    public ServiceResponse<Product> Update(int id, Product product);
     public ServiceResponse<Product> Delete(int id);
     public ServiceResponse<Product> GetProductByName(string name);
     public ServiceResponse<List<Product>> GetProductsByBrandName(string name);
