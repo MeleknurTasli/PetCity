@@ -51,8 +51,19 @@ public class ProductService : IProductService
         response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationFail;
         return response;
     }
-    public Product? GetProductByBrandName(string Brand){
-        return productRepository.GetProductByBrand(Brand);
+
+    public ServiceResponse<List<Product>> GetProductByBrandName(string name)
+    {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        var products = productRepository.GetProductsByBrandName(name);
+        if (products != null)
+        {
+            response.ResponseCode = ResponseCodeEnum.GetProductsByBrandNameOperationSuccess;
+            response.Data = products;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.GetProductsByBrandNameOperationFail;
+        return response;
     }
     public List<Product> GetProductsOrderByNameDescending() {
         return productRepository.GetProductsOrderByNameDescending();

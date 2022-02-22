@@ -5,7 +5,7 @@ public interface IProductService {
     public Product Update(int id, Product product);
     public ServiceResponse<Product> Delete(int id);
     public ServiceResponse<Product> GetProductByName(string name);
-    public Product? GetProductByBrandName(string name);
+    public ServiceResponse<List<Product>> GetProductsByBrandName(string name);
     public List<Product> GetProductsOrderByNameDescending();
     public List<Product> GetProductsOrderByNameAscending();
     public List<Product> GetProductsOrderByPriceDescending();

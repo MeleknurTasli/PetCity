@@ -19,9 +19,9 @@ public class ProductRepository {
         Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name);
         return product;
     }      
-    public Product? GetProductByBrand(string Brand){
-        Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Brand == Brand);
-        return product;
+    public List<Product> GetProductsByBrandName(string Brand){
+        List<Product> products = MockData.ProductMockDataList.Where(x => x.Brand == Brand).ToList();
+        return products;
     }
 
     public Product? GetProductByNameAndBrandName(string name, string brand){

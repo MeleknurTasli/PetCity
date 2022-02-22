@@ -10,6 +10,8 @@ public enum ResponseCodeEnum
     GetAccountByEmailOperationFail,
     GetProductByNameOperationSuccess,
     GetProductByNameOperationFail,
+    GetProductsByBrandNameOperationSuccess,
+    GetProductsByBrandNameOperationFail,
     ProductNotFound,
     ProductDeletedSuccess,
     GetAllProductOperationSuccess,

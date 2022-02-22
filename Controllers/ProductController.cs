@@ -33,12 +33,8 @@ public class ProductController : ControllerBase
     }
 
     [HttpGet("ProductByBrand")]
-    public IActionResult GetProductByBrand(string name){
-        Product? IncomingProduct = _productService.GetProductByBrandName(name);
-        if(IncomingProduct == null){
-            return BadRequest("Marka bulunamadı");
-        }
-        return Ok(IncomingProduct);
+    public ActionResult<ServiceResponse<List<Product>>> GetProductsByBrandName([FromQuery]string name){
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsByBrandName(name));
     }
 
    [HttpDelete("id")]

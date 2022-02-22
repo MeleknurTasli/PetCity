@@ -13,6 +13,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetAllProductOperationSuccess:
             case ResponseCodeEnum.GetAccountByEmailOperationSuccess:
             case ResponseCodeEnum.GetProductByNameOperationSuccess:
+            case ResponseCodeEnum.GetProductsByBrandNameOperationSuccess:
             case ResponseCodeEnum.ProductDeletedSuccess:
                 {
                     return Ok(incomingResponse);
@@ -20,6 +21,7 @@ public class ResponseGeneratorHelper : ControllerBase
 
             case ResponseCodeEnum.GetAccountByEmailOperationFail:
             case ResponseCodeEnum.GetProductByNameOperationFail:
+            case ResponseCodeEnum.GetProductsByBrandNameOperationFail:
                 {
                     return NotFound(incomingResponse);
                 }
