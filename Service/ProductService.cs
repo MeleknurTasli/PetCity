@@ -52,7 +52,7 @@ public class ProductService : IProductService
         return response;
     }
 
-    public ServiceResponse<List<Product>> GetProductByBrandName(string name)
+    public ServiceResponse<List<Product>> GetProductsByBrandName(string name)
     {
         ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
         var products = productRepository.GetProductsByBrandName(name);
@@ -76,11 +76,6 @@ public class ProductService : IProductService
     }
     public List<Product> GetProductsOrderByPriceAscending() {
         return productRepository.GetProductsOrderByPriceAscending();
-    }
-
-    public List<Product> GetProductsByCategoryName(int CategoryId)
-    {
-        return productRepository.GetProductsByCategoryName(CategoryId);
     }
 
     public List<Product> GetProductsGreaterOrEqualsThen(decimal min)
