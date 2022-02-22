@@ -38,6 +38,23 @@ public class ProductService : IProductService
         }
     }
 
+<<<<<<< HEAD
+=======
+    public ServiceResponse<Product> GetProductByName(string name)
+    {
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
+        var product = productRepository.GetProductByName(name);
+        if (product != null)
+        {
+            response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationSuccess;
+            response.Data = product;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationFail;
+        return response;
+    }
+
+>>>>>>> 5f67ac19051a3b28ec823518589921d111e56c54
     public ServiceResponse<List<Product>> GetProductsByBrandName(string name)
     {
         ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
@@ -63,11 +80,6 @@ public class ProductService : IProductService
     }
     public List<Product> GetProductsOrderByPriceAscending() {
         return productRepository.GetProductsOrderByPriceAscending();
-    }
-
-    public List<Product> GetProductsByCategoryName(int CategoryId)
-    {
-        return productRepository.GetProductsByCategoryName(CategoryId);
     }
 
     public List<Product> GetProductsGreaterOrEqualsThen(decimal min)
