@@ -47,13 +47,33 @@ public class PetRepository
 
     public string PetAdd(Pet pet)
     {
-          if(GetPet(pet.id) == null)
+        if (GetPet(pet.id) == null)
         {
             MockData.PetMockDataList.Add(pet);
-        }else{
+        }
+        else
+        {
             return "kayıtlı pet";
         }
-        
+
+        return "Ok";
+    }
+    public string PetListAdd(List<Pet> pets)
+    {
+
+        foreach (var pet in pets)
+        {
+            if (GetPet(pet.id) == null)
+            {
+                MockData.PetMockDataList.Add(pet);
+            }
+            else
+            {
+                return "kayitli pet";
+            }
+
+        }
+
         return "Ok";
     }
 

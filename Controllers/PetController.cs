@@ -17,9 +17,9 @@ public class PetController : ControllerBase
 
 
     [HttpGet]
-    public ActionResult<ServiceResponse<List<Pet>>> GetAll()
+    public ActionResult<ServiceResponse<List<Pet>>> GetAllPet()
     {
-        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.GetAll());
+        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.GetAllPet());
     }
 
     /////GetPet Urlden id girlen yöntem//////
@@ -36,6 +36,13 @@ public class PetController : ControllerBase
     {
 
          return ResponseGeneratorHelper.ResponseGenerator(_IPetService.GetPet(id));
+    }
+
+    
+    [HttpPost("List")]
+    public ActionResult<ServiceResponse<List<Pet>>> AddPetList(List<Pet> pets)
+    {
+        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.AddPetList(pets));
     }
 
     ///////GetPet Metodu QueryString ile çekilmiş 2. yöntem https://localhost:7278/Pet/GetPet?id=2 şeklinde girilecek /////
@@ -69,19 +76,20 @@ public class PetController : ControllerBase
     }
 
     [HttpDelete("{id}")]
-    public ActionResult<ServiceResponse<string>> PetAdd(int id)
+    public ActionResult<ServiceResponse<string>> PetDelete(int id)
     {
 
-        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.Delete(id));
+        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.PetDelete(id));
 
         // _IPetService.Delete(id);
     }
 
     [HttpPut("{id}")]
-    public ActionResult<ServiceResponse<Pet>> Put(Pet pet, int id)
+    public ActionResult<ServiceResponse<Pet>> PetEdit(Pet pet, int id)
     {
         return ResponseGeneratorHelper.ResponseGenerator(_IPetService.PetEdit(pet,id));
         // return _IPetService.PetEdit(pet, id);
     }
 }
+
 
