@@ -67,17 +67,29 @@ public class ProductService : IProductService
         return response;
     }
 
-    public List<Product> GetProductsOrderByNameDescending() {
-        return productRepository.GetProductsOrderByNameDescending();
+    public ServiceResponse<List<Product>> GetProductsOrderByNameDescending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByNameDescending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
-    public List<Product> GetProductsOrderByNameAscending() {
-        return productRepository.GetProductsOrderByNameAscending();
+    public ServiceResponse<List<Product>> GetProductsOrderByNameAscending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByNameAscending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
-    public List<Product> GetProductsOrderByPriceDescending() {
-        return productRepository.GetProductsOrderByPriceDescending();
+    public ServiceResponse<List<Product>> GetProductsOrderByPriceDescending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByPriceDescending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
-    public List<Product> GetProductsOrderByPriceAscending() {
-        return productRepository.GetProductsOrderByPriceAscending();
+    public ServiceResponse<List<Product>> GetProductsOrderByPriceAscending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByPriceAscending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
 
     public List<Product> GetProductsGreaterOrEqualsThen(decimal min)
