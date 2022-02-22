@@ -24,14 +24,25 @@ public class ProductRepository {
         return product;
     }
 
-    public List<Product> GetProductOrderByName(bool IsDescending)
-    {
-        return IsDescending ? GetAll().OrderByDescending(x => x.Name).ToList() : GetAll().OrderBy(x => x.Name).ToList(); 
+    public Product? GetProductByNameAndBrandName(string name, string brand){
+        Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name && x.Brand == brand);
+        return product;
+    }
+
+    public List<Product> GetProductsOrderByNameDescending() {
+        return GetAll().OrderByDescending(x => x.Name).ToList();
+    }
+
+     public List<Product> GetProductsOrderByNameAscending() {
+        return GetAll().OrderBy(x => x.Name).ToList();
     }
     
-     public List<Product> GetProductOrderByPrice(bool IsDescending)
-    {
-        return IsDescending ? GetAll().OrderByDescending(x => x.Price).ToList() : GetAll().OrderBy(x => x.Price).ToList(); 
+     public List<Product> GetProductsOrderByPriceDescending() {
+        return GetAll().OrderByDescending(x => x.Price).ToList(); 
+    }
+
+    public List<Product> GetProductsOrderByPriceAscending() {
+        return GetAll().OrderBy(x => x.Price).ToList(); 
     }
     public List<Product> GetProductsGreaterOrEqualsThen(decimal min) {
         return MockData.ProductMockDataList.Where(x => x.Price >= min).ToList();
@@ -50,14 +61,17 @@ public class ProductRepository {
         return MockData.ProductMockDataList.Where(x => x.CategoryId == CategoryId).ToList();
     }
 
-    public bool Delete(int id) {
-        Product product = GetProductById(id);
-        return MockData.ProductMockDataList.Remove(product);
+    public void Delete(int id) {
+        MockData.ProductMockDataList.Remove(GetProductById(id));      
     }
 
     public Product Update(int id, Product product) {
         Product p = GetProductById(id);
-        p = product;
+        p.Name = product.Name;
+        p.Brand = product.Brand;
+        p.Detail = product.Detail;
+        p.Price = product.Price;
+        p.Stock = product.Stock;
         return p;
     }
 }

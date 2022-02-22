@@ -1,36 +1,26 @@
 public static class MessageGenarator
 {
+    public static readonly Dictionary<ResponseCodeEnum, string> TrResponseMessages
+        = new Dictionary<ResponseCodeEnum, string>
+    {
+    { ResponseCodeEnum.Success, "Ok" },
+    { ResponseCodeEnum.GetAllAccountOperationSuccess,"Ok" },
+    { ResponseCodeEnum.GetAllProductOperationSuccess,"Ok" },
+    { ResponseCodeEnum.ProductCreated,"Ürün başarılı bir şekilde eklendi" },
+     {ResponseCodeEnum.DuplicateAccountError,"Girilen e mail sistemde kayıtlı" },
+     {ResponseCodeEnum.DuplicateProductError,"Girilen üründen sistemde kayıtlı" },
+{ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
+{ ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
+{ResponseCodeEnum.GetProductByNameOperationSuccess, "Girilen isimde ürün başarılı bir şekilde bulundu"},
+{ResponseCodeEnum.GetProductByNameOperationFail, "Girilen isimde ürün bulunamadı"},
+    {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"}
+
+    };
+
 
     public static string ResponseMessageGenarator(ResponseCodeEnum ResponseCode)
     {
-        switch (ResponseCode)
-        {
-
-            case ResponseCodeEnum.Success:
-            case ResponseCodeEnum.GetAllAccountOperationSuccess:
-                {
-                    return "Ok";
-                }
-
-            case ResponseCodeEnum.DuplicateAccountError:
-                {
-                    return "Girilen e mail sistemde kayıtlı";
-                }
-
-            case ResponseCodeEnum.GetAccountByEmailOperationSuccess:
-                {
-                    return "Girilen maile sahip account başarılı bir şekilde bulundu.";
-                }
-
-            case ResponseCodeEnum.GetAccountByEmailOperationFail:
-                {
-                    return "Girilen maile sahip account bulunamadı";
-                }
-            default:
-                {
-                    return "blablabla";
-                }
-        }
+        return TrResponseMessages[ResponseCode];
     }
 
 }

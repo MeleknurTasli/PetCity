@@ -7,64 +7,54 @@ namespace PetCity.Controllers;
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
-
+    private ResponseGeneratorHelper ResponseGeneratorHelper;
     public ProductController(IProductService productService)
     {
         _productService = productService;
+        ResponseGeneratorHelper = new ResponseGeneratorHelper();
     }
 
     [HttpGet]
-    public List<Product> GetAllProducts()
+    public ActionResult<ServiceResponse<List<Product>>> GetAllProducts()
     {
-        return _productService.GetAll();
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetAll());
     }
 
     [HttpPost]
-    public string Create(Product product)
+    public ActionResult<ServiceResponse<Product>> Create(Product product)
     {
-      Product p= _productService.Create(product);
-      if(p!=null){
-          return "Ekleme başarılı";
-      }
-        
-       return "Başarısız";
+        return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Create(product));
     }
 
-    [HttpGet]
-    [Route("product/productName/{name}")]
-    public Product? GetProductByName(string name)
-    {
-       return _productService.GetProductByName(name);
+    [HttpGet("ProductByName")]
+    public ActionResult<ServiceResponse<Product>> GetProductByName([FromQuery]string name)
+    {   
+        return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.GetProductByName(name));
     }
 
-    [HttpGet]
-    [Route("product/brandName/{name}")]
-    public Product? GetProductByBrand(string name){
-        return _productService.GetProductByBrandName(name);
+    [HttpGet("ProductByBrand")]
+    public IActionResult GetProductByBrand(string name){
+        Product? IncomingProduct = _productService.GetProductByBrandName(name);
+        if(IncomingProduct == null){
+            return BadRequest("Marka bulunamadı");
+        }
+        return Ok(IncomingProduct);
     }
 
-    // [HttpPost("{val}")]
-    // public string GetProductsOrderByPrice(bool val)
-    // {
-    //     bool test = val;
-    //     if (test) 
-    //     {
-    //         return "true";
-    //     }
+   [HttpDelete("id")]
+   public ActionResult<ServiceResponse<Product>> Delete(int id) {
+       return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Delete(id));
+   }
 
-    //     return "false";
-    // }
+    [HttpPut("{id}")]
+   public IActionResult Update([FromQuery]int id, [FromBody]Product p) {
+       Product product = _productService.Update(id, p);
+        if (p != null){
+            return Ok(product);
+        }
 
+        return BadRequest("Güncelleme işlemi başarısız");
+   }
+
+  
 }
-/*
-{
-    "id":1,
-    "Name": "Minnak",
-    "Detail":"fdsfsdf",
-    "Price":12.45,
-    "Stock":12,
-    "SupplierId":10,
-    "Brand":"sadsad",
-    "CategoryId":2
- }
-*/
