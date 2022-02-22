@@ -15,7 +15,24 @@ public static class MessageGenarator
 {ResponseCodeEnum.GetProductByNameOperationFail, "Girilen isimde ürün bulunamadı"},
 {ResponseCodeEnum.GetProductsByBrandNameOperationSuccess, "Girilen markada ürün başarılı bir şekilde bulundu"},
 {ResponseCodeEnum.GetProductsByBrandNameOperationFail, "Girilen markada ürün bulunamadı"},
-    {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"}
+    {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"},
+     {ResponseCodeEnum.DuplicateAccountError,"Girilen e mail sistemde kayıtlı" },
+    {ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
+    { ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
+    //Pet Operation
+    { ResponseCodeEnum.GetPetByIDOperationFail,"Girilen id'ye sahip pet bulunamadı"},
+    { ResponseCodeEnum.GetPetByIDOperationSuccess,"Ok"},
+    { ResponseCodeEnum.GetAllPetOperationSuccess,"Ok"},
+    { ResponseCodeEnum.GetAllPetOperationFail,"Petler Getirelemedi"},
+    { ResponseCodeEnum.DuplicatePetError,"Aynı id'ye sahip pet bulunmaktadır."},
+    { ResponseCodeEnum.PetIDNotFoundError,"Girilen id'ye sahip pet bulunamadı"},
+    {ResponseCodeEnum.GetAllPetHelperSuccess,"Ok"},
+    {ResponseCodeEnum.GetAllPetHelperFail,"Pethelper bulunamadı."},
+    {ResponseCodeEnum.FindPetHelperByLatLongSuccess,"Koordinat bulundu."},
+    {ResponseCodeEnum.FindPetHelperByLatLongFail,"Koordinat bulunamadı."},
+    {ResponseCodeEnum.PetHelperAddSuccess,"Ok"},
+    {ResponseCodeEnum.PetHelperAddFail,"Aynı Id'de veri bulundu."}
+
 
     };
 

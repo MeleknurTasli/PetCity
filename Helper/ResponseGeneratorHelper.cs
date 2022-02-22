@@ -15,6 +15,10 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetProductByNameOperationSuccess:
             case ResponseCodeEnum.GetProductsByBrandNameOperationSuccess:
             case ResponseCodeEnum.ProductDeletedSuccess:
+            case ResponseCodeEnum.GetAllPetHelperSuccess:
+            case ResponseCodeEnum.FindPetHelperByLatLongSuccess:
+            case ResponseCodeEnum.GetPetByIDOperationSuccess:
+            case ResponseCodeEnum.GetAllPetOperationSuccess:
                 {
                     return Ok(incomingResponse);
                 }
@@ -22,13 +26,20 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetAccountByEmailOperationFail:
             case ResponseCodeEnum.GetProductByNameOperationFail:
             case ResponseCodeEnum.GetProductsByBrandNameOperationFail:
+            case ResponseCodeEnum.GetPetByIDOperationFail:
+            case ResponseCodeEnum.GetAllPetOperationFail:
+            case ResponseCodeEnum.DuplicateAccountError:
+            case ResponseCodeEnum.PetIDNotFoundError:
+
+            case ResponseCodeEnum.GetAllPetHelperFail:
+            case ResponseCodeEnum.FindPetHelperByLatLongFail:
                 {
                     return NotFound(incomingResponse);
                 }
             case ResponseCodeEnum.GetAllProductOperationFail:
-            {
-                return NoContent();
-            }
+                {
+                    return NoContent();
+                }
             default:
                 {
                     return BadRequest(incomingResponse);

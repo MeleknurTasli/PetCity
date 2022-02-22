@@ -20,4 +20,24 @@ public enum ResponseCodeEnum
     DuplicateProductError,
     ProductCreated,
     BadRequest = 400,
+
+     GetAllPetHelperSuccess,
+    GetAllPetHelperFail,
+    FindPetHelperByLatLongSuccess,
+    FindPetHelperByLatLongFail,
+    PetHelperAddSuccess,
+    PetHelperAddFail,
+
+    //pet Operations
+    GetPetByIDOperationFail,
+    GetPetByIDOperationSuccess,
+    GetAllPetOperationSuccess,
+    GetAllPetOperationFail,
+    DuplicatePetError,
+    PetIDNotFoundError,
+
+
+    
+    
+
 }
