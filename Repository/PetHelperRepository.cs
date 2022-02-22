@@ -7,7 +7,7 @@ public class PetHelperRepository
         
         return petHelper;
     }
-    public List<PetHelper> GetPetHelper()
+    public List<PetHelper> GetAll()
     {
         return  MockData.PetHelperMockDataList;
     }
@@ -17,7 +17,7 @@ public class PetHelperRepository
 
     }
 
-    public PetHelper UpdatePetHelper (int id, PetHelper petHelper)
+    public PetHelper Update (int id, PetHelper petHelper)
     {
         var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);
         if(result != null)
@@ -37,7 +37,7 @@ public class PetHelperRepository
          return result;
     }
    
-    public string GetPetHelperDelete(int id)
+    public string Delete(int id)
     {
         var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);
        int index=MockData.PetHelperMockDataList.IndexOf(result);

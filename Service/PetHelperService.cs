@@ -41,7 +41,7 @@ public class PetHelperService : IPetHelperService
 
         try
         {
-            response.Data = petHelperRepository.GetPetHelper();
+            response.Data = petHelperRepository.GetAll();
             response.ResponseCode = ResponseCodeEnum.GetAllPetHelperSuccess;
             return response;
         }
@@ -58,7 +58,7 @@ public class PetHelperService : IPetHelperService
          var petHelperData = petHelperRepository.GetById(id);
         if (petHelperData!=null)
         {
-            petHelperRepository.UpdatePetHelper(id,petHelper);
+            petHelperRepository.Update(id,petHelper);
             response.ResponseCode = ResponseCodeEnum.PetHelperUpdateSuccess;
             response.Data = petHelper;
             return response;
@@ -92,7 +92,7 @@ public class PetHelperService : IPetHelperService
          var petHelperData = petHelperRepository.GetById(id);
         if (petHelperData!=null)
         {
-            petHelperRepository.GetPetHelperDelete(id);
+            petHelperRepository.Delete(id);
             response.ResponseCode = ResponseCodeEnum.GetPetHelperDeleteSuccess;
             return response;
         }
