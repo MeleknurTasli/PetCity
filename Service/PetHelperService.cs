@@ -35,7 +35,7 @@ public class PetHelperService : IPetHelperService
         return response;
     }
 
-    public ServiceResponse<List<PetHelper>> GetPetHelper()
+    public ServiceResponse<List<PetHelper>> GetAll()
     {
         ServiceResponse<List<PetHelper>> response = new ServiceResponse<List<PetHelper>>();
 
@@ -52,7 +52,7 @@ public class PetHelperService : IPetHelperService
             return response;
         }
     }
-    public ServiceResponse<PetHelper> UpdatePetHelper(int id, PetHelper petHelper)
+    public ServiceResponse<PetHelper> Update(int id, PetHelper petHelper)
     {
          ServiceResponse<PetHelper> response = new ServiceResponse<PetHelper>();
          var petHelperData = petHelperRepository.GetById(id);
@@ -85,7 +85,7 @@ public class PetHelperService : IPetHelperService
 
     }
 
-    public ServiceResponse<string> GetPetHelperDelete(int id)
+    public ServiceResponse<string> Delete(int id)
     {
         
          ServiceResponse<string> response = new ServiceResponse<string>();
