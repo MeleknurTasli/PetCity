@@ -10,11 +10,25 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.AccountCreated:
             case ResponseCodeEnum.GetAllAccountOperationSuccess:
             case ResponseCodeEnum.GetAccountByEmailOperationSuccess:
+            case ResponseCodeEnum.GetAllPetHelperSuccess:
+            case ResponseCodeEnum.FindPetHelperByLatLongSuccess:
+            case ResponseCodeEnum.GetPetByIDOperationSuccess:
+            case ResponseCodeEnum.GetAllPetOperationSuccess:
+
                 {
                     return Ok(incomingResponse);
                 }
 
             case ResponseCodeEnum.GetAccountByEmailOperationFail:
+            case ResponseCodeEnum.GetPetByIDOperationFail:
+            case ResponseCodeEnum.GetAllPetOperationFail:
+            case ResponseCodeEnum.DuplicateAccountError:
+            case ResponseCodeEnum.PetIDNotFoundError:
+                {
+                    return NotFound(incomingResponse);
+                }
+                case ResponseCodeEnum.GetAllPetHelperFail:
+                case ResponseCodeEnum.FindPetHelperByLatLongFail:
                 {
                     return NotFound(incomingResponse);
                 }
