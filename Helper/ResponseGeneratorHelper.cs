@@ -14,6 +14,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetAccountByEmailOperationSuccess:
             case ResponseCodeEnum.GetProductByNameOperationSuccess:
             case ResponseCodeEnum.GetProductsByBrandNameOperationSuccess:
+            case ResponseCodeEnum.GetProductsInStockOperationSuccess:
             case ResponseCodeEnum.ProductDeletedSuccess:
             case ResponseCodeEnum.GetAllPetHelperSuccess:
             case ResponseCodeEnum.FindPetHelperByLatLongSuccess:
@@ -26,6 +27,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetAccountByEmailOperationFail:
             case ResponseCodeEnum.GetProductByNameOperationFail:
             case ResponseCodeEnum.GetProductsByBrandNameOperationFail:
+            case ResponseCodeEnum.GetProductsInStockOperationFailed:
             case ResponseCodeEnum.GetPetByIDOperationFail:
             case ResponseCodeEnum.GetAllPetOperationFail:
             case ResponseCodeEnum.DuplicateAccountError:

@@ -36,6 +36,11 @@ public class ProductController : ControllerBase
     public ActionResult<ServiceResponse<List<Product>>> GetProductsByBrandName([FromQuery]string name){
         return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsByBrandName(name));
     }
+    [HttpGet("ProductInStock")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductInStock()
+    {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsInStock());
+    }
 
    [HttpDelete("id")]
    public ActionResult<ServiceResponse<Product>> Delete(int id) {

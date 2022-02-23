@@ -107,9 +107,12 @@ public class ProductService : IProductService
         return productRepository.GetProductsBetweenMinMaxPrice(min, max);
     }
 
-    public List<Product> GetProductsInStock()
+    public ServiceResponse<List<Product>> GetProductsInStock()
     {
-        return GetProductsInStock();
+        ServiceResponse<List<Product>> response=new ServiceResponse<List<Product>>();
+        response.Data=productRepository.GetProductsInStock();
+        response.ResponseCode=ResponseCodeEnum.GetProductsInStockOperationSuccess;
+        return response;
     }
 
     public List<Product> GetProductsByCategory(int CategoryId)

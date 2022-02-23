@@ -13,6 +13,6 @@ public interface IProductService {
     public List<Product> GetProductsGreaterOrEqualsThen(decimal min);
     public List<Product> GetProductsLessOrEqualsThen(decimal max);
     public List<Product> GetProductsBetweenMinMaxPrice(decimal min, decimal max);
-    public List<Product> GetProductsInStock();
+    public ServiceResponse<List<Product>> GetProductsInStock();
 
 }

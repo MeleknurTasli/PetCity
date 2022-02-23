@@ -15,6 +15,8 @@ public static class MessageGenarator
 {ResponseCodeEnum.GetProductByNameOperationFail, "Girilen isimde ürün bulunamadı"},
 {ResponseCodeEnum.GetProductsByBrandNameOperationSuccess, "Girilen markada ürün başarılı bir şekilde bulundu"},
 {ResponseCodeEnum.GetProductsByBrandNameOperationFail, "Girilen markada ürün bulunamadı"},
+{ResponseCodeEnum.GetProductsInStockOperationSuccess,"Stoktaki ürünler başarılı bir şekilde bulundu"},
+{ResponseCodeEnum.GetProductsInStockOperationFailed,"Stoktaki ürünler bulunamadı"},
     {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"},
     //Pet Operation
     { ResponseCodeEnum.GetPetByIDOperationFail,"Girilen id'ye sahip pet bulunamadı"},
