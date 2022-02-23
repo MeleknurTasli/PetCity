@@ -8,7 +8,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IAccountService,AccountService>();//Bu işlemden sonra AccountService yerine IAccountService kullnılacak.
 builder.Services.AddScoped<IProductService,ProductService>();
-builder.Services.AddScoped<PetHelperValidator>();
 builder.Services.AddScoped<IPetHelperService,PetHelperService>();
 builder.Services.AddScoped<IPetService,PetService>();
 var app = builder.Build();

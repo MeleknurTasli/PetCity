@@ -8,13 +8,11 @@ namespace PetCity.Controllers;
 public class PetHelperController : ControllerBase
 {
     private readonly IPetHelperService _petHelperService;
-    private PetHelperValidator _validator;
     private ResponseGeneratorHelper ResponseGeneratorHelper;
 
-    public PetHelperController(IPetHelperService petHelperService, PetHelperValidator validator)
+    public PetHelperController(IPetHelperService petHelperService)
     {
         _petHelperService = petHelperService;
-        _validator = validator;
         ResponseGeneratorHelper = new ResponseGeneratorHelper();
     }
 
