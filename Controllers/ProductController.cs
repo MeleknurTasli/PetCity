@@ -83,4 +83,9 @@ public class ProductController : ControllerBase
     {   
         return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsLessOrEqualsThan(price));
     }
+
+    [HttpPost("ByCategory/{categoryId}")]
+     public ActionResult<ServiceResponse<List<Product>>> GetProductsByCategory(int categoryId){
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsByCategory(categoryId));
+    }
 }

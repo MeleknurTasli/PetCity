@@ -20,6 +20,8 @@ public static class MessageGenarator
 {ResponseCodeEnum.GetProductsGreaterThanFail,"Girilen fiyattan yüksek fiyata sahip ürün bulunamadı"},
 {ResponseCodeEnum.GetProductsLessThanFail,"Girilen fiyattan düşük fiyata sahip ürün bulunamadı"},
     {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"},
+    {ResponseCodeEnum.GetProductsByCategorySuccess, "Ürün başarı bir şekilde silindi"},
+    {ResponseCodeEnum.GetProductsByCategoryFail, "Girilen kategori de ürün bulunamadı"},
     //Pet Operation
     { ResponseCodeEnum.GetPetByIDOperationFail,"Girilen id'ye sahip pet bulunamadı"},
     { ResponseCodeEnum.GetPetByIDOperationSuccess,"Ok"},

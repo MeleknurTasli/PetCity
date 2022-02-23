@@ -20,6 +20,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.FindPetHelperByLatLongSuccess:
             case ResponseCodeEnum.GetPetByIDOperationSuccess:
             case ResponseCodeEnum.GetAllPetOperationSuccess:
+            case ResponseCodeEnum.GetProductsByCategorySuccess:
                 {
                     return Ok(incomingResponse);
                 }
@@ -37,6 +38,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.FindPetHelperByLatLongFail:
             case ResponseCodeEnum.GetProductsGreaterThanFail:
             case ResponseCodeEnum.GetProductsLessThanFail:
+            case ResponseCodeEnum.GetProductsByCategoryFail:
                 {
                     return NotFound(incomingResponse);
                 }

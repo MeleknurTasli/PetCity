@@ -57,7 +57,7 @@ public class ProductRepository {
         return MockData.ProductMockDataList.Where(x => x.Stock > 0).ToList();
     }
 
-    public List<Product> GetProductsByCategoryName(int CategoryId){
+    public List<Product> GetProductsByCategory(int CategoryId){
         return MockData.ProductMockDataList.Where(x => x.CategoryId == CategoryId).ToList();
     }
 

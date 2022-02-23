@@ -135,9 +135,19 @@ public class ProductService : IProductService
         return response;
     }
 
-    public List<Product> GetProductsByCategory(int CategoryId)
+    public ServiceResponse<List<Product>> GetProductsByCategory(int CategoryId)
     {
-        return productRepository.GetProductsByCategoryName(CategoryId);
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        List<Product> filteredProducts = productRepository.GetProductsByCategory(CategoryId);
+        
+        if (filteredProducts != null) {
+            response.Data = filteredProducts;
+            response.ResponseCode = ResponseCodeEnum.GetProductsByCategorySuccess;
+            return response;
+        }
+
+        response.ResponseCode = ResponseCodeEnum.GetProductsByCategoryFail;
+        return response;
     }
 
     public ServiceResponse<Product> Update(int id, Product product)
