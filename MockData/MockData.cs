@@ -7,7 +7,7 @@ public static class MockData
         new Product {
             ID = 1,
             Name = "product1", 
-            Detail = "Detail1",
+            Description = "Detail1",
             Price = 12.4m,
             Stock = 15,
             SupplierId = 3,
