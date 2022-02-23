@@ -92,14 +92,34 @@ public class ProductService : IProductService
         return response;
     }
 
-    public List<Product> GetProductsGreaterOrEqualsThen(decimal min)
+    public ServiceResponse<List<Product>> GetProductsGreaterOrEqualsThan(decimal min)
     {
-        return productRepository.GetProductsGreaterOrEqualsThen(min);
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        List<Product> filteredProducts = productRepository.GetProductsGreaterOrEqualsThen(min);
+
+        if (filteredProducts != null) {
+            response.Data = filteredProducts;
+            response.ResponseCode = ResponseCodeEnum.Success;
+            return response;
+        }
+
+        response.ResponseCode = ResponseCodeEnum.GetProductsGreaterThanFail;
+        return response;
     }
 
-    public List<Product> GetProductsLessOrEqualsThen(decimal max)
+    public ServiceResponse<List<Product>> GetProductsLessOrEqualsThan(decimal max)
     {
-        return productRepository.GetProductsLessOrEqualsThen(max);
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        List<Product> filteredProducts = productRepository.GetProductsLessOrEqualsThen(max);
+
+        if (filteredProducts != null) {
+            response.Data = filteredProducts;
+            response.ResponseCode = ResponseCodeEnum.Success;
+            return response;
+        }
+
+        response.ResponseCode = ResponseCodeEnum.GetProductsLessThanFail;
+        return response;
     }
 
     public List<Product> GetProductsBetweenMinMaxPrice(decimal min, decimal max)

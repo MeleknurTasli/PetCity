@@ -22,6 +22,8 @@ public enum ResponseCodeEnum
     GetAllProductOperationFail,
     DuplicateProductError,
     ProductCreated,
+    GetProductsGreaterThanFail,
+    GetProductsLessThanFail,
     BadRequest = 400,
     GetAllPetHelperSuccess,
     GetAllPetHelperFail,

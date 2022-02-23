@@ -71,4 +71,16 @@ public class ProductController : ControllerBase
     public ActionResult<ServiceResponse<List<Product>>> OrderPriceAsscending() {
         return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByPriceAscending());
     }
+
+    [HttpPost("GreaterThan")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductsGreaterThan([FromQuery]decimal price)
+    {   
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsGreaterOrEqualsThan(price));
+    }
+
+       [HttpPost("LessThan")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductsLessThen([FromQuery]decimal price)
+    {   
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsLessOrEqualsThan(price));
+    }
 }

@@ -35,6 +35,8 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.ProductNotFound:
             case ResponseCodeEnum.GetAllPetHelperFail:
             case ResponseCodeEnum.FindPetHelperByLatLongFail:
+            case ResponseCodeEnum.GetProductsGreaterThanFail:
+            case ResponseCodeEnum.GetProductsLessThanFail:
                 {
                     return NotFound(incomingResponse);
                 }
