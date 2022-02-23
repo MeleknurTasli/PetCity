@@ -16,9 +16,6 @@ public static class MessageGenarator
 {ResponseCodeEnum.GetProductsByBrandNameOperationSuccess, "Girilen markada ürün başarılı bir şekilde bulundu"},
 {ResponseCodeEnum.GetProductsByBrandNameOperationFail, "Girilen markada ürün bulunamadı"},
     {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"},
-     {ResponseCodeEnum.DuplicateAccountError,"Girilen e mail sistemde kayıtlı" },
-    {ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
-    { ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
     //Pet Operation
     { ResponseCodeEnum.GetPetByIDOperationFail,"Girilen id'ye sahip pet bulunamadı"},
     { ResponseCodeEnum.GetPetByIDOperationSuccess,"Ok"},

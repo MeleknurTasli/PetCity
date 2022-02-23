@@ -20,7 +20,6 @@ public enum ResponseCodeEnum
     DuplicateProductError,
     ProductCreated,
     BadRequest = 400,
-
      GetAllPetHelperSuccess,
     GetAllPetHelperFail,
     FindPetHelperByLatLongSuccess,

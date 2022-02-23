@@ -38,6 +38,21 @@ public class ProductService : IProductService
         }
     }
 
+      public ServiceResponse<Product> GetProductByName(string name)
+    {
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
+        var product = productRepository.GetProductByName(name);
+        if (product != null)
+        {
+            response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationSuccess;
+            response.Data = product;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationFail;
+        return response;
+    }
+
+
     public ServiceResponse<List<Product>> GetProductsByBrandName(string name)
     {
         ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
@@ -52,17 +67,29 @@ public class ProductService : IProductService
         return response;
     }
 
-    public List<Product> GetProductsOrderByNameDescending() {
-        return productRepository.GetProductsOrderByNameDescending();
+    public ServiceResponse<List<Product>> GetProductsOrderByNameDescending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByNameDescending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
-    public List<Product> GetProductsOrderByNameAscending() {
-        return productRepository.GetProductsOrderByNameAscending();
+    public ServiceResponse<List<Product>> GetProductsOrderByNameAscending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByNameAscending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
-    public List<Product> GetProductsOrderByPriceDescending() {
-        return productRepository.GetProductsOrderByPriceDescending();
+    public ServiceResponse<List<Product>> GetProductsOrderByPriceDescending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByPriceDescending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
-    public List<Product> GetProductsOrderByPriceAscending() {
-        return productRepository.GetProductsOrderByPriceAscending();
+    public ServiceResponse<List<Product>> GetProductsOrderByPriceAscending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByPriceAscending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
 
     public List<Product> GetProductsGreaterOrEqualsThen(decimal min)
@@ -91,23 +118,32 @@ public class ProductService : IProductService
     }
 
     public ServiceResponse<Product> Update(int id, Product product)
-    {   ServiceResponse<Product> response = new ServiceResponse<Product>();
-        productRepository.Update(id, product);
-        response.ResponseCode = ResponseCodeEnum.ProductUpdatedSuccess;
+    {   
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
+        Product updatedProduct = productRepository.GetProductById(id);
+        
+        if (updatedProduct != null) {
+            response.Data = productRepository.Update(id, product);
+            response.ResponseCode = ResponseCodeEnum.ProductUpdatedSuccess;
+            return response;
+        }
+        
+        response.ResponseCode = ResponseCodeEnum.ProductNotFound;
         return response;
     }
 
     public ServiceResponse<Product> Delete(int id)
     {   
         ServiceResponse<Product> response = new ServiceResponse<Product>();
-        productRepository.Delete(id);
-        response.ResponseCode = ResponseCodeEnum.ProductDeletedSuccess;
-        return response;
+        Product product = productRepository.GetProductById(id);
         
-    }
-
-    public ServiceResponse<Product> GetProductByName(string name)
-    {
-        throw new NotImplementedException();
+        if (product != null) {
+            productRepository.Delete(id);
+            response.ResponseCode = ResponseCodeEnum.ProductDeletedSuccess;
+            return response;
+        }
+        
+        response.ResponseCode = ResponseCodeEnum.ProductNotFound;
+        return response;
     }
 }
