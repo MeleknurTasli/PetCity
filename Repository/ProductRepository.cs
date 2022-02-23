@@ -69,7 +69,7 @@ public class ProductRepository {
         Product p = GetProductById(id);
         p.Name = product.Name;
         p.Brand = product.Brand;
-        p.Detail = product.Detail;
+        p.Description = product.Description;
         p.Price = product.Price;
         p.Stock = product.Stock;
         return p;
