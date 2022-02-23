@@ -19,9 +19,9 @@ public class ProductRepository {
         Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Name == name);
         return product;
     }      
-    public Product? GetProductByBrand(string Brand){
-        Product? product = MockData.ProductMockDataList.FirstOrDefault(x => x.Brand == Brand);
-        return product;
+    public List<Product> GetProductsByBrandName(string Brand){
+        List<Product> products = MockData.ProductMockDataList.Where(x => x.Brand == Brand).ToList();
+        return products;
     }
 
     public Product? GetProductByNameAndBrandName(string name, string brand){
@@ -29,14 +29,20 @@ public class ProductRepository {
         return product;
     }
 
-    public List<Product> GetProductOrderByName(bool IsDescending)
-    {
-        return IsDescending ? GetAll().OrderByDescending(x => x.Name).ToList() : GetAll().OrderBy(x => x.Name).ToList(); 
+    public List<Product> GetProductsOrderByNameDescending() {
+        return GetAll().OrderByDescending(x => x.Name).ToList();
+    }
+
+     public List<Product> GetProductsOrderByNameAscending() {
+        return GetAll().OrderBy(x => x.Name).ToList();
     }
     
-     public List<Product> GetProductOrderByPrice(bool IsDescending)
-    {
-        return IsDescending ? GetAll().OrderByDescending(x => x.Price).ToList() : GetAll().OrderBy(x => x.Price).ToList(); 
+     public List<Product> GetProductsOrderByPriceDescending() {
+        return GetAll().OrderByDescending(x => x.Price).ToList(); 
+    }
+
+    public List<Product> GetProductsOrderByPriceAscending() {
+        return GetAll().OrderBy(x => x.Price).ToList(); 
     }
     public List<Product> GetProductsGreaterOrEqualsThen(decimal min) {
         return MockData.ProductMockDataList.Where(x => x.Price >= min).ToList();
@@ -51,20 +57,19 @@ public class ProductRepository {
         return MockData.ProductMockDataList.Where(x => x.Stock > 0).ToList();
     }
 
-    public List<Product> GetProductsByCategoryName(int CategoryId){
+    public List<Product> GetProductsByCategory(int CategoryId){
         return MockData.ProductMockDataList.Where(x => x.CategoryId == CategoryId).ToList();
     }
 
-    public bool Delete(int id) {
-        Product product = GetProductById(id);
-        return MockData.ProductMockDataList.Remove(product);
+    public void Delete(int id) {
+        MockData.ProductMockDataList.Remove(GetProductById(id));      
     }
 
     public Product Update(int id, Product product) {
         Product p = GetProductById(id);
         p.Name = product.Name;
         p.Brand = product.Brand;
-        p.Detail = product.Detail;
+        p.Description = product.Description;
         p.Price = product.Price;
         p.Stock = product.Stock;
         return p;

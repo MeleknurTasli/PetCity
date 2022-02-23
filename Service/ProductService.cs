@@ -5,75 +5,188 @@ public class ProductService : IProductService
     {
        productRepository = new ProductRepository();   
     }
-    public Product? Create(Product product)
+    public ServiceResponse<Product> Create(Product product)
     {
-        Product? p = productRepository.GetProductByNameAndBrandName(product.Name, product.Brand);
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
+        var p = productRepository.GetProductByName(product.Name);
 
         if(p == null){
-            return productRepository.Create(product);
+            response.ResponseCode = ResponseCodeEnum.ProductCreated;
+            response.Data = productRepository.Create(product);
+            return response;
         }
-        return null;
+
+        response.ResponseCode = ResponseCodeEnum.DuplicateProductError;
+        return response;
     }
 
-    public List<Product> GetAll()
+    public ServiceResponse<List<Product>> GetAll()
     {
-        return productRepository.GetAll();
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+
+        try
+        {
+            response.Data = productRepository.GetAll();
+            response.ResponseCode = ResponseCodeEnum.GetAllProductOperationSuccess;
+            return response;
+        }
+        catch (Exception e)
+        {
+            response.Data = null;
+            response.ResponseCode = ResponseCodeEnum.GetAllAccountOperationFail;
+            return response;
+        }
     }
 
-    public Product? GetProductByName(string name)
+      public ServiceResponse<Product> GetProductByName(string name)
     {
-        return productRepository.GetProductByName(name);
-    }
-    public Product? GetProductByBrandName(string Brand){
-        return productRepository.GetProductByBrand(Brand);
-    }
-
-    public List<Product> GetProductOrderByName(bool IsDescending) {
-         return productRepository.GetProductOrderByName(IsDescending);
-    }
-
-    public List<Product> GetProductOrderByPrice(bool IsDescending) {
-        return productRepository.GetProductOrderByPrice(IsDescending); 
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
+        var product = productRepository.GetProductByName(name);
+        if (product != null)
+        {
+            response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationSuccess;
+            response.Data = product;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.GetProductByNameOperationFail;
+        return response;
     }
 
-    public List<Product> GetProductsByCategoryName(int CategoryId)
+
+    public ServiceResponse<List<Product>> GetProductsByBrandName(string name)
     {
-        return productRepository.GetProductsByCategoryName(CategoryId);
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        var products = productRepository.GetProductsByBrandName(name);
+        if (products != null)
+        {
+            response.ResponseCode = ResponseCodeEnum.GetProductsByBrandNameOperationSuccess;
+            response.Data = products;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.GetProductsByBrandNameOperationFail;
+        return response;
     }
 
-    public List<Product> GetProductsGreaterOrEqualsThen(decimal min)
-    {
-        return productRepository.GetProductsGreaterOrEqualsThen(min);
+    public ServiceResponse<List<Product>> GetProductsOrderByNameDescending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByNameDescending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
+    }
+    public ServiceResponse<List<Product>> GetProductsOrderByNameAscending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByNameAscending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
+    }
+    public ServiceResponse<List<Product>> GetProductsOrderByPriceDescending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByPriceDescending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
+    }
+    public ServiceResponse<List<Product>> GetProductsOrderByPriceAscending() {
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        response.Data = productRepository.GetProductsOrderByPriceAscending();
+        response.ResponseCode = ResponseCodeEnum.Success;
+        return response;
     }
 
-    public List<Product> GetProductsLessOrEqualsThen(decimal max)
+    public ServiceResponse<List<Product>> GetProductsGreaterOrEqualsThan(decimal min)
     {
-        return productRepository.GetProductsLessOrEqualsThen(max);
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        List<Product> filteredProducts = productRepository.GetProductsGreaterOrEqualsThen(min);
+
+        if (filteredProducts != null) {
+            response.Data = filteredProducts;
+            response.ResponseCode = ResponseCodeEnum.Success;
+            return response;
+        }
+
+        response.ResponseCode = ResponseCodeEnum.GetProductsGreaterThanFail;
+        return response;
     }
 
-    public List<Product> GetProductsBetweenMinMaxPrice(decimal min, decimal max)
+    public ServiceResponse<List<Product>> GetProductsLessOrEqualsThan(decimal max)
     {
-        return productRepository.GetProductsBetweenMinMaxPrice(min, max);
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        List<Product> filteredProducts = productRepository.GetProductsLessOrEqualsThen(max);
+
+        if (filteredProducts != null) {
+            response.Data = filteredProducts;
+            response.ResponseCode = ResponseCodeEnum.Success;
+            return response;
+        }
+
+        response.ResponseCode = ResponseCodeEnum.GetProductsLessThanFail;
+        return response;
     }
 
-    public List<Product> GetProductsInStock()
+    public ServiceResponse<List<Product>> GetProductsBetweenMinMaxPrice(decimal min, decimal max)
     {
-        return GetProductsInStock();
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        List<Product> filteredProducts = productRepository.GetProductsBetweenMinMaxPrice(min, max);
+
+        if (filteredProducts != null) {
+            response.Data = filteredProducts;
+            response.ResponseCode = ResponseCodeEnum.GetProductsBetweenMinMaxPriceSuccess;
+            return response;
+        }
+
+        response.ResponseCode = ResponseCodeEnum.GetProductsBetweenMinMaxPriceSuccess;
+        return response;
     }
 
-    public List<Product> GetProductsByCategory(int CategoryId)
+    public ServiceResponse<List<Product>> GetProductsInStock()
     {
-        return productRepository.GetProductsByCategoryName(CategoryId);
+        ServiceResponse<List<Product>> response=new ServiceResponse<List<Product>>();
+        response.Data=productRepository.GetProductsInStock();
+        response.ResponseCode=ResponseCodeEnum.GetProductsInStockOperationSuccess;
+        return response;
     }
 
-    public Product Update(int id, Product product)
+    public ServiceResponse<List<Product>> GetProductsByCategory(int CategoryId)
     {
-        return productRepository.Update(id, product);
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        List<Product> filteredProducts = productRepository.GetProductsByCategory(CategoryId);
+        
+        if (filteredProducts != null) {
+            response.Data = filteredProducts;
+            response.ResponseCode = ResponseCodeEnum.GetProductsByCategorySuccess;
+            return response;
+        }
+
+        response.ResponseCode = ResponseCodeEnum.GetProductsByCategoryFail;
+        return response;
     }
 
-    public bool Delete(int id)
-    {
+    public ServiceResponse<Product> Update(int id, Product product)
+    {   
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
+        Product updatedProduct = productRepository.GetProductById(id);
+        
+        if (updatedProduct != null) {
+            response.Data = productRepository.Update(id, product);
+            response.ResponseCode = ResponseCodeEnum.ProductUpdatedSuccess;
+            return response;
+        }
+        
+        response.ResponseCode = ResponseCodeEnum.ProductNotFound;
+        return response;
+    }
+
+    public ServiceResponse<Product> Delete(int id)
+    {   
+        ServiceResponse<Product> response = new ServiceResponse<Product>();
         Product product = productRepository.GetProductById(id);
-        return productRepository.Delete(id);
+        
+        if (product != null) {
+            productRepository.Delete(id);
+            response.ResponseCode = ResponseCodeEnum.ProductDeletedSuccess;
+            return response;
+        }
+        
+        response.ResponseCode = ResponseCodeEnum.ProductNotFound;
+        return response;
     }
 }

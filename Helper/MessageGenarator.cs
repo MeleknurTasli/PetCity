@@ -5,9 +5,25 @@ public static class MessageGenarator
     {
     { ResponseCodeEnum.Success, "Ok" },
     { ResponseCodeEnum.GetAllAccountOperationSuccess,"Ok" },
-    {ResponseCodeEnum.DuplicateAccountError,"Girilen e mail sistemde kayıtlı" },
-    {ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
-    { ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
+    { ResponseCodeEnum.GetAllProductOperationSuccess,"Ok" },
+    { ResponseCodeEnum.ProductCreated,"Ürün başarılı bir şekilde eklendi" },
+     {ResponseCodeEnum.DuplicateAccountError,"Girilen e mail sistemde kayıtlı" },
+     {ResponseCodeEnum.DuplicateProductError,"Girilen üründen sistemde kayıtlı" },
+{ResponseCodeEnum.GetAccountByEmailOperationSuccess,"Girilen maile sahip account başarılı bir şekilde bulundu."},
+{ ResponseCodeEnum.GetAccountByEmailOperationFail,"Girilen maile sahip account bulunamadı"},
+{ResponseCodeEnum.GetProductByNameOperationSuccess, "Girilen isimde ürün başarılı bir şekilde bulundu"},
+{ResponseCodeEnum.GetProductByNameOperationFail, "Girilen isimde ürün bulunamadı"},
+{ResponseCodeEnum.GetProductsByBrandNameOperationSuccess, "Girilen markada ürün başarılı bir şekilde bulundu"},
+{ResponseCodeEnum.GetProductsByBrandNameOperationFail, "Girilen markada ürün bulunamadı"},
+{ResponseCodeEnum.GetProductsInStockOperationSuccess,"Stoktaki ürünler başarılı bir şekilde bulundu"},
+{ResponseCodeEnum.GetProductsInStockOperationFailed,"Stoktaki ürünler bulunamadı"},
+{ResponseCodeEnum.GetProductsGreaterThanFail,"Girilen fiyattan yüksek fiyata sahip ürün bulunamadı"},
+{ResponseCodeEnum.GetProductsLessThanFail,"Girilen fiyattan düşük fiyata sahip ürün bulunamadı"},
+    {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"},
+    {ResponseCodeEnum.GetProductsByCategorySuccess, "Ürün başarı bir şekilde silindi"},
+    {ResponseCodeEnum.GetProductsByCategoryFail, "Girilen kategori de ürün bulunamadı"},
+    {ResponseCodeEnum.GetProductsBetweenMinMaxPriceSuccess, "Ok"},
+    {ResponseCodeEnum.GetProductsBetweenMinMaxPriceFail, "İstenen aralıkta ürün bulunamadı"},
     //Pet Operation
     { ResponseCodeEnum.GetPetByIDOperationFail,"Girilen id'ye sahip pet bulunamadı"},
     { ResponseCodeEnum.GetPetByIDOperationSuccess,"Ok"},
@@ -21,9 +37,6 @@ public static class MessageGenarator
     {ResponseCodeEnum.FindPetHelperByLatLongFail,"Koordinat bulunamadı."},
     {ResponseCodeEnum.PetHelperAddSuccess,"Ok"},
     {ResponseCodeEnum.PetHelperAddFail,"Aynı Id'de veri bulundu."}
-
-
-
 
 
     };
