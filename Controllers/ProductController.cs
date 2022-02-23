@@ -52,5 +52,23 @@ public class ProductController : ControllerBase
        return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Update(id, p));
    }
 
-  
+    [HttpGet("DescendingByName")]
+    public ActionResult<ServiceResponse<List<Product>>> OrderByNameDescending() {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByNameDescending());
+    }
+
+     [HttpGet("AscendingByName")]
+    public ActionResult<ServiceResponse<List<Product>>> OrderByNameAscending() {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByNameAscending());
+    }
+
+     [HttpGet("DescendingByPrice")]
+    public ActionResult<ServiceResponse<List<Product>>> OrderPriceDescending() {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByPriceDescending());
+    }
+
+     [HttpGet("AscendingByPrice")]
+    public ActionResult<ServiceResponse<List<Product>>> OrderPriceAsscending() {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByPriceAscending());
+    }
 }
