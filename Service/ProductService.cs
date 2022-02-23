@@ -122,9 +122,19 @@ public class ProductService : IProductService
         return response;
     }
 
-    public List<Product> GetProductsBetweenMinMaxPrice(decimal min, decimal max)
+    public ServiceResponse<List<Product>> GetProductsBetweenMinMaxPrice(decimal min, decimal max)
     {
-        return productRepository.GetProductsBetweenMinMaxPrice(min, max);
+        ServiceResponse<List<Product>> response = new ServiceResponse<List<Product>>();
+        List<Product> filteredProducts = productRepository.GetProductsBetweenMinMaxPrice(min, max);
+
+        if (filteredProducts != null) {
+            response.Data = filteredProducts;
+            response.ResponseCode = ResponseCodeEnum.GetProductsBetweenMinMaxPriceSuccess;
+            return response;
+        }
+
+        response.ResponseCode = ResponseCodeEnum.GetProductsBetweenMinMaxPriceSuccess;
+        return response;
     }
 
     public ServiceResponse<List<Product>> GetProductsInStock()

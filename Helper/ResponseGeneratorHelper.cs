@@ -21,6 +21,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetPetByIDOperationSuccess:
             case ResponseCodeEnum.GetAllPetOperationSuccess:
             case ResponseCodeEnum.GetProductsByCategorySuccess:
+            case ResponseCodeEnum.GetProductsBetweenMinMaxPriceSuccess:
                 {
                     return Ok(incomingResponse);
                 }
@@ -39,6 +40,7 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetProductsGreaterThanFail:
             case ResponseCodeEnum.GetProductsLessThanFail:
             case ResponseCodeEnum.GetProductsByCategoryFail:
+            case ResponseCodeEnum.GetProductsBetweenMinMaxPriceFail:
                 {
                     return NotFound(incomingResponse);
                 }

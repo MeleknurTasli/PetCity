@@ -12,7 +12,7 @@ public interface IProductService {
     public ServiceResponse<List<Product>> GetProductsOrderByPriceAscending();
     public ServiceResponse<List<Product>> GetProductsGreaterOrEqualsThan(decimal min);
     public ServiceResponse<List<Product>> GetProductsLessOrEqualsThan(decimal max);
-    public List<Product> GetProductsBetweenMinMaxPrice(decimal min, decimal max);
+    public ServiceResponse<List<Product>> GetProductsBetweenMinMaxPrice(decimal min, decimal max);
     public ServiceResponse<List<Product>> GetProductsInStock();
 
 }

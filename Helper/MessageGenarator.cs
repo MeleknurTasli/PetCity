@@ -22,6 +22,8 @@ public static class MessageGenarator
     {ResponseCodeEnum.ProductDeletedSuccess, "Ürün başarı bir şekilde silindi"},
     {ResponseCodeEnum.GetProductsByCategorySuccess, "Ürün başarı bir şekilde silindi"},
     {ResponseCodeEnum.GetProductsByCategoryFail, "Girilen kategori de ürün bulunamadı"},
+    {ResponseCodeEnum.GetProductsBetweenMinMaxPriceSuccess, "Ok"},
+    {ResponseCodeEnum.GetProductsBetweenMinMaxPriceFail, "İstenen aralıkta ürün bulunamadı"},
     //Pet Operation
     { ResponseCodeEnum.GetPetByIDOperationFail,"Girilen id'ye sahip pet bulunamadı"},
     { ResponseCodeEnum.GetPetByIDOperationSuccess,"Ok"},

@@ -17,6 +17,8 @@ public enum ResponseCodeEnum
     GetProductsInStockOperationFailed,
     GetProductsByCategorySuccess,
     GetProductsByCategoryFail,
+    GetProductsBetweenMinMaxPriceSuccess,
+    GetProductsBetweenMinMaxPriceFail,
     ProductNotFound,
     ProductUpdatedSuccess,
     ProductDeletedSuccess,

@@ -78,10 +78,16 @@ public class ProductController : ControllerBase
         return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsGreaterOrEqualsThan(price));
     }
 
-       [HttpPost("LessThan")]
+    [HttpPost("LessThan")]
     public ActionResult<ServiceResponse<List<Product>>> GetProductsLessThen([FromQuery]decimal price)
     {   
         return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsLessOrEqualsThan(price));
+    }
+
+    [HttpPost("BetweenPrice")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductsBetweenMinMaxPrice([FromQuery]decimal min, [FromQuery]decimal max)
+    {   
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsBetweenMinMaxPrice(min, max));
     }
 
     [HttpPost("ByCategory/{categoryId}")]
