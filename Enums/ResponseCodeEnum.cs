@@ -8,6 +8,8 @@ public enum ResponseCodeEnum
     GetAllAccountOperationFail,
     GetAccountByEmailOperationSuccess,
     GetAccountByEmailOperationFail,
+
+    //PetHelper
     //Product Enums
     GetProductByNameOperationSuccess,
     GetProductByNameOperationFail,
