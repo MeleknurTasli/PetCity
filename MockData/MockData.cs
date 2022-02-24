@@ -1,4 +1,4 @@
-public static class MockData
+public static  class MockData
 {
     public static List<Account> AccountMockDataList = new List<Account>();
     public static List<PetHelper> PetHelperMockDataList = new List<PetHelper>();
