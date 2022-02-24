@@ -36,8 +36,9 @@ public static class MessageGenarator
     {ResponseCodeEnum.FindPetHelperByLatLongSuccess,"Koordinat bulundu."},
     {ResponseCodeEnum.FindPetHelperByLatLongFail,"Koordinat bulunamadı."},
     {ResponseCodeEnum.PetHelperAddSuccess,"Ok"},
-    {ResponseCodeEnum.PetHelperAddFail,"Aynı Id'de veri bulundu."}
-
+    {ResponseCodeEnum.PetHelperAddFail,"Aynı Id'de veri bulundu."},
+    { ResponseCodeEnum.GetPetByGenusOperationSuccess,"Ok"},
+    { ResponseCodeEnum.GetPetByGenusOperationFail,"Girilen cinse sahip pet bulunamadı"}
 
     };
 
