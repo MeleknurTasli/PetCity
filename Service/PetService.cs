@@ -6,7 +6,7 @@ public class PetService : IPetService
         petRepository = new PetRepository();
     }
 
-    public ServiceResponse<string> Delete(int id)
+    public ServiceResponse<string> PetDelete(int id)
     {
         ServiceResponse<string> response = new ServiceResponse<string>();
         if (id != null)
@@ -21,7 +21,7 @@ public class PetService : IPetService
     }
 
 
-    public ServiceResponse<List<Pet>> GetAll()
+    public ServiceResponse<List<Pet>> GetAllPet()
     {
         ServiceResponse<List<Pet>> response = new ServiceResponse<List<Pet>>();
 
@@ -53,6 +53,20 @@ public class PetService : IPetService
         return response;
 
     }
+    public ServiceResponse<List<Pet>> GetPetByGenus(string genus)
+    {
+        ServiceResponse<List<Pet>> response = new ServiceResponse<List<Pet>>();
+        var pet = petRepository.GetPetByGenus(genus);
+        if (pet != null)
+        {
+            response.ResponseCode = ResponseCodeEnum.GetPetByGenusOperationSuccess;
+            response.Data = pet;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.GetPetByGenusOperationFail;
+        return response;
+
+    }
 
     public ServiceResponse<string> PetAdd(Pet pet)
     {
@@ -65,6 +79,26 @@ public class PetService : IPetService
         }
         response.ResponseCode = ResponseCodeEnum.DuplicatePetError;
         return response;
+    }
+
+    public ServiceResponse<List<Pet>> AddPetList(List<Pet> pets)
+    {
+        ServiceResponse<List<Pet>> response = new ServiceResponse<List<Pet>>();
+
+        foreach (var pet in pets)
+        {
+            if (petRepository.GetPet(pet.id) == null)
+            {
+                petRepository.PetListAdd(pets);
+                response.ResponseCode = ResponseCodeEnum.Success;
+                return response;
+            }
+            response.ResponseCode = ResponseCodeEnum.DuplicatePetError;
+            return response;
+
+        }
+        return response;
+
     }
 
     public ServiceResponse<Pet> PetEdit(Pet pet, int id)

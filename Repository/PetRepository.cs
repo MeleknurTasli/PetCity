@@ -21,6 +21,21 @@ public class PetRepository
         }
 
     }
+    public List<Pet> GetPetByGenus(string genus)
+    {
+
+        var pets = MockData.PetMockDataList.Where(x => x.Genus == genus).ToList();
+        if (pets != null)
+        {
+            return pets; //petController
+
+        }
+        else
+        {
+            return null;
+        }
+
+    }
     /*Update*/
     public Pet PetEdit(Pet pet, int id)
     {
@@ -47,13 +62,33 @@ public class PetRepository
 
     public string PetAdd(Pet pet)
     {
-          if(GetPet(pet.id) == null)
+        if (GetPet(pet.id) == null)
         {
             MockData.PetMockDataList.Add(pet);
-        }else{
+        }
+        else
+        {
             return "kayıtlı pet";
         }
-        
+
+        return "Ok";
+    }
+    public string PetListAdd(List<Pet> pets)
+    {
+
+        foreach (var pet in pets)
+        {
+            if (GetPet(pet.id) == null)
+            {
+                MockData.PetMockDataList.Add(pet);
+            }
+            else
+            {
+                return "kayitli pet";
+            }
+
+        }
+
         return "Ok";
     }
 

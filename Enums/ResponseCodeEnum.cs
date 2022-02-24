@@ -49,9 +49,11 @@ public enum ResponseCodeEnum
     GetPetByIDOperationFail,
     GetPetByIDOperationSuccess,
     GetAllPetOperationSuccess,
+    GetPetByGenusOperationSuccess,
     GetAllPetOperationFail,
     DuplicatePetError,
     PetIDNotFoundError,
+    GetPetByGenusOperationFail,
 
 
 
