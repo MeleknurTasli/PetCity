@@ -14,16 +14,12 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetAccountByEmailOperationSuccess:
             case ResponseCodeEnum.GetPetByIDOperationSuccess:
             case ResponseCodeEnum.GetAllPetOperationSuccess:
-            ////////////////////Pethelper start here////////////////////////////
             case ResponseCodeEnum.GetAllPetHelperSuccess:
             case ResponseCodeEnum.FindPetHelperByLatLongSuccess:
             case ResponseCodeEnum.PetHelperGetByIdSuccess:
             case ResponseCodeEnum.PetHelperAddSuccess:
             case ResponseCodeEnum.PetHelperUpdateSuccess:
             case ResponseCodeEnum.GetPetHelperDeleteSuccess:
-            ///////////////////////Pethelper end here///////////////////////////////
-            
-
             case ResponseCodeEnum.GetProductByNameOperationSuccess:
             case ResponseCodeEnum.GetProductsByBrandNameOperationSuccess:
             case ResponseCodeEnum.GetProductsInStockOperationSuccess:
