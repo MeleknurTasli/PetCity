@@ -8,8 +8,27 @@ public enum ResponseCodeEnum
     GetAllAccountOperationFail,
     GetAccountByEmailOperationSuccess,
     GetAccountByEmailOperationFail,
-
-    //PetHelper
+    //Product Enums
+    GetProductByNameOperationSuccess,
+    GetProductByNameOperationFail,
+    GetProductsByBrandNameOperationSuccess,
+    GetProductsByBrandNameOperationFail,
+    GetProductsInStockOperationSuccess,
+    GetProductsInStockOperationFailed,
+    GetProductsByCategorySuccess,
+    GetProductsByCategoryFail,
+    GetProductsBetweenMinMaxPriceSuccess,
+    GetProductsBetweenMinMaxPriceFail,
+    ProductNotFound,
+    ProductUpdatedSuccess,
+    ProductDeletedSuccess,
+    GetAllProductOperationSuccess,
+    GetAllProductOperationFail,
+    DuplicateProductError,
+    ProductCreated,
+    GetProductsGreaterThanFail,
+    GetProductsLessThanFail,
+    BadRequest = 400,
     GetAllPetHelperSuccess,
     GetAllPetHelperFail,
     FindPetHelperByLatLongSuccess,
@@ -37,8 +56,6 @@ public enum ResponseCodeEnum
 
 
     
-
-    BadRequest = 400,
     
 
 }
