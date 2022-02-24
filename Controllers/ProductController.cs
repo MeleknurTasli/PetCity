@@ -7,92 +7,91 @@ namespace PetCity.Controllers;
 public class ProductController : ControllerBase
 {
     private readonly IProductService _productService;
-
+    private ResponseGeneratorHelper ResponseGeneratorHelper;
     public ProductController(IProductService productService)
     {
         _productService = productService;
+        ResponseGeneratorHelper = new ResponseGeneratorHelper();
     }
 
     [HttpGet]
-    public IActionResult GetAllProducts()
+    public ActionResult<ServiceResponse<List<Product>>> GetAllProducts()
     {
-        
-        return Ok(_productService.GetAll());
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetAll());
     }
 
     [HttpPost]
-    public IActionResult Create(Product product)
+    public ActionResult<ServiceResponse<Product>> Create(Product product)
     {
-      Product? p = _productService.Create(product);
-      if(p!=null){
-          return Ok("Ekleme Başarılı");
-      }
-        
-       return BadRequest("Ekleme Başarısız");
-       
+        return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Create(product));
     }
 
-    [HttpGet]
-    [Route("productName")]
-    public IActionResult GetProductByName(string name)
+    [HttpGet("ProductByName")]
+    public ActionResult<ServiceResponse<Product>> GetProductByName([FromQuery]string name)
     {   
-        Product? InComingProduct = _productService.GetProductByName(name);
-        if(InComingProduct == null){
-            return BadRequest("Ürün bulunamadı");
-        }
-        return Ok(InComingProduct);
+        return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.GetProductByName(name));
     }
 
-    [HttpGet]
-    [Route("branName")]
-    public IActionResult GetProductByBrand(string name){
-        Product? IncomingProduct = _productService.GetProductByBrandName(name);
-        if(IncomingProduct == null){
-            return BadRequest("Marka bulunamadı");
-        }
-        return Ok(IncomingProduct);
+    [HttpGet("ProductByBrand")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductsByBrandName([FromQuery]string name){
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsByBrandName(name));
+    }
+    [HttpGet("ProductInStock")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductInStock()
+    {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsInStock());
     }
 
-    [HttpGet]
-    [Route("orderByName")]
-    public IActionResult GetProductOrderByName(Boolean IsDescending){
-        List<Product> InComingList = _productService.GetProductOrderByName(IsDescending);
-        if(InComingList == null){
-            return BadRequest("Ürünler listelenemedi");
-        }
-        return Ok(InComingList);
-    }
-
-   [HttpDelete("{id}")]
-   public IActionResult Delete(int id) {
-       bool IsDeleted =_productService.Delete(id);
-
-       if (IsDeleted) {
-           return NoContent();
-       }
-
-       return BadRequest("Kayıt silinemedi");
+   [HttpDelete("id")]
+   public ActionResult<ServiceResponse<Product>> Delete(int id) {
+       return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Delete(id));
    }
 
-   [HttpPut("{id}")]
-   public IActionResult Update([FromRoute]int id, [FromBody]Product p) {
-       Product product = _productService.Update(id, p);
-        if (p != null) {
-            return Ok(product);
-        }
-
-        return BadRequest("Güncelleme işlemi başarısız");
+    [HttpPut("{id}")]
+   public ActionResult<ServiceResponse<Product>> Update([FromQuery]int id, [FromBody]Product p) {
+       return ResponseGeneratorHelper.ResponseGenerator<Product>(_productService.Update(id, p));
    }
+
+    [HttpGet("DescendingByName")]
+    public ActionResult<ServiceResponse<List<Product>>> OrderByNameDescending() {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByNameDescending());
+    }
+
+     [HttpGet("AscendingByName")]
+    public ActionResult<ServiceResponse<List<Product>>> OrderByNameAscending() {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByNameAscending());
+    }
+
+     [HttpGet("DescendingByPrice")]
+    public ActionResult<ServiceResponse<List<Product>>> OrderPriceDescending() {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByPriceDescending());
+    }
+
+     [HttpGet("AscendingByPrice")]
+    public ActionResult<ServiceResponse<List<Product>>> OrderPriceAsscending() {
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsOrderByPriceAscending());
+    }
+
+    [HttpPost("GreaterThan")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductsGreaterThan([FromQuery]decimal price)
+    {   
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsGreaterOrEqualsThan(price));
+    }
+
+    [HttpPost("LessThan")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductsLessThen([FromQuery]decimal price)
+    {   
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsLessOrEqualsThan(price));
+    }
+
+    [HttpPost("BetweenPrice")]
+    public ActionResult<ServiceResponse<List<Product>>> GetProductsBetweenMinMaxPrice([FromQuery]decimal min, [FromQuery]decimal max)
+    {   
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsBetweenMinMaxPrice(min, max));
+    }
+
+    [HttpPost("ByCategory/{categoryId}")]
+     public ActionResult<ServiceResponse<List<Product>>> GetProductsByCategory(int categoryId){
+        return ResponseGeneratorHelper.ResponseGenerator<List<Product>>(_productService.GetProductsByCategory(categoryId));
+    }
 }
-/*
-{
-    "id":1,
-    "Name": "Minnak",
-    "Detail":"fdsfsdf",
-    "Price":12.45,
-    "Stock":12,
-    "SupplierId":10,
-    "Brand":"sadsad",
-    "CategoryId":2
- }
-*/

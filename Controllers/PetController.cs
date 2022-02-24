@@ -1,3 +1,4 @@
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PetCity.Controllers;
@@ -6,52 +7,62 @@ namespace PetCity.Controllers;
 [Route("[controller]")]
 public class PetController : ControllerBase
 {
+    private readonly IPetService _IPetService;
+    private ResponseGeneratorHelper ResponseGeneratorHelper;
+    public PetController(IPetService petService)
+    {
+        _IPetService = petService;
+        ResponseGeneratorHelper = new ResponseGeneratorHelper();
+    }
 
 
     [HttpGet]
-    public List<Pet> Get()
+    public ActionResult<ServiceResponse<List<Pet>>> GetAll()
     {
-        return MockData.PetMockDataList;
+        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.GetAll());
     }
 
     [HttpGet("{id}")]
-    public Pet GetUser(int id)
+    public ActionResult<ServiceResponse<Pet>> GetPet(int id)
     {
-        var pet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
-        return pet;
+         return ResponseGeneratorHelper.ResponseGenerator(_IPetService.GetPet(id));
     }
 
-
     [HttpPost]
-    public string Add(Pet pet)
+    public ActionResult<ServiceResponse<string>> PetAdd(Pet pet)
     {
-        MockData.PetMockDataList.Add(pet);
-        return "Ok";
+
+        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.PetAdd(pet));
+
+        // string eror = "";
+        // PetValidator validator = new PetValidator();
+        // ValidationResult results = validator.Validate(pet);
+        // if (results.IsValid)
+        // {
+        //     return _IPetService.PetAdd(pet);
+        // }
+        // foreach (var Errors in results.Errors)
+        // {
+        //     eror += Errors.ErrorMessage + "\n";
+        // }
+        // return eror;
+
     }
 
     [HttpDelete("{id}")]
-    public void Delete(int id)
+    public ActionResult<ServiceResponse<string>> PetAdd(int id)
     {
-        var deletePet = MockData.PetMockDataList.FirstOrDefault(x => x.id == id);
-        MockData.PetMockDataList.Remove(deletePet);
-    }
 
+        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.Delete(id));
+
+        // _IPetService.Delete(id);
+    }
 
     [HttpPut("{id}")]
-    public void Put(Pet petDTO, int id)
+    public ActionResult<ServiceResponse<Pet>> Put(Pet pet, int id)
     {
-        PetRepository pet = new PetRepository();
-        pet.PetEdit(petDTO, id);
-        //var editedPet = PetDTO.PetList.FirstOrDefault(x=>x.id ==id);
-        // editedPet.name = petDTO.name;
-        // editedPet.About = petDTO.About;
-        // editedPet.BirthDate = petDTO.BirthDate;
-        // editedPet.Family = petDTO.Family;
-        // editedPet.Gender = petDTO.Gender;
-        // editedPet.Genus = petDTO.Genus;
-        // editedPet.UserID = petDTO.UserID;
-
-        //return editedPet ;
-
+        return ResponseGeneratorHelper.ResponseGenerator(_IPetService.PetEdit(pet,id));
+        // return _IPetService.PetEdit(pet, id);
     }
 }
+
