@@ -42,9 +42,9 @@ public static class MessageGenarator
     {ResponseCodeEnum.PetHelperUpdateSuccess, "Ok"},
     {ResponseCodeEnum.PetHelperUpdateFail,"Güncellenecek veri bulunamadı."},
     {ResponseCodeEnum.GetPetHelperDeleteSuccess,"ok"},
-    {ResponseCodeEnum.GetPetHelperDeleteFail,"Silinecek Veri Bulunamadı"}
-
-
+    {ResponseCodeEnum.GetPetHelperDeleteFail,"Silinecek Veri Bulunamadı"},
+    { ResponseCodeEnum.GetPetByGenusOperationSuccess,"Ok"},
+    { ResponseCodeEnum.GetPetByGenusOperationFail,"Girilen cinse sahip pet bulunamadı"}
 
     };
 
