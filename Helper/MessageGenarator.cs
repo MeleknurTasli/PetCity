@@ -15,12 +15,14 @@ public static class MessageGenarator
     { ResponseCodeEnum.GetAllPetOperationFail,"Petler Getirelemedi"},
     { ResponseCodeEnum.DuplicatePetError,"Aynı id'ye sahip pet bulunmaktadır."},
     { ResponseCodeEnum.PetIDNotFoundError,"Girilen id'ye sahip pet bulunamadı"},
+    {ResponseCodeEnum.GetAllPetHelperSuccess,"Ok"},
+    {ResponseCodeEnum.GetAllPetHelperFail,"Pethelper bulunamadı."},
+    {ResponseCodeEnum.FindPetHelperByLatLongSuccess,"Koordinat bulundu."},
+    {ResponseCodeEnum.FindPetHelperByLatLongFail,"Koordinat bulunamadı."},
+    {ResponseCodeEnum.PetHelperAddSuccess,"Ok"},
+    {ResponseCodeEnum.PetHelperAddFail,"Aynı Id'de veri bulundu."},
     { ResponseCodeEnum.GetPetByGenusOperationSuccess,"Ok"},
-    { ResponseCodeEnum.GetPetByGenusOperationFail,"Girilen cinse sahip pet bulunamadı"},
-
-
-
-
+    { ResponseCodeEnum.GetPetByGenusOperationFail,"Girilen cinse sahip pet bulunamadı"}
 
     };
 
