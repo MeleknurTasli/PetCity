@@ -8,7 +8,21 @@ public static class MockData
         new(){Id=4, UserId=3, Image="rty", Date=new DateTime(2018,08,23), Latitude="25", Longtitude="65", Description="açıklama4"},
         new(){Id=5, UserId=3, Image="fgh", Date=new DateTime(2019,09,22), Latitude="30", Longtitude="70", Description="açıklama5"}
     };
-    public static List<Product> ProductMockDataList = new List<Product>();
+
+    public static List<Product> ProductMockDataList = new List<Product>()
+    {
+        new Product {
+            ID = 1,
+            Name = "product1", 
+            Description = "Detail1",
+            Price = 12.4m,
+            Stock = 15,
+            SupplierId = 3,
+            Brand = "Brand1",
+            CategoryId = 1
+        }
+    };
+    
     public static List<User> UserMockDataList = new List<User>();
     public static List<Pet> PetMockDataList = new List<Pet>();
 
