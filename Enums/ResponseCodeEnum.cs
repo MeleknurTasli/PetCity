@@ -44,9 +44,6 @@ public enum ResponseCodeEnum
     GetPetHelperDeleteSuccess,
     GetPetHelperDeleteFail,
 
-
-    //PetHelper end here
-
     //pet Operations
     GetPetByIDOperationFail,
     GetPetByIDOperationSuccess,
