@@ -53,6 +53,20 @@ public class PetService : IPetService
         return response;
 
     }
+    public ServiceResponse<List<Pet>> GetPetByGenus(string genus)
+    {
+        ServiceResponse<List<Pet>> response = new ServiceResponse<List<Pet>>();
+        var pet = petRepository.GetPetByGenus(genus);
+        if (pet != null)
+        {
+            response.ResponseCode = ResponseCodeEnum.GetPetByGenusOperationSuccess;
+            response.Data = pet;
+            return response;
+        }
+        response.ResponseCode = ResponseCodeEnum.GetPetByGenusOperationFail;
+        return response;
+
+    }
 
     public ServiceResponse<string> PetAdd(Pet pet)
     {

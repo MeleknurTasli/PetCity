@@ -21,6 +21,21 @@ public class PetRepository
         }
 
     }
+    public List<Pet> GetPetByGenus(string genus)
+    {
+
+        var pets = MockData.PetMockDataList.Where(x => x.Genus == genus).ToList();
+        if (pets != null)
+        {
+            return pets; //petController
+
+        }
+        else
+        {
+            return null;
+        }
+
+    }
     /*Update*/
     public Pet PetEdit(Pet pet, int id)
     {

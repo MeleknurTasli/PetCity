@@ -15,6 +15,8 @@ public static class MessageGenarator
     { ResponseCodeEnum.GetAllPetOperationFail,"Petler Getirelemedi"},
     { ResponseCodeEnum.DuplicatePetError,"Aynı id'ye sahip pet bulunmaktadır."},
     { ResponseCodeEnum.PetIDNotFoundError,"Girilen id'ye sahip pet bulunamadı"},
+    { ResponseCodeEnum.GetPetByGenusOperationSuccess,"Ok"},
+    { ResponseCodeEnum.GetPetByGenusOperationFail,"Girilen cinse sahip pet bulunamadı"},
 
 
 
