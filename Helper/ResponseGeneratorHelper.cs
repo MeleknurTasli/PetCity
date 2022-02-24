@@ -12,14 +12,18 @@ public class ResponseGeneratorHelper : ControllerBase
             case ResponseCodeEnum.GetAllAccountOperationSuccess:
             case ResponseCodeEnum.GetAllProductOperationSuccess:
             case ResponseCodeEnum.GetAccountByEmailOperationSuccess:
+            case ResponseCodeEnum.GetPetByIDOperationSuccess:
+            case ResponseCodeEnum.GetAllPetOperationSuccess:
+            case ResponseCodeEnum.GetAllPetHelperSuccess:
+            case ResponseCodeEnum.FindPetHelperByLatLongSuccess:
+            case ResponseCodeEnum.PetHelperGetByIdSuccess:
+            case ResponseCodeEnum.PetHelperAddSuccess:
+            case ResponseCodeEnum.PetHelperUpdateSuccess:
+            case ResponseCodeEnum.GetPetHelperDeleteSuccess:
             case ResponseCodeEnum.GetProductByNameOperationSuccess:
             case ResponseCodeEnum.GetProductsByBrandNameOperationSuccess:
             case ResponseCodeEnum.GetProductsInStockOperationSuccess:
             case ResponseCodeEnum.ProductDeletedSuccess:
-            case ResponseCodeEnum.GetAllPetHelperSuccess:
-            case ResponseCodeEnum.FindPetHelperByLatLongSuccess:
-            case ResponseCodeEnum.GetPetByIDOperationSuccess:
-            case ResponseCodeEnum.GetAllPetOperationSuccess:
             case ResponseCodeEnum.GetProductsByCategorySuccess:
             case ResponseCodeEnum.GetProductsBetweenMinMaxPriceSuccess:
                 {
@@ -44,6 +48,10 @@ public class ResponseGeneratorHelper : ControllerBase
                 {
                     return NotFound(incomingResponse);
                 }
+                case ResponseCodeEnum.PetHelperAddFail:
+                case ResponseCodeEnum.PetHelperGetByIdFail:
+                case ResponseCodeEnum.PetHelperUpdateFail:
+                case ResponseCodeEnum.GetPetHelperDeleteFail:
             case ResponseCodeEnum.GetAllProductOperationFail:
                 {
                     return NoContent();

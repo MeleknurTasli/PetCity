@@ -8,6 +8,8 @@ public enum ResponseCodeEnum
     GetAllAccountOperationFail,
     GetAccountByEmailOperationSuccess,
     GetAccountByEmailOperationFail,
+
+    //PetHelper
     //Product Enums
     GetProductByNameOperationSuccess,
     GetProductByNameOperationFail,
@@ -35,6 +37,12 @@ public enum ResponseCodeEnum
     FindPetHelperByLatLongFail,
     PetHelperAddSuccess,
     PetHelperAddFail,
+    PetHelperGetByIdSuccess,
+    PetHelperGetByIdFail,
+    PetHelperUpdateSuccess,
+    PetHelperUpdateFail,
+    GetPetHelperDeleteSuccess,
+    GetPetHelperDeleteFail,
 
     //pet Operations
     GetPetByIDOperationFail,
@@ -45,6 +53,7 @@ public enum ResponseCodeEnum
     DuplicatePetError,
     PetIDNotFoundError,
     GetPetByGenusOperationFail,
+
 
 
     

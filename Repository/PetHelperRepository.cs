@@ -7,7 +7,7 @@ public class PetHelperRepository
         
         return petHelper;
     }
-    public List<PetHelper> GetPetHelper()
+    public List<PetHelper> GetAll()
     {
         return  MockData.PetHelperMockDataList;
     }
@@ -17,5 +17,33 @@ public class PetHelperRepository
 
     }
 
+    public PetHelper Update (int id, PetHelper petHelper)
+    {
+        var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);
+        if(result != null)
+        {
+            result.UserId = petHelper.UserId;
+            result.Image = petHelper.Image;
+            result.Date = petHelper.Date;
+            result.Description = petHelper.Description;
+            result.Latitude = petHelper.Latitude;
+            result.Longtitude = petHelper.Longtitude;
+        }
+        return result;
+    }
+    public PetHelper GetById (int id)
+    {
+        var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);
+         return result;
+    }
+   
+    public string Delete(int id)
+    {
+        var result = MockData.PetHelperMockDataList.SingleOrDefault(p => p.Id == id);
+       int index=MockData.PetHelperMockDataList.IndexOf(result);
+       MockData.PetHelperMockDataList.RemoveAt(index);
+       return "ok";
+        
+    }
 
 }
