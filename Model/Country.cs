@@ -7,17 +7,18 @@ public class Country
     public string Name { get; set; }
     public int CountryCode { get; set; }
 
-   public List<Country> list = new List<Country>();
-  
-public Country(int Id, string Name, int CountryCode){
+    public List<Country> list = new List<Country>();
 
-this.Id = Id;
-this.Name = Name;
-this.CountryCode = CountryCode;
+    public Country(int Id, string Name, int CountryCode)
+    {
+
+        this.Id = Id;
+        this.Name = Name;
+        this.CountryCode = CountryCode;
 
 
-list.Add(new Country(Id, Name, CountryCode));
-}
+        list.Add(new Country(Id, Name, CountryCode));
+    }
 
 
 
