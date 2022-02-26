@@ -8,7 +8,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddScoped<IAccountService,AccountService>();
 var app = builder.Build();
-
+  using (var context = new LibraryContext()) {
+        context.Database.EnsureCreated();
+    }
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
