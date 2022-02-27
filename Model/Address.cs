@@ -1,5 +1,5 @@
-public class Addresses{
-    public int AddresID { get; set; }
+public class Address{
+    public int Id{ get; set; }
     public string AddressName { get; set; }
     public Country Country { get; set; }
     public string OpenAddres1 { get; set; }
