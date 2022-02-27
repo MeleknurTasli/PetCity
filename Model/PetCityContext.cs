@@ -7,6 +7,7 @@ public class PetCityContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
+        
         optionsBuilder.UseMySQL("server=localhost;database=sahabt;user=root;port=3306;password=toortoor");
     }
 
