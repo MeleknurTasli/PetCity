@@ -1,4 +1,4 @@
-public class Addresses{
+public class Address{
     public int AddresID { get; set; }
     public string AddressName { get; set; }
     public Country Country { get; set; }
