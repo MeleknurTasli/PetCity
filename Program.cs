@@ -18,7 +18,7 @@ var app = builder.Build();
 
     using(var context = new PetCityContext())
     {  
-        if(context.Database.EnsureCreated())
+        if(!context.Database.GetService<IRelationalDatabaseCreator>().HasTables())
         {
         var databaseCreator = context.Database.GetService<IServiceProvider>().GetService<IRelationalDatabaseCreator>();
         if(databaseCreator is not null)
