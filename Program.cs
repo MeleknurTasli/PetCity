@@ -12,19 +12,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 //builder.Services.AddScoped<IAccountService,AccountService>();
 var app = builder.Build();
-  using (var context = new PetCityContext()) {
-        context.Database.EnsureCreated();
-    }
-
-    // using(var context = new PetCityContext())
-    // {  
-    //     if(!context.Database.GetService<IRelationalDatabaseCreator>().HasTables())
-    //     {
-    //     var databaseCreator = context.Database.GetService<IServiceProvider>().GetService<IRelationalDatabaseCreator>();
-    //     if(databaseCreator is not null)
-    //     databaseCreator.CreateTables();
-    //     }
-    // }
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
