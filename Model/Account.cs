@@ -8,8 +8,12 @@ public class Account {
     {
         
     }
-    public Account(Parameters)
+    public Account(int id,string email,string password,bool isblocked,bool visibility)
     {
-        
+        this.ID=id;
+        this.EMAIL=email;
+        this.PASSWORD=password;
+        this.ISBLOCKED=isblocked;
+        this.VISIBILITY=visibility;
     }
 }
