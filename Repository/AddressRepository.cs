@@ -1,5 +1,6 @@
 public class AddressRepository
 {
+<<<<<<< HEAD
 
 
     public List<Address> GetAllAddresses()
@@ -48,4 +49,6 @@ public class AddressRepository
 
 
 
+=======
+>>>>>>> e2009710f01a792c7fac9802ab2070cc177bcc07
 }
