@@ -88,7 +88,7 @@ public class PetCityContext : DbContext
                 },
             new Product
             {
-                ProductId = 1,
+                ProductId = 2,
                 Name = "Pro Line Active",
                 UnitPrice = 10,
                 UnitsInStock= 15,
