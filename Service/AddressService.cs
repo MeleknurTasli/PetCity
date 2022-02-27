@@ -8,6 +8,7 @@ public class AddressService : IAddressService
     }
      List<Address> GetAllAdress()
     {
+        ///////////////////////////////////
         List<Address> Response=new List<Address>();
        Response = addressRepository.GetAllAddress();
         return Response;
