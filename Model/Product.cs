@@ -5,6 +5,7 @@ public class Product {
     public short UnitsInStock { get; set; }
     public short QuantityPerUnit { get; set; }
     
+    public int test { get; set; }
 
     
     public int CategoryId { get; set; }
