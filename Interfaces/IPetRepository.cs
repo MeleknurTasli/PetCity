@@ -1,6 +1,6 @@
 public interface IPetRepository{
 
-    Pet CreatePet(Pet pet);
+    Pet CreatePetAsync(Pet pet);
     Pet GetPetById(int id);
     IEnumerable<Pet> GetAllPets();
     void DeletePet(int id);

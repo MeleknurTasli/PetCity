@@ -6,11 +6,16 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-//builder.Services.AddScoped<IAccountService,AccountService>();
+
+// builder.Services.AddScoped<IAccountService,AccountService>();
 var app = builder.Build();
   using (var context = new LibraryContext()) {
         context.Database.EnsureCreated();
-    }
+    }    
+//     var app = builder.Build();
+//   using (var context = new PetCityContext()) {
+//         context.Database.EnsureCreated();
+//     }       
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -25,4 +30,5 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
 
