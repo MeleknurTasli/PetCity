@@ -1,13 +1,19 @@
 public class AddressService : IAddressService
 
 
-{
-    List<Address> IAddressService.GetAllAdress()
+{   private AddressRepository addressRepository;
+    public AddressService()
     {
-        throw new NotImplementedException();
+        addressRepository = new AddressRepository();
+    }
+     List<Address> GetAllAdress()
+    {
+        List<Address> Response=new List<Address>();
+       Response = addressRepository.GetAllAddress();
+        return Response;
     }
 
-    List<Address> IAddressService.GetAllAdress(int id)
+    List<Address> IAddressService.GetAdress(int id)
     {
         throw new NotImplementedException();
     }

@@ -12,9 +12,9 @@ public class AddressController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<Address>> GetAllPetAddress()
+    public ActionResult<List<Address>> GetAllAddress()
     {
-        return _IAddressService.GetAllPetAddress();
+        return _IAddressService.GetAllAdress();
     }
 
 }

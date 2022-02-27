@@ -4,5 +4,8 @@ public class Address{
     public Country Country { get; set; }
     public string OpenAddres1 { get; set; }
     public string OpenAddres2 { get; set; }
+    
+    ///////////////////////////////////
+    public ICollection<Country> CountryList { get; set; }
 
 }
