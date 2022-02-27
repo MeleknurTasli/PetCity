@@ -1,19 +1,19 @@
 public class Account {
-    public int ID { get; set; }
-    public string EMAIL { get; set; }
-    public string PASSWORD { get; set; }
-    public bool ISBLOCKED { get; set; }
-    public bool VISIBILITY { get; set; }
+    public int Id { get; set; }
+    public string Email { get; set; }
+    public string Password { get; set; }
+    public bool IsBlocked { get; set; }
+    public bool Visibility { get; set; }
     public Account()
     {
         
     }
     public Account(int id,string email,string password,bool isblocked,bool visibility)
     {
-        this.ID=id;
-        this.EMAIL=email;
-        this.PASSWORD=password;
-        this.ISBLOCKED=isblocked;
-        this.VISIBILITY=visibility;
+        this.Id=id;
+        this.Email=email;
+        this.Password=password;
+        this.IsBlocked=isblocked;
+        this.Visibility=visibility;
     }
 }
