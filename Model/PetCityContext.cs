@@ -34,7 +34,6 @@ public class PetCityContext : DbContext
         {
             entity.HasKey(e => e.ProductId);
             entity.Property(e => e.Name).IsRequired();
-              entity.Property(e => e.test);
             entity.HasOne(p => p.Category)
             .WithMany(c => c!.Products);
             entity.HasOne(b => b.Brand)
