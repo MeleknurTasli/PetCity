@@ -4,6 +4,7 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
+    public DbSet<Pet>? Pets { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -95,6 +96,49 @@ public class PetCityContext : DbContext
                 BrandId =2,
                 CategoryId=2,
                 CompanyId=2
+            }
+        );
+
+         modelBuilder.Entity<Pet>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.PetImageUrl).IsRequired();
+            entity.Property(e=> e.HealthStatus).IsRequired();
+            
+        });
+        modelBuilder.Entity<Pet>().HasData(
+            new Pet{
+                Id = 1,
+                Name = "karabaş",
+                Age = 2,
+                Gender = PetGender.Male,
+                HealthStatus = HealthStatus.Green,
+                PetImageUrl = "avsba12323",
+                Species = new PetSpecies(){
+                    Id=1,
+                    Name = "Köpek"
+                },
+                SubSpecies = new PetSubSpecies(){
+                    Id = 1,
+                    Name = "Kangal"
+                }
+            },
+            new Pet{
+                Id = 2,
+                Name = "minnoş",
+                Age = 5,
+                Gender = PetGender.Female,
+                HealthStatus = HealthStatus.Yellow,
+                PetImageUrl = "avsba12343",
+                 Species = new PetSpecies(){
+                    Id=2,
+                    Name = "Kedi"
+                },
+                SubSpecies = new PetSubSpecies(){
+                    Id = 1,
+                    Name = "Tekir"
+                }
             }
         );
     }
