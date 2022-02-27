@@ -46,57 +46,57 @@ public class PetCityContext : DbContext
             {
                 CategoryId = 1,
                 Name = "Cat Food"
-            },
+                },
             new Category
             {
                 CategoryId = 2,
                 Name = "Dog Food"
-            }
+                }
         );
         modelBuilder.Entity<Company>().HasData(
             new Company
             {
                 CompanyId = 1,
                 Name = "BlaBla Sirketi"
-            },
+                },
             new Company
             {
                 CompanyId = 2,
                 Name = "BlaBlaBla Sirketi"
-            }
+                }
         );
-        modelBuilder.Entity<Brand>().HasData(
-        new Brand
-        {
-            BrandId = 1,
-            Name = "Pro Plan"
-        },
-        new Brand
-        {
-            BrandId = 2,
-            Name = "Pro Line"
-        }
-    );
+            modelBuilder.Entity<Brand>().HasData(
+            new Brand
+            {
+                BrandId = 1,
+                Name = "Pro Plan"
+                },
+            new Brand
+            {
+                BrandId = 2,
+                Name = "Pro Line"
+                }
+        );
         modelBuilder.Entity<Product>().HasData(
             new Product
             {
                 ProductId = 1,
                 Name = "Pro Plan Active",
                 UnitPrice = 15,
-                UnitsInStock = 10,
-                BrandId = 1,
-                CategoryId = 1,
-                CompanyId = 1
-            },
+                UnitsInStock= 10,
+                BrandId =1,
+                CategoryId=1,
+                CompanyId=1
+                },
             new Product
             {
                 ProductId = 2,
                 Name = "Pro Line Active",
                 UnitPrice = 10,
-                UnitsInStock = 15,
-                BrandId = 2,
-                CategoryId = 2,
-                CompanyId = 2
+                UnitsInStock= 15,
+                BrandId =2,
+                CategoryId=2,
+                CompanyId=2
             }
         );
     }
