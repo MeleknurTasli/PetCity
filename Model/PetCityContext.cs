@@ -4,6 +4,7 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
+    public DbSet<Account>? Account { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
