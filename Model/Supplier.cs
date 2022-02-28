@@ -18,4 +18,6 @@ public class Supplier
             else _rating = 10;
         } 
     }
+
+    public bool IsVisibility { get; set; }
 }
