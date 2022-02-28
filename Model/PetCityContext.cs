@@ -10,13 +10,13 @@ public class PetCityContext : DbContext
     public DbSet<PetSubSpecies>? PetSubSpecies { get; set; }
     public DbSet<Account>? Account { get; set; }
 
-    public DbSet<Address>? Address { get; set; }
+ public DbSet<Address>? Address { get; set; }
     public DbSet<Country>? Country { get; set; }
     public DbSet<City>? City { get; set; }
 
-    public DbSet<Neighborhood>? Neighborhood { get; set; }
-    public DbSet<State>? State { get; set; }
-    public DbSet<Street>? Street { get; set; }
+    //public DbSet<Neighborhood>? Neighborhood { get; set; }
+    //public DbSet<State>? State { get; set; }
+    //public DbSet<Street>? Street { get; set; }
 
 
 
@@ -131,6 +131,8 @@ public class PetCityContext : DbContext
                    entity.Property(e => e.AddressName).IsRequired();
                    entity.Property(e => e.OpenAddres1);
                    entity.Property(e => e.OpenAddres2);
+                   entity.HasOne(e => e.City);
+                   entity.HasOne(e => e.Country);
 
 
 
@@ -138,34 +140,25 @@ public class PetCityContext : DbContext
                });
 
 
-        modelBuilder.Entity<City>(entity =>
-           {
-               entity.HasKey(e => e.CityId);
-
-               entity.Property(e => e.Name).IsRequired();
-               entity.Property(e => e.CountryId);
-
-               entity.HasOne(b => b.Country)
-                     .WithMany(c => c!.City);
-               entity.HasOne(b => b.State)
-               .WithMany(c => c!.City);
-
-           });
-
-        modelBuilder.Entity<Country>(entity =>
-       {
-           entity.HasKey(e => e.CountryId);
-
-           entity.Property(e => e.CountryName).IsRequired();
-           entity.Property(e => e.CountryCode);
-           entity.Property(e => e.AddressId);
-           entity.HasOne(b => b.Address)
-                     .WithMany(c => c!.Country);
 
 
 
-       });
+    //     modelBuilder.Entity<Country>(entity =>
+    //    {
+    //        entity.HasKey(e => e.CountryId);
 
+    //        entity.Property(e => e.CountryName).IsRequired();
+    //        entity.Property(e => e.CountryCode);
+    //        entity.Property(e => e.AddressId);
+    //        entity.HasOne(b => b.Address)
+    //                  .WithMany(c => c!.Country);
+
+
+
+    //    });
+
+
+/*
         modelBuilder.Entity<District>(entity =>
        {
            entity.HasKey(e => e.DistrictId);
@@ -177,45 +170,56 @@ public class PetCityContext : DbContext
 
 
        });
+       */
 
-        modelBuilder.Entity<Neighborhood>(entity =>
-              {
-                  entity.HasKey(e => e.NeighborhoodId);
+        modelBuilder.Entity<City>(entity =>
+       {
+           entity.HasKey(e => e.CityId);
 
-                  entity.Property(e => e.Name).IsRequired();
-                  entity.Property(e => e.DistrictId);
-                  entity.HasOne(b => b.District)
-                     .WithMany(c => c!.Neighborhood);
-
+           entity.Property(e => e.Name).IsRequired();
+        entity.HasOne(c => c!.Country).WithMany(c => c!.city);
 
 
+       });
 
-              });
+        // modelBuilder.Entity<Neighborhood>(entity =>
+        //       {
+        //           entity.HasKey(e => e.NeighborhoodId);
 
-        modelBuilder.Entity<State>(entity =>
-               {
-                   entity.HasKey(e => e.StateId);
-
-                   entity.Property(e => e.Name).IsRequired();
-                   entity.Property(e => e.CountryId);
-                   entity.HasOne(b => b.Country)
-                     .WithMany(c => c!.State);
+        //           entity.Property(e => e.Name).IsRequired();
+        //           entity.Property(e => e.DistrictId);
+        //           entity.HasOne(b => b.District)
+        //              .WithMany(c => c!.Neighborhood);
 
 
 
 
-               });
+        //       });
 
-        modelBuilder.Entity<Street>(entity =>
-               {
-                   entity.HasKey(e => e.StreetId);
+        // modelBuilder.Entity<State>(entity =>
+        //        {
+        //            entity.HasKey(e => e.StateId);
 
-                   entity.Property(e => e.Name).IsRequired();
-                   entity.Property(e => e.NeighborhoodId);
+        //            entity.Property(e => e.Name).IsRequired();
+        //            entity.Property(e => e.CountryId);
+        //            entity.HasOne(b => b.Country)
+        //              .WithMany(c => c!.State);
 
-                   entity.HasOne(b => b.Neighborhood);
 
-               });
+
+
+        //        });
+
+        // modelBuilder.Entity<Street>(entity =>
+        //        {
+        //            entity.HasKey(e => e.StreetId);
+
+        //            entity.Property(e => e.Name).IsRequired();
+        //            entity.Property(e => e.NeighborhoodId);
+
+        //            entity.HasOne(b => b.Neighborhood);
+
+        //        });
 
         modelBuilder.Entity<Role>().HasData(
            new Role
