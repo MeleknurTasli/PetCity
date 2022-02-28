@@ -4,7 +4,11 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
-    public DbSet<Account>? Account { get; set; }
+    public DbSet<Pet>? Pets {get;set;}
+    public DbSet<PetSpecies>? PetSpecies { get; set; }
+    public DbSet<PetHealthStatus>? HealthStatuses { get; set; }
+    public DbSet<PetGender>? PetGenders { get; set; }
+    public DbSet<PetSubSpecies>? PetSubSpecies { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -154,5 +158,40 @@ public class PetCityContext : DbContext
 
            }
        );
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Pet>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+            entity.Property(e=> e.Species).IsRequired();
+            entity.Property(e=> e.HealthStatus).IsRequired();
+        });
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<PetSpecies>(entity=>{
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+            
+        });
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<PetSubSpecies>(entity =>{
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+        });
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<PetGender>(entity =>{
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+        });
+
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<PetHealthStatus>(entity =>{
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+        });
+        
     }
 }
