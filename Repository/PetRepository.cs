@@ -1,8 +1,16 @@
 public class PetRepository : IPetRepository
 {
-    Pet IPetRepository.CreatePet(Pet pet)
+    PetCityContext _petCityContext;
+
+    public PetRepository()
     {
-        throw new NotImplementedException();
+        _petCityContext = new PetCityContext();
+    }
+    public Pet CreatePetAsync(Pet pet)
+    {   
+       _petCityContext.Attach(pet).State = EntityState.Added;
+       _petCityContext.SaveChanges();
+       return pet;
     }
 
     void IPetRepository.DeletePet(int id)
@@ -15,7 +23,7 @@ public class PetRepository : IPetRepository
         throw new NotImplementedException();
     }
 
-    IEnumerable<Pet> IPetRepository.GetAllPetsHealthStatus(HealthStatus health)
+    IEnumerable<Pet> IPetRepository.GetAllPetsHealthStatus(PetHealthStatus health)
     {
         throw new NotImplementedException();
     }

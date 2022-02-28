@@ -1,6 +1,6 @@
 public interface IPetRepository{
 
-    Pet CreatePet(Pet pet);
+    Pet CreatePetAsync(Pet pet);
     Pet GetPetById(int id);
     IEnumerable<Pet> GetAllPets();
     void DeletePet(int id);
@@ -10,6 +10,6 @@ public interface IPetRepository{
     IEnumerable<Pet> GetPetsByName(string name);
     IEnumerable<Pet> GetPetsByGender(PetGender gender);
     IEnumerable<Pet> GetByPetsSpecies(string species);
-    IEnumerable<Pet> GetAllPetsHealthStatus(HealthStatus health);
+    IEnumerable<Pet> GetAllPetsHealthStatus(PetHealthStatus health);
 
 }
