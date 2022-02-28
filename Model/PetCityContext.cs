@@ -53,9 +53,9 @@ public class PetCityContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
-            entity.HasOne(p => p.Category).WithMany(c => c!.Products).HasForeignKey();
-            entity.HasOne(b => b.Brand).WithMany(c => c!.Products).HasForeignKey();
-            entity.HasOne(c => c.Company).WithMany(c => c!.Products).HasForeignKey();
+            entity.HasOne(p => p.Category).WithMany(c => c!.Products).HasForeignKey(p=>p.CategoryId);
+            entity.HasOne(b => b.Brand).WithMany(c => c!.Products).HasForeignKey(b=>b.BrandId);
+            entity.HasOne(c => c.Company).WithMany(c => c!.Products).HasForeignKey(c=>c.CompanyId);
         });
 
 
