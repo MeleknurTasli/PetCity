@@ -5,8 +5,8 @@ public class Product {
     public string? TestPropString { get; set; }
     public int? TestPropInt { get; set; }
     public decimal UnitPrice { get; set; }
-    public short UnitsInStock { get; set; }
-    public short QuantityPerUnit { get; set; }
+    public int UnitsInStock { get; set; }
+    public int QuantityPerUnit { get; set; }
     
 
     
