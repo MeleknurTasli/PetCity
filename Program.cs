@@ -12,7 +12,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<PetCityContext>();
 
+<<<<<<< HEAD
 // builder.Services.AddScoped<IAccountService,AccountService>();
+=======
+builder.Services.AddScoped<IIncidenceRepository,IncidenceRepository>();
+
+>>>>>>> ed06b9eab36f30db9bb72668fcbf0231238196ca
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
