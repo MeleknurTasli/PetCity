@@ -226,7 +226,6 @@ public class PetCityContext : DbContext
                 },
             new Product
             {
-                ProductId = 2,
                 Id = 2,
                 Name = "Pro Line Active",
                 UnitPrice = 10,
