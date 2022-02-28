@@ -4,6 +4,8 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
+    public DbSet<Incidence> Incidences { get; set; } = null!;
+    public DbSet<Supplier> Suppliers{get;set;} = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -98,6 +100,64 @@ public class PetCityContext : DbContext
                 CategoryId=2,
                 CompanyId=2
             }
+        );
+
+
+         modelBuilder.Entity<Supplier>(entity=>{
+            entity.HasKey(e=>e.Id);
+            entity.Property(e=>e.Name);
+            entity.Property(e=>e.Email);
+        });
+        modelBuilder.Entity<Supplier>().HasData(
+            new Supplier{
+                Id=1,
+                Name="Koc Holding",
+                Email="kocholding@gmail.com"                
+            },
+            new Supplier{
+                Id=2,
+                Name="Sabanci Holding",
+                Email="sabanciholding@gmail.com"                
+            },
+            new Supplier{
+                Id=3,
+                Name="Zorlu Holding",
+                Email="zorluholding@gmail.com"                
+            },
+            new Supplier{
+                Id=4,
+                Name="Dogan Holding",
+                Email="doganholding@gmail.com"                
+            },
+            new Supplier{
+                Id=5,
+                Name="Kamci Holding",
+                Email="kamciholding@gmail.com"                
+            }
+            
+        );
+       
+        modelBuilder.Entity<Incidence>(entity=>{
+            entity.HasKey(e=>e.Id);
+            entity.Property(e=>e.Name);
+            entity.Property(e=>e.Visibility);
+        });
+        modelBuilder.Entity<Incidence>().HasData(
+            new Incidence{
+                Id=1,
+                Name="Kedi ac",
+                Visibility=true,
+                UserId=1,
+                RegionId=1 
+            },
+            new Incidence{
+                Id=2,
+                Name="Kopek ac",
+                Visibility=true ,
+                 UserId=1,
+                RegionId=1              
+            }
+            
         );
     }
 }
