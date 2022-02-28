@@ -84,7 +84,7 @@ public class PetCityContext : DbContext
             {
                 Id = 2,
                 Name = "BlaBlaBla Sirketi"
-            }
+                }
         );
         modelBuilder.Entity<Brand>().HasData(
         new Brand
