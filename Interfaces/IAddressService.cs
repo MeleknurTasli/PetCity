@@ -17,6 +17,7 @@ public interface IAddressService
     public List<City> GetAllCity();
     public City GetCity(int id);
     public List<State> GetAllState();
+<<<<<<< Updated upstream
     public State GetState(int id);
     public List<District> GetAllDistrict();
     public District GetDistrict(int id);
@@ -24,6 +25,16 @@ public interface IAddressService
     public Neighborhood GetNeigborhood(int id);
     public List<Street> GetAllStreet();
     public Street GetStreet(int id);
+=======
+    public List<State> GetState(int id);
+    public List<District> GetAllDistricts();
+    public List<District> GetDistricts(int id);
+
+    public List<Neighborhood> GetAllNeigborhoods();
+    public List<Neighborhood> GetNeigborhoods(int id);
+    public List<Street> GetAllStreet();
+    public List<Street> GetStreet(int id);
+>>>>>>> Stashed changes
 
 
 

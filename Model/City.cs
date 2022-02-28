@@ -1,11 +1,8 @@
 public class City{
-    public int CityID { get; set; }
-    public string CityName { get; set; }
-    public District District { get; set; }
-
-    ///////////////////////////////////////
-    
-     public State? State { get; set; }
-    public Country? Country { get; set; }
-     public ICollection<District> DistrictList { get; set; }
+    public int CityId { get; set; }
+    public string Name { get; set; }
+     public State State { get; set; }
+    public Country Country { get; set; }
+    public int CountryId { get; set; }
+     public List<District> DistrictList { get; set; }
 }

@@ -1,11 +1,8 @@
 public class Address{
-    public int Id{ get; set; }
+    public int AddressId{ get; set; }
     public string AddressName { get; set; }
-    public Country Country { get; set; }
     public string OpenAddres1 { get; set; }
     public string OpenAddres2 { get; set; }
-    
-    ///////////////////////////////////
-    public ICollection<Country> CountryList { get; set; }
+    public List<Country> CountryList { get; set; }
 
 }
