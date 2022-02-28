@@ -46,6 +46,14 @@ public class PetCityContext : DbContext
             entity.HasOne(c => c.Company)
             .WithMany(c => c!.Products);
         });
+        modelBuilder.Entity<Supplier>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name);
+            entity.HasMany(e=>e.Brand).WithMany(p=>p.Suppliers).UsingEntity(j=>j.ToTable("SupplierBrand"));
+            entity.Property(e=>e.Rating);            
+            
+        });
 
         modelBuilder.Entity<Account>(entity =>
        {
@@ -126,40 +134,46 @@ public class PetCityContext : DbContext
             }
         );
 
-
-         modelBuilder.Entity<Supplier>(entity=>{
-            entity.HasKey(e=>e.Id);
-            entity.Property(e=>e.Name);
-            entity.Property(e=>e.Email);
-        });
         modelBuilder.Entity<Supplier>().HasData(
-            new Supplier{
-                Id=1,
-                Name="Koc Holding",
-                Email="kocholding@gmail.com"                
-            },
-            new Supplier{
-                Id=2,
-                Name="Sabanci Holding",
-                Email="sabanciholding@gmail.com"                
-            },
-            new Supplier{
-                Id=3,
-                Name="Zorlu Holding",
-                Email="zorluholding@gmail.com"                
-            },
-            new Supplier{
-                Id=4,
-                Name="Dogan Holding",
-                Email="doganholding@gmail.com"                
-            },
-            new Supplier{
-                Id=5,
-                Name="Kamci Holding",
-                Email="kamciholding@gmail.com"                
-            }
-            
-        );
+                new Supplier
+                {
+                    Id = 1,
+                    Name = "Koc Holding",
+                    Brand = null,
+                    Rating = 5.1
+                },
+                new Supplier
+                {
+                    Id = 2,
+                    Name = "Sabanci Holding",
+                    Brand = null,
+                    Rating = 5.5
+                },
+                new Supplier
+                {
+                    Id = 3,
+                    Name = "Zorlu Holding",
+                    Brand = null,
+                    Rating = 5.7
+                },
+                new Supplier
+                {
+                    Id = 4,
+                    Name = "Dogan Holding",
+                    Brand = null,
+                    Rating = 5.5
+                },
+                new Supplier
+                {
+                    Id = 5,
+                    Name = "Kamci Holding",
+                    Brand = null,
+                    Rating = 8.1
+                }
+
+            );
+
+
        
        modelBuilder.Entity<Region>(entity =>
         {
