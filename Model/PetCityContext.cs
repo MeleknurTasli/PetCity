@@ -4,10 +4,27 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
-    public DbSet<Supplier>? Suppliers { get; set; }
-    public DbSet<Incidence>? Incidences { get; set; }
-    public DbSet<User>? Users { get; set; } 
-    public DbSet<Region>? Regions { get; set; } 
+    public DbSet<Pet>? Pets { get; set; }
+    public DbSet<PetSpecies>? PetSpecies { get; set; }
+    public DbSet<PetGender>? PetGenders { get; set; }
+    public DbSet<PetSubSpecies>? PetSubSpecies { get; set; }
+    public DbSet<Account>? Account { get; set; }
+
+    public DbSet<Address>? Address { get; set; }
+    public DbSet<Country>? Country { get; set; }
+    public DbSet<City>? City { get; set; }
+
+    public DbSet<Neighborhood>? Neighborhood { get; set; }
+    public DbSet<State>? State { get; set; }
+    public DbSet<Street>? Street { get; set; }
+
+    public DbSet<Supplier>? Suppliers {get; set;}
+
+
+
+
+
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -49,6 +66,8 @@ public class PetCityContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name);
+            entity.HasOne(e=>e.Account);
+            entity.HasOne(e=>e.Address);
             entity.HasMany(e=>e.Brand).WithMany(p=>p.Suppliers).UsingEntity(j=>j.ToTable("SupplierBrand"));
             entity.Property(e=>e.Rating);            
             
@@ -118,6 +137,8 @@ public class PetCityContext : DbContext
                 {
                     Id = 1,
                     Name = "Koc Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 5.1
                 },
@@ -125,6 +146,8 @@ public class PetCityContext : DbContext
                 {
                     Id = 2,
                     Name = "Sabanci Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 5.5
                 },
@@ -132,6 +155,8 @@ public class PetCityContext : DbContext
                 {
                     Id = 3,
                     Name = "Zorlu Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 5.7
                 },
@@ -139,6 +164,8 @@ public class PetCityContext : DbContext
                 {
                     Id = 4,
                     Name = "Dogan Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 5.5
                 },
@@ -146,54 +173,190 @@ public class PetCityContext : DbContext
                 {
                     Id = 5,
                     Name = "Kamci Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 8.1
-                }
+                });
 
-            );
-       modelBuilder.Entity<Region>(entity =>
+
+
+
+        modelBuilder.Entity<Address>(entity =>
+               {
+                   entity.HasKey(e => e.AddressId);
+                   entity.Property(e => e.AddressName).IsRequired();
+                   entity.Property(e => e.OpenAddres1);
+                   entity.Property(e => e.OpenAddres2);
+
+
+
+
+               });
+
+
+        modelBuilder.Entity<City>(entity =>
+           {
+               entity.HasKey(e => e.CityId);
+
+               entity.Property(e => e.Name).IsRequired();
+               entity.Property(e => e.CountryId);
+
+               entity.HasOne(b => b.Country)
+                     .WithMany(c => c!.City);
+               entity.HasOne(b => b.State)
+               .WithMany(c => c!.City);
+
+           });
+
+        modelBuilder.Entity<Country>(entity =>
+       {
+           entity.HasKey(e => e.CountryId);
+
+           entity.Property(e => e.CountryName).IsRequired();
+           entity.Property(e => e.CountryCode);
+           entity.Property(e => e.AddressId);
+           entity.HasOne(b => b.Address)
+                     .WithMany(c => c!.Country);
+
+
+
+       });
+
+        modelBuilder.Entity<District>(entity =>
+       {
+           entity.HasKey(e => e.DistrictId);
+
+           entity.Property(e => e.Name).IsRequired();
+           entity.Property(e => e.CityId);
+           entity.HasOne(b => b.City)
+                     .WithMany(c => c!.District);
+
+
+       });
+
+        modelBuilder.Entity<Neighborhood>(entity =>
+              {
+                  entity.HasKey(e => e.NeighborhoodId);
+
+                  entity.Property(e => e.Name).IsRequired();
+                  entity.Property(e => e.DistrictId);
+                  entity.HasOne(b => b.District)
+                     .WithMany(c => c!.Neighborhood);
+
+
+
+
+              });
+
+        modelBuilder.Entity<State>(entity =>
+               {
+                   entity.HasKey(e => e.StateId);
+
+                   entity.Property(e => e.Name).IsRequired();
+                   entity.Property(e => e.CountryId);
+                   entity.HasOne(b => b.Country)
+                     .WithMany(c => c!.State);
+
+
+
+
+               });
+
+        modelBuilder.Entity<Street>(entity =>
+               {
+                   entity.HasKey(e => e.StreetId);
+
+                   entity.Property(e => e.Name).IsRequired();
+                   entity.Property(e => e.NeighborhoodId);
+
+                   entity.HasOne(b => b.Neighborhood);
+
+               });
+
+        modelBuilder.Entity<Role>().HasData(
+           new Role
+           {
+               Id = 1,
+               Name = "admin"
+
+           },
+           new Role
+           {
+               Id = 2,
+               Name = "moderator"
+
+           }
+       );
+
+        modelBuilder.Entity<Account>(entity =>
         {
-            entity.HasKey(e=>e.Id);
-            entity.Property(e=> e.Name);
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Password).IsRequired();
+            entity.Property(e => e.IsBlocked).IsRequired();
+            entity.Property(e => e.Visibility).IsRequired();
+            entity.HasMany(e => e.Role).WithMany(e => e.Account).UsingEntity(j => j.ToTable("Account_Role"));
+
         });
-        modelBuilder.Entity<User>(entity =>
-        {
-            entity.HasKey(e=>e.Id);
-        });
-         modelBuilder.Entity<Incidence>(entity =>
+
+
+
+        modelBuilder.Entity<Role>(entity =>
+       {
+           entity.HasKey(e => e.Id);
+           entity.Property(e => e.Name).IsRequired();
+       });
+
+        modelBuilder.Entity<Pet>(entity =>
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
-            entity.HasOne(p => p.Region).WithMany(c => c!.IncidenceList).HasForeignKey(c => c.RegionId);
-            entity.HasOne(b => b.User).WithMany(c => c!.IncidenceList).HasForeignKey(c => c.UserId);
-            entity.Property(e=>e.Visibility);
-            entity.Property(e=>e.UserId);
-            entity.Property(e=>e.RegionId);
         });
-        modelBuilder.Entity<Incidence>().HasData(
-            new Incidence{
-                Id=1,
-                Name="Kedi ac",
-                Visibility=true,
-                UserId = 1,
-                RegionId = 1
-            },
-            new Incidence{
-                Id=2,
-                Name="Kopek ac",
-                Visibility=true ,
-                UserId = 1,
-                RegionId = 1      
-            }
-        );
-        modelBuilder.Entity<Region>().HasData(
-            new Region{
-                Id=1,
-                Name="r1"
-            });
-        modelBuilder.Entity<User>().HasData(
-            new User{
-                Id=1
-            });    
+
+        modelBuilder.Entity<PetSpecies>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+
+        });
+
+        modelBuilder.Entity<PetSubSpecies>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+        });
+
+        modelBuilder.Entity<PetGender>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+        });
+
+        modelBuilder.Entity<PetHealthStatus>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+        });
+
+        modelBuilder.Entity<Account>().HasData(
+           new Account
+           {
+               Id = 1,
+               Email = "meryem.dogan@sahabt.com",
+               Password = "123123",
+               IsBlocked = true,
+               Visibility = true
+           },
+           new Account
+           {
+               Id = 2,
+               Email = "galipcan.karaaslan@sahabt.com",
+               Password = "555555",
+               IsBlocked = true,
+               Visibility = true
+           }
+       );
+
     }
 }

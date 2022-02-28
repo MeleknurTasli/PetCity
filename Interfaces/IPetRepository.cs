@@ -10,6 +10,6 @@ public interface IPetRepository{
     IEnumerable<Pet> GetPetsByName(string name);
     IEnumerable<Pet> GetPetsByGender(PetGender gender);
     IEnumerable<Pet> GetByPetsSpecies(string species);
-    IEnumerable<Pet> GetAllPetsHealthStatus(HealthStatus health);
+    IEnumerable<Pet> GetAllPetsHealthStatus(PetHealthStatus health);
 
 }

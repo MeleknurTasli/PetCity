@@ -6,6 +6,6 @@ public class Pet{
     public PetGender Gender{get; set;}
     public PetSpecies? Species { get; set; }
     public PetSubSpecies? SubSpecies { get; set; }
-    public PetHealthStatus HealthStatus { get; set; }
+    public PetHealthStatus? HealthStatus { get; set; }
 
 }
