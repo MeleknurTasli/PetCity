@@ -23,6 +23,10 @@ public class PetCityContext : DbContext
 
 
 
+    public DbSet<Supplier>? Suppliers { get; set; }
+    public DbSet<Incidence>? Incidences { get; set; }
+    public DbSet<User>? Users { get; set; } 
+    public DbSet<Region>? Regions { get; set; } 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -68,7 +72,6 @@ public class PetCityContext : DbContext
             entity.Property(e=>e.Rating);            
             
         });
-
 
         modelBuilder.Entity<Category>().HasData(
             new Category
@@ -167,9 +170,6 @@ public class PetCityContext : DbContext
                 }
 
             );
-
-
-       
        modelBuilder.Entity<Region>(entity =>
         {
             entity.HasKey(e=>e.Id);
@@ -417,4 +417,5 @@ public class PetCityContext : DbContext
 
 
 
+    }
 }

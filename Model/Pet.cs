@@ -7,5 +7,4 @@ public class Pet{
     public PetSpecies? Species { get; set; }
     public PetSubSpecies? SubSpecies { get; set; }
     public PetHealthStatus? HealthStatus { get; set; }
-
 }
