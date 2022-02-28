@@ -1,6 +1,9 @@
 public class Product {
-    public int ProductId { get; set; }
+    public int Id { get; set; }
     public string? Name { get; set; }
+
+    public string? TestPropString { get; set; }
+    public int? TestPropInt { get; set; }
     public decimal UnitPrice { get; set; }
     public short UnitsInStock { get; set; }
     public short QuantityPerUnit { get; set; }
