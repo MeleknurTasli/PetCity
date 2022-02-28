@@ -8,6 +8,7 @@ public class PetCityContext : DbContext
     public DbSet<User>? Users { get; set; } 
     public DbSet<Region>? Regions { get; set; } 
     public DbSet<Supplier>? Suppliers{get;set;} 
+    public DbSet<Account>? Account { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -53,6 +54,26 @@ public class PetCityContext : DbContext
             entity.Property(e=>e.Rating);            
             
         });
+
+        modelBuilder.Entity<Account>(entity =>
+       {
+           entity.HasKey(e => e.Id);
+           entity.Property(e => e.Email).IsRequired();
+           entity.Property(e => e.Password).IsRequired();
+           entity.Property(e => e.IsBlocked).IsRequired();
+           entity.Property(e => e.Visibility).IsRequired();
+           entity.HasMany(e => e.Role).WithMany(e => e.Account).UsingEntity(j => j.ToTable("Account_Role"));
+
+       });
+
+
+
+        modelBuilder.Entity<Role>(entity =>
+       {
+           entity.HasKey(e => e.Id);
+           entity.Property(e => e.Name).IsRequired();
+       });
+
 
         modelBuilder.Entity<Category>().HasData(
             new Category
@@ -198,5 +219,38 @@ public class PetCityContext : DbContext
             new User{
                 Id=1
             });    
+        modelBuilder.Entity<Account>().HasData(
+            new Account
+            {
+                Id = 1,
+                Email = "meryem.dogan@sahabt.com",
+                Password = "123123",
+                IsBlocked = true,
+                Visibility = true
+            },
+            new Account
+            {
+                Id = 2,
+                Email = "galipcan.karaaslan@sahabt.com",
+                Password = "555555",
+                IsBlocked = true,
+                Visibility = true
+            }
+        );
+
+        modelBuilder.Entity<Role>().HasData(
+           new Role
+           {
+               Id = 1,
+               Name = "admin"
+
+           },
+           new Role
+           {
+               Id = 2,
+               Name = "moderator"
+
+           }
+       );
     }
 }
