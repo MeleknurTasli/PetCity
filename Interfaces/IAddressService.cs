@@ -11,20 +11,19 @@ public interface IAddressService
     // public List<Address> GetAllPetByCity(string city, string genus);
 
     public List<Address> GetAllAdress();
-    public List<Address> GetAdress(int id);
+    public Address GetAdress(int id);
     public List<Country> GetAllCountry();
-    public List<Country> GetCountry(int id);
+    public Country GetCountry(int id);
     public List<City> GetAllCity();
-    public List<City> GetCity(int id);
+    public City GetCity(int id);
     public List<State> GetAllState();
-    public List<State> GetState(int id);
-    public List<District> GetAllDistricts();
-    public List<District> GetDistricts(int id);
-    
-    public List<Neighborhood> GetAllNeigborhoods();
-    public List<Neighborhood> GetNeigborhoods(int id);
-        public List<Street> GetAllStreet();
-    public List<Street> GetStreet(int id);
+    public State GetState(int id);
+    public List<District> GetAllDistrict();
+    public District GetDistrict(int id);
+    public List<Neighborhood> GetAllNeigborhood();
+    public Neighborhood GetNeigborhood(int id);
+    public List<Street> GetAllStreet();
+    public Street GetStreet(int id);
 
 
 
