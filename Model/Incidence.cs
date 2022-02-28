@@ -8,7 +8,7 @@ public class Incidence
    public int UserId { get; set; }
     public DateTime? Date { get; set; }
     public bool Visibility { get; set; }
-    public string Image { get; set; }
-    public string Description { get; set; }
+    public string? Image { get; set; }
+    public string? Description { get; set; }
     
 }

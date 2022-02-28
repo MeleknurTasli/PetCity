@@ -4,6 +4,9 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
+    public DbSet<Incidence>? Incidences { get; set; }
+    public DbSet<User>? Users { get; set; } 
+    public DbSet<Region>? Regions { get; set; } 
     public DbSet<Pet>? Pets { get; set; }
     public DbSet<PetSpecies>? PetSpecies { get; set; }
     public DbSet<PetGender>? PetGenders { get; set; }
@@ -18,15 +21,13 @@ public class PetCityContext : DbContext
     public DbSet<State>? State { get; set; }
     public DbSet<Street>? Street { get; set; }
 
+    public DbSet<Supplier>? Suppliers {get; set;}
 
 
 
 
 
-    public DbSet<Supplier>? Suppliers { get; set; }
-    public DbSet<Incidence>? Incidences { get; set; }
-    public DbSet<User>? Users { get; set; } 
-    public DbSet<Region>? Regions { get; set; } 
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -68,6 +69,8 @@ public class PetCityContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name);
+            entity.HasOne(e=>e.Account);
+            entity.HasOne(e=>e.Address);
             entity.HasMany(e=>e.Brand).WithMany(p=>p.Suppliers).UsingEntity(j=>j.ToTable("SupplierBrand"));
             entity.Property(e=>e.Rating);            
             
@@ -95,7 +98,7 @@ public class PetCityContext : DbContext
             {
                 Id = 2,
                 Name = "BlaBlaBla Sirketi"
-            }
+                }
         );
         modelBuilder.Entity<Brand>().HasData(
         new Brand
@@ -137,6 +140,8 @@ public class PetCityContext : DbContext
                 {
                     Id = 1,
                     Name = "Koc Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 5.1
                 },
@@ -144,6 +149,8 @@ public class PetCityContext : DbContext
                 {
                     Id = 2,
                     Name = "Sabanci Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 5.5
                 },
@@ -151,6 +158,8 @@ public class PetCityContext : DbContext
                 {
                     Id = 3,
                     Name = "Zorlu Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 5.7
                 },
@@ -158,6 +167,8 @@ public class PetCityContext : DbContext
                 {
                     Id = 4,
                     Name = "Dogan Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 5.5
                 },
@@ -165,11 +176,13 @@ public class PetCityContext : DbContext
                 {
                     Id = 5,
                     Name = "Kamci Holding",
+                    Account = null,
+                    Address = null,
                     Brand = null,
                     Rating = 8.1
                 }
-
             );
+            
        modelBuilder.Entity<Region>(entity =>
         {
             entity.HasKey(e=>e.Id);
@@ -411,11 +424,6 @@ public class PetCityContext : DbContext
                Visibility = true
            }
        );
-
-    }
-
-
-
 
     }
 }

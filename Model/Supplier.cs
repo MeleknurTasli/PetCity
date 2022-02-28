@@ -5,7 +5,8 @@ public class Supplier
 
     public int Id { get; set; }
     public string?  Name { get; set; }
-    // Account ve Address propları eklenicek.
+    public virtual Account? Account {get; set;}
+    public virtual Address? Address { get; set; }
     public virtual ICollection<Brand>? Brand { get; set; }
     public double Rating 
     { 
