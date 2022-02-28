@@ -1,3 +1,6 @@
+using System.Linq;
+using Microsoft.VisualBasic;
+
 public class ProductRepository : IProductRepository
 {
     private readonly PetCityContext _context;
@@ -8,61 +11,61 @@ public class ProductRepository : IProductRepository
     }
     public async Task<Product> AddProduct(Product product)
     {
-        using(_context)
-        {
             await _context.AddAsync(product);
             await _context.SaveChangesAsync();
             return product;
-        }
     }
 
     public async Task DeleteProduct(Product product)
     {
-        throw new NotImplementedException();
+            var result = _context.Remove(product);
+            await _context.SaveChangesAsync();
     }
 
     public async Task<List<Product>> GetAllProduct()
     {
-        throw new NotImplementedException();
+        return await _context.Set<Product>().ToListAsync();
     }
 
     public async Task<List<Product>> GetAllProductByBrandId(int brandId)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Product>().Where(p=> p.BrandId == brandId).ToListAsync();
     }
 
     public async Task<List<Product>> GetAllProductByCategoryId(int categoryId)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Product>().Where(p=> p.CategoryId == categoryId).ToListAsync();
     }
 
     public async Task<List<Product>> GetAllProductByName(string productName)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Product>().Where(p=> p.Name == productName).ToListAsync();
     }
 
     public async Task<List<Product>> GetAllProductByPriceASC(int price)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Product>().OrderBy(p=>p.UnitPrice).ToListAsync();
     }
 
     public async Task<List<Product>> GetAllProductByPriceDESC(int price)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Product>().OrderByDescending(p=>p.UnitPrice).ToListAsync();
     }
 
     public async Task<List<Product>> GetAllProductByPriceRange(int minPrice, int maxPrice)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Product>().Where(p=> p.UnitPrice >= minPrice && p.UnitPrice <=maxPrice).ToListAsync();
     }
 
     public async Task<Product> GetByProductId(int productId)
     {
-        throw new NotImplementedException();
+        return await _context.Set<Product>().SingleOrDefaultAsync(p=> p.Id == productId);
     }
 
     public async Task<Product> UpdateProduct(int id, Product product)
     {
-        throw new NotImplementedException();
+            var result = _context.Update(product);
+            await _context.SaveChangesAsync();
+            return product;
     }
 }
