@@ -4,12 +4,26 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
-    public DbSet<Pet>? Pets {get;set;}
+    public DbSet<Pet>? Pets { get; set; }
     public DbSet<PetSpecies>? PetSpecies { get; set; }
     public DbSet<PetHealthStatus>? HealthStatuses { get; set; }
     public DbSet<PetGender>? PetGenders { get; set; }
     public DbSet<PetSubSpecies>? PetSubSpecies { get; set; }
-     public DbSet<Account>? Account { get; set; }
+    public DbSet<Account>? Account { get; set; }
+
+    public DbSet<Address>? Address { get; set; }
+    public DbSet<Country>? Country { get; set; }
+    public DbSet<City>? City { get; set; }
+
+    public DbSet<Neighborhood>? Neighborhood { get; set; }
+    public DbSet<State>? State { get; set; }
+    public DbSet<Street>? Street { get; set; }
+
+
+
+
+
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -47,25 +61,6 @@ public class PetCityContext : DbContext
             entity.HasOne(c => c.Company)
             .WithMany(c => c!.Products);
         });
-
-        modelBuilder.Entity<Account>(entity =>
-       {
-           entity.HasKey(e => e.Id);
-           entity.Property(e => e.Email).IsRequired();
-           entity.Property(e => e.Password).IsRequired();
-           entity.Property(e => e.IsBlocked).IsRequired();
-           entity.Property(e => e.Visibility).IsRequired();
-           entity.HasMany(e => e.Role).WithMany(e => e.Account).UsingEntity(j => j.ToTable("Account_Role"));
-
-       });
-
-
-
-        modelBuilder.Entity<Role>(entity =>
-       {
-           entity.HasKey(e => e.Id);
-           entity.Property(e => e.Name).IsRequired();
-       });
 
 
         modelBuilder.Entity<Category>().HasData(
@@ -126,22 +121,121 @@ public class PetCityContext : DbContext
                 CompanyId = 2
             }
         );
-            new Account
-            {
-                Id = 1,
-                Email = "meryem.dogan@sahabt.com",
-                Password = "123123",
-                IsBlocked = true,
-                Visibility = true
-            },
-            new Account
-            {
-                Id = 2,
-                Email = "galipcan.karaaslan@sahabt.com",
-                Password = "555555",
-                IsBlocked = true,
-                Visibility = true
-            }
+
+
+
+
+
+        modelBuilder.Entity<Address>(entity =>
+               {
+                   entity.HasKey(e => e.AddressId);
+                   entity.Property(e => e.AddressName).IsRequired();
+                   entity.Property(e => e.OpenAddres1);
+                   entity.Property(e => e.OpenAddres2);
+
+
+
+
+               });
+
+
+        modelBuilder.Entity<City>(entity =>
+           {
+               entity.HasKey(e => e.CityId);
+
+               entity.Property(e => e.Name).IsRequired();
+               entity.Property(e => e.CountryId);
+
+               entity.HasOne(b => b.Country)
+                     .WithMany(c => c!.City);
+               entity.HasOne(b => b.State)
+               .WithMany(c => c!.City);
+
+           });
+
+        modelBuilder.Entity<Country>(entity =>
+       {
+           entity.HasKey(e => e.CountryId);
+
+           entity.Property(e => e.CountryName).IsRequired();
+           entity.Property(e => e.CountryCode);
+           entity.Property(e => e.AddressId);
+           entity.HasOne(b => b.Address)
+                     .WithMany(c => c!.Country);
+
+
+
+       });
+
+        modelBuilder.Entity<District>(entity =>
+       {
+           entity.HasKey(e => e.DistrictId);
+
+           entity.Property(e => e.Name).IsRequired();
+           entity.Property(e => e.CityId);
+           entity.HasOne(b => b.City)
+                     .WithMany(c => c!.District);
+
+
+       });
+
+        modelBuilder.Entity<Neighborhood>(entity =>
+              {
+                  entity.HasKey(e => e.NeighborhoodId);
+
+                  entity.Property(e => e.Name).IsRequired();
+                  entity.Property(e => e.DistrictId);
+                  entity.HasOne(b => b.District)
+                     .WithMany(c => c!.Neighborhood);
+
+
+
+
+              });
+
+        modelBuilder.Entity<State>(entity =>
+               {
+                   entity.HasKey(e => e.StateId);
+
+                   entity.Property(e => e.Name).IsRequired();
+                   entity.Property(e => e.CountryId);
+                   entity.HasOne(b => b.Country)
+                     .WithMany(c => c!.State);
+
+
+
+
+               });
+
+        modelBuilder.Entity<Street>(entity =>
+               {
+                   entity.HasKey(e => e.StreetId);
+
+                   entity.Property(e => e.Name).IsRequired();
+                   entity.Property(e => e.NeighborhoodId);
+
+                   entity.HasOne(b => b.Neighborhood);
+
+               });
+
+
+        modelBuilder.Entity<Account>().HasData(
+    new Account
+    {
+        Id = 1,
+        Email = "meryem.dogan@sahabt.com",
+        Password = "123123",
+        IsBlocked = true,
+        Visibility = true
+    },
+    new Account
+    {
+        Id = 2,
+        Email = "galipcan.karaaslan@sahabt.com",
+        Password = "555555",
+        IsBlocked = true,
+        Visibility = true
+    }
         );
 
         modelBuilder.Entity<Role>().HasData(
@@ -158,59 +252,82 @@ public class PetCityContext : DbContext
 
            }
        );
+
+        modelBuilder.Entity<Account>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Password).IsRequired();
+            entity.Property(e => e.IsBlocked).IsRequired();
+            entity.Property(e => e.Visibility).IsRequired();
+            entity.HasMany(e => e.Role).WithMany(e => e.Account).UsingEntity(j => j.ToTable("Account_Role"));
+
+        });
+
+
+
+        modelBuilder.Entity<Role>(entity =>
+       {
+           entity.HasKey(e => e.Id);
+           entity.Property(e => e.Name).IsRequired();
+       });
 
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Pet>(entity =>
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
-            entity.Property(e=> e.Species).IsRequired();
-            entity.Property(e=> e.HealthStatus).IsRequired();
+            entity.Property(e => e.Species).IsRequired();
+            entity.Property(e => e.HealthStatus).IsRequired();
         });
 
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<PetSpecies>(entity=>{
+        modelBuilder.Entity<PetSpecies>(entity =>
+        {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
-            
+
         });
 
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<PetSubSpecies>(entity =>{
-            entity.HasKey(e => e.Id);
-            entity.Property(e => e.Name).IsRequired();
-        });
-
-        base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<PetGender>(entity =>{
+        modelBuilder.Entity<PetSubSpecies>(entity =>
+        {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
 
         base.OnModelCreating(modelBuilder);
-        modelBuilder.Entity<PetHealthStatus>(entity =>{
+        modelBuilder.Entity<PetGender>(entity =>
+        {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
 
-         modelBuilder.Entity<Account>().HasData(
-            new Account
-            {
-                Id = 1,
-                Email = "meryem.dogan@sahabt.com",
-                Password = "123123",
-                IsBlocked = true,
-                Visibility = true
-            },
-            new Account
-            {
-                Id = 2,
-                Email = "galipcan.karaaslan@sahabt.com",
-                Password = "555555",
-                IsBlocked = true,
-                Visibility = true
-            }
-        );
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<PetHealthStatus>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+        });
+
+        modelBuilder.Entity<Account>().HasData(
+           new Account
+           {
+               Id = 1,
+               Email = "meryem.dogan@sahabt.com",
+               Password = "123123",
+               IsBlocked = true,
+               Visibility = true
+           },
+           new Account
+           {
+               Id = 2,
+               Email = "galipcan.karaaslan@sahabt.com",
+               Password = "555555",
+               IsBlocked = true,
+               Visibility = true
+           }
+       );
 
         modelBuilder.Entity<Role>().HasData(
            new Role
@@ -226,6 +343,13 @@ public class PetCityContext : DbContext
 
            }
        );
-        
+
+
+
+
     }
+
+
+
+
 }
