@@ -23,7 +23,7 @@ public class PetRepository : IPetRepository
         throw new NotImplementedException();
     }
 
-    IEnumerable<Pet> IPetRepository.GetAllPetsHealthStatus(HealthStatus health)
+    IEnumerable<Pet> IPetRepository.GetAllPetsHealthStatus(PetHealthStatus health)
     {
         throw new NotImplementedException();
     }
