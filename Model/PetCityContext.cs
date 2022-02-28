@@ -52,13 +52,10 @@ public class PetCityContext : DbContext
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(ahmetAmca => ahmetAmca.TestPropInt);
-            entity.Property(ahmetAmca => ahmetAmca.TestPropString);
             entity.Property(e => e.Name).IsRequired();
-            entity.HasOne(p => p.Category).WithMany(c => c!.Products);
-            entity.HasOne(b => b.Brand).WithMany(c => c!.Products);
-            entity.HasOne(c => c.Company)
-            .WithMany(c => c!.Products);
+            entity.HasOne(p => p.Category).WithMany(c => c!.Products).HasForeignKey();
+            entity.HasOne(b => b.Brand).WithMany(c => c!.Products).HasForeignKey();
+            entity.HasOne(c => c.Company).WithMany(c => c!.Products).HasForeignKey();
         });
 
 
