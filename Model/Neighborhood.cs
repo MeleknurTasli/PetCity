@@ -1,10 +1,9 @@
 public class Neighborhood{
-    public int NeighnorhoodID { get; set; }
-    public string NeighborhoodName { get; set; }
-    public Street Street { get; set; }
-    /////////////////////////////
+    public int NeighborhoodId { get; set; }
+    public string Name { get; set; }
     public District District { get; set; }
-    public ICollection<Street> StreetList { get; set; }
+    public int DistrictId { get; set; }
+    public List<Street> StreetList { get; set; }
 
 
 }
