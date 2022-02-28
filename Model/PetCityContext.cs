@@ -4,8 +4,10 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
-    public DbSet<Incidence> Incidences { get; set; } = null!;
-    public DbSet<Supplier> Suppliers{get;set;} = null!;
+    public DbSet<Incidence>? Incidences { get; set; }
+    public DbSet<User>? Users { get; set; } 
+    public DbSet<Region>? Regions { get; set; } 
+    public DbSet<Supplier>? Suppliers{get;set;} 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -137,27 +139,49 @@ public class PetCityContext : DbContext
             
         );
        
-        modelBuilder.Entity<Incidence>(entity=>{
+       modelBuilder.Entity<Region>(entity =>
+        {
             entity.HasKey(e=>e.Id);
-            entity.Property(e=>e.Name);
+            entity.Property(e=> e.Name);
+        });
+        modelBuilder.Entity<User>(entity =>
+        {
+            entity.HasKey(e=>e.Id);
+        });
+         modelBuilder.Entity<Incidence>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+            entity.HasOne(p => p.Region).WithMany(c => c!.IncidenceList).HasForeignKey(c => c.RegionId);
+            entity.HasOne(b => b.User).WithMany(c => c!.IncidenceList).HasForeignKey(c => c.UserId);
             entity.Property(e=>e.Visibility);
+            entity.Property(e=>e.UserId);
+            entity.Property(e=>e.RegionId);
         });
         modelBuilder.Entity<Incidence>().HasData(
             new Incidence{
                 Id=1,
                 Name="Kedi ac",
                 Visibility=true,
-                UserId=1,
-                RegionId=1 
+                UserId = 1,
+                RegionId = 1
             },
             new Incidence{
                 Id=2,
                 Name="Kopek ac",
                 Visibility=true ,
-                 UserId=1,
-                RegionId=1              
+                UserId = 1,
+                RegionId = 1      
             }
-            
         );
+        modelBuilder.Entity<Region>().HasData(
+            new Region{
+                Id=1,
+                Name="r1"
+            });
+        modelBuilder.Entity<User>().HasData(
+            new User{
+                Id=1
+            });    
     }
 }

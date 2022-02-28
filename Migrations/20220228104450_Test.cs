@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetCity.Migrations
 {
-    public partial class migrate1 : Migration
+    public partial class Test : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,21 +59,17 @@ namespace PetCity.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Incidences",
+                name: "Regions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(type: "longtext", nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RegionId = table.Column<int>(type: "int", nullable: false),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    Visibility = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Incidences", x => x.Id);
+                    table.PrimaryKey("PK_Regions", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -91,6 +87,19 @@ namespace PetCity.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Suppliers", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -133,6 +142,37 @@ namespace PetCity.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
+            migrationBuilder.CreateTable(
+                name: "Incidences",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    RegionId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Date = table.Column<DateTime>(type: "datetime(6)", nullable: true),
+                    Visibility = table.Column<bool>(type: "tinyint(1)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Incidences", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Incidences_Regions_RegionId",
+                        column: x => x.RegionId,
+                        principalTable: "Regions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Incidences_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "BrandId", "Name" },
@@ -161,13 +201,9 @@ namespace PetCity.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Incidences",
-                columns: new[] { "Id", "Date", "Name", "RegionId", "UserId", "Visibility" },
-                values: new object[,]
-                {
-                    { 1, null, "Kedi ac", 1, 1, true },
-                    { 2, null, "Kopek ac", 1, 1, true }
-                });
+                table: "Regions",
+                columns: new[] { "Id", "Name" },
+                values: new object[] { 1, "r1" });
 
             migrationBuilder.InsertData(
                 table: "Suppliers",
@@ -182,14 +218,37 @@ namespace PetCity.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Products",
-                columns: new[] { "ProductId", "BrandId", "CategoryId", "CompanyId", "Name", "QuantityPerUnit", "UnitPrice", "UnitsInStock" },
-                values: new object[] { 1, 1, 1, 1, "Pro Plan Active", (short)0, 15m, (short)10 });
+                table: "Users",
+                column: "Id",
+                value: 1);
+
+            migrationBuilder.InsertData(
+                table: "Incidences",
+                columns: new[] { "Id", "Date", "Name", "RegionId", "UserId", "Visibility" },
+                values: new object[,]
+                {
+                    { 1, null, "Kedi ac", 1, 1, true },
+                    { 2, null, "Kopek ac", 1, 1, true }
+                });
 
             migrationBuilder.InsertData(
                 table: "Products",
                 columns: new[] { "ProductId", "BrandId", "CategoryId", "CompanyId", "Name", "QuantityPerUnit", "UnitPrice", "UnitsInStock" },
-                values: new object[] { 2, 2, 2, 2, "Pro Line Active", (short)0, 10m, (short)15 });
+                values: new object[,]
+                {
+                    { 1, 1, 1, 1, "Pro Plan Active", (short)0, 15m, (short)10 },
+                    { 2, 2, 2, 2, "Pro Line Active", (short)0, 10m, (short)15 }
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Incidences_RegionId",
+                table: "Incidences",
+                column: "RegionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Incidences_UserId",
+                table: "Incidences",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_BrandId",
@@ -217,6 +276,12 @@ namespace PetCity.Migrations
 
             migrationBuilder.DropTable(
                 name: "Suppliers");
+
+            migrationBuilder.DropTable(
+                name: "Regions");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Brands");

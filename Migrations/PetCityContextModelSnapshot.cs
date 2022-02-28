@@ -109,6 +109,7 @@ namespace PetCity.Migrations
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<int>("RegionId")
@@ -121,6 +122,10 @@ namespace PetCity.Migrations
                         .HasColumnType("tinyint(1)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("RegionId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Incidences");
 
@@ -206,6 +211,27 @@ namespace PetCity.Migrations
                         });
                 });
 
+            modelBuilder.Entity("Region", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Regions");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "r1"
+                        });
+                });
+
             modelBuilder.Entity("Supplier", b =>
                 {
                     b.Property<int>("Id")
@@ -255,6 +281,42 @@ namespace PetCity.Migrations
                         });
                 });
 
+            modelBuilder.Entity("User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        });
+                });
+
+            modelBuilder.Entity("Incidence", b =>
+                {
+                    b.HasOne("Region", "Region")
+                        .WithMany("IncidenceList")
+                        .HasForeignKey("RegionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("User", "User")
+                        .WithMany("IncidenceList")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Region");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Product", b =>
                 {
                     b.HasOne("Brand", "Brand")
@@ -295,6 +357,16 @@ namespace PetCity.Migrations
             modelBuilder.Entity("Company", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Region", b =>
+                {
+                    b.Navigation("IncidenceList");
+                });
+
+            modelBuilder.Entity("User", b =>
+                {
+                    b.Navigation("IncidenceList");
                 });
 #pragma warning restore 612, 618
         }
