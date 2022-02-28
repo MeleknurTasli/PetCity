@@ -17,17 +17,17 @@ public class PetCityContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Brand>(entity =>
         {
-            entity.HasKey(e => e.BrandId);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
         modelBuilder.Entity<Company>(entity =>
         {
-            entity.HasKey(e => e.CompanyId);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
         modelBuilder.Entity<Product>(entity =>
@@ -44,36 +44,36 @@ public class PetCityContext : DbContext
         modelBuilder.Entity<Category>().HasData(
             new Category
             {
-                CategoryId = 1,
+                Id = 1,
                 Name = "Cat Food"
                 },
             new Category
             {
-                CategoryId = 2,
+                Id = 2,
                 Name = "Dog Food"
                 }
         );
         modelBuilder.Entity<Company>().HasData(
             new Company
             {
-                CompanyId = 1,
+                Id = 1,
                 Name = "BlaBla Sirketi"
                 },
             new Company
             {
-                CompanyId = 2,
+                Id = 2,
                 Name = "BlaBlaBla Sirketi"
                 }
         );
             modelBuilder.Entity<Brand>().HasData(
             new Brand
             {
-                BrandId = 1,
+                Id = 1,
                 Name = "Pro Plan"
                 },
             new Brand
             {
-                BrandId = 2,
+                Id = 2,
                 Name = "Pro Line"
                 }
         );
