@@ -4,6 +4,7 @@ public class PetCityContext : DbContext
     public DbSet<Category>? Categories { get; set; }
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Brand>? Brands { get; set; }
+    public DbSet<Account>? Account { get; set; }
 
     public DbSet<Address>? Address { get; set; }
     public DbSet<Country>? Country { get; set; }
@@ -31,27 +32,27 @@ public class PetCityContext : DbContext
         base.OnModelCreating(modelBuilder);
         modelBuilder.Entity<Brand>(entity =>
         {
-            entity.HasKey(e => e.BrandId);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
         modelBuilder.Entity<Category>(entity =>
         {
-            entity.HasKey(e => e.CategoryId);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
         modelBuilder.Entity<Company>(entity =>
         {
-            entity.HasKey(e => e.CompanyId);
+            entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
         modelBuilder.Entity<Product>(entity =>
         {
-            entity.HasKey(e => e.ProductId);
+            entity.HasKey(e => e.Id);
+            entity.Property(ahmetAmca => ahmetAmca.TestPropInt);
+            entity.Property(ahmetAmca => ahmetAmca.TestPropString);
             entity.Property(e => e.Name).IsRequired();
-            entity.HasOne(p => p.Category)
-            .WithMany(c => c!.Products);
-            entity.HasOne(b => b.Brand)
-            .WithMany(c => c!.Products);
+            entity.HasOne(p => p.Category).WithMany(c => c!.Products);
+            entity.HasOne(b => b.Brand).WithMany(c => c!.Products);
             entity.HasOne(c => c.Company)
             .WithMany(c => c!.Products);
         });
@@ -60,43 +61,43 @@ public class PetCityContext : DbContext
         modelBuilder.Entity<Category>().HasData(
             new Category
             {
-                CategoryId = 1,
+                Id = 1,
                 Name = "Cat Food"
             },
             new Category
             {
-                CategoryId = 2,
+                Id = 2,
                 Name = "Dog Food"
             }
         );
         modelBuilder.Entity<Company>().HasData(
             new Company
             {
-                CompanyId = 1,
+                Id = 1,
                 Name = "BlaBla Sirketi"
             },
             new Company
             {
-                CompanyId = 2,
+                Id = 2,
                 Name = "BlaBlaBla Sirketi"
             }
         );
         modelBuilder.Entity<Brand>().HasData(
         new Brand
         {
-            BrandId = 1,
+            Id = 1,
             Name = "Pro Plan"
         },
         new Brand
         {
-            BrandId = 2,
+            Id = 2,
             Name = "Pro Line"
         }
     );
         modelBuilder.Entity<Product>().HasData(
             new Product
             {
-                ProductId = 1,
+                Id = 1,
                 Name = "Pro Plan Active",
                 UnitPrice = 15,
                 UnitsInStock = 10,
@@ -106,7 +107,7 @@ public class PetCityContext : DbContext
             },
             new Product
             {
-                ProductId = 2,
+                Id = 2,
                 Name = "Pro Line Active",
                 UnitPrice = 10,
                 UnitsInStock = 15,
@@ -126,7 +127,7 @@ public class PetCityContext : DbContext
                    entity.Property(e => e.AddressName).IsRequired();
                    entity.Property(e => e.OpenAddres1);
                    entity.Property(e => e.OpenAddres2);
-                   
+
 
 
 
@@ -139,11 +140,11 @@ public class PetCityContext : DbContext
 
                entity.Property(e => e.Name).IsRequired();
                entity.Property(e => e.CountryId);
-            
+
                entity.HasOne(b => b.Country)
                      .WithMany(c => c!.City);
-                     entity.HasOne(b => b.State)
-                     .WithMany(c => c!.City);
+               entity.HasOne(b => b.State)
+               .WithMany(c => c!.City);
 
            });
 
@@ -169,7 +170,7 @@ public class PetCityContext : DbContext
            entity.Property(e => e.CityId);
            entity.HasOne(b => b.City)
                      .WithMany(c => c!.District);
-           
+
 
        });
 
@@ -209,11 +210,69 @@ public class PetCityContext : DbContext
                    entity.Property(e => e.NeighborhoodId);
 
                    entity.HasOne(b => b.Neighborhood);
-                
+
                });
+
+
+        modelBuilder.Entity<Account>().HasData(
+    new Account
+    {
+        Id = 1,
+        Email = "meryem.dogan@sahabt.com",
+        Password = "123123",
+        IsBlocked = true,
+        Visibility = true
+    },
+    new Account
+    {
+        Id = 2,
+        Email = "galipcan.karaaslan@sahabt.com",
+        Password = "555555",
+        IsBlocked = true,
+        Visibility = true
+    }
+);
+
+        modelBuilder.Entity<Role>().HasData(
+           new Role
+           {
+               Id = 1,
+               Name = "admin"
+
+           },
+           new Role
+           {
+               Id = 2,
+               Name = "moderator"
+
+           }
+       );
+
+        modelBuilder.Entity<Account>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Email).IsRequired();
+            entity.Property(e => e.Password).IsRequired();
+            entity.Property(e => e.IsBlocked).IsRequired();
+            entity.Property(e => e.Visibility).IsRequired();
+            entity.HasMany(e => e.Role).WithMany(e => e.Account).UsingEntity(j => j.ToTable("Account_Role"));
+
+        });
+
+
+
+        modelBuilder.Entity<Role>(entity =>
+       {
+           entity.HasKey(e => e.Id);
+           entity.Property(e => e.Name).IsRequired();
+       });
 
 
 
 
     }
+
+
+
+
 }
