@@ -1,5 +1,9 @@
 public interface IAccountRepository{
-    public Account SetAccount();
-    public Account UpdateAccountByEmail();
-    public Account UpdateAccountPassword();
+    IEnumerable<Pet> GetAllPets();
+     Account GetAccountByEmail();
+     Account UpdateAccountByEmail();
+     Account UpdateAccountPassword();
+      Account ChangeVisibilityOfAccount(); 
+     Account BlockAccount();
+     Account Role();
 }
