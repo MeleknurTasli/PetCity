@@ -1,10 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-
-
-
-
 public class SupplierRepository : ISupplierRepository
 {
     private readonly PetCityContext _context;
@@ -13,9 +9,13 @@ public class SupplierRepository : ISupplierRepository
     {
         _context = context;
     }
-    Task<Supplier> ISupplierRepository.ChangeSupplierVisibility(Supplier supplier)
+    async Task<Supplier> ISupplierRepository.ChangeSupplierVisibility(int id)
     {
-        throw new NotImplementedException();
+        var sp = await _context.Suppliers.FindAsync(id);        
+        sp.IsVisibility = false;
+        await _context.SaveChangesAsync();
+        
+        return sp;
     }
 
     async Task<Supplier> ISupplierRepository.CreateSupplierOperation(Supplier supplier)
@@ -30,22 +30,7 @@ public class SupplierRepository : ISupplierRepository
         return await _context.Suppliers!.ToListAsync();        
     }
 
-    Task<IEnumerable<Supplier>> ISupplierRepository.GetSupplierByCountry(Supplier Address, string Country)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<IEnumerable<Supplier>> ISupplierRepository.GetSupplierByCountryAndCity(Supplier Address, string Country, string City)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<IEnumerable<Supplier>> ISupplierRepository.GetSupplierByCountryAndState(Supplier Address, string Country, string State)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<IEnumerable<Supplier>> ISupplierRepository.GetSupplierByCountryAndStateAndCity(Supplier Address, string Country, string State, string City)
+    Task<IEnumerable<Supplier>> ISupplierRepository.GetSupplierByAddress(AddressSearchDTO addressSearch)
     {
         throw new NotImplementedException();
     }
@@ -120,17 +105,28 @@ public class SupplierRepository : ISupplierRepository
         return null;
     }
 
-    async Task<Supplier> ISupplierRepository.UpdateSupplierOperation(int id, Supplier supplier )
+    async Task<Supplier> ISupplierRepository.UpdateSupplierOperation(Supplier supplier )
     {
-        if(id != supplier.Id){
-            return null;
-        }
-        _context.Entry(supplier).State = EntityState.Modified;
+        /*
+       _context.Entry(supplier).State = EntityState.Modified;
         try{
             await _context.SaveChangesAsync();
         }catch(Exception ex){
             throw;
         }
+        */
+      
+        var sp = await _context.Suppliers.FindAsync(supplier.Id);
+
+        sp.Name = supplier.Name;
+        sp.Account = supplier.Account;
+        sp.Address = supplier.Address;
+        sp.Brand = supplier.Brand;
+        sp.Rating = supplier.Rating;
+        sp.IsVisibility = supplier.IsVisibility;
+
+        await _context.SaveChangesAsync();
+
         return supplier;
 
     }

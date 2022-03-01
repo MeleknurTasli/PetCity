@@ -13,7 +13,8 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<PetCityContext>();
 
 builder.Services.AddScoped<IIncidenceRepository,IncidenceRepository>();
-
+builder.Services.AddScoped<ISupplierRepository,SupplierRepository>();
+builder.Services.AddScoped<ISupplierService,SupplierService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
