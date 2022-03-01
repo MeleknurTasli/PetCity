@@ -21,7 +21,7 @@ public class IncidenceRepository : IIncidenceRepository
         {
             await _petCityContext.SaveChangesAsync();
         }
-        catch (Exception ex)
+        catch (Exception e)
         { 
             throw;
         }
@@ -30,12 +30,12 @@ public class IncidenceRepository : IIncidenceRepository
 
     public async Task ChangeIncidenceVisibility(Incidence incidence)
     {
-        
+    
     }
 
     public async Task ChangeIncidenceVisibilityById(int Id)
     {
-        
+
     }
 
     public async Task<Incidence> CreateIncidence(Incidence incidence)
@@ -86,47 +86,12 @@ public class IncidenceRepository : IIncidenceRepository
         return _petCityContext.Incidences.Any(e => e.Id == id);
     }
 
-    public async Task<Incidence> ChangeIncidence(int Id, Incidence incidence)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task ChangeIncidenceVisibility(Incidence incidence)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task ChangeIncidenceVisibilityById(int Id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<Incidence> CreateIncidence(Incidence incidence)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<Incidence>> GetAllIncidences()
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<IEnumerable<Incidence>> GetAllIncidencesByUser(User user)
     {
         throw new NotImplementedException();
     }
 
     public async Task<IEnumerable<Incidence>> GetIncidencesByDate(DateTime date)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<Incidence> GetIncidencesById(int Id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<Incidence>> GetIncidencesByName(string name)
     {
         throw new NotImplementedException();
     }
