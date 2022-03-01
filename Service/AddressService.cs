@@ -1,162 +1,85 @@
 public class AddressService : IAddressService
-
-
 {
-    private AddressRepository addressRepository;
-
+    private AddressRepository _addressRepository;
 
     public AddressService()
     {
-        addressRepository = new AddressRepository();
-    }
-    List<Address> GetAllAdress()
-    {
-
-
-        return addressRepository.GetAllAddress();
+        _addressRepository = new AddressRepository();
     }
 
-    Address IAddressService.GetAdress(int id)
+    public async Task<List<Address>> DeleteAdress(int id)
     {
         if (id != null)
         {
-            return addressRepository.GetAdress(id);
+            return await _addressRepository.DeleteAddress(id);
 
         }
         return null;
-
     }
 
-    List<City> IAddressService.GetAllCity()
-    {
-
-        return addressRepository.GetAllCity();
-    }
-
-    List<Country> IAddressService.GetAllCountry()
-    {
-        return addressRepository.GetAllCountry();
-    }
-
-    List<District> IAddressService.GetAllDistricts()
-    {
-        return addressRepository.GetAllDistricts();
-    }
-
-    List<State> IAddressService.GetAllState()
-    {
-
-        return addressRepository.GetAllState();
-    }
-
-    City IAddressService.GetCity(int id)
+    public async Task<List<Address>> GetAdress(int id)
     {
         if (id != null)
         {
-            return addressRepository.GetCity(id);
+            return await _addressRepository.GetAdress(id);
 
         }
         return null;
+    }
 
-        Country IAddressService.GetCountry(int id)
+    public async Task<List<Address>> GetAllAddresses()
     {
-            if (id != null)
-            {
-                return addressRepository.GetAdress(id);
+        return await _addressRepository.GetAllAddresses();
+    }
 
-            }
-            return null;
-        }
-
-        District IAddressService.GetDistrict(int id)
+    public async Task<List<City>> GetAllCitiesByContryId(int id)
     {
-            if (id != null)
-            {
-                return addressRepository.GetDistrict(id);
+        return await _addressRepository.GetAllCitiesByContryId(id);
+    }
 
-            }
-            return null;
-        }
-
-        State IAddressService.GetState(int id)
+    public async Task<List<City>> GetAllCitiesByStateId(int id)
     {
-            if (id != null)
-            {
-                return addressRepository.GetState(id);
-
-            }
-            return null;
-        }
-        Neighborhood IAddressService.GetNeigborhood(int id)
+        return await _addressRepository.GetAllCitiesByContryId(id);
+    }
+    public async Task<List<Address>> GetAllCountries()
     {
-            if (id != null)
-            {
-                return addressRepository.GetNeigborhood(id);
+        return await _addressRepository.GetAllCountry();
+    }
 
-            }
-            return null;
-        }
-        List<Neighborhood> IAddressService.GetAllNeighborhood()
+    public async Task<List<District>> GetAllDistrictsByCityId(int id)
     {
-            return addressRepository.GetAllCountry();
-        }
-        List<Country> IAddressService.GetAllCountry()
+        return await _addressRepository.GetAllDistrictsByCityId(id);
+    }
+
+    public async Task<List<Neighborhood>> GetAllNeighborhoodsByDistrictId(int id)
     {
-            return addressRepository.GetAllCountry();
-        }
+        return await _addressRepository.GetAllNeighborhoodsByDistrictId(id);
+    }
 
-        Street IAddressService.GetStreet(int id)
+    public async Task<List<State>> GetAllStatesByCountryId(int id)
     {
-            if (id != null)
-            {
-                return addressRepository.GetStreet(id);
+        return await _addressRepository.GetAllStatesByCountryId(id);
+    }
 
-            }
-            return null;
-        }
-
-
-        List<Address> IAddressService.GetAllAdress()
+    public async Task<List<Street>> GetAllStreetsByNeighborhoodtId(int id)
     {
-            throw new NotImplementedException();
-        }
+        return await _addressRepository.GetAllStreetsByNeighborhoodtId(id);
 
-        Country GetCountry(int id)
-        {
-            throw new NotImplementedException();
-        }
+    }
+    public async Task<Address> RegisterAddress()
+    {
+        return await _addressRepository.RegisterAddress();
+    }
 
-        State GetState(int id)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<Address> UpdateAddress(int id)
+    {
+        return await _addressRepository.UpdateAddress();
+    }
 
-        List<District> GetAllDistrict()
-        {
-            throw new NotImplementedException();
-        }
-        District GetDistrict(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Neighborhood> GetAllNeigborhood()
-        {
-            throw new NotImplementedException();
-        }
-
-        Neighborhood GetNeigborhood(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Street> GetAllStreet()
-        {
-            throw new NotImplementedException();
-        }
-        Street GetStreet(int id)
-        {
-            throw new NotImplementedException();
-        }
+    public async Task<Address> DeleteAddress(int id)
+    {
+        return await _addressRepository.DeleteAddress();
     }
 }
+
+
