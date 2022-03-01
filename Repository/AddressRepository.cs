@@ -8,7 +8,7 @@ public class AddressRepository
     }
     public Address GetAddress(int id)
     {
-        var addresscontroller = MockData.ListOfAddress.FirstOrDefault(x => x.AddressId == id);
+        var addresscontroller = MockData.ListOfAddress.FirstOrDefault(x => x.Id == id);
 
         if (addresscontroller != null)
         {
@@ -31,7 +31,7 @@ public class AddressRepository
 
     public Country GetCountry(int id)
     {
-        var Countrycontroller = MockData.ListOfCountry.FirstOrDefault(x => x.CountryId == id);
+        var Countrycontroller = MockData.ListOfCountry.FirstOrDefault(x => x.Id == id);
 
         if (Countrycontroller != null)
         {
@@ -54,7 +54,7 @@ public class AddressRepository
 
     public City GetCity(int id)
     {
-        var Citycontroller = MockData.ListOfCity.FirstOrDefault(x => x.CityId == id);
+        var Citycontroller = MockData.ListOfCity.FirstOrDefault(x => x.Id == id);
 
         if (Citycontroller != null)
         {
@@ -77,7 +77,7 @@ public class AddressRepository
 
     public State GetState(int id)
     {
-        var Statecontroller = MockData.ListOfState.FirstOrDefault(x => x.StateId== id);
+        var Statecontroller = MockData.ListOfState.FirstOrDefault(x => x.Id== id);
 
         if (Statecontroller != null)
         {
@@ -100,7 +100,7 @@ public class AddressRepository
 
     public District GetDistrict(int id)
     {
-        var Districtcontroller = MockData.ListOfDistrict.FirstOrDefault(x => x.DistrictId == id);
+        var Districtcontroller = MockData.ListOfDistrict.FirstOrDefault(x => x.Id == id);
 
         if (Districtcontroller != null)
         {
@@ -124,7 +124,7 @@ public class AddressRepository
 
     public Neighborhood GetAllNeigborhood(int id)
     {
-        var Neigborhoodcontroller = MockData.ListOfNeighborhood.FirstOrDefault(x => x.NeighborhoodId== id);
+        var Neigborhoodcontroller = MockData.ListOfNeighborhood.FirstOrDefault(x => x.Id== id);
 
         if (Neigborhoodcontroller != null)
         {
@@ -146,7 +146,7 @@ public class AddressRepository
 
     public Street GetAllStreet(int id)
     {
-        var Streetcontroller = MockData.ListOfStreet.FirstOrDefault(x => x.StreetId == id);
+        var Streetcontroller = MockData.ListOfStreet.FirstOrDefault(x => x.Id == id);
 
         if (Streetcontroller != null)
         {
