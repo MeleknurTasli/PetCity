@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-public class IncidenceRepository: IIncidenceRepository
-=======
-public class IncidenceRepository :IIncidenceRepository
->>>>>>> ed06b9eab36f30db9bb72668fcbf0231238196ca
+
+public class IncidenceRepository : IIncidenceRepository
 {
     private readonly PetCityContext _petCityContext;
 
