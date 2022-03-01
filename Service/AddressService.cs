@@ -7,16 +7,6 @@ public class AddressService : IAddressService
         _addressRepository = new AddressRepository();
     }
 
-    public async Task<List<Address>> DeleteAdress(int id)
-    {
-        if (id != null)
-        {
-            return await _addressRepository.DeleteAddress(id);
-
-        }
-        return null;
-    }
-
     public async Task<List<Address>> GetAdress(int id)
     {
         if (id != null)
