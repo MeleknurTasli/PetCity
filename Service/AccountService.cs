@@ -20,9 +20,10 @@ public class AccountService : IAccountService
         return ((IAccountService)Account).GetAccountByEmail(email);
     }
 
-    public Account CreateNewAccount()
+    public async Task<Account> CreateNewAccount(Account account)
     {
-        return ((IAccountService)Account).CreateNewAccount();
+        
+        return await _accountRepository.CreateNewAccount(account);
     }
 
     public Account ChangeVisibilityOfAccount()

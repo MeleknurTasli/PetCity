@@ -1,5 +1,5 @@
 public interface IAccountRepository{
-    IEnumerable<Pet> GetAllPets();
+    IEnumerable<Pet> GetAllAccounts();
      Account GetAccountByEmail();
      Account UpdateAccountByEmail();
      Account UpdateAccountPassword();

@@ -20,9 +20,9 @@ public class AccountRepository : IAccountRepository
         throw new NotImplementedException();
     }
 
-    IEnumerable<Pet> IAccountRepository.GetAllPets()
+    IEnumerable<Pet> IAccountRepository.GetAllAccounts()
     {
-        throw new NotImplementedException();
+        return await _context.Set<Account>().ToListAsync();
     }
 
     Account IAccountRepository.Role()
@@ -30,9 +30,11 @@ public class AccountRepository : IAccountRepository
         throw new NotImplementedException();
     }
 
-    Account IAccountRepository.UpdateAccountByEmail()
+    Account IAccountRepository.UpdateAccountByEmail(string email,Account account)
     {
-        throw new NotImplementedException();
+        var Final = _context.Update(email);
+            await _context.SaveChangesAsync();
+            return Final;
     }
 
     Account IAccountRepository.UpdateAccountPassword()
