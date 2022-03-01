@@ -15,6 +15,10 @@ builder.Services.AddScoped<PetCityContext>();
 builder.Services.AddScoped<IIncidenceRepository,IncidenceRepository>();
 builder.Services.AddScoped<ISupplierRepository,SupplierRepository>();
 builder.Services.AddScoped<ISupplierService,SupplierService>();
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<PetCityContext>();
+// builder.Services.AddScoped<IAccountService,AccountService>();
 var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
