@@ -59,6 +59,9 @@ public class ProductService : IProductService
 
     public async Task<Product> UpdateProduct(int id, Product product)
     {
-        return await _productRepository.UpdateProduct(id,product);
+        var updatedProduct = await _productRepository.GetByProductId(id);
+        updatedProduct = product;
+        await _productRepository.UpdateProduct(product);
+        return product;
     }
 }
