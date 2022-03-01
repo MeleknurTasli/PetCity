@@ -4,7 +4,7 @@ public interface IAddressService
 {
     public List<Address> GetAllAddresses();
     public Address GetAddress(int id);
-    public List<Country> GetAllCountries();
+    public Task< List<Country>> GetAllCountries();
     public List<State> GetAllStatesByCountryId(int id);
     public List<City> GetAllCitiesByStateId(int id);
     public List<City> GetAllCitiesByContryId(int id);

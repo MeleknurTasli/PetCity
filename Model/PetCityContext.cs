@@ -141,9 +141,6 @@ public class PetCityContext : DbContext
 
 
 
-
-        /*Emin değilim.Sorulacak*/
-
         modelBuilder.Entity<Country>(entity =>
        {
            entity.HasKey(e => e.Id);

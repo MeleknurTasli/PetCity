@@ -24,9 +24,9 @@ public class AddressController : ControllerBase
     }
 
     [HttpGet("register")]
-    public ActionResult<List<Country>> GetAllCountries()
+    public  async Task<ActionResult<List<Country>>> GetAllCountries()
     {
-        return _IAddressService.GetAllCountries();
+        return  await _IAddressService.GetAllCountries();
     }
 
     [HttpGet("GetAllStates")]

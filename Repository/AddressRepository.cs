@@ -1,6 +1,13 @@
 public class AddressRepository
 {
 
+PetCityContext _petCityContext;
+
+    public AddressRepository()
+    {
+        _petCityContext = new PetCityContext();
+    }
+ 
     public List<Address> GetAllAddresses()
     {
 
@@ -22,11 +29,12 @@ public class AddressRepository
         }
     }
 
-    public List<Country> GetAllCountry()
+    public async Task <List<Country>> GetAllCountry()
     {
 
-        return MockData.ListOfCountry;
+        return await _petCityContext.Country.ToListAsync();
     }
+    
 
 
     public Country GetCountry(int id)
