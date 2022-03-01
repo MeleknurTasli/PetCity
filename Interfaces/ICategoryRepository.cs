@@ -1,9 +1,10 @@
-public interface ICategoryRepository{
-    Category AddCategory(Category category);
-    Category UpdateCategory(int id, Category category);
-    void DeleteCategory(Category category);
-    List<Category> GetAllCategory();
-    Category GetByCategoryId(int categoryId);
-    List<Category> GetAllCategoryByName(string categoryName);
+public interface ICategoryRepository
+{
+   Task <Category> AddCategory(Category category);
+    Task <Category> UpdateCategory(int id, Category category);
+    Task DeleteCategory(Category category);
+    Task <List<Category>> GetAllCategory();
+    Task <Category> GetByCategoryId(int categoryId);
+    Task <List<Category>> GetAllCategoryByName(string categoryName);
     
 }
