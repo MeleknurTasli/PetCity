@@ -1,166 +1,162 @@
-// public class AddressService : IAddressService
+public class AddressService : IAddressService
 
 
-// {
-//     private AddressRepository addressRepository;
+{
+    private AddressRepository addressRepository;
 
 
-//     public AddressService()
-//     {
-//         addressRepository = new AddressRepository();
-//     }
-//     List<Address> GetAllAdress()
-//     {
+    public AddressService()
+    {
+        addressRepository = new AddressRepository();
+    }
+    List<Address> GetAllAdress()
+    {
 
 
-//         return addressRepository.GetAllAddress();
-//     }
+        return addressRepository.GetAllAddress();
+    }
 
-//     Address IAddressService.GetAdress(int id)
-//     {
-//         if (id != null)
-//         {
-//             return addressRepository.GetAdress(id);
+    Address IAddressService.GetAdress(int id)
+    {
+        if (id != null)
+        {
+            return addressRepository.GetAdress(id);
 
-//         }
-//         return null;
+        }
+        return null;
 
-//     }
+    }
 
-//     List<City> IAddressService.GetAllCity()
-//     {
+    List<City> IAddressService.GetAllCity()
+    {
 
-//         return addressRepository.GetAllCity();
-//     }
+        return addressRepository.GetAllCity();
+    }
 
-//     List<Country> IAddressService.GetAllCountry()
-//     {
-//          return addressRepository.GetAllCountry();
-//     }
+    List<Country> IAddressService.GetAllCountry()
+    {
+        return addressRepository.GetAllCountry();
+    }
 
-//     List<District> IAddressService.GetAllDistricts()
-//     {
-//          return addressRepository.GetAllDistricts();
-//     }
+    List<District> IAddressService.GetAllDistricts()
+    {
+        return addressRepository.GetAllDistricts();
+    }
 
-//     List<State> IAddressService.GetAllState()
-//     {
-    
-//          return addressRepository.GetAllState();
-//     }
+    List<State> IAddressService.GetAllState()
+    {
 
-//     City IAddressService.GetCity(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetCity(id);
+        return addressRepository.GetAllState();
+    }
 
-//         }
-//         return null;
+    City IAddressService.GetCity(int id)
+    {
+        if (id != null)
+        {
+            return addressRepository.GetCity(id);
 
-//     Country IAddressService.GetCountry(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetAdress(id);
+        }
+        return null;
 
-//         }
-//         return null;
-//     }
+        Country IAddressService.GetCountry(int id)
+    {
+            if (id != null)
+            {
+                return addressRepository.GetAdress(id);
 
-//    District IAddressService.GetDistrict(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetDistrict(id);
+            }
+            return null;
+        }
 
-//         }
-//         return null;
-//     }
+        District IAddressService.GetDistrict(int id)
+    {
+            if (id != null)
+            {
+                return addressRepository.GetDistrict(id);
 
-//     State IAddressService.GetState(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetState(id);
+            }
+            return null;
+        }
 
-//         }
-//         return null;
-//     }
-//     Neighborhood IAddressService.GetNeigborhood(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetNeigborhood(id);
+        State IAddressService.GetState(int id)
+    {
+            if (id != null)
+            {
+                return addressRepository.GetState(id);
 
-//         }
-//         return null;
-//     }
-//     List<Neighborhood> IAddressService.GetAllNeighborhood()
-//     {
-//          return addressRepository.GetAllCountry();
-//     }
-//     List<Country> IAddressService.GetAllCountry()
-//     {
-//          return addressRepository.GetAllCountry();
-//     }
+            }
+            return null;
+        }
+        Neighborhood IAddressService.GetNeigborhood(int id)
+    {
+            if (id != null)
+            {
+                return addressRepository.GetNeigborhood(id);
 
-//     Street IAddressService.GetStreet(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetStreet(id);
+            }
+            return null;
+        }
+        List<Neighborhood> IAddressService.GetAllNeighborhood()
+    {
+            return addressRepository.GetAllCountry();
+        }
+        List<Country> IAddressService.GetAllCountry()
+    {
+            return addressRepository.GetAllCountry();
+        }
 
-//         }
-//         return null;
-//     }
+        Street IAddressService.GetStreet(int id)
+    {
+            if (id != null)
+            {
+                return addressRepository.GetStreet(id);
+
+            }
+            return null;
+        }
 
 
+        List<Address> IAddressService.GetAllAdress()
+    {
+            throw new NotImplementedException();
+        }
 
-// }
+        Country GetCountry(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-//     List<Address> IAddressService.GetAllAdress()
-//     {
-//         throw new NotImplementedException();
-//     }
+        State GetState(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-//     public Country GetCountry(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
+        List<District> GetAllDistrict()
+        {
+            throw new NotImplementedException();
+        }
+        District GetDistrict(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-//     public State GetState(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
+        List<Neighborhood> GetAllNeigborhood()
+        {
+            throw new NotImplementedException();
+        }
 
-//     public List<District> GetAllDistrict()
-//     {
-//         throw new NotImplementedException();
-//     }
+        Neighborhood GetNeigborhood(int id)
+        {
+            throw new NotImplementedException();
+        }
 
-//     public District GetDistrict(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
-
-//     public List<Neighborhood> GetAllNeigborhood()
-//     {
-//         throw new NotImplementedException();
-//     }
-
-//     public Neighborhood GetNeigborhood(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
-
-//     public List<Street> GetAllStreet()
-//     {
-//         throw new NotImplementedException();
-//     }
-
-//     public Street GetStreet(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
-// }
+        List<Street> GetAllStreet()
+        {
+            throw new NotImplementedException();
+        }
+        Street GetStreet(int id)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
