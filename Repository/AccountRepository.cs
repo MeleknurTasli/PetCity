@@ -1,44 +1,57 @@
 public class AccountRepository : IAccountRepository
-{
+{     
+    
+    
+      //ACcountDTO yüzünden mi bu hatalar ??????
+
+
     private readonly PetCityContext _context;
     public AccountRepository(PetCityContext context)
     {
         _context=context;
     }
-    Account IAccountRepository.BlockAccount()
+
+    public async Task<Account> BlockAccount()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException();        //yarın halledicez, önce bi yürütelim
     }
 
-    Account IAccountRepository.ChangeVisibilityOfAccount()
+    public async Task<Account> ChangeVisibilityOfAccount()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException();            //yarın halledicez, önce bi yürütelim
     }
 
-    Account IAccountRepository.GetAccountByEmail()
+    public async Task<Account> CreateAccount(Account account)
     {
-        throw new NotImplementedException();
+        await _context.Account.AddAsync(account);
+        await _context.SaveChangesAsync();
+        return account;
     }
 
-    IEnumerable<Pet> IAccountRepository.GetAllAccounts()
+    public async Task<Account> GetAccountByEmail(string email)
+    {
+         return await _context.Account.FirstOrDefaultAsync(a=>a.Email==email);
+    }
+
+    public async Task<List<Account>> GetAllAccounts()
     {
         return await _context.Set<Account>().ToListAsync();
     }
 
-    Account IAccountRepository.Role()
+    public async Task<Account> Role()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException();            //yarın halledicez, önce bi yürütelim
     }
 
-    Account IAccountRepository.UpdateAccountByEmail(string email,Account account)
+    public async Task<Account> UpdateAccountByEmail(string email, Account account)
     {
-        var Final = _context.Update(email);
-            await _context.SaveChangesAsync();
-            return Final;
+        throw new NotImplementedException();                //yarın halledicez, önce bi yürütelim
     }
 
-    Account IAccountRepository.UpdateAccountPassword()
+    public async Task<Account> UpdateAccountPassword(string oldpassword, string newpassword)
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException();            //yarın halledicez, önce bi yürütelim
     }
 }
+
+   

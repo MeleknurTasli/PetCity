@@ -1,54 +1,52 @@
 public class AccountService : IAccountService
 {
-    private readonly AccountRepository _accountRepository;
+    private readonly IAccountRepository _accountRepository;
     public AccountService(IAccountRepository accountRepository)
     {
         _accountRepository=accountRepository;
     }
-    Account IAccountService.BlockAccount()
+
+    public async Task<Account> BlockAccount()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException();        //yarın yapıcaz, önce bi yürütelim
     }
 
-    public List<Account> GetAllAccounts()
+    public async Task<Account> ChangeVisibilityOfAccount()
     {
-        return ((IAccountService)Account).GetAllAccounts();
-    }
-
-    public Account GetAccountByEmail(string email)
-    {
-        return ((IAccountService)Account).GetAccountByEmail(email);
+        throw new NotImplementedException();            //yarın yapıcaz, önce bi yürütelim
     }
 
     public async Task<Account> CreateNewAccount(Account account)
     {
+        await _accountRepository.CreateAccount(account);        //repodaki methodun adını yazıyoruz, repoda da bir alt katman olan db(contexti işliyoruz vs...)
         
-        return await _accountRepository.CreateNewAccount(account);
+        return account;
     }
 
-    public Account ChangeVisibilityOfAccount()
+    public async Task<Account> GetAccountByEmail(string email)
     {
-        return ((IAccountService)Account).ChangeVisibilityOfAccount();
+        var getAccountByEmail=await _accountRepository.GetAccountByEmail(email);
+        return getAccountByEmail;
     }
 
-    public Account UpdateAccountByEmail(Account account, string email)
+    public async Task<List<Account>> GetAllAccounts()
     {
-        return ((IAccountService)Account).UpdateAccountByEmail(account, email);
+        return await _accountRepository.GetAllAccounts();   //repoda tolist dediğimiz için bu katmana direkt tolist hali geldi,burdan da controllera gönderiyoz
+        }
+
+    public async Task<Account> Role()
+    {
+        throw new NotImplementedException();        //yarın yapıcaz, önce bi yürütelim
     }
 
-    public Account UpdateAccountPassword(string oldpassword, string newpassword)
+    public async Task<Account> UpdateAccountByEmail(Account account, string email)
     {
-        return ((IAccountService)Account).UpdateAccountPassword(oldpassword, newpassword);
+        throw new NotImplementedException();                //yarın yapıcaz, önce bi yürütelim
     }
 
-    public Account BlockAccount()
+    public async Task<Account> UpdateAccountPassword(string oldpassword, string newpassword)
     {
-        return ((IAccountService)Account).BlockAccount();
-    }
-
-    public Account Role()
-    {
-        return ((IAccountService)Account).Role();
+        throw new NotImplementedException();            //yarın yapıcaz, önce bi yürütelim
     }
 }
 

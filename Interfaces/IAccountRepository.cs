@@ -1,9 +1,10 @@
 public interface IAccountRepository{
-    IEnumerable<Pet> GetAllAccounts();
-     Account GetAccountByEmail();
-     Account UpdateAccountByEmail();
-     Account UpdateAccountPassword();
-      Account ChangeVisibilityOfAccount(); 
-     Account BlockAccount();
-     Account Role();
+    Task<List<Account>> GetAllAccounts();
+    Task<Account>CreateAccount(Account account);
+     Task<Account> GetAccountByEmail(string email);
+    Task<Account> UpdateAccountByEmail(string email,Account account);
+     Task<Account> UpdateAccountPassword(string oldpassword,string newpassword);
+      Task<Account> ChangeVisibilityOfAccount(); 
+     Task<Account> BlockAccount();
+     Task<Account> Role();
 }
