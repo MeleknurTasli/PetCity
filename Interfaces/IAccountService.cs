@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 public interface IAccountService{
-     List<Account> GetAllAccount();
+     List<Account> GetAllAccounts();
      Account GetAccountByEmail(string email);
      Account CreateNewAccount();
      Account ChangeVisibilityOfAccount(); 
