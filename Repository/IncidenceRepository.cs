@@ -52,20 +52,6 @@ public class IncidenceRepository : IIncidenceRepository
         { 
             throw;
         }
-<<<<<<< HEAD
-        return incidence;
-    }
-
-    public async Task ChangeIncidenceVisibility(Incidence incidence)
-    {
-    
-    }
-
-    public async Task ChangeIncidenceVisibilityById(int Id)
-    {
-
-=======
->>>>>>> 7965e51dd8ab3b5c571e9e5cba227601c928c81e
     }
 
     public async Task<Incidence> CreateIncidence(Incidence incidence)
@@ -111,24 +97,8 @@ public class IncidenceRepository : IIncidenceRepository
        return await _petCityContext.Incidences.Where(p=> p.Region.Name == regionName).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
     }
 
-
     private bool IncidenceExists(int id)
     {
         return _petCityContext.Incidences.Any(e => e.Id == id);
-    }
-
-    public async Task<IEnumerable<Incidence>> GetAllIncidencesByUser(User user)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<Incidence>> GetIncidencesByDate(DateTime date)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<IEnumerable<Incidence>> GetIncidencesByRegion(Region region)
-    {
-        throw new NotImplementedException();
     }
 }
