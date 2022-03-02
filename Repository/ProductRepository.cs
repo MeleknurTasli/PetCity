@@ -62,7 +62,7 @@ public class ProductRepository : IProductRepository
         return await _context.Set<Product>().SingleOrDefaultAsync(p=> p.Id == productId);
     }
 
-    public async Task<Product> UpdateProduct(int id, Product product)
+    public async Task<Product> UpdateProduct(Product product)
     {
             var result = _context.Update(product);
             await _context.SaveChangesAsync();

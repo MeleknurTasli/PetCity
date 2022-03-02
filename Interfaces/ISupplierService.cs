@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 
 public interface ISupplierService
 {
-    Task<IEnumerable<Supplier>> GetAllSupplier();
-    Task<Supplier> GetSupplierById(int id);
-    Task<Supplier> GetSupplierByName(string name);
+    Task<IEnumerable<SupplierDTO>> GetAllSupplier();
+    Task<SupplierDTO> GetSupplierById(int id);
+    Task<SupplierDTO> GetSupplierByName(string name);
+    Task<SupplierDTO> GetSupplierByEmail(string email);
+    Task<IEnumerable<SupplierDTO>> GetSupplierByAddress(AddressSearchDTO address);
 
-    Task<Supplier> CreateSupplierOperation(Supplier supplier);
-    Task<Supplier> UpdateSupplierOperation(int id, Supplier supplier);
-    Task<Supplier> DeleteSupplierOperation(int id);
+    Task<SupplierDTO> CreateSupplierOperation(Supplier supplier);
+    Task<SupplierDTO> UpdateSupplierOperation(int id, SupplierDTO supplier);
+    Task<SupplierDTO> DeleteSupplierOperation(int id);
 
 }

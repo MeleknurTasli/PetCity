@@ -1,17 +1,17 @@
 
 public interface ISupplierRepository
 {
-    Task<IEnumerable<Supplier>> GetAllSupplier();
-    Task<Supplier> GetSupplierById(int id);
-    Task<Supplier> GetSupplierByName(string Name);
-    Task<Supplier> GetSupplierByEmail(string Email);
-    Task<IEnumerable<Supplier>> GetSupplierByAddress(AddressSearchDTO addressSearch);
-    Task<IEnumerable<Supplier>> GetSupplierByRating(double Rating);
-    Task<IEnumerable<Supplier>> GetSupplierByMinRatingAndAbove(double MinRating);
-    Task<IEnumerable<Supplier>> GetSupplierByRatingRange(double DownRating,double UpRating);
-    Task<Supplier> CreateSupplierOperation(Supplier supplier);
-    Task<Supplier> UpdateSupplierOperation(Supplier supplier);
-    Task<Supplier> ChangeSupplierVisibility(int id);
+    Task<IEnumerable<SupplierDTO>> GetAllSupplier();
+    Task<SupplierDTO> GetSupplierById(int id);
+    Task<SupplierDTO> GetSupplierByName(string Name);
+    Task<SupplierDTO> GetSupplierByEmail(string Email);
+    Task<IEnumerable<SupplierDTO>> GetSupplierByAddress(AddressSearchDTO address);
+    Task<IEnumerable<SupplierDTO>> GetSupplierByRating(double Rating);
+    Task<IEnumerable<SupplierDTO>> GetSupplierByMinRatingAndAbove(double MinRating);
+    Task<IEnumerable<SupplierDTO>> GetSupplierByRatingRange(double DownRating,double UpRating);
+    Task<SupplierDTO> CreateSupplierOperation(Supplier supplier);
+    Task<SupplierDTO> UpdateSupplierOperation(int id, SupplierDTO supplier);
+    Task<SupplierDTO> ChangeSupplierVisibility(int id);
 
 
 
