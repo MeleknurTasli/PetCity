@@ -1,56 +1,104 @@
 using Microsoft.AspNetCore.Mvc;
-public class IncidenceService : ControllerBase, IIncidenceService
+public class IncidenceService : IIncidenceService
 {
-    private readonly IIncidenceService _IncidenceService;
-    public IncidenceService(IIncidenceService IncidenceService)
+    private readonly IIncidenceRepository _IncidenceRepository;
+    public IncidenceService(IIncidenceRepository incidenceRepository)
     {
-         _IncidenceService = IncidenceService;
+         _IncidenceRepository = incidenceRepository;
     }
 
     public IncidenceService(){}
 
-    public Task<IEnumerable<Incidence>> GetAllIncidences()
+    public async Task<IEnumerable<IncidenceDTO>> GetAllIncidences()
     {
-        throw new NotImplementedException();
+        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetAllIncidences();
+        if(incidenceDTOs != null)
+        {
+            return incidenceDTOs;
+        }
+        return new List<IncidenceDTO> { new IncidenceDTO(null) };
+
     }
 
-    public Task<IEnumerable<Incidence>> GetIncidencesByRegionName(string regionName)
+    public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByDistrictName(string districtName)
     {
-        throw new NotImplementedException();
+        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetIncidencesByDistrictName(districtName);
+        if(incidenceDTOs != null)
+        {
+            return incidenceDTOs;
+        }
+        return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
-    public Task<IEnumerable<Incidence>> GetAllIncidencesByUserName(string username)
+    public async Task<IEnumerable<IncidenceDTO>> GetAllIncidencesByUserName(string username)
     {
-        throw new NotImplementedException();
+        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetAllIncidencesByUserName(username);
+        if(incidenceDTOs != null)
+        {
+            return incidenceDTOs;
+        }
+        return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
-    public Task<IEnumerable<Incidence>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate)
+    public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate)
     {
-        throw new NotImplementedException();
+        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetIncidencesByDate(FirstDate, LastDate);
+        if(incidenceDTOs != null)
+        {
+            return incidenceDTOs;
+        }
+        return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
-    public Task<Incidence> GetIncidencesById(int Id)
+    public async Task<IncidenceDTO> GetIncidencesById(int Id)
     {
-        throw new NotImplementedException();
+       IncidenceDTO incidenceDTOs = await _IncidenceRepository.GetIncidencesById(Id);
+        if(incidenceDTOs != null)
+        {
+            return incidenceDTOs;
+        }
+        return new IncidenceDTO(null) ;
     }
 
-    public Task<IEnumerable<Incidence>> GetIncidencesByName(string name)
+    public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByName(string name)
     {
-        throw new NotImplementedException();
+        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetIncidencesByName(name);
+        if(incidenceDTOs != null)
+        {
+            return incidenceDTOs;
+        }
+        return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
-    public Task<bool> ChangeIncidenceVisibilityById(int Id)
+    //todo
+    public async Task ChangeIncidenceVisibilityById(int Id)
     {
-        throw new NotImplementedException();
+        var incidence = await _IncidenceRepository.GetIncidencesById(Id); 
+        if(incidence != null)
+        {
+            await ChangeIncidenceVisibilityById(Id);
+        }
     }
 
-    public Task<Incidence> CreateIncidence(Incidence incidence)
+    //todo
+    public async Task<IncidenceDTO> CreateIncidence(Incidence incidence)
     {
-        throw new NotImplementedException();
+        IncidenceDTO incidenceDTO = await _IncidenceRepository.GetIncidencesById(incidence.Id);
+        if(incidenceDTO == null)
+        {
+            return await _IncidenceRepository.CreateIncidence(incidence);
+        }
+        return new IncidenceDTO(null) ;
     }
 
-    public Task<Incidence> ChangeIncidence(int Id, Incidence incidence)
+    //todo
+    public async Task<IncidenceDTO> ChangeIncidence(int Id, Incidence incidence)
     {
-        throw new NotImplementedException();
+        IncidenceDTO incidenceDTO = await _IncidenceRepository.GetIncidencesById(Id);
+        if(incidenceDTO != null)
+        {
+            return await _IncidenceRepository.ChangeIncidence(Id, incidence);
+        }
+        return new IncidenceDTO(null) ;
     }
 }

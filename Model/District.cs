@@ -7,4 +7,7 @@ public class District
     public List<Neighborhood>? Neighborhood { get; set; }
 
 
+
+    public virtual List<Incidence> IncidenceList {get; set; }
+
 }

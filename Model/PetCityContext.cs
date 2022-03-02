@@ -6,7 +6,7 @@ public class PetCityContext : DbContext
     public DbSet<Brand>? Brands { get; set; }
     public DbSet<Incidence>? Incidences { get; set; }
     public DbSet<User>? Users { get; set; } 
-    public DbSet<Region>? Regions { get; set; } 
+    public DbSet<District>? Regions { get; set; } 
     public DbSet<Pet>? Pets { get; set; }
     public DbSet<PetSpecies>? PetSpecies { get; set; }
     public DbSet<PetGender>? PetGenders { get; set; }
@@ -180,12 +180,7 @@ public class PetCityContext : DbContext
                     Rating = 8.1
                 });
 
-            
-       modelBuilder.Entity<Region>(entity =>
-        {
-            entity.HasKey(e=>e.Id);
-            entity.Property(e=> e.Name);
-        });
+       
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e=>e.Id);
@@ -195,11 +190,11 @@ public class PetCityContext : DbContext
         {
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
-            entity.HasOne(p => p.Region).WithMany(c => c!.IncidenceList).HasForeignKey(c => c.RegionId);
+            entity.HasOne(p => p.District).WithMany(c => c!.IncidenceList).HasForeignKey(c => c.DistrictId);
             entity.HasOne(b => b.User).WithMany(c => c!.IncidenceList).HasForeignKey(c => c.UserId);
             entity.Property(e=>e.Visibility);
             entity.Property(e=>e.UserId);
-            entity.Property(e=>e.RegionId);
+            entity.Property(e=>e.DistrictId);
             entity.Property(e=>e.Description);
             entity.Property(e=>e.Image);
         });
@@ -209,7 +204,7 @@ public class PetCityContext : DbContext
                 Name="Kedi ac",
                 Visibility=true,
                 UserId = 1,
-                RegionId = 1,
+                DistrictId = 1,
                 Description = "kedi çok aç"
             },
             new Incidence{
@@ -217,22 +212,16 @@ public class PetCityContext : DbContext
                 Name="Kopek ac",
                 Visibility=true ,
                 UserId = 1,
-                RegionId = 1 ,
+                DistrictId = 1 ,
                 Description = "köpek çok aç"  
             }
         );
-        modelBuilder.Entity<Region>().HasData(
-            new Region{
-                Id=1,
-                Name="region1"
-            });
+        
         modelBuilder.Entity<User>().HasData(
             new User{
                 Id=1,
                 Name="melek"
             });    
-
-
 
         modelBuilder.Entity<Address>(entity =>
                {
