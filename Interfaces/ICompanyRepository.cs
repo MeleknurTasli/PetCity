@@ -1,9 +1,9 @@
     public interface ICompanyRepository{
-    Company AddCompany(Company company);
-    Company UpdateCompany(int id, Company company);
-    void DeleteCompany(Company company);
-    List<Company> GetAllCompany();
-    Company GetByBrandtId(int companyId);
-    List<Company> GetAllCompanyByName(string companyName);
+    Task<Company> AddCompanyAsync(Company company);
+    Task<Company> UpdateCompanyAsync(Company company);
+    Task DeleteCompanyAsync(Company company);
+    Task<List<Company>> GetAllCompanyAsync();
+    Task<Company> GetCompanyByIdAsync(int companyId);
+    Task<Company> GetCompanyByNameAsync(string companyName);
     
     }
