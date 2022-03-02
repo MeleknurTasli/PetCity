@@ -194,13 +194,55 @@ public class PetCityContext : DbContext
 
                });
 
+               modelBuilder.Entity<Country>().HasData(
+           new Country
+           {
+               Id = 1,
+               Name = "Turkey",
+               Code = 001
+
+           },
+           new Country
+           {
+               Id = 2,
+               Name = "Usa",
+               Code = 002
+
+           }
+       );
+       modelBuilder.Entity<City>().HasData(
+           new City
+           {
+               Id = 1,
+               Name = "Ankara",
+               
+
+           },
+           new City
+           {
+               Id = 2,
+               Name = "New York"
+
+           }
+       );
+       modelBuilder.Entity<State>().HasData(
+           new State
+           {
+               Id = 1,
+               Name = "California"
+
+           },
+           new State
+           {
+               Id = 2,
+               Name = "Texas"
+
+           }
+       );
 
 
 
-<<<<<<< HEAD
-=======
 
->>>>>>> dev/main
         modelBuilder.Entity<Role>().HasData(
            new Role
            {

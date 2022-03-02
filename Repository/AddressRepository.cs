@@ -1,5 +1,4 @@
-namespace PetCity.Repository
-{
+
     public class AddressRepository : IAddressRepository
     {
 
@@ -167,4 +166,4 @@ namespace PetCity.Repository
 
     }
 
-}
+
