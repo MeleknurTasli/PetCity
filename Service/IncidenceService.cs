@@ -7,48 +7,50 @@ public class IncidenceService : ControllerBase, IIncidenceService
          _IncidenceService = IncidenceService;
     }
 
-    public async Task<Incidence> ChangeIncidence(int Id, Incidence incidence)
+    public IncidenceService(){}
+
+    public Task<IEnumerable<Incidence>> GetAllIncidences()
     {
-        
+        throw new NotImplementedException();
     }
 
-    public async Task<bool> ChangeIncidenceVisibilityById(int Id)
+    public Task<IEnumerable<Incidence>> GetIncidencesByRegionName(string regionName)
     {
-        
+        throw new NotImplementedException();
     }
 
-    public async Task<Incidence> CreateIncidence(Incidence incidence)
+    public Task<IEnumerable<Incidence>> GetAllIncidencesByUserName(string username)
     {
-        
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Incidence>> GetAllIncidences()
+    public Task<IEnumerable<Incidence>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate)
     {
-        
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Incidence>> GetAllIncidencesByUserName(string username)
+    public Task<Incidence> GetIncidencesById(int Id)
     {
-        
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Incidence>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate)
+    public Task<IEnumerable<Incidence>> GetIncidencesByName(string name)
     {
-        
+        throw new NotImplementedException();
     }
 
-    public async Task<Incidence> GetIncidencesById(int Id)
+    public Task<bool> ChangeIncidenceVisibilityById(int Id)
     {
-        
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Incidence>> GetIncidencesByName(string name)
+    public Task<Incidence> CreateIncidence(Incidence incidence)
     {
-        
+        throw new NotImplementedException();
     }
 
-    public async Task<IEnumerable<Incidence>> GetIncidencesByRegionName(string regionName)
+    public Task<Incidence> ChangeIncidence(int Id, Incidence incidence)
     {
-        
+        throw new NotImplementedException();
     }
 }

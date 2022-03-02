@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 
 
 using System.Net;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -36,10 +38,11 @@ builder.Services.AddScoped<IBrandRepository,BrandRepository>();
 builder.Services.AddScoped<IBrandService,BrandService>();
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<ICategoryService,CategoryService>();
+builder.Services.AddScoped<IIncidenceRepository,IncidenceRepository>();
+builder.Services.AddScoped<IIncidenceService,IncidenceService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
-builder.Services.AddScoped<IIncidenceRepository,IncidenceRepository>();
 builder.Services.AddScoped<ISupplierRepository,SupplierRepository>();
 builder.Services.AddScoped<ISupplierService,SupplierService>();
 var app = builder.Build();

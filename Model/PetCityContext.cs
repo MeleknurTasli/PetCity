@@ -189,6 +189,7 @@ public class PetCityContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e=>e.Id);
+            entity.Property(e=> e.Name);
         });
          modelBuilder.Entity<Incidence>(entity =>
         {
@@ -199,6 +200,8 @@ public class PetCityContext : DbContext
             entity.Property(e=>e.Visibility);
             entity.Property(e=>e.UserId);
             entity.Property(e=>e.RegionId);
+            entity.Property(e=>e.Description);
+            entity.Property(e=>e.Image);
         });
         modelBuilder.Entity<Incidence>().HasData(
             new Incidence{
@@ -206,24 +209,27 @@ public class PetCityContext : DbContext
                 Name="Kedi ac",
                 Visibility=true,
                 UserId = 1,
-                RegionId = 1
+                RegionId = 1,
+                Description = "kedi çok aç"
             },
             new Incidence{
                 Id=2,
                 Name="Kopek ac",
                 Visibility=true ,
                 UserId = 1,
-                RegionId = 1      
+                RegionId = 1 ,
+                Description = "köpek çok aç"  
             }
         );
         modelBuilder.Entity<Region>().HasData(
             new Region{
                 Id=1,
-                Name="r1"
+                Name="region1"
             });
         modelBuilder.Entity<User>().HasData(
             new User{
-                Id=1
+                Id=1,
+                Name="melek"
             });    
 
 
