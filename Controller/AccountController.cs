@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-public class AccountController : ControllerBase
+public class AccountController : ControllerBase         //eksiklermiz var düzenleme yapacağız...
 {
     private readonly IAccountService _accountService;
 
@@ -12,9 +12,9 @@ public class AccountController : ControllerBase
         _accountService=accountService;
     }
     [HttpPost]
-    public AccountDTO Create(AccountDTO account)
+    public async Task<Account> CreateNewAccount(Account account)
     {
-        return _accountService.CreateNewAccount(account);
+        return await _accountService.CreateNewAccount(account);
     }
 
         

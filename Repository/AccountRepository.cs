@@ -1,4 +1,4 @@
-public class AccountRepository : IAccountRepository
+public class AccountRepository :IAccountRepository
 {     
     
     
@@ -88,6 +88,11 @@ public class AccountRepository : IAccountRepository
                            where x.Id == id
                            select x).FirstOrDefault();
         return accountByID; 
+    }
+
+    Task<Account> IAccountRepository.CreateAccount(Account account)
+    {
+        throw new NotImplementedException();
     }
 }
 
