@@ -39,6 +39,7 @@ public class PetCityContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
+
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -84,7 +85,7 @@ public class PetCityContext : DbContext
             {
                 Id = 2,
                 Name = "BlaBlaBla Sirketi"
-                }
+            }
         );
         modelBuilder.Entity<Brand>().HasData(
         new Brand
@@ -216,6 +217,10 @@ public class PetCityContext : DbContext
                    entity.HasOne(b => b.Neighborhood);
 
                });
+
+
+
+
 
         modelBuilder.Entity<Role>().HasData(
            new Role

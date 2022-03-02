@@ -6,6 +6,11 @@ public class AccountRepository : IAccountRepository
         _context = context;
     }
 
+    public AccountRepository()
+    {
+
+    }
+
     public AccountDTO CreateAccount(AccountDTO account)
     {
         try
@@ -20,5 +25,21 @@ public class AccountRepository : IAccountRepository
         {
             return new AccountDTO(null);
         }
+    }
+
+    public Account FindAccountByEmailAndPassword(LoginDTO loginDTO)
+    {
+        Account account = (from x in _context.Account
+                           where x.Email == loginDTO.Email && x.Password == loginDTO.Password
+                           select x).FirstOrDefault();
+        return account;
+    }
+
+    public Account findAccountById(int id)
+    {
+        var account = (from x in _context.Account
+        where x.Id == 3 
+        select x).FirstOrDefault();
+        return account;
     }
 }
