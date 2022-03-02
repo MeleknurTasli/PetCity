@@ -2,17 +2,17 @@ using System.Collections.Generic;
 
 public interface IAddressService
 {
-    public List<Address> GetAllAddresses();
-    public Address GetAddress(int id);
-    public Task< List<Country>> GetAllCountries();
-    public List<State> GetAllStatesByCountryId(int id);
-    public List<City> GetAllCitiesByStateId(int id);
-    public List<City> GetAllCitiesByContryId(int id);
-    public List<District> GetAllDistrictsByCityId(int id);
-    public List<Neighborhood> GetAllNeighborhoodsByDistrictId(int id);
-    public List<Street> GetAllStreetsByNeighborhoodtId(int id);
-    public Address RegisterAddress();
-    public Address DeleteAddress(int id);
-    public Address UpdateAddress(int id);
+   Task<List<Address>> GetAllAddresses();
+    Task<Address> GetAddress(int id);
+    Task<List<Country>> GetAllCountries();
+    Task<List<State>> GetAllStatesByCountryId(int id);
+    Task<List<City>> GetAllCitiesByStateId(int id);
+    Task<List<City>> GetAllCitiesByContryId(int id);
+    Task<List<District>> GetAllDistrictsByCityId(int id);
+    Task<List<Neighborhood>> GetAllNeighborhoodsByDistrictId(int id);
+    Task<List<Street>> GetAllStreetsByNeighborhoodtId(int id);
+    Task< Address> RegisterAddress();
+    Task< Address> DeleteAddress(int id);
+    Task< Address> UpdateAddress(int id);
 
 }
