@@ -1,5 +1,7 @@
-public interface IAccountRepository{
-    public Account SetAccount();
-    public Account UpdateAccountByEmail();
-    public Account UpdateAccountPassword();
+public interface IAccountRepository
+{
+    AccountDTO CreateAccount(AccountDTO account);
+    Account FindAccountByEmailAndPassword(LoginDTO loginDTO);
+    Account findAccountById(int id);
+
 }
