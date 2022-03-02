@@ -11,62 +11,79 @@ public class SupplierService : ISupplierService
         _supplierRepository = supplierRepository;
     }
 
-    async Task<Supplier> ISupplierService.CreateSupplierOperation(Supplier supplier)
+    public async Task<IEnumerable<SupplierDTO>> GetSupplierByAddress(AddressSearchDTO address)
     {
-        var sp_id = await _supplierRepository.GetSupplierById(supplier.Id);
-        var sp_name = await _supplierRepository.GetSupplierByName(supplier.Name);
-        if(sp_id == null && sp_name == null)
+        IEnumerable<SupplierDTO> supplierDTOs = await _supplierRepository.GetSupplierByAddress(address);
+        if(supplierDTOs!=null){
+            return supplierDTOs;
+        }
+        return new List<SupplierDTO> { new SupplierDTO(null) };
+    }
+
+    public async Task<SupplierDTO> GetSupplierByEmail(string email)
+    {
+        SupplierDTO supplierDTO = await _supplierRepository.GetSupplierByEmail(email);
+        if(supplierDTO!=null){
+            return supplierDTO;
+        }
+        return new SupplierDTO(null);
+    }
+
+    async Task<SupplierDTO> ISupplierService.CreateSupplierOperation(Supplier supplier)
+    {
+        SupplierDTO supplierDTO = await _supplierRepository.GetSupplierByName(supplier.Name);
+        if(supplierDTO == null)
         {
             return await _supplierRepository.CreateSupplierOperation(supplier);
         }
-        return null;
+        return new SupplierDTO(null);
     }
 
-    async Task<Supplier> ISupplierService.DeleteSupplierOperation(int id)
+    async Task<SupplierDTO> ISupplierService.DeleteSupplierOperation(int id)
     {
-        var supplier = await _supplierRepository.GetSupplierById(id);
-        if(supplier != null){
+        SupplierDTO supplierDTO = await _supplierRepository.GetSupplierById(id);
+        if(supplierDTO != null){
             return await _supplierRepository.ChangeSupplierVisibility(id);
         }
-        return null;
+        return new SupplierDTO(null);
     }
 
-    async Task<IEnumerable<Supplier>> ISupplierService.GetAllSupplier()
+    async Task<IEnumerable<SupplierDTO>> ISupplierService.GetAllSupplier()
     {
-        var suppliers = await _supplierRepository.GetAllSupplier();
-        if(suppliers != null)
+        IEnumerable<SupplierDTO> supplierDTOs = await _supplierRepository.GetAllSupplier();
+        if(supplierDTOs != null)
         {
-            return suppliers;
+            return supplierDTOs;
         }
-        return null;
+        return new List<SupplierDTO> { new SupplierDTO(null) };
     }
 
-    async Task<Supplier> ISupplierService.GetSupplierById(int id)
+    async Task<SupplierDTO> ISupplierService.GetSupplierById(int id)
     {
-        var supplier = await _supplierRepository.GetSupplierById(id);
-        if(supplier != null)
+        SupplierDTO supplierDTO = await _supplierRepository.GetSupplierById(id);
+        if(supplierDTO != null)
         {
-            return supplier;
+            return supplierDTO;
         }
-        return null;
+        return new SupplierDTO(null);
     }
 
-    async Task<Supplier> ISupplierService.GetSupplierByName(string name)
+    async Task<SupplierDTO> ISupplierService.GetSupplierByName(string name)
     {
-        var supplier = await _supplierRepository.GetSupplierByName(name);
-        if(supplier != null)
+        SupplierDTO supplierDTO = await _supplierRepository.GetSupplierByName(name);
+        if(supplierDTO != null)
         {
-            return supplier;
+            return supplierDTO;
         }
-        return null;
+        return new SupplierDTO(null);
     }
 
-    async Task<Supplier> ISupplierService.UpdateSupplierOperation(int id, Supplier supplier)
+    async Task<SupplierDTO> ISupplierService.UpdateSupplierOperation(int id, SupplierDTO supplier)
     {
-        var sp = await _supplierRepository.GetSupplierById(id);
-        if(sp!=null && sp.Id == supplier.Id){
-            return await _supplierRepository.UpdateSupplierOperation(supplier);
+        SupplierDTO supplierDTO = await _supplierRepository.GetSupplierById(id);
+        if(supplierDTO!=null){
+            return await _supplierRepository.UpdateSupplierOperation(id,supplier);
         }
-        return null;
+        return new SupplierDTO(null);
     }
 }

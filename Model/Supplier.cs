@@ -7,7 +7,7 @@ public class Supplier
     public string?  Name { get; set; }
     public virtual Account? Account {get; set;}
     public virtual Address? Address { get; set; }
-    public virtual ICollection<Brand>? Brand { get; set; }
+    public virtual ICollection<Brand>? Brand { get; set; } // virtual denildigi icin db de karsiligi yoktur.
     public double Rating 
     { 
         get{
