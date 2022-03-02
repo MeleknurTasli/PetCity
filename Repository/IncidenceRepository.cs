@@ -119,7 +119,7 @@ public class IncidenceRepository :IIncidenceRepository
         List<IncidenceDTO> IncidenceDTOs = new List<IncidenceDTO>();
         foreach(Incidence incedence in Incidences)
         {
-               IncidenceDTOs.Add(new IncidenceDTO(incedence));
+            IncidenceDTOs.Add(new IncidenceDTO(incedence));
         }
         return IncidenceDTOs;
     }
