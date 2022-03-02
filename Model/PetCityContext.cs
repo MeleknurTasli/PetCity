@@ -38,6 +38,7 @@ public class PetCityContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
+
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -51,13 +52,10 @@ public class PetCityContext : DbContext
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(ahmetAmca => ahmetAmca.TestPropInt);
-            entity.Property(ahmetAmca => ahmetAmca.TestPropString);
             entity.Property(e => e.Name).IsRequired();
-            entity.HasOne(p => p.Category).WithMany(c => c!.Products);
-            entity.HasOne(b => b.Brand).WithMany(c => c!.Products);
-            entity.HasOne(c => c.Company)
-            .WithMany(c => c!.Products);
+            entity.HasOne(p => p.Category).WithMany(c => c!.Products).HasForeignKey(p=>p.CategoryId);
+            entity.HasOne(b => b.Brand).WithMany(c => c!.Products).HasForeignKey(b=>b.BrandId);
+            entity.HasOne(c => c.Company).WithMany(c => c!.Products).HasForeignKey(c=>c.CompanyId);
         });
 
 
@@ -199,6 +197,10 @@ public class PetCityContext : DbContext
 
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> dev/main
         modelBuilder.Entity<Role>().HasData(
            new Role
            {
@@ -219,8 +221,8 @@ public class PetCityContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Email).IsRequired();
             entity.Property(e => e.Password).IsRequired();
-            entity.Property(e => e.IsBlocked).IsRequired();
-            entity.Property(e => e.Visibility).IsRequired();
+            entity.Property(e => e.IsBlocked);
+            entity.Property(e => e.Visibility);
             entity.HasMany(e => e.Role).WithMany(e => e.Account).UsingEntity(j => j.ToTable("Account_Role"));
 
         });
