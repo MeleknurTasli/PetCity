@@ -3,42 +3,43 @@ public class AccountRepository : IAccountRepository
     private readonly PetCityContext _context;
     public AccountRepository(PetCityContext context)
     {
-        _context=context;
-    }
-    Account IAccountRepository.BlockAccount()
-    {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    Account IAccountRepository.ChangeVisibilityOfAccount()
+    public AccountRepository()
     {
-        throw new NotImplementedException();
+
     }
 
-    Account IAccountRepository.GetAccountByEmail()
+    public AccountDTO CreateAccount(AccountDTO account)
     {
-        throw new NotImplementedException();
+        try
+        {
+            Account persistAccount = new Account(account);
+
+            _context.Set<Account>().Add(persistAccount);
+            _context.SaveChanges();
+            return new AccountDTO(persistAccount);
+        }
+        catch (Exception e)
+        {
+            return new AccountDTO(null);
+        }
     }
 
-    IEnumerable<Pet> IAccountRepository.GetAllAccounts()
+    public Account FindAccountByEmailAndPassword(LoginDTO loginDTO)
     {
-        return await _context.Set<Account>().ToListAsync();
+        Account account = (from x in _context.Account
+                           where x.Email == loginDTO.Email && x.Password == loginDTO.Password
+                           select x).FirstOrDefault();
+        return account;
     }
 
-    Account IAccountRepository.Role()
+    public Account findAccountById(int id)
     {
-        throw new NotImplementedException();
-    }
-
-    Account IAccountRepository.UpdateAccountByEmail(string email,Account account)
-    {
-        var Final = _context.Update(email);
-            await _context.SaveChangesAsync();
-            return Final;
-    }
-
-    Account IAccountRepository.UpdateAccountPassword()
-    {
-        throw new NotImplementedException();
+        var account = (from x in _context.Account
+        where x.Id == 3 
+        select x).FirstOrDefault();
+        return account;
     }
 }
