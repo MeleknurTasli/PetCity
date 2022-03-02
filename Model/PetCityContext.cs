@@ -44,6 +44,7 @@ public class PetCityContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
+
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -57,13 +58,10 @@ public class PetCityContext : DbContext
         modelBuilder.Entity<Product>(entity =>
         {
             entity.HasKey(e => e.Id);
-            entity.Property(ahmetAmca => ahmetAmca.TestPropInt);
-            entity.Property(ahmetAmca => ahmetAmca.TestPropString);
             entity.Property(e => e.Name).IsRequired();
-            entity.HasOne(p => p.Category).WithMany(c => c!.Products);
-            entity.HasOne(b => b.Brand).WithMany(c => c!.Products);
-            entity.HasOne(c => c.Company)
-            .WithMany(c => c!.Products);
+            entity.HasOne(p => p.Category).WithMany(c => c!.Products).HasForeignKey(p=>p.CategoryId);
+            entity.HasOne(b => b.Brand).WithMany(c => c!.Products).HasForeignKey(b=>b.BrandId);
+            entity.HasOne(c => c.Company).WithMany(c => c!.Products).HasForeignKey(c=>c.CompanyId);
         });
         modelBuilder.Entity<Supplier>(entity =>
         {
@@ -98,7 +96,7 @@ public class PetCityContext : DbContext
             {
                 Id = 2,
                 Name = "BlaBlaBla Sirketi"
-                }
+            }
         );
         modelBuilder.Entity<Brand>().HasData(
         new Brand
@@ -191,6 +189,7 @@ public class PetCityContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasKey(e=>e.Id);
+            entity.Property(e=> e.Name);
         });
          modelBuilder.Entity<Incidence>(entity =>
         {
@@ -201,6 +200,8 @@ public class PetCityContext : DbContext
             entity.Property(e=>e.Visibility);
             entity.Property(e=>e.UserId);
             entity.Property(e=>e.RegionId);
+            entity.Property(e=>e.Description);
+            entity.Property(e=>e.Image);
         });
         modelBuilder.Entity<Incidence>().HasData(
             new Incidence{
@@ -208,24 +209,27 @@ public class PetCityContext : DbContext
                 Name="Kedi ac",
                 Visibility=true,
                 UserId = 1,
-                RegionId = 1
+                RegionId = 1,
+                Description = "kedi çok aç"
             },
             new Incidence{
                 Id=2,
                 Name="Kopek ac",
                 Visibility=true ,
                 UserId = 1,
-                RegionId = 1      
+                RegionId = 1 ,
+                Description = "köpek çok aç"  
             }
         );
         modelBuilder.Entity<Region>().HasData(
             new Region{
                 Id=1,
-                Name="r1"
+                Name="region1"
             });
         modelBuilder.Entity<User>().HasData(
             new User{
-                Id=1
+                Id=1,
+                Name="melek"
             });    
         modelBuilder.Entity<Account>().HasData(
             new Account
@@ -341,6 +345,10 @@ public class PetCityContext : DbContext
 
                });
 
+
+
+
+
         modelBuilder.Entity<Role>().HasData(
            new Role
            {
@@ -361,8 +369,8 @@ public class PetCityContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Email).IsRequired();
             entity.Property(e => e.Password).IsRequired();
-            entity.Property(e => e.IsBlocked).IsRequired();
-            entity.Property(e => e.Visibility).IsRequired();
+            entity.Property(e => e.IsBlocked);
+            entity.Property(e => e.Visibility);
             entity.HasMany(e => e.Role).WithMany(e => e.Account).UsingEntity(j => j.ToTable("Account_Role"));
 
         });

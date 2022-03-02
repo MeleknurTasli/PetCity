@@ -11,6 +11,13 @@ public class Account
     {
 
     }
+
+    public Account(AccountDTO incomingAccount) {
+        this.Email = incomingAccount.Email;
+        this.Password = incomingAccount.Password;
+    }
+
+
     public Account(int id, string email, string password, bool isblocked, bool visibility)
     {
         this.Id = id;
