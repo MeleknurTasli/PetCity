@@ -1,10 +1,10 @@
 public class AddressService : IAddressService
 {
-    private AddressRepository _addressRepository;
+    private IAddressRepository _addressRepository;
 
-    public AddressService()
+    public AddressService(IAddressRepository addressRepository)
     {
-        _addressRepository = new AddressRepository();
+        _addressRepository = addressRepository;
     }
 
     public async Task<List<Address>> GetAdress(int id)
