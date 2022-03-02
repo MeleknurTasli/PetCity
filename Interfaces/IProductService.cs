@@ -1,15 +1,15 @@
 public interface IProductService{
-    Product AddProduct(Product product);
-    Product UpdateProduct(int id, Product product);
-    void DeleteProduct(Product product);
-    List<Product> GetAllProduct();
-    Product GetByProductId(int productId);
-    List<Product> GetAllProductByName(string productName);
-    List<Product> GetAllProductByCategoryId(int categoryId);
-    List<Product> GetAllProductByBrandId(int brandId);
-    List<Product> GetAllProductByPriceASC(int price);
-    List<Product> GetAllProductByPriceDESC(int price);
-    List<Product> GetAllProductByPriceRange(int minPrice , int maxPrice);
+    Task<Product> AddProduct(Product product);
+    Task<Product> UpdateProduct(int id, Product product);
+    Task DeleteProduct(Product product);
+    Task<List<Product>> GetAllProduct();
+    Task<Product> GetByProductId(int productId);
+    Task<List<Product>> GetAllProductByName(string productName);
+    Task<List<Product>> GetAllProductByCategoryId(int categoryId);
+    Task<List<Product>> GetAllProductByBrandId(int brandId);
+    Task<List<Product>> GetAllProductByPriceASC(int price);
+    Task<List<Product>> GetAllProductByPriceDESC(int price);
+    Task<List<Product>> GetAllProductByPriceRange(int minPrice , int maxPrice);
     
 
 }
