@@ -7,11 +7,12 @@ public class AddressService : IAddressService
         _addressRepository = addressRepository;
     }
 
-    public async Task<List<Address>> GetAdress(int id)
+
+    public async Task<Address> GetAddress(int id)
     {
         if (id != null)
         {
-            return await _addressRepository.GetAdress(id);
+            return await _addressRepository.GetAddress(id);
 
         }
         return null;
@@ -19,7 +20,7 @@ public class AddressService : IAddressService
 
     public async Task<List<Address>> GetAllAddresses()
     {
-        return await _addressRepository.GetAllAddresses();
+        return await _addressRepository.GetAllAddress();
     }
 
     public async Task<List<City>> GetAllCitiesByContryId(int id)
@@ -27,13 +28,13 @@ public class AddressService : IAddressService
         return await _addressRepository.GetAllCitiesByContryId(id);
     }
 
- >
-     public async Task<List<City>> GetAllCitiesByStateId(int id)
+
+    public async Task<List<City>> GetAllCitiesByStateId(int id)
     {
         return await _addressRepository.GetAllCitiesByContryId(id);
     }
-    
-    public async Task<List<Address>> GetAllCountries()
+
+    public async Task<List<Country>> GetAllCountries()
     {
         return await _addressRepository.GetAllCountry();
     }
@@ -72,6 +73,8 @@ public class AddressService : IAddressService
     {
         return await _addressRepository.DeleteAddress(id);
     }
+
+
 }
 
 

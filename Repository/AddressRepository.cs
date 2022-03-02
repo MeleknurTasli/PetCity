@@ -1,171 +1,170 @@
-public class AddressRepository
+namespace PetCity.Repository
 {
-
-PetCityContext _petCityContext;
-
-    public AddressRepository()
-    {
-        _petCityContext = new PetCityContext();
-    }
- 
-    public List<Address> GetAllAddresses()
+    public class AddressRepository : IAddressRepository
     {
 
-        return MockData.ListOfAddress;
-    }
-    public Address GetAddress(int id)
-    {
-        var addresscontroller = MockData.ListOfAddress.FirstOrDefault(x => x.Id == id);
+        PetCityContext _petCityContext;
 
-        if (addresscontroller != null)
+        public AddressRepository()
         {
-
-            return addresscontroller;
-
+            _petCityContext = new PetCityContext();
         }
-        else
+
+        public async Task<Address> RegisterAddress()
         {
             return null;
         }
-    }
-
-    public async Task <List<Country>> GetAllCountry()
-    {
-
-        return await _petCityContext.Country.ToListAsync();
-    }
-    
 
 
-    public Country GetCountry(int id)
-    {
-        var Countrycontroller = MockData.ListOfCountry.FirstOrDefault(x => x.Id == id);
-
-        if (Countrycontroller != null)
+        public async Task<List<Address>> GetAllAddress()
         {
 
-            return Countrycontroller;
-
+            return await _petCityContext.Set<Address>().ToListAsync();
         }
-        else
+        public async Task<Address> GetAddress(int id)
         {
+
+            var getAddress = await _petCityContext.Set<Address>().SingleOrDefaultAsync(p => p.Id == id);
+
+            if (getAddress != null)
+            {
+
+                return getAddress;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Country>> GetAllCountry()
+        {
+
+            return await _petCityContext.Set<Country>().ToListAsync();
+        }
+
+        string name;
+        public async Task<List<State>> GetAllStatesByCountryId(int id)
+        {
+            Country countryname = await _petCityContext.Country.SingleOrDefaultAsync(x => x.Id == id);
+            var name = countryname.Name;
+            var getState = await _petCityContext.Set<State>().Where(p => p.Id == id).ToListAsync();
+            if (getState != null)
+            {
+
+                return getState;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<City>> GetAllCitiesByStateId(int id)
+        {
+            var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
+            if (getCity != null)
+            {
+
+                return getCity;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<City>> GetAllCitiesByContryId(int id)
+        {
+            var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
+            if (getCity != null)
+            {
+
+                return getCity;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<District>> GetAllDistrictsByCityId(int id)
+        {
+            var getDistricts = await _petCityContext.Set<District>().Where(p => p.Id == id).ToListAsync();
+            if (getDistricts != null)
+            {
+
+                return getDistricts;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Neighborhood>> GetAllNeighborhoodsByDistrictId(int id)
+        {
+            var getNeighborhood = await _petCityContext.Set<Neighborhood>().Where(p => p.Id == id).ToListAsync();
+            if (getNeighborhood != null)
+            {
+
+                return getNeighborhood;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Street>> GetAllStreetsByNeighborhoodtId(int id)
+        {
+            var getStreet = await _petCityContext.Set<Street>().Where(p => p.Id == id).ToListAsync();
+            if (getStreet != null)
+            {
+
+                return getStreet;
+
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<Address> RegisterAddress(Address address)
+        {
+            address.City.Name = name;
+
+
+            address.OpenAddres1 = address.Country.Name + address.City.Name + address.District.Name + address.Neighborhood.Name + address.Street.Name;
             return null;
         }
-    }
 
-    public List<City> GetAllCity()
-    {
-
-        return MockData.ListOfCity;
-    }
-
-
-    public City GetCity(int id)
-    {
-        var Citycontroller = MockData.ListOfCity.FirstOrDefault(x => x.Id == id);
-
-        if (Citycontroller != null)
+        public async Task<Address> DeleteAddress(int id)
         {
 
-            return Citycontroller;
 
-        }
-        else
-        {
+            var DeletedAddress = await _petCityContext.Address.FirstOrDefaultAsync(x => x.Id == id);
+            _petCityContext.Address.Remove(DeletedAddress);
+            _petCityContext.SaveChangesAsync();
+
             return null;
+
+
         }
-    }
 
-    public List<State> GetAllState()
-    {
-
-        return MockData.ListOfState;
-    }
-
-
-    public State GetState(int id)
-    {
-        var Statecontroller = MockData.ListOfState.FirstOrDefault(x => x.Id== id);
-
-        if (Statecontroller != null)
+        public Task<Address> UpdateAddress(int id)
         {
-
-            return Statecontroller;
-
+            throw new NotImplementedException();
         }
-        else
-        {
-            return null;
-        }
-    }
-
-    public List<District> GetAllDistricts()
-    {
-
-        return MockData.ListOfDistrict;
-    }
 
 
-    public District GetDistrict(int id)
-    {
-        var Districtcontroller = MockData.ListOfDistrict.FirstOrDefault(x => x.Id == id);
-
-        if (Districtcontroller != null)
-        {
-
-            return Districtcontroller;
-
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-
-    public List<Neighborhood> GetAllNeigborhoods()
-    {
-
-        return MockData.ListOfNeighborhood;
-    }
-
-
-    public Neighborhood GetAllNeigborhood(int id)
-    {
-        var Neigborhoodcontroller = MockData.ListOfNeighborhood.FirstOrDefault(x => x.Id== id);
-
-        if (Neigborhoodcontroller != null)
-        {
-
-            return Neigborhoodcontroller;
-
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public List<Street> GetAllStreets()
-    {
-
-        return MockData.ListOfStreet;
-    }
-
-    public Street GetAllStreet(int id)
-    {
-        var Streetcontroller = MockData.ListOfStreet.FirstOrDefault(x => x.Id == id);
-
-        if (Streetcontroller != null)
-        {
-
-            return Streetcontroller;
-
-        }
-        else
-        {
-            return null;
-        }
     }
 
 }

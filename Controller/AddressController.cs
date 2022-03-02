@@ -12,76 +12,76 @@ public class AddressController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<List<Address>> GetAllAddresses()
+    public async Task<List<Address>> GetAllAddresses()
     {
-        return _IAddressService.GetAllAddresses();
+        return await _IAddressService.GetAllAddresses();
     }
 
     [HttpGet("id")]
-    public ActionResult<Address> GetAddress([FromQuery] int id)
+    public async Task<Address> GetAddress([FromQuery] int id)
     {
-        return _IAddressService.GetAddress(id);
+        return await _IAddressService.GetAddress(id);
     }
 
     [HttpGet("register")]
-    public  async Task<ActionResult<List<Country>>> GetAllCountries()
+    public async Task<ActionResult<List<Country>>> GetAllCountries()
     {
         return  await _IAddressService.GetAllCountries();
     }
 
     [HttpGet("GetAllStates")]
-    public ActionResult<List<State>> GetAllStatesByCountryId([FromQuery] int id)
+    public async Task<List<State>> GetAllStatesByCountryId([FromQuery] int id)
     {
-        return _IAddressService.GetAllStatesByCountryId(id);
+        return await _IAddressService.GetAllStatesByCountryId(id);
     }
 
     [HttpGet("GetAllCities")]
-    public ActionResult<List<City>> GetAllCitiesByStateId([FromQuery] int id)
+    public async Task<List<City>> GetAllCitiesByStateId([FromQuery] int id)
     {
-        return _IAddressService.GetAllCitiesByStateId(id);
+        return await _IAddressService.GetAllCitiesByStateId(id);
     }
 
     [HttpGet("GetAllCities")]
-    public ActionResult<List<City>> GetAllCitiesByContryId([FromQuery] int id)
+    public async Task<List<City>> GetAllCitiesByContryId([FromQuery] int id)
     {
-        return _IAddressService.GetAllCitiesByContryId(id);
+        return await _IAddressService.GetAllCitiesByContryId(id);
     }
 
     [HttpGet("GetAllDistricts")]
-    public ActionResult<List<District>> GetAllDistrictsByCityId([FromQuery] int id)
+    public async Task<List<District>> GetAllDistrictsByCityId([FromQuery] int id)
     {
-        return _IAddressService.GetAllDistrictsByCityId(id);
+        return await _IAddressService.GetAllDistrictsByCityId(id);
     }
 
     [HttpGet("GetAllNeighborhoods")]
-    public ActionResult<List<Neighborhood>> GetAllNeighborhoodsByDistrictId([FromQuery] int id)
+    public async Task<List<Neighborhood>> GetAllNeighborhoodsByDistrictId([FromQuery] int id)
     {
-        return _IAddressService.GetAllNeighborhoodsByDistrictId(id);
+        return await _IAddressService.GetAllNeighborhoodsByDistrictId(id);
     }
 
     [HttpGet("GetAllStreets")]
-    public ActionResult<List<Street>> GetAllStreetsByNeighborhoodtId([FromQuery] int id)
+    public async Task<List<Street>> GetAllStreetsByNeighborhoodtId([FromQuery] int id)
     {
-        return _IAddressService.GetAllStreetsByNeighborhoodtId(id);
+        return await _IAddressService.GetAllStreetsByNeighborhoodtId(id);
     }
 
     [HttpPost]
-    public ActionResult<Address> RegisterAddress([FromQuery] int id)
+    public async Task<Address> RegisterAddress([FromQuery] int id)
     {
-        return _IAddressService.RegisterAddress();
+        return await _IAddressService.RegisterAddress();
     }
 
     [HttpDelete("DeleteAddress")]
-    public ActionResult<Address> DeleteAddress([FromQuery] int id)
+    public async Task<Address> DeleteAddress([FromQuery] int id)
     {
-        return _IAddressService.DeleteAddress(id);
+        return await _IAddressService.DeleteAddress(id);
     }
 
 
     [HttpPut("UpdateAddress")]
-    public ActionResult<Address> UpdateAddress([FromQuery] int id)
+    public async Task<Address> UpdateAddress([FromQuery] int id)
     {
-        return _IAddressService.UpdateAddress(id);
+        return await _IAddressService.UpdateAddress(id);
     }
 
 }
