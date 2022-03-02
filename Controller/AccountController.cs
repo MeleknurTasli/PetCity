@@ -1,3 +1,4 @@
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -8,21 +9,16 @@ public class AccountController : ControllerBase
 
     public AccountController(IAccountService accountService)
     {
-        _accountService = accountService;
+        _accountService=accountService;
+    }
+    [HttpPost]
+    public AccountDTO Create(AccountDTO account)
+    {
+        return _accountService.CreateNewAccount(account);
     }
 
-    [HttpPost("add")]
-    public async Task<Account> Add(Account account)
-    {
-        await _accountService.CreateNewAccount(account); //AccountDTO mu yapılacak??
-        return account;
-    }
-   /* [HttpPut("delete")]
-    public async Task TaskDelete(Account account)
-    {
-        await _accountService.DeleteAccount(account);           burası visiblea çevrilecek
         
-    }*/
+    
     [HttpPut("update")]
     public async Task<Account> UpdateAccountByEmail(Account account,string email)
     {

@@ -3,50 +3,50 @@ public class AccountService : IAccountService
     private readonly IAccountRepository _accountRepository;
     public AccountService(IAccountRepository accountRepository)
     {
-        _accountRepository=accountRepository;
+        _accountRepository= accountRepository; //BU constructor'ın BOŞUNU OLUŞTURMADAN DÜN ÇALIŞTIRDIK VE SORUNSUZ ÇALIŞMIŞTI AMA REPODAYKEN HOCA BOŞ CONSTRUCTOR OLUŞTURDU,NEDEN ?
     }
 
-    public async Task<Account> BlockAccount()
+    public Task<Account> BlockAccount()
     {
-        throw new NotImplementedException();        //yarın yapıcaz, önce bi yürütelim
+        throw new NotImplementedException();        //HALLEDİCEZ
     }
 
-    public async Task<Account> ChangeVisibilityOfAccount()
+    public Task<Account> ChangeVisibilityOfAccount()
     {
-        throw new NotImplementedException();            //yarın yapıcaz, önce bi yürütelim
+        throw new NotImplementedException();        //HALLEDİCEZ
     }
 
-    public async Task<Account> CreateNewAccount(Account account)
+     public async Task<Account> CreateNewAccount(Account account)
     {
-        await _accountRepository.CreateAccount(account);        //repodaki methodun adını yazıyoruz, repoda da bir alt katman olan db(contexti işliyoruz vs...)
+         return  await _accountRepository.CreateAccount(account);       
         
-        return account;
+        
     }
 
     public async Task<Account> GetAccountByEmail(string email)
     {
-        var getAccountByEmail=await _accountRepository.GetAccountByEmail(email);
-        return getAccountByEmail;
+       return  await _accountRepository.GetAccountByEmail(email);
+        
     }
 
     public async Task<List<Account>> GetAllAccounts()
     {
-        return await _accountRepository.GetAllAccounts();   //repoda tolist dediğimiz için bu katmana direkt tolist hali geldi,burdan da controllera gönderiyoz
-        }
-
-    public async Task<Account> Role()
-    {
-        throw new NotImplementedException();        //yarın yapıcaz, önce bi yürütelim
+        return await _accountRepository.GetAllAccounts();
     }
 
-    public async Task<Account> UpdateAccountByEmail(Account account, string email)
+    public Task<Account> Role()
     {
-        throw new NotImplementedException();                //yarın yapıcaz, önce bi yürütelim
+        throw new NotImplementedException();        //halledicez
+    }
+
+    public  async Task<Account> UpdateAccountByEmail(Account account, string email)
+    {
+        return await _accountRepository.UpdateAccountByEmail(email,account);
     }
 
     public async Task<Account> UpdateAccountPassword(string oldpassword, string newpassword)
     {
-        throw new NotImplementedException();            //yarın yapıcaz, önce bi yürütelim
+        return await _accountRepository.UpdateAccountPassword(oldpassword,newpassword);
     }
 }
 
