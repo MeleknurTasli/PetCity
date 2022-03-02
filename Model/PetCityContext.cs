@@ -44,6 +44,7 @@ public class PetCityContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired();
         });
+
         modelBuilder.Entity<Category>(entity =>
         {
             entity.HasKey(e => e.Id);
@@ -98,7 +99,7 @@ public class PetCityContext : DbContext
             {
                 Id = 2,
                 Name = "BlaBlaBla Sirketi"
-                }
+            }
         );
         modelBuilder.Entity<Brand>().HasData(
         new Brand
@@ -322,6 +323,10 @@ public class PetCityContext : DbContext
 
                });
 
+
+
+
+
         modelBuilder.Entity<Role>().HasData(
            new Role
            {
@@ -342,8 +347,8 @@ public class PetCityContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Email).IsRequired();
             entity.Property(e => e.Password).IsRequired();
-            entity.Property(e => e.IsBlocked).IsRequired();
-            entity.Property(e => e.Visibility).IsRequired();
+            entity.Property(e => e.IsBlocked);
+            entity.Property(e => e.Visibility);
             entity.HasMany(e => e.Role).WithMany(e => e.Account).UsingEntity(j => j.ToTable("Account_Role"));
 
         });

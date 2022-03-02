@@ -1,9 +1,7 @@
-public interface IAccountRepository{
-    IEnumerable<Pet> GetAllAccounts();
-     Account GetAccountByEmail();
-     Account UpdateAccountByEmail();
-     Account UpdateAccountPassword();
-      Account ChangeVisibilityOfAccount(); 
-     Account BlockAccount();
-     Account Role();
+public interface IAccountRepository
+{
+    AccountDTO CreateAccount(AccountDTO account);
+    Account FindAccountByEmailAndPassword(LoginDTO loginDTO);
+    Account findAccountById(int id);
+
 }
