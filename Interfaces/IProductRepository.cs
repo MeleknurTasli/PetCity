@@ -1,6 +1,6 @@
 public interface IProductRepository{
     Task<Product> AddProduct(Product product);
-    Task<Product> UpdateProduct(int id, Product product);
+    Task<Product> UpdateProduct(Product product);
     Task DeleteProduct(Product product);
     Task<List<Product>> GetAllProduct();
     Task<Product> GetByProductId(int productId);
