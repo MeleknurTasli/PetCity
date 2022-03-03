@@ -1,4 +1,5 @@
-public class IncidenceRepository :IIncidenceRepository
+
+public class IncidenceRepository : IIncidenceRepository
 {
     private readonly PetCityContext _petCityContext;
 
@@ -45,7 +46,7 @@ public class IncidenceRepository :IIncidenceRepository
             await _petCityContext.SaveChangesAsync();
             return incidence;
         }
-        catch (Exception ex)
+        catch (Exception e)
         { 
             throw;
         }
