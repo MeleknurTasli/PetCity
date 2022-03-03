@@ -9,21 +9,21 @@ public class AddressRepository : IAddressRepository
         _petCityContext = new PetCityContext();
     }
 
-    public async Task<Address> RegisterAddress()
+    public Address RegisterAddress()
     {
         return null;
     }
 
 
-    public async Task<List<Address>> GetAllAddress()
+    public  List<Address> GetAllAddress()
     {
 
-        return await _petCityContext.Set<Address>().ToListAsync();
+        return  _petCityContext.Set<Address>().ToList();
     }
-    public async Task<Address> GetAddress(int id)
+    public  Address GetAddress(int id)
     {
 
-        var getAddress = await _petCityContext.Set<Address>().SingleOrDefaultAsync(p => p.Id == id);
+        var getAddress =  _petCityContext.Set<Address>().SingleOrDefault(p => p.Id == id);
 
         if (getAddress != null)
         {
@@ -37,18 +37,18 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<List<Country>> GetAllCountry()
+    public List<Country> GetAllCountry()
     {
 
-        return await _petCityContext.Set<Country>().ToListAsync();
+        return  _petCityContext.Set<Country>().ToList();
     }
 
     string name;
-    public async Task<List<State>> GetAllStatesByCountryId(int id)
+    public  List<State> GetAllStatesByCountryId(int id)
     {
-        Country countryname = await _petCityContext.Country.SingleOrDefaultAsync(x => x.Id == id);
+        Country countryname = _petCityContext.Country.SingleOrDefault(x => x.Id == id);
         var name = countryname.Name;
-        var getState = await _petCityContext.Set<State>().Where(p => p.Id == id).ToListAsync();
+        var getState =  _petCityContext.Set<State>().Where(p => p.Id == id).ToList();
         if (getState != null)
         {
 
@@ -61,9 +61,9 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<List<City>> GetAllCitiesByStateId(int id)
+    public  List<City> GetAllCitiesByStateId(int id)
     {
-        var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
+        var getCity =  _petCityContext.Set<City>().Where(p => p.Id == id).ToList();
         if (getCity != null)
         {
 
@@ -76,9 +76,9 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<List<City>> GetAllCitiesByContryId(int id)
+    public  List<City> GetAllCitiesByContryId(int id)
     {
-        var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
+        var getCity =  _petCityContext.Set<City>().Where(p => p.Id == id).ToList();
         if (getCity != null)
         {
 
@@ -91,9 +91,9 @@ public class AddressRepository : IAddressRepository
         }
     }
 
-    public async Task<List<District>> GetAllDistrictsByCityId(int id)
+    public  List<District> GetAllDistrictsByCityId(int id)
     {
-        var getDistricts = await _petCityContext.Set<District>().Where(p => p.Id == id).ToListAsync();
+        var getDistricts =  _petCityContext.Set<District>().Where(p => p.Id == id).ToList();
         if (getDistricts != null)
         {
 
@@ -105,11 +105,11 @@ public class AddressRepository : IAddressRepository
             return null;
         }
     }
-    public async Task<Address> DeleteAddress(int id)
+    public  Address DeleteAddress(int id)
     {
 
 
-        var DeletedAddress = await _petCityContext.Address.FirstOrDefaultAsync(x => x.Id == id);
+        var DeletedAddress =  _petCityContext.Address.FirstOrDefault(x => x.Id == id);
         _petCityContext.Address.Remove(DeletedAddress);
         _petCityContext.SaveChangesAsync();
 
@@ -119,7 +119,7 @@ public class AddressRepository : IAddressRepository
     }
 
 
-    public async Task<Address> RegisterAddress(Address address)
+    public  Address RegisterAddress(Address address)
     {
         address.City.Name = name;
 
@@ -130,7 +130,7 @@ public class AddressRepository : IAddressRepository
 
 
 
-    public Task<Address> UpdateAddress(int id)
+    public Address UpdateAddress(int id)
     {
         throw new NotImplementedException();
     }
