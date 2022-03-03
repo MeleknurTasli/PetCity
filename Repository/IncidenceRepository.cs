@@ -10,9 +10,10 @@ public class IncidenceRepository : IIncidenceRepository
     
     public IncidenceRepository(){}
 
-    public async Task<Incidence> ChangeIncidence(int Id, Incidence incidence)
+    //TODO
+    public async Task<IncidenceDTO> ChangeIncidence(int Id, Incidence incidence)
     {
-        if(Id != incidence.Id)
+        if(!IncidenceExists(Id))
         {
             return null;
         }
@@ -26,13 +27,8 @@ public class IncidenceRepository : IIncidenceRepository
             throw;
          }
          
-         return incidence;
+         return new IncidenceDTO(incidence);
     }
-
-    //public async Task ChangeIncidenceVisibility(Incidence incidence)
-    //{
-        
-    //}
 
     public async Task<bool> ChangeIncidenceVisibilityById(int Id)
     {
@@ -53,52 +49,78 @@ public class IncidenceRepository : IIncidenceRepository
             throw;
         }
     }
-
-    public async Task<Incidence> CreateIncidence(Incidence incidence)
+    
+    //todo
+    public async Task<IncidenceDTO> CreateIncidence(Incidence incidence)
     {
         await _petCityContext.Incidences.AddAsync(incidence);
         await _petCityContext.SaveChangesAsync();
-        return incidence;
+        return new IncidenceDTO(incidence);
     }
 
-    public async Task<IEnumerable<Incidence>> GetAllIncidences()
+    public async Task<IEnumerable<IncidenceDTO>> GetAllIncidences()
     {
-        return await _petCityContext.Incidences.Where(p=>p.Visibility == true).ToListAsync();
+        List<IncidenceDTO> Incidences = await 
+        (from incidence in _petCityContext.Incidences select new IncidenceDTO()
+        {
+        Name = incidence.Name,
+        District = incidence.District,
+        Date = incidence.Date,
+        Visibility = incidence.Visibility,
+        Image = incidence.Image,
+        Description = incidence.Description,
+        User = incidence.User
+        }).ToListAsync();
+        return Incidences;
     }
 
-    public async Task<IEnumerable<Incidence>> GetAllIncidencesByUserName(string UserName)
+    public async Task<IEnumerable<IncidenceDTO>> GetAllIncidencesByUserName(string UserName)
     {
-        return await _petCityContext.Incidences.Where(p=> p.User.Name == UserName).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
+        IEnumerable<Incidence> Incidences = await _petCityContext.Incidences.Where(p=> p.User.Name == UserName).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
+        return ConvertToIncedenceDTO(Incidences);
     }
         
-    public async Task<IEnumerable<Incidence>> GetIncidencesByDate(DateTime firstDate, DateTime lastDate)
+    public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByDate(DateTime firstDate, DateTime lastDate)
     {
         var IncidencesByDate = from x in _petCityContext.Incidences 
                                where x.Date >= firstDate.Date
                                where x.Date <= lastDate.Date
                                where x.Visibility == true
                                select x;
-        return await IncidencesByDate.ToListAsync();
+         IEnumerable<Incidence> Incidences = await IncidencesByDate.ToListAsync();
+         return ConvertToIncedenceDTO(Incidences);
     }
 
-    public async Task<Incidence> GetIncidencesById(int Id)
+    public async Task<IncidenceDTO> GetIncidencesById(int Id)
     {
-        return await _petCityContext.Incidences.Where(p=> p.Id == Id).Where(p=>p.Visibility == true).FirstOrDefaultAsync();
+        var incidence = await _petCityContext.Incidences.Where(p=> p.Id == Id).Where(p=>p.Visibility == true).FirstOrDefaultAsync();
+        return new IncidenceDTO(incidence);
     }
 
-    public async Task<IEnumerable<Incidence>> GetIncidencesByName(string name)
+    public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByName(string name)
     {
-         return await _petCityContext.Incidences.Where(p=> p.Name == name).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
+        IEnumerable<Incidence> Incidences = await _petCityContext.Incidences.Where(p=> p.Name == name).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
+        return ConvertToIncedenceDTO(Incidences);
     }
 
-    //TODO
-    public async Task<IEnumerable<Incidence>> GetIncidencesByRegionName(string regionName)
+    public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByDistrictName(string districtName)
     {
-       return await _petCityContext.Incidences.Where(p=> p.Region.Name == regionName).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
+        IEnumerable<Incidence> Incidences = await _petCityContext.Incidences.Where(p=> p.District.Name == districtName).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
+        return ConvertToIncedenceDTO(Incidences);
     }
 
     private bool IncidenceExists(int id)
     {
         return _petCityContext.Incidences.Any(e => e.Id == id);
+    }
+
+    private List<IncidenceDTO> ConvertToIncedenceDTO(IEnumerable<Incidence> Incidences )
+    {
+        List<IncidenceDTO> IncidenceDTOs = new List<IncidenceDTO>();
+        foreach(Incidence incedence in Incidences)
+        {
+            IncidenceDTOs.Add(new IncidenceDTO(incedence));
+        }
+        return IncidenceDTOs;
     }
 }

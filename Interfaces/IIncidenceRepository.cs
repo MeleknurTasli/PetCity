@@ -1,13 +1,14 @@
 public interface IIncidenceRepository
 {
-    Task<IEnumerable<Incidence>> GetAllIncidences();
-    Task<IEnumerable<Incidence>> GetIncidencesByRegionName(string regionName);
-    Task<IEnumerable<Incidence>> GetAllIncidencesByUserName(string username);
-    Task<IEnumerable<Incidence>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate);
-    Task<Incidence> GetIncidencesById(int Id);
-    Task<IEnumerable<Incidence>> GetIncidencesByName(string name);
-    //Task ChangeIncidenceVisibility(Incidence incidence);
+    Task<IEnumerable<IncidenceDTO>> GetAllIncidences();
+    Task<IEnumerable<IncidenceDTO>> GetIncidencesByDistrictName(string regionName);
+    Task<IEnumerable<IncidenceDTO>> GetAllIncidencesByUserName(string username);
+    Task<IEnumerable<IncidenceDTO>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate);
+    Task<IncidenceDTO> GetIncidencesById(int Id);
+    Task<IEnumerable<IncidenceDTO>> GetIncidencesByName(string name);
     Task<bool> ChangeIncidenceVisibilityById(int Id);
-    Task<Incidence> CreateIncidence(Incidence incidence);
-    Task<Incidence> ChangeIncidence(int Id, Incidence incidence);   
+    Task<IncidenceDTO> CreateIncidence(Incidence incidence);
+
+    //TODO
+    Task<IncidenceDTO> ChangeIncidence(int Id, Incidence incidence);   
 }

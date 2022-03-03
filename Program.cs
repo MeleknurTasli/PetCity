@@ -39,7 +39,7 @@ builder.Services.AddScoped<IBrandService,BrandService>();
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<ICategoryService,CategoryService>();
 builder.Services.AddScoped<IIncidenceRepository,IncidenceRepository>();
-builder.Services.AddScoped<IIncidenceService,IncidenceService>();
+//builder.Services.AddScoped<IIncidenceService,IncidenceService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ILoginService, LoginService>();

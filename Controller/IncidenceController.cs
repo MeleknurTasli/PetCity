@@ -5,5 +5,5 @@ using Microsoft.EntityFrameworkCore;
 [Route("[controller]")]
 public class IncidenceController : ControllerBase
 {
-
+    
 }

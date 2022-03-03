@@ -8,16 +8,22 @@ public class Supplier
     public virtual Account? Account {get; set;}
     public virtual Address? Address { get; set; }
     public virtual ICollection<Brand>? Brand { get; set; } // virtual denildigi icin db de karsiligi yoktur.
-    public double Rating 
-    { 
-        get{
-            return _rating;
-        } set{
-            if(value >=0 && value<=10) _rating = value;
-            else if(value<0) _rating = 0;
-            else _rating = 10;
-        } 
-    }
+    public double Rating { get; set; }  
 
     public bool IsVisibility { get; set; }
+
+    public Supplier()
+    {        
+    }
+
+    public Supplier(SupplierDTO supplierDTO)
+    {
+        this.Name = supplierDTO.Name;
+        this.Account = supplierDTO.Account;
+        this.Address = supplierDTO.Address;
+        this.Brand = supplierDTO.Brand;
+        this.Rating = supplierDTO.Rating;
+        this.IsVisibility = supplierDTO.IsVisibility;
+    }
+
 }

@@ -27,4 +27,16 @@ public class SupplierDTO
         }
     }
 
+    public SupplierDTO(string name, Account account, Address address, ICollection<Brand> brand, double rating, bool IsVisibility)
+    {
+
+        this.Name = name;
+        this.Account = account;
+        this.Address = address;
+        this.Brand = brand;
+        this.Rating = rating;
+        this.IsVisibility = IsVisibility;
+
+    }
+
 }
