@@ -53,17 +53,9 @@ public class AddressController : ControllerBase
         return await _IAddressService.GetAllDistrictsByCityId(id);
     }
 
-    [HttpGet("GetAllNeighborhoods")]
-    public async Task<List<Neighborhood>> GetAllNeighborhoodsByDistrictId([FromQuery] int id)
-    {
-        return await _IAddressService.GetAllNeighborhoodsByDistrictId(id);
-    }
+   
 
-    [HttpGet("GetAllStreets")]
-    public async Task<List<Street>> GetAllStreetsByNeighborhoodtId([FromQuery] int id)
-    {
-        return await _IAddressService.GetAllStreetsByNeighborhoodtId(id);
-    }
+   
 
     [HttpPost]
     public async Task<Address> RegisterAddress([FromQuery] int id)

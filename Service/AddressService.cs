@@ -44,20 +44,16 @@ public class AddressService : IAddressService
         return await _addressRepository.GetAllDistrictsByCityId(id);
     }
 
-    public async Task<List<Neighborhood>> GetAllNeighborhoodsByDistrictId(int id)
-    {
-        return await _addressRepository.GetAllNeighborhoodsByDistrictId(id);
-    }
+  
 
     public async Task<List<State>> GetAllStatesByCountryId(int id)
     {
         return await _addressRepository.GetAllStatesByCountryId(id);
     }
 
-    public async Task<List<Street>> GetAllStreetsByNeighborhoodtId(int id)
+    public async Task<Address> DeleteAddress(int id)
     {
-        return await _addressRepository.GetAllStreetsByNeighborhoodtId(id);
-
+        return await _addressRepository.DeleteAddress(id);
     }
     public async Task<Address> RegisterAddress()
     {
@@ -69,10 +65,6 @@ public class AddressService : IAddressService
         return await _addressRepository.UpdateAddress(id);
     }
 
-    public async Task<Address> DeleteAddress(int id)
-    {
-        return await _addressRepository.DeleteAddress(id);
-    }
 
 
 }

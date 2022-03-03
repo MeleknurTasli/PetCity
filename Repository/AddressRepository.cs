@@ -1,169 +1,141 @@
 
-    public class AddressRepository : IAddressRepository
+public class AddressRepository : IAddressRepository
+{
+
+    PetCityContext _petCityContext;
+
+    public AddressRepository()
+    {
+        _petCityContext = new PetCityContext();
+    }
+
+    public async Task<Address> RegisterAddress()
+    {
+        return null;
+    }
+
+
+    public async Task<List<Address>> GetAllAddress()
     {
 
-        PetCityContext _petCityContext;
+        return await _petCityContext.Set<Address>().ToListAsync();
+    }
+    public async Task<Address> GetAddress(int id)
+    {
 
-        public AddressRepository()
+        var getAddress = await _petCityContext.Set<Address>().SingleOrDefaultAsync(p => p.Id == id);
+
+        if (getAddress != null)
         {
-            _petCityContext = new PetCityContext();
-        }
 
-        public async Task<Address> RegisterAddress()
+            return getAddress;
+
+        }
+        else
         {
             return null;
         }
+    }
 
+    public async Task<List<Country>> GetAllCountry()
+    {
 
-        public async Task<List<Address>> GetAllAddress()
+        return await _petCityContext.Set<Country>().ToListAsync();
+    }
+
+    string name;
+    public async Task<List<State>> GetAllStatesByCountryId(int id)
+    {
+        Country countryname = await _petCityContext.Country.SingleOrDefaultAsync(x => x.Id == id);
+        var name = countryname.Name;
+        var getState = await _petCityContext.Set<State>().Where(p => p.Id == id).ToListAsync();
+        if (getState != null)
         {
 
-            return await _petCityContext.Set<Address>().ToListAsync();
+            return getState;
+
         }
-        public async Task<Address> GetAddress(int id)
+        else
         {
-
-            var getAddress = await _petCityContext.Set<Address>().SingleOrDefaultAsync(p => p.Id == id);
-
-            if (getAddress != null)
-            {
-
-                return getAddress;
-
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<Country>> GetAllCountry()
-        {
-
-            return await _petCityContext.Set<Country>().ToListAsync();
-        }
-
-        string name;
-        public async Task<List<State>> GetAllStatesByCountryId(int id)
-        {
-            Country countryname = await _petCityContext.Country.SingleOrDefaultAsync(x => x.Id == id);
-            var name = countryname.Name;
-            var getState = await _petCityContext.Set<State>().Where(p => p.Id == id).ToListAsync();
-            if (getState != null)
-            {
-
-                return getState;
-
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<City>> GetAllCitiesByStateId(int id)
-        {
-            var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
-            if (getCity != null)
-            {
-
-                return getCity;
-
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<City>> GetAllCitiesByContryId(int id)
-        {
-            var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
-            if (getCity != null)
-            {
-
-                return getCity;
-
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<District>> GetAllDistrictsByCityId(int id)
-        {
-            var getDistricts = await _petCityContext.Set<District>().Where(p => p.Id == id).ToListAsync();
-            if (getDistricts != null)
-            {
-
-                return getDistricts;
-
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<Neighborhood>> GetAllNeighborhoodsByDistrictId(int id)
-        {
-            var getNeighborhood = await _petCityContext.Set<Neighborhood>().Where(p => p.Id == id).ToListAsync();
-            if (getNeighborhood != null)
-            {
-
-                return getNeighborhood;
-
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public async Task<List<Street>> GetAllStreetsByNeighborhoodtId(int id)
-        {
-            var getStreet = await _petCityContext.Set<Street>().Where(p => p.Id == id).ToListAsync();
-            if (getStreet != null)
-            {
-
-                return getStreet;
-
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public async Task<Address> RegisterAddress(Address address)
-        {
-            address.City.Name = name;
-
-
-            address.OpenAddres1 = address.Country.Name + address.City.Name + address.District.Name + address.Neighborhood.Name + address.Street.Name;
             return null;
         }
+    }
 
-        public async Task<Address> DeleteAddress(int id)
+    public async Task<List<City>> GetAllCitiesByStateId(int id)
+    {
+        var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
+        if (getCity != null)
         {
 
+            return getCity;
 
-            var DeletedAddress = await _petCityContext.Address.FirstOrDefaultAsync(x => x.Id == id);
-            _petCityContext.Address.Remove(DeletedAddress);
-            _petCityContext.SaveChangesAsync();
-
+        }
+        else
+        {
             return null;
-
-
         }
+    }
 
-        public Task<Address> UpdateAddress(int id)
+    public async Task<List<City>> GetAllCitiesByContryId(int id)
+    {
+        var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
+        if (getCity != null)
         {
-            throw new NotImplementedException();
+
+            return getCity;
+
         }
+        else
+        {
+            return null;
+        }
+    }
+
+    public async Task<List<District>> GetAllDistrictsByCityId(int id)
+    {
+        var getDistricts = await _petCityContext.Set<District>().Where(p => p.Id == id).ToListAsync();
+        if (getDistricts != null)
+        {
+
+            return getDistricts;
+
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public async Task<Address> DeleteAddress(int id)
+    {
+
+
+        var DeletedAddress = await _petCityContext.Address.FirstOrDefaultAsync(x => x.Id == id);
+        _petCityContext.Address.Remove(DeletedAddress);
+        _petCityContext.SaveChangesAsync();
+
+        return null;
 
 
     }
+
+
+    public async Task<Address> RegisterAddress(Address address)
+    {
+        address.City.Name = name;
+
+
+
+        return null;
+    }
+
+
+
+    public Task<Address> UpdateAddress(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+
+}
 
 

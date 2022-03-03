@@ -95,9 +95,6 @@ namespace PetCity.Migrations
                     b.Property<int>("DistrictId")
                         .HasColumnType("int");
 
-                    b.Property<int>("NeighborhoodId")
-                        .HasColumnType("int");
-
                     b.Property<string>("OpenAddres1")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -109,9 +106,6 @@ namespace PetCity.Migrations
                     b.Property<int?>("StateId")
                         .HasColumnType("int");
 
-                    b.Property<int>("StreetId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CityId");
@@ -120,11 +114,7 @@ namespace PetCity.Migrations
 
                     b.HasIndex("DistrictId");
 
-                    b.HasIndex("NeighborhoodId");
-
                     b.HasIndex("StateId");
-
-                    b.HasIndex("StreetId");
 
                     b.ToTable("Address");
                 });
@@ -206,6 +196,47 @@ namespace PetCity.Migrations
                     b.HasIndex("StateId");
 
                     b.ToTable("City");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CountryId = 1,
+                            Name = "Ankara"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CountryId = 1,
+                            Name = "Istanbul"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CountryId = 2,
+                            Name = "New York City",
+                            StateId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CountryId = 2,
+                            Name = "Los Angeles",
+                            StateId = 2
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CountryId = 3,
+                            Name = "Munich",
+                            StateId = 3
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CountryId = 4,
+                            Name = "Londra"
+                        });
                 });
 
             modelBuilder.Entity("Company", b =>
@@ -251,6 +282,32 @@ namespace PetCity.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Country");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = 1,
+                            Name = "Turkey"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = 2,
+                            Name = "Usa"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Code = 3,
+                            Name = "Germany"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Code = 4,
+                            Name = "England"
+                        });
                 });
 
             modelBuilder.Entity("District", b =>
@@ -259,7 +316,7 @@ namespace PetCity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("CityId")
+                    b.Property<int>("CityId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -270,26 +327,80 @@ namespace PetCity.Migrations
                     b.HasIndex("CityId");
 
                     b.ToTable("District");
-                });
 
-            modelBuilder.Entity("Neighborhood", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("DistrictId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DistrictId");
-
-                    b.ToTable("Neighborhood");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CityId = 1,
+                            Name = "Kecioren"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CityId = 1,
+                            Name = "Mamak"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CityId = 2,
+                            Name = "Bagcılar"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CityId = 2,
+                            Name = "Besiktas"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CityId = 3,
+                            Name = "Manhattan"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CityId = 3,
+                            Name = "Brooklyn"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CityId = 4,
+                            Name = "Hollywood"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CityId = 4,
+                            Name = "Santa Monica"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CityId = 5,
+                            Name = "Altstadt"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CityId = 5,
+                            Name = "Neuhausen"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CityId = 6,
+                            Name = "Greenwich"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CityId = 6,
+                            Name = "Soho"
+                        });
                 });
 
             modelBuilder.Entity("Pet", b =>
@@ -500,25 +611,26 @@ namespace PetCity.Migrations
                     b.HasIndex("CountryId");
 
                     b.ToTable("State");
-                });
 
-            modelBuilder.Entity("Street", b =>
-                {
-                    b.Property<int?>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext");
-
-                    b.Property<int?>("NeighborhoodId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NeighborhoodId");
-
-                    b.ToTable("Street");
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CountryId = 2,
+                            Name = "New York"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CountryId = 2,
+                            Name = "California"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CountryId = 3,
+                            Name = "Bavyera"
+                        });
                 });
 
             modelBuilder.Entity("AccountRole", b =>
@@ -556,21 +668,9 @@ namespace PetCity.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Neighborhood", "Neighborhood")
-                        .WithMany()
-                        .HasForeignKey("NeighborhoodId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("State", "State")
                         .WithMany()
                         .HasForeignKey("StateId");
-
-                    b.HasOne("Street", "Street")
-                        .WithMany()
-                        .HasForeignKey("StreetId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
 
                     b.Navigation("City");
 
@@ -578,11 +678,7 @@ namespace PetCity.Migrations
 
                     b.Navigation("District");
 
-                    b.Navigation("Neighborhood");
-
                     b.Navigation("State");
-
-                    b.Navigation("Street");
                 });
 
             modelBuilder.Entity("City", b =>
@@ -606,20 +702,11 @@ namespace PetCity.Migrations
                 {
                     b.HasOne("City", "City")
                         .WithMany("District")
-                        .HasForeignKey("CityId");
-
-                    b.Navigation("City");
-                });
-
-            modelBuilder.Entity("Neighborhood", b =>
-                {
-                    b.HasOne("District", "District")
-                        .WithMany("Neighborhood")
-                        .HasForeignKey("DistrictId")
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("District");
+                    b.Navigation("City");
                 });
 
             modelBuilder.Entity("Pet", b =>
@@ -700,15 +787,6 @@ namespace PetCity.Migrations
                     b.Navigation("Country");
                 });
 
-            modelBuilder.Entity("Street", b =>
-                {
-                    b.HasOne("Neighborhood", "Neighborhood")
-                        .WithMany("Street")
-                        .HasForeignKey("NeighborhoodId");
-
-                    b.Navigation("Neighborhood");
-                });
-
             modelBuilder.Entity("Brand", b =>
                 {
                     b.Navigation("Products");
@@ -734,16 +812,6 @@ namespace PetCity.Migrations
                     b.Navigation("city");
 
                     b.Navigation("state");
-                });
-
-            modelBuilder.Entity("District", b =>
-                {
-                    b.Navigation("Neighborhood");
-                });
-
-            modelBuilder.Entity("Neighborhood", b =>
-                {
-                    b.Navigation("Street");
                 });
 
             modelBuilder.Entity("PetSpecies", b =>
