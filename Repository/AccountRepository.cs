@@ -21,10 +21,10 @@ public class AccountRepository :IAccountRepository
         return getirilenHESAPLAR;
     }
 
-    public Account CreateAccount(Account account)
+    public async Task<Account> CreateAccount(Account account)
     {
-         _context.Account.AddAsync(account);       
-         _context.SaveChangesAsync();
+        await _context.Account.AddAsync(account);       
+        await _context.SaveChangesAsync();
         return account;
     }
 
@@ -33,14 +33,19 @@ public class AccountRepository :IAccountRepository
         return await _context.Account.FirstOrDefaultAsync(a=>a.Email==email); 
     }
 
-    public Task<Account> UpdateAccountByEmail(string email, Account account)
-    {
-        throw new NotImplementedException();        //hALLEDİCEZ, MERGELERİ VS BİTİRDİKTEN SONRA...
+    public async Task<Account> UpdateAccountByEmail(string email, Account account)
+    {throw new NotImplementedException();
+         
+        var updateOperation= _context.Update(account);
+         await _context.SaveChangesAsync();
+        return account ;                        
     }
 
-    public Task<Account> UpdateAccountPassword(string oldpassword, string newpassword)
+    public async Task<Account> UpdateAccountPassword(Account account,string oldpassword, string newpassword)
     {
-        throw new NotImplementedException();    //hALLEDİCEZ, MERGELERİ VS BİTİRDİKTEN SONRA...
+         var updateOperation= _context.Account.Update(account);
+         await _context.SaveChangesAsync();
+          return account;                
     }
 
     public Task<Account> ChangeVisibilityOfAccount()
@@ -90,10 +95,7 @@ public class AccountRepository :IAccountRepository
         return accountByID; 
     }
 
-    Task<Account> IAccountRepository.CreateAccount(Account account)
-    {
-        throw new NotImplementedException();
-    }
+    
 }
 
    

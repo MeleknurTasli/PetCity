@@ -5,7 +5,7 @@ public interface IAccountService{
      Task<Account> CreateNewAccount(Account account); //DTO Ya çevir unutma SENSITIVE DATA OLANLARI...
      Task<Account> ChangeVisibilityOfAccount(); 
      Task<Account> UpdateAccountByEmail(Account account,string email);
-     Task<Account> UpdateAccountPassword(string oldpassword,string newpassword);
+     Task<Account> UpdateAccountPassword(Account account,string oldpassword,string newpassword);
      Task<Account> BlockAccount();
      Task<Account> Role();
 

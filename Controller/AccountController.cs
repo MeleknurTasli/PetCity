@@ -22,7 +22,7 @@ public class AccountController : ControllerBase         //eksiklermiz var düzen
     [HttpPut("update")]
     public async Task<Account> UpdateAccountByEmail(Account account,string email)
     {
-        var result = await _accountService.UpdateAccountByEmail(account,email); //controllerdaki parametre içindeki sıralama önemli değil,serviceteki parametre sıralaması önemli yine de hepsini aynı yap
+        var result = await _accountService.UpdateAccountByEmail(account,email); 
         return result;
         
     }

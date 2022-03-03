@@ -44,10 +44,13 @@ public class AccountService : IAccountService
         return await _accountRepository.UpdateAccountByEmail(email,account);
     }
 
-    public async Task<Account> UpdateAccountPassword(string oldpassword, string newpassword)
+    public async Task<Account> UpdateAccountPassword(Account account,string oldpassword, string newpassword)
     {
-        return await _accountRepository.UpdateAccountPassword(oldpassword,newpassword);
+        return await _accountRepository.UpdateAccountPassword(account,oldpassword,newpassword);     //sonradan bir kontrol yap tekrardan ve repoda daraltma yapacaz unutma...
+        
     }
+
+    
 }
 
     
