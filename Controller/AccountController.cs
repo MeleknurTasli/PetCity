@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-public class AccountController : ControllerBase         //eksiklermiz var düzenleme yapacağız...
+public class AccountController : ControllerBase         
 {
     private readonly IAccountService _accountService;
 

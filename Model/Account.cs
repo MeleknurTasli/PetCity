@@ -5,7 +5,7 @@ public class Account
     public string Password { get; set; }
     public bool IsBlocked { get; set; }
     public bool Visibility { get; set; }
-    public virtual ICollection<Role> Role { get; set; }
+    public virtual ICollection<Role>? Role { get; set; }        //şimdilik (postmande deneme için...) nullable yaptık, değiştireceğiz 
 
     public Account()
     {
