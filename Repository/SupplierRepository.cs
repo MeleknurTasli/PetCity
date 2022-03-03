@@ -14,7 +14,7 @@ public class SupplierRepository : ISupplierRepository
         try
         {
             Supplier sp = await _context.Suppliers.FindAsync(id);
-            sp.IsVisibility = false;
+            sp.IsVisibility = !sp.IsVisibility;
 
             await _context.SaveChangesAsync();
 
