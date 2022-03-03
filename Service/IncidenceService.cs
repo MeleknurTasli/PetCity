@@ -58,7 +58,7 @@ public class IncidenceService : IIncidenceService
         {
             return incidenceDTOs;
         }
-        return new IncidenceDTO(null) ;
+        return new IncidenceDTO(null);
     }
 
     public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByName(string name)

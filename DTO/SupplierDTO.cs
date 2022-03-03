@@ -27,6 +27,7 @@ public class SupplierDTO
         }
     }
 
+
     public SupplierDTO(string name, Account account, Address address, ICollection<Brand> brand, double rating, bool IsVisibility)
     {
 
