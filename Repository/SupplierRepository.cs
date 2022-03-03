@@ -9,7 +9,7 @@ public class SupplierRepository : ISupplierRepository
     {
         _context = context;
     }
-    async Task<SupplierDTO> ISupplierRepository.ChangeSupplierVisibility(int id)
+    async Task<Supplier> ISupplierRepository.ChangeSupplierVisibility(int id)
     {
         try
         {
@@ -18,16 +18,16 @@ public class SupplierRepository : ISupplierRepository
 
             await _context.SaveChangesAsync();
 
-            return new SupplierDTO(sp);
+            return sp;
         }
         catch (Exception ex)
         {
-            return new SupplierDTO(null);
+            return null;
         }
 
     }
 
-    async Task<SupplierDTO> ISupplierRepository.CreateSupplierOperation(SupplierDTO supplier)
+    async Task<Supplier> ISupplierRepository.CreateSupplierOperation(SupplierDTO supplier)
     {
         try
         {
@@ -35,32 +35,30 @@ public class SupplierRepository : ISupplierRepository
             
             _context.Set<Supplier>().Add(persistSupplier);
             await _context.SaveChangesAsync();
-            return supplier;
+            return persistSupplier;
         }
         catch (Exception ex)
         {
-            return new SupplierDTO(null);
+            return null;
         }
 
     }
 
-    async Task<IEnumerable<SupplierDTO>> ISupplierRepository.GetAllSupplier()
+    async Task<IEnumerable<Supplier>> ISupplierRepository.GetAllSupplier()
     {
         try
         {
-            List<SupplierDTO> temp = await (from db in _context.Suppliers
-                                            select new SupplierDTO(db.Name,db.Account,db.Address,db.Brand,db.Rating,db.IsVisibility)
-                                            ).ToListAsync();
+            List<Supplier> temp = await (from db in _context.Suppliers select db).ToListAsync();
             return temp;
         }
         catch (Exception ex)
         {
-            return new List<SupplierDTO> { new SupplierDTO(null) };
+            return null;
         }
 
     }
 
-    async Task<SupplierDTO> ISupplierRepository.GetSupplierByEmail(string email)
+    async Task<Supplier> ISupplierRepository.GetSupplierByEmail(string email)
     {
         try
         {
@@ -69,59 +67,58 @@ public class SupplierRepository : ISupplierRepository
                                         select sp).FirstOrDefaultAsync();
             if (supplier != null)
             {
-                return new SupplierDTO(supplier);
+                return supplier;
             }
-            return new SupplierDTO(null);
+            return null;
 
 
         }
         catch (Exception ex)
         {
-            return new SupplierDTO(null);
+            return null;
         }
 
     }
 
-    async Task<SupplierDTO> ISupplierRepository.GetSupplierById(int id)
+    async Task<Supplier> ISupplierRepository.GetSupplierById(int id)
     {
         try
         {
             Supplier? supplier = await _context.Suppliers!.FindAsync(id);
             if (supplier != null)
             {
-                return new SupplierDTO(supplier);
+                return supplier;
             }
-            return new SupplierDTO(null);
+            return null;
         }
         catch (Exception ex)
         {
-            return new SupplierDTO(null);
+            return null;
         }
 
     }
 
-    async Task<IEnumerable<SupplierDTO>> ISupplierRepository.GetSupplierByMinRatingAndAbove(double MinRating)
+    async Task<IEnumerable<Supplier>> ISupplierRepository.GetSupplierByMinRatingAndAbove(double MinRating)
     {
         try
         {
             var SupplierListAsync = await (from item in _context.Suppliers
                                            where item.Rating >= MinRating
-                                           select new SupplierDTO(item.Name,item.Account,item.Address,item.Brand,item.Rating,item.IsVisibility)
-                                           ).ToListAsync();
+                                           select item ).ToListAsync();
             if (SupplierListAsync != null)
             {
                 return SupplierListAsync;
             }
-            return new List<SupplierDTO> { new SupplierDTO(null) };
+            return null;
         }
         catch (Exception ex)
         {
-            return new List<SupplierDTO> { new SupplierDTO(null) };
+            return null;
         }
 
     }
 
-    async Task<SupplierDTO> ISupplierRepository.GetSupplierByName(string Name)
+    async Task<Supplier> ISupplierRepository.GetSupplierByName(string Name)
     {
         string name="";
         string[] temp = Name.Split('-');
@@ -138,58 +135,56 @@ public class SupplierRepository : ISupplierRepository
                                         select sp).FirstOrDefaultAsync();
             if (supplier != null)
             {
-                return new SupplierDTO(supplier);
+                return supplier;
             }
             return null;
         }
         catch (Exception ex)
         {
-            return new SupplierDTO(null);
+            return null;
         }
 
     }
 
-    async Task<IEnumerable<SupplierDTO>> ISupplierRepository.GetSupplierByRating(double Rating)
+    async Task<IEnumerable<Supplier>> ISupplierRepository.GetSupplierByRating(double Rating)
     {
         try
         {
             var SupplierListAsync = await (from item in _context.Suppliers
                                            where item.Rating == Rating
-                                           select new SupplierDTO(item.Name,item.Account,item.Address,item.Brand,item.Rating,item.IsVisibility)
-                                           ).ToListAsync();
+                                           select item ).ToListAsync();
             if (SupplierListAsync != null)
             {
                 return SupplierListAsync;
             }
-            return new List<SupplierDTO> { new SupplierDTO(null) };
+            return null;
         }
         catch (Exception ex)
         {
-            return new List<SupplierDTO> { new SupplierDTO(null) };
+            return null;
         }
     }
 
-    async Task<IEnumerable<SupplierDTO>> ISupplierRepository.GetSupplierByRatingRange(double DownRating, double UpRating)
+    async Task<IEnumerable<Supplier>> ISupplierRepository.GetSupplierByRatingRange(double DownRating, double UpRating)
     {
         try
         {
             var SupplierListAsync = await (from item in _context.Suppliers
                                            where (item.Rating >= DownRating && item.Rating <= UpRating)
-                                           select new SupplierDTO(item.Name,item.Account,item.Address,item.Brand,item.Rating,item.IsVisibility)
-                                           ).ToListAsync();
+                                           select item ).ToListAsync();
             if (SupplierListAsync != null)
             {
                 return SupplierListAsync;
             }
-            return new List<SupplierDTO> { new SupplierDTO(null) };
+            return null;
         }
         catch (Exception ex)
         {
-            return new List<SupplierDTO> { new SupplierDTO(null) };
+            return null;
         }
     }
 
-    async Task<SupplierDTO> ISupplierRepository.UpdateSupplierOperation(int id, SupplierDTO supplier)
+    async Task<Supplier> ISupplierRepository.UpdateSupplierOperation(int id, SupplierDTO supplier)
     {
         /*
        _context.Entry(supplier).State = EntityState.Modified;
@@ -210,14 +205,15 @@ public class SupplierRepository : ISupplierRepository
             sp.IsVisibility = supplier.IsVisibility;
 
             await _context.SaveChangesAsync();
+            return sp;
         }
         catch (Exception ex)
         {
-            return new SupplierDTO(null);
+            return null;
         }
 
 
-        return supplier;
+        
 
     }
 }
