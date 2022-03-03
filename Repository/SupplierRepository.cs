@@ -27,13 +27,15 @@ public class SupplierRepository : ISupplierRepository
 
     }
 
-    async Task<SupplierDTO> ISupplierRepository.CreateSupplierOperation(Supplier supplier)
+    async Task<SupplierDTO> ISupplierRepository.CreateSupplierOperation(SupplierDTO supplier)
     {
         try
         {
-            _context.Set<Supplier>().Add(supplier);
+            Supplier persistSupplier = new Supplier(supplier);
+            
+            _context.Set<Supplier>().Add(persistSupplier);
             await _context.SaveChangesAsync();
-            return new SupplierDTO(supplier);
+            return supplier;
         }
         catch (Exception ex)
         {
@@ -47,15 +49,8 @@ public class SupplierRepository : ISupplierRepository
         try
         {
             List<SupplierDTO> temp = await (from db in _context.Suppliers
-                                            select new SupplierDTO()
-                                            {
-                                                Name = db.Name,
-                                                Account = db.Account,
-                                                Address = db.Address,
-                                                Brand = db.Brand,
-                                                Rating = db.Rating,
-                                                IsVisibility = db.IsVisibility
-                                            }).ToListAsync();
+                                            select new SupplierDTO(db.Name,db.Account,db.Address,db.Brand,db.Rating,db.IsVisibility)
+                                            ).ToListAsync();
             return temp;
         }
         catch (Exception ex)
@@ -65,32 +60,12 @@ public class SupplierRepository : ISupplierRepository
 
     }
 
-    async Task<IEnumerable<SupplierDTO>> ISupplierRepository.GetSupplierByAddress(AddressSearchDTO address)
-    {
-        IEnumerable<SupplierDTO> supplierDTOs = null;
-        if(address.Country != null && address.State == null && address.City == null && address.District == null){
-            supplierDTOs = await (from supplier in _context.Suppliers
-                                    where supplier.Address.Country.Equals(address.Country)
-                                    select new SupplierDTO{
-                                        Name = supplier.Name,
-                                        Account = supplier.Account,
-                                        Address = supplier.Address,
-                                        Brand = supplier.Brand,
-                                        Rating = supplier.Rating,
-                                        IsVisibility = supplier.IsVisibility
-                                    }
-                                ).ToListAsync();
-            return supplierDTOs;
-        }
-        return new List<SupplierDTO> { new SupplierDTO(null) };
-    }
-
-    async Task<SupplierDTO> ISupplierRepository.GetSupplierByEmail(string Email)
+    async Task<SupplierDTO> ISupplierRepository.GetSupplierByEmail(string email)
     {
         try
         {
             Supplier? supplier = await (from sp in _context.Suppliers
-                                        where sp.Account.Email == Email
+                                        where sp.Account.Email == email
                                         select sp).FirstOrDefaultAsync();
             if (supplier != null)
             {
@@ -131,20 +106,13 @@ public class SupplierRepository : ISupplierRepository
         {
             var SupplierListAsync = await (from item in _context.Suppliers
                                            where item.Rating >= MinRating
-                                           select new SupplierDTO()
-                                           {
-                                               Name = item.Name,
-                                               Account = item.Account,
-                                               Address = item.Address,
-                                               Brand = item.Brand,
-                                               Rating = item.Rating,
-                                               IsVisibility = item.IsVisibility
-                                           }).ToListAsync();
+                                           select new SupplierDTO(item.Name,item.Account,item.Address,item.Brand,item.Rating,item.IsVisibility)
+                                           ).ToListAsync();
             if (SupplierListAsync != null)
             {
                 return SupplierListAsync;
             }
-            return new List<SupplierDTO> { new SupplierDTO(null) }; ;
+            return new List<SupplierDTO> { new SupplierDTO(null) };
         }
         catch (Exception ex)
         {
@@ -155,16 +123,24 @@ public class SupplierRepository : ISupplierRepository
 
     async Task<SupplierDTO> ISupplierRepository.GetSupplierByName(string Name)
     {
+        string name="";
+        string[] temp = Name.Split('-');
+        for(int i=0;i<temp.Length;i++)
+        {
+            name+=temp[i];
+            if(i<temp.Length-1)
+                name+=" ";
+        }
         try
         {
             Supplier? supplier = await (from sp in _context.Suppliers
-                                        where sp.Name == Name
+                                        where sp.Name == name
                                         select sp).FirstOrDefaultAsync();
             if (supplier != null)
             {
                 return new SupplierDTO(supplier);
             }
-            return new SupplierDTO(null);
+            return null;
         }
         catch (Exception ex)
         {
@@ -179,15 +155,8 @@ public class SupplierRepository : ISupplierRepository
         {
             var SupplierListAsync = await (from item in _context.Suppliers
                                            where item.Rating == Rating
-                                           select new SupplierDTO()
-                                           {
-                                               Name = item.Name,
-                                               Account = item.Account,
-                                               Address = item.Address,
-                                               Brand = item.Brand,
-                                               Rating = item.Rating,
-                                               IsVisibility = item.IsVisibility
-                                           }).ToListAsync();
+                                           select new SupplierDTO(item.Name,item.Account,item.Address,item.Brand,item.Rating,item.IsVisibility)
+                                           ).ToListAsync();
             if (SupplierListAsync != null)
             {
                 return SupplierListAsync;
@@ -206,15 +175,8 @@ public class SupplierRepository : ISupplierRepository
         {
             var SupplierListAsync = await (from item in _context.Suppliers
                                            where (item.Rating >= DownRating && item.Rating <= UpRating)
-                                           select new SupplierDTO()
-                                           {
-                                               Name = item.Name,
-                                               Account = item.Account,
-                                               Address = item.Address,
-                                               Brand = item.Brand,
-                                               Rating = item.Rating,
-                                               IsVisibility = item.IsVisibility
-                                           }).ToListAsync();
+                                           select new SupplierDTO(item.Name,item.Account,item.Address,item.Brand,item.Rating,item.IsVisibility)
+                                           ).ToListAsync();
             if (SupplierListAsync != null)
             {
                 return SupplierListAsync;
@@ -240,7 +202,6 @@ public class SupplierRepository : ISupplierRepository
         try
         {
             var sp = await _context.Suppliers.FindAsync(id);
-
             sp.Name = supplier.Name;
             sp.Account = supplier.Account;
             sp.Address = supplier.Address;

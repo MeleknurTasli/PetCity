@@ -6,9 +6,12 @@ public interface ISupplierService
     Task<SupplierDTO> GetSupplierById(int id);
     Task<SupplierDTO> GetSupplierByName(string name);
     Task<SupplierDTO> GetSupplierByEmail(string email);
-    Task<IEnumerable<SupplierDTO>> GetSupplierByAddress(AddressSearchDTO address);
 
-    Task<SupplierDTO> CreateSupplierOperation(Supplier supplier);
+    Task<IEnumerable<SupplierDTO>> GetSupplierByRating(string Rating);
+    Task<IEnumerable<SupplierDTO>> GetSupplierByMinRatingAndAbove(string MinRating);
+    Task<IEnumerable<SupplierDTO>> GetSupplierByRatingRange(string DownRating,string UpRating);
+
+    Task<SupplierDTO> CreateSupplierOperation(SupplierDTO supplier);
     Task<SupplierDTO> UpdateSupplierOperation(int id, SupplierDTO supplier);
     Task<SupplierDTO> DeleteSupplierOperation(int id);
 

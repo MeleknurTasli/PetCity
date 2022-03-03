@@ -229,10 +229,6 @@ public class PetCityContext : DbContext
                    entity.Property(e => e.AddressName).IsRequired();
                    entity.Property(e => e.OpenAddres1);
                    entity.Property(e => e.OpenAddres2);
-
-
-
-
                });
 
 
@@ -402,6 +398,8 @@ public class PetCityContext : DbContext
                Visibility = true
            }
        );
+
+
 
     }
 }
