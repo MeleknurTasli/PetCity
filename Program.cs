@@ -4,7 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.AspNetCore.Mvc;
+
+
 using System.Net;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,15 +33,21 @@ builder.Services.AddScoped<IAddressService,AddressService>();
 
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<PetCityContext>();
+
+// builder.Services.AddScoped<IAccountService,AccountService>();
 builder.Services.AddScoped<IProductRepository,ProductRepository>();
 builder.Services.AddScoped<IProductService,ProductService>();
 builder.Services.AddScoped<IBrandRepository,BrandRepository>();
 builder.Services.AddScoped<IBrandService,BrandService>();
 builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<ICategoryService,CategoryService>();
+builder.Services.AddScoped<IIncidenceRepository,IncidenceRepository>();
+//builder.Services.AddScoped<IIncidenceService,IncidenceService>();
 builder.Services.AddScoped<IAccountRepository, AccountRepository>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddScoped<ILoginService, LoginService>();
+builder.Services.AddScoped<ISupplierRepository,SupplierRepository>();
+builder.Services.AddScoped<ISupplierService,SupplierService>();
 builder.Services.AddScoped<IAddressRepository, AddressRepository>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 var app = builder.Build();

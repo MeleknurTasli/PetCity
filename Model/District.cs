@@ -6,4 +6,7 @@ public class District
     public City City { get; set; }
 
 
+
+    public virtual List<Incidence> IncidenceList {get; set; }
+
 }
