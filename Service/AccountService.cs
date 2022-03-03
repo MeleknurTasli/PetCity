@@ -3,17 +3,17 @@ public class AccountService : IAccountService
     private readonly IAccountRepository _accountRepository;
     public AccountService(IAccountRepository accountRepository)
     {
-        _accountRepository= accountRepository; //BU constructor'ın BOŞUNU OLUŞTURMADAN DÜN ÇALIŞTIRDIK VE SORUNSUZ ÇALIŞMIŞTI AMA REPODAYKEN HOCA BOŞ CONSTRUCTOR OLUŞTURDU,NEDEN ?
+        _accountRepository= accountRepository; //burda constructor'ın boşu yok ama repoda var, neden ??
     }
 
     public Task<Account> BlockAccount()
     {
-        throw new NotImplementedException();        //HALLEDİCEZ
+        throw new NotImplementedException();       
     }
 
     public Task<Account> ChangeVisibilityOfAccount()
     {
-        throw new NotImplementedException();        //HALLEDİCEZ
+        throw new NotImplementedException();        
     }
 
      public async Task<Account> CreateNewAccount(Account account)

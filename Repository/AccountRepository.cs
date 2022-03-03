@@ -11,7 +11,7 @@ public class AccountRepository :IAccountRepository
     }
     public AccountRepository()
     {
-            //Constructor methodun boşu
+            
     }
 
     public async Task<List<Account>> GetAllAccounts()
@@ -50,17 +50,17 @@ public class AccountRepository :IAccountRepository
 
     public Task<Account> ChangeVisibilityOfAccount()
     {
-        throw new NotImplementedException();        //hALLEDİCEZ, MERGELERİ VS BİTİRDİKTEN SONRA...
+        throw new NotImplementedException();        
     }
 
     public Task<Account> BlockAccount()
     {
-        throw new NotImplementedException();        //hALLEDİCEZ, MERGELERİ VS BİTİRDİKTEN SONRA...
+        throw new NotImplementedException();       
     }
 
     public Task<Account> Role()
     {
-        throw new NotImplementedException();        //hALLEDİCEZ, MERGELERİ VS BİTİRDİKTEN SONRA...
+        throw new NotImplementedException();        
     }
 
     public async Task<AccountDTO> CreateAccount(AccountDTO account)
@@ -69,7 +69,7 @@ public class AccountRepository :IAccountRepository
         {
             Account persistAccount = new Account(account);
 
-             await _context.Set<Account>().AddAsync(persistAccount);    //burayı hocaya soralım bida
+             await _context.Set<Account>().AddAsync(persistAccount);    //burayı hocaya soralım 
              await _context.SaveChangesAsync();                                 
             return new AccountDTO(persistAccount);
         }
@@ -79,13 +79,7 @@ public class AccountRepository :IAccountRepository
         }
     }
 
-    public Account FindAccountByEmailAndPassword(LoginDTO loginDTO)
-    {
-        Account account = (from x in _context.Account
-                           where x.Email == loginDTO.Email && x.Password == loginDTO.Password
-                           select x).FirstOrDefault();
-        return account;
-    }
+    
 
     public Account findAccountById(int id)
     {
@@ -95,7 +89,18 @@ public class AccountRepository :IAccountRepository
         return accountByID; 
     }
 
-    
+   /* Task<Account> IAccountRepository.FindAccountByEmailAndPassword(LoginDTO loginDTO,Account account)
+    {
+       Account accountFinded = (from x in _context.Account
+                           where x.Email == loginDTO.Email && x.Password == loginDTO.Password
+                           select x).FirstOrDefault();
+        return account;
+    } */
+
+    public Task<Account> FindAccountByEmailAndPassword(LoginDTO loginDTO)
+    {
+        throw new NotImplementedException();
+    }
 }
 
    
