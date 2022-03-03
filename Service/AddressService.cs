@@ -43,7 +43,7 @@ public class AddressService : IAddressService
         return await _addressRepository.GetAllDistrictsByCityId(id);
     }
 
-  
+
 
     public async Task<List<State>> GetAllStatesByCountryId(int id)
     {
@@ -64,8 +64,27 @@ public class AddressService : IAddressService
         return await _addressRepository.UpdateAddress(id);
     }
 
+    public PetCityContext _petCityContext;
+    Task<Country> IAddressService.CreateCountry(Country country)
+    {
+        _petCityContext = new PetCityContext();
+        var controller = _petCityContext.Country.FirstOrDefault(x => x.Name == country.Name);
+        if (controller != null)
+        {
 
+            return _addressRepository.CreateCountry(country);
+
+
+        }
+        else
+        {
+            return null;
+        }
+
+
+    }
 
 }
+
 
 

@@ -4,7 +4,10 @@ public interface IAddressService
 {
    Task<List<Address>> GetAllAddresses();
     Task<Address> GetAddress(int id);
+
+  
     Task<List<Country>> GetAllCountries();
+   Task<Country> CreateCountry(Country country);
     Task<List<State>> GetAllStatesByCountryId(int id);
     Task<List<City>> GetAllCitiesByStateId(int id);
     Task<List<City>> GetAllCitiesByContryId(int id);

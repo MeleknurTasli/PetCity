@@ -77,4 +77,25 @@ public class AddressController : ControllerBase
         return await _IAddressService.UpdateAddress(id);
     }
 
+
+[HttpPost]
+public async Task<Country> CreateCountry([FromQuery]Country country) 
+{
+
+
+        return await _IAddressService.CreateCountry(country);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
 }

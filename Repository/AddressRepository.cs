@@ -36,11 +36,29 @@ public class AddressRepository : IAddressRepository
             return null;
         }
     }
+    public async Task<Country> GetCountry(string name)
+    {
+
+        var countrycontroller =await _petCityContext.Set<Country>().FirstOrDefaultAsync(p => p.Name == name );
+        if(countrycontroller != null)
+        {
+            return countrycontroller;
+        }
+         return null;
+    }
+
 
     public async Task<List<Country>> GetAllCountry()
     {
 
         return await _petCityContext.Set<Country>().ToListAsync();
+    }
+     async Task<Country> IAddressRepository.CreateCountry(Country country)
+    {
+        _petCityContext.Country.Add(country);
+        _petCityContext.SaveChangesAsync();
+        return country;
+        
     }
 
     string name;
@@ -134,7 +152,57 @@ public class AddressRepository : IAddressRepository
         throw new NotImplementedException();
     }
 
+    Task<List<Address>> IAddressRepository.GetAllAddress()
+    {
+        throw new NotImplementedException();
+    }
 
+    Task<Address> IAddressRepository.GetAddress(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<List<Country>> IAddressRepository.GetAllCountry()
+    {
+        throw new NotImplementedException();
+    }
+
+   
+
+    Task<List<State>> IAddressRepository.GetAllStatesByCountryId(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<List<City>> IAddressRepository.GetAllCitiesByStateId(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<List<City>> IAddressRepository.GetAllCitiesByContryId(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<List<District>> IAddressRepository.GetAllDistrictsByCityId(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<Address> IAddressRepository.RegisterAddress()
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<Address> IAddressRepository.DeleteAddress(int id)
+    {
+        throw new NotImplementedException();
+    }
+
+    Task<Address> IAddressRepository.UpdateAddress(int id)
+    {
+        throw new NotImplementedException();
+    }
 }
 
 
