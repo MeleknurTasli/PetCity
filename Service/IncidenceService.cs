@@ -7,15 +7,14 @@ public class IncidenceService : IIncidenceService
          _IncidenceRepository = incidenceRepository;
     }
 
-    public IncidenceService(){}
-
     public async Task<IEnumerable<IncidenceDTO>> GetAllIncidences()
     {
-        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetAllIncidences();
-        if(incidenceDTOs != null)
+        IEnumerable<Incidence> Incidences = await _IncidenceRepository.GetAllIncidences();
+        if(Incidences != null)
         {
-            return incidenceDTOs;
+             return ConvertToIncedenceDTO(Incidences);
         }
+
         //todo
         return new List<IncidenceDTO> { new IncidenceDTO(null) };
 
@@ -23,83 +22,101 @@ public class IncidenceService : IIncidenceService
 
     public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByDistrictName(string districtName)
     {
-        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetIncidencesByDistrictName(districtName);
-        if(incidenceDTOs != null)
+        IEnumerable<Incidence> Incidences =  await _IncidenceRepository.GetIncidencesByDistrictName(districtName);
+        if(Incidences != null)
         {
-            return incidenceDTOs;
+             return ConvertToIncedenceDTO(Incidences);
         }
+
         return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
     public async Task<IEnumerable<IncidenceDTO>> GetAllIncidencesByUserName(string username)
     {
-        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetAllIncidencesByUserName(username);
-        if(incidenceDTOs != null)
+        IEnumerable<Incidence> Incidences = await _IncidenceRepository.GetAllIncidencesByUserName(username);
+        if(Incidences != null)
         {
-            return incidenceDTOs;
+             return ConvertToIncedenceDTO(Incidences);
         }
         return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
     public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate)
     {
-        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetIncidencesByDate(FirstDate, LastDate);
-        if(incidenceDTOs != null)
+        IEnumerable<Incidence> Incidences =  await _IncidenceRepository.GetIncidencesByDate(FirstDate, LastDate);
+        if(Incidences != null)
         {
-            return incidenceDTOs;
+             return ConvertToIncedenceDTO(Incidences);
         }
+
         return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
     public async Task<IncidenceDTO> GetIncidencesById(int Id)
     {
-       IncidenceDTO incidenceDTOs = await _IncidenceRepository.GetIncidencesById(Id);
-        if(incidenceDTOs != null)
+       Incidence incidence =  await _IncidenceRepository.GetIncidencesById(Id);
+        if(incidence != null)
         {
-            return incidenceDTOs;
+             return new IncidenceDTO(incidence);
         }
+
         return new IncidenceDTO(null) ;
     }
 
     public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByName(string name)
     {
-        IEnumerable<IncidenceDTO> incidenceDTOs = await _IncidenceRepository.GetIncidencesByName(name);
-        if(incidenceDTOs != null)
+        IEnumerable<Incidence> Incidences =  await _IncidenceRepository.GetIncidencesByName(name);
+        if(Incidences != null)
         {
-            return incidenceDTOs;
+            return ConvertToIncedenceDTO(Incidences);
         }
         return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
-    //todo
     public async Task ChangeIncidenceVisibilityById(int Id)
     {
         var incidence = await _IncidenceRepository.GetIncidencesById(Id); 
         if(incidence != null)
         {
-            await ChangeIncidenceVisibilityById(Id);
+            await _IncidenceRepository.ChangeIncidenceVisibilityById(Id);
         }
     }
 
     //todo
-    public async Task<IncidenceDTO> CreateIncidence(Incidence incidence)
+    public async Task<IncidenceDTO> CreateIncidence(IncidenceDTO incidence)
     {
-        IncidenceDTO incidenceDTO = await _IncidenceRepository.GetIncidencesById(incidence.Id);
-        if(incidenceDTO == null)
+        //Incidence Incidence = await _IncidenceRepository.GetIncidencesById(incidence.Id);
+       // if(incidence == null)
+        //{
+            Incidence Incidence=  await _IncidenceRepository.CreateIncidence(incidence);
+            return new IncidenceDTO(Incidence);
+        //}
+
+        //return new IncidenceDTO(null) ;
+    }
+
+    public async Task<IncidenceDTO> ChangeIncidence(Incidence incidence)
+    {
+        if(incidence != null)
         {
-            return await _IncidenceRepository.CreateIncidence(incidence);
+        Incidence Incidence =  await _IncidenceRepository.GetIncidencesById(incidence.Id);
+        if(Incidence != null)
+        {
+            Incidence =  await _IncidenceRepository.ChangeIncidence(incidence);
+            return new IncidenceDTO(Incidence);
         }
+        }
+
         return new IncidenceDTO(null) ;
     }
 
-    //todo
-    public async Task<IncidenceDTO> ChangeIncidence(int Id, Incidence incidence)
+    private List<IncidenceDTO> ConvertToIncedenceDTO(IEnumerable<Incidence> Incidences )
     {
-        IncidenceDTO incidenceDTO = await _IncidenceRepository.GetIncidencesById(Id);
-        if(incidenceDTO != null)
+        List<IncidenceDTO> IncidenceDTOs = new List<IncidenceDTO>();
+        foreach(Incidence incedence in Incidences)
         {
-            return await _IncidenceRepository.ChangeIncidence(Id, incidence);
+            IncidenceDTOs.Add(new IncidenceDTO(incedence));
         }
-        return new IncidenceDTO(null) ;
+        return IncidenceDTOs;
     }
 }

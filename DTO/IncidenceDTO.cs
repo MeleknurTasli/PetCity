@@ -2,12 +2,12 @@ public class IncidenceDTO
 {
     
     public string? Name { get; set; }
-    public District? District { get; set; }
+    public virtual District? District { get; set; }
     public DateTime? Date { get; set; }
     public bool Visibility { get; set; }
     public string? Image { get; set; }
     public string? Description { get; set; }
-     public User? User { get; set; }
+     public virtual User? User { get; set; }
 
 
     public IncidenceDTO(Incidence incidence)

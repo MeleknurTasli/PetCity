@@ -6,8 +6,7 @@ public interface IIncidenceService
     Task<IEnumerable<IncidenceDTO>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate);
     Task<IncidenceDTO> GetIncidencesById(int Id);
     Task<IEnumerable<IncidenceDTO>> GetIncidencesByName(string name);
-    //Task ChangeIncidenceVisibility(Incidence incidence);
     Task ChangeIncidenceVisibilityById(int Id);
-    Task<IncidenceDTO> CreateIncidence(Incidence incidence);
-    Task<IncidenceDTO> ChangeIncidence(int Id, Incidence incidence);  
+    Task<IncidenceDTO> CreateIncidence(IncidenceDTO incidence);
+    Task<IncidenceDTO> ChangeIncidence(Incidence incidence);  
 }

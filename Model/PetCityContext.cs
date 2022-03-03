@@ -40,5 +40,6 @@ public class PetCityContext : DbContext
         PetDatabaseBuilder.TableBuilder(modelBuilder);
         ProductDatabaseBuilder.TableBuilder(modelBuilder);
         SupplierDatabaseBuilder.TableBuilder(modelBuilder);
+        IncidenceDatabaseBuilder.TableBuilder(modelBuilder);
     }
 }
