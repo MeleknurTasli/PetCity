@@ -46,9 +46,8 @@ public class AddressRepository : IAddressRepository
     string name;
     public async Task<List<State>> GetAllStatesByCountryId(int id)
     {
-        Country countryname = await _petCityContext.Country.SingleOrDefaultAsync(x => x.Id == id);
-        var name = countryname.Name;
-        var getState = await _petCityContext.Set<State>().Where(p => p.Id == id).ToListAsync();
+    
+        var getState = await _petCityContext.Set<State>().Where(p => p.CountryId == id).ToListAsync();
         if (getState != null)
         {
 
@@ -63,7 +62,7 @@ public class AddressRepository : IAddressRepository
 
     public async Task<List<City>> GetAllCitiesByStateId(int id)
     {
-        var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
+        var getCity = await _petCityContext.Set<City>().Where(p => p.StateId == id).ToListAsync();
         if (getCity != null)
         {
 
@@ -78,7 +77,7 @@ public class AddressRepository : IAddressRepository
 
     public async Task<List<City>> GetAllCitiesByContryId(int id)
     {
-        var getCity = await _petCityContext.Set<City>().Where(p => p.Id == id).ToListAsync();
+        var getCity = await _petCityContext.Set<City>().Where(p => p.CountryId == id).ToListAsync();
         if (getCity != null)
         {
 
@@ -93,7 +92,7 @@ public class AddressRepository : IAddressRepository
 
     public async Task<List<District>> GetAllDistrictsByCityId(int id)
     {
-        var getDistricts = await _petCityContext.Set<District>().Where(p => p.Id == id).ToListAsync();
+        var getDistricts = await _petCityContext.Set<District>().Where(p => p.CityId == id).ToListAsync();
         if (getDistricts != null)
         {
 

@@ -23,7 +23,7 @@ public class AddressController : ControllerBase
         return await _IAddressService.GetAddress(id);
     }
 
-    [HttpGet("register")]
+    [HttpGet("CountryList")]
     public async Task<ActionResult<List<Country>>> GetAllCountries()
     {
         return  await _IAddressService.GetAllCountries();
@@ -35,13 +35,14 @@ public class AddressController : ControllerBase
         return await _IAddressService.GetAllStatesByCountryId(id);
     }
 
-    [HttpGet("GetAllCities")]
+    ///http://localhost:5281/Address/GetAllCitiesByStateId?id=3 şeklinde sorgulamalar yapılacak
+    [HttpGet("GetAllCitiesByStateId")]
     public async Task<List<City>> GetAllCitiesByStateId([FromQuery] int id)
     {
         return await _IAddressService.GetAllCitiesByStateId(id);
     }
 
-    [HttpGet("GetAllCities")]
+    [HttpGet("GetAllCitiesByContryId")]
     public async Task<List<City>> GetAllCitiesByContryId([FromQuery] int id)
     {
         return await _IAddressService.GetAllCitiesByContryId(id);

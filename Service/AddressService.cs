@@ -28,10 +28,9 @@ public class AddressService : IAddressService
         return await _addressRepository.GetAllCitiesByContryId(id);
     }
 
-
     public async Task<List<City>> GetAllCitiesByStateId(int id)
     {
-        return await _addressRepository.GetAllCitiesByContryId(id);
+        return await _addressRepository.GetAllCitiesByStateId(id);
     }
 
     public async Task<List<Country>> GetAllCountries()
