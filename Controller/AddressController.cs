@@ -26,10 +26,11 @@ public class AddressController : ControllerBase
     [HttpGet("CountryList")]
     public async Task<ActionResult<List<Country>>> GetAllCountries()
     {
-        return  await _IAddressService.GetAllCountries();
+        return await _IAddressService.GetAllCountries();
     }
 
-    [HttpGet("GetAllStates")]
+
+    [HttpGet("GetAllStatesByCountryId")]
     public async Task<List<State>> GetAllStatesByCountryId([FromQuery] int id)
     {
         return await _IAddressService.GetAllStatesByCountryId(id);
@@ -48,15 +49,11 @@ public class AddressController : ControllerBase
         return await _IAddressService.GetAllCitiesByContryId(id);
     }
 
-    [HttpGet("GetAllDistricts")]
-    public async Task<List<District>> GetAllDistrictsByCityId([FromQuery] int id)
+    [HttpGet("GetAllDistrictsCityById")]
+    public async Task<List<District>> GetAllDistrictsCityById([FromQuery] int id)
     {
         return await _IAddressService.GetAllDistrictsByCityId(id);
     }
-
-   
-
-   
 
     [HttpPost]
     public async Task<Address> RegisterAddress([FromQuery] int id)
@@ -78,16 +75,47 @@ public class AddressController : ControllerBase
     }
 
 
-[HttpPost]
-public async Task<Country> CreateCountry([FromQuery]Country country) 
-{
+    [HttpPost("CreateCountry")]
+    public async Task<Country> CreateCountry(Country country)
+    {
 
 
         return await _IAddressService.CreateCountry(country);
 
+    }
+    [HttpPost("CreateCity")]
+    public async Task<City> CreateCity(City city)
+    {
 
 
-}
+        return await _IAddressService.CreateCity(city);
+
+    }
+    [HttpPost("CreateState")]
+    public async Task<State> CreateState(State state)
+    {
+
+
+        return await _IAddressService.CreateState(state);
+
+    }
+    [HttpPost("CreateDistrict")]
+    public async Task<District> CreateDistrict(District district)
+    {
+
+
+        return await _IAddressService.CreateDistrict(district);
+
+    }
+
+    [HttpDelete("DeleteCountry")]
+      public async Task<Country> DeleteCountry(Country country)
+    {
+
+
+        return await _IAddressService.DeleteCountry(country);
+
+    }
 
 
 
