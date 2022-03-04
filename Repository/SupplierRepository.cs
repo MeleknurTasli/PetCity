@@ -186,14 +186,6 @@ public class SupplierRepository : ISupplierRepository
 
     async Task<Supplier> ISupplierRepository.UpdateSupplierOperation(int id, SupplierDTO supplier)
     {
-        /*
-       _context.Entry(supplier).State = EntityState.Modified;
-        try{
-            await _context.SaveChangesAsync();
-        }catch(Exception ex){
-            throw;
-        }
-        */
         try
         {
             var sp = await _context.Suppliers.FindAsync(id);
