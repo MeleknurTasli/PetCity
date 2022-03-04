@@ -26,7 +26,7 @@ public class IncidenceController : ControllerBase
     [HttpGet("username")]
     public async Task<IEnumerable<IncidenceDTO>> GetAllIncidencesByUserName(string username)
     {
-         return await _incidenceService.GetAllIncidencesByUserName(username);
+         return await _incidenceService.GetIncidencesByUserName(username);
     }
 
     [HttpGet("{FirstDate}/{LastDate}")]

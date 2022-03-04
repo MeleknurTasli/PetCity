@@ -52,6 +52,7 @@ public class IncidenceRepository : IIncidenceRepository
         }
     }
     
+    //todo
     public async Task<Incidence> CreateIncidence(IncidenceDTO incidence)
     {
         var CreatedIncidence = new Incidence(incidence);
@@ -62,13 +63,60 @@ public class IncidenceRepository : IIncidenceRepository
 
     public async Task<IEnumerable<Incidence>> GetAllIncidences()
     {
-        List<Incidence> Incidences = await _petCityContext.Incidences.ToListAsync();
+        //List<Incidence> Incidences = await _petCityContext.Incidences.ToListAsync();
+        IEnumerable<Incidence> Incidences = await (from x in _petCityContext.Incidences  //.Include(i=>i.User).Include(i=>i.District)
+                                                   join u in _petCityContext.Users on x.UserId equals u.Id
+                                                   join d in _petCityContext.District on x.DistrictId equals d.DistrictId
+                                                   select new Incidence()
+                                                   {
+                                                       Id = x.Id,
+                                                       Name = x.Name,
+                                                       Date = x.Date,
+                                                       Image = x.Image,
+                                                       Description = x.Description,
+                                                       Visibility = x.Visibility,
+                                                       UserId = x.UserId,
+                                                       DistrictId = x.DistrictId,
+                                                       District = new District()
+                                                       {
+                                                           DistrictId = x.District.DistrictId,
+                                                           Name = x.District.Name
+                                                       },
+                                                       User = new User()
+                                                       {
+                                                           Id = null,
+                                                           Name = x.User.Name
+                                                       }
+                                                   }).ToListAsync();
         return Incidences;
     }
 
-    public async Task<IEnumerable<Incidence>> GetAllIncidencesByUserName(string UserName)
+    public async Task<IEnumerable<Incidence>> GetIncidencesByUserName(string UserName)
     {
-        IEnumerable<Incidence> Incidences =  await _petCityContext.Incidences.Where(p=> p.User.Name == UserName).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
+        //IEnumerable<Incidence> Incidences =  await _petCityContext.Incidences.Where(p=> p.User.Name == UserName).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();
+        IEnumerable<Incidence> Incidences = await (from x in _petCityContext.Incidences.Include(i=>i.User).Include(i=>i.District)
+         where x.User.Name == UserName && x.Visibility == true orderby x.Date descending
+         select new Incidence()
+        {
+             Id = x.Id,
+             Name = x.Name,
+             Date = x.Date,
+             Image = x.Image,
+             Description = x.Description,
+             Visibility = x.Visibility,
+             UserId = x.UserId,
+             DistrictId = x.DistrictId,
+             District = new District()
+             {
+                DistrictId = x.District.DistrictId,
+                Name = x.District.Name
+             },
+             User = new User()
+             {
+                 Id = null,
+                 Name = x.User.Name
+             }
+        }).ToListAsync();
         return Incidences;
     }
         

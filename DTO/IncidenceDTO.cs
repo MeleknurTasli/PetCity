@@ -1,6 +1,6 @@
 public class IncidenceDTO
 {
-    
+    public int Id { get; set; }
     public string? Name { get; set; }
     public virtual District? District { get; set; }
     public DateTime? Date { get; set; }
@@ -12,6 +12,7 @@ public class IncidenceDTO
 
     public IncidenceDTO(Incidence incidence)
     {
+        Id = incidence.Id;
         Name = incidence.Name;
         District = incidence.District;
         Date = incidence.Date;

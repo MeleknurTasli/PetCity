@@ -31,9 +31,9 @@ public class IncidenceService : IIncidenceService
         return new List<IncidenceDTO> { new IncidenceDTO(null) };
     }
 
-    public async Task<IEnumerable<IncidenceDTO>> GetAllIncidencesByUserName(string username)
+    public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByUserName(string username)
     {
-        IEnumerable<Incidence> Incidences = await _IncidenceRepository.GetAllIncidencesByUserName(username);
+        IEnumerable<Incidence> Incidences = await _IncidenceRepository.GetIncidencesByUserName(username);
         if(Incidences != null)
         {
              return ConvertToIncedenceDTO(Incidences);

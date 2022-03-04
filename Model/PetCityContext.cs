@@ -6,7 +6,6 @@ public class PetCityContext : DbContext
     public DbSet<Brand>? Brands { get; set; }
     public DbSet<Incidence>? Incidences { get; set; }
     public DbSet<User>? Users { get; set; } 
-    public DbSet<District>? Regions { get; set; } 
     public DbSet<Pet>? Pets { get; set; }
     public DbSet<PetSpecies>? PetSpecies { get; set; }
     public DbSet<PetGender>? PetGenders { get; set; }
@@ -18,7 +17,7 @@ public class PetCityContext : DbContext
     public DbSet<Neighborhood>? Neighborhood { get; set; }
     public DbSet<State>? State { get; set; }
     public DbSet<Street>? Street { get; set; }
-
+    public DbSet<District>? District { get; set; }
     public DbSet<Supplier>? Suppliers {get; set;}
 
 
