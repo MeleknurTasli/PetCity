@@ -19,11 +19,6 @@ public class AccountService : IAccountService
     public   async Task<Account> CreateNewAccount(Account account)
     {
         return await _accountRepository.CreateAccount(account);
-        
-        
-       
-
-
     }
 
     public async Task<Account> GetAccountByEmail(string email)

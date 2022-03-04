@@ -22,16 +22,12 @@ public class AccountController : ControllerBase
          Visibility=account.Visibility  
         };
         return await _accountService.CreateNewAccount(accountresult);
-    }
-
-        
-    
+    }  
     [HttpPut("update")]
     public async Task<Account> UpdateAccountByEmail(Account account,string email)
     {
         var result = await _accountService.UpdateAccountByEmail(account,email); 
-        return result;
-        
+        return result;   
     }
 
     [HttpGet("getall")]
