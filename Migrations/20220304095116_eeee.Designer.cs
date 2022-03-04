@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace PetCity.Migrations
 {
     [DbContext(typeof(PetCityContext))]
-    [Migration("20220303190148_first")]
-    partial class first
+    [Migration("20220304095116_eeee")]
+    partial class eeee
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,10 +84,6 @@ namespace PetCity.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("AddressName")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
@@ -97,11 +93,15 @@ namespace PetCity.Migrations
                     b.Property<int>("DistrictId")
                         .HasColumnType("int");
 
-                    b.Property<string>("OpenAddres1")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("OpenAddres2")
+                    b.Property<string>("OpenAddress1")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("OpenAddress2")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -119,6 +119,50 @@ namespace PetCity.Migrations
                     b.HasIndex("StateId");
 
                     b.ToTable("Address");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CityId = 2,
+                            CountryId = 1,
+                            DistrictId = 3,
+                            Name = "Adems",
+                            OpenAddress1 = "bagcilar sok mahalllesi",
+                            OpenAddress2 = "caminin arkasi"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CityId = 6,
+                            CountryId = 4,
+                            DistrictId = 11,
+                            Name = "Hayris",
+                            OpenAddress1 = "Pendik sok mahalllesi",
+                            OpenAddress2 = "caminin karsisi"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CityId = 4,
+                            CountryId = 2,
+                            DistrictId = 8,
+                            Name = "Muhammed",
+                            OpenAddress1 = "Bahçelievler sok mahalllesi",
+                            OpenAddress2 = "kepacinin karsisi",
+                            StateId = 2
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CityId = 5,
+                            CountryId = 3,
+                            DistrictId = 10,
+                            Name = "fatihs",
+                            OpenAddress1 = "sıcak denizler",
+                            OpenAddress2 = "bir tatil yeri",
+                            StateId = 3
+                        });
                 });
 
             modelBuilder.Entity("Brand", b =>
@@ -748,25 +792,25 @@ namespace PetCity.Migrations
             modelBuilder.Entity("Address", b =>
                 {
                     b.HasOne("City", "City")
-                        .WithMany()
+                        .WithMany("Addresses")
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Country", "Country")
-                        .WithMany()
+                        .WithMany("Addresses")
                         .HasForeignKey("CountryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("District", "District")
-                        .WithMany()
+                        .WithMany("Addresses")
                         .HasForeignKey("DistrictId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("State", "State")
-                        .WithMany()
+                        .WithMany("Addresses")
                         .HasForeignKey("StateId");
 
                     b.Navigation("City");
@@ -945,6 +989,8 @@ namespace PetCity.Migrations
 
             modelBuilder.Entity("City", b =>
                 {
+                    b.Navigation("Addresses");
+
                     b.Navigation("District");
                 });
 
@@ -955,9 +1001,16 @@ namespace PetCity.Migrations
 
             modelBuilder.Entity("Country", b =>
                 {
+                    b.Navigation("Addresses");
+
                     b.Navigation("city");
 
                     b.Navigation("state");
+                });
+
+            modelBuilder.Entity("District", b =>
+                {
+                    b.Navigation("Addresses");
                 });
 
             modelBuilder.Entity("PetSpecies", b =>
@@ -967,6 +1020,8 @@ namespace PetCity.Migrations
 
             modelBuilder.Entity("State", b =>
                 {
+                    b.Navigation("Addresses");
+
                     b.Navigation("city");
                 });
 

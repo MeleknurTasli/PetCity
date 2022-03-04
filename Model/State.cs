@@ -6,4 +6,7 @@ public class State
     public Country Country { get; set; }
     public virtual ICollection<City>? city { get; set; }
 
+    public virtual ICollection<Address>? Addresses { get; set; }
+
+
 }

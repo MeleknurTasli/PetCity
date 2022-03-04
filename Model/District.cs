@@ -5,4 +5,7 @@ public class District
     public int CityId { get; set; }
     public City City { get; set; }
 
+    public virtual ICollection<Address>? Addresses {get;set;}
+
+
 }

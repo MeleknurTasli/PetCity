@@ -6,9 +6,11 @@ namespace PetCity.Controllers;
 public class AddressController : ControllerBase
 {
     private readonly IAddressService _IAddressService;
+
     public AddressController(IAddressService addressService)
     {
         _IAddressService = addressService;
+
     }
 
     [HttpGet]
@@ -17,7 +19,9 @@ public class AddressController : ControllerBase
         return await _IAddressService.GetAllAddresses();
     }
 
-    [HttpGet("id")]
+
+
+    [HttpGet("GetAddressById")]
     public async Task<Address> GetAddress([FromQuery] int id)
     {
         return await _IAddressService.GetAddress(id);
@@ -25,6 +29,7 @@ public class AddressController : ControllerBase
 
     [HttpGet("CountryList")]
     public async Task<ActionResult<List<Country>>> GetAllCountries()
+
     {
         return await _IAddressService.GetAllCountries();
     }
@@ -56,9 +61,9 @@ public class AddressController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<Address> RegisterAddress([FromQuery] int id)
+    public async Task<Address> RegisterAddress(Address address)
     {
-        return await _IAddressService.RegisterAddress();
+        return await _IAddressService.RegisterAddress(address);
     }
 
     [HttpDelete("DeleteAddress")]
@@ -99,7 +104,7 @@ public class AddressController : ControllerBase
         return await _IAddressService.CreateState(state);
 
     }
-    [HttpPost("CreateDistrict")]
+[HttpPost("CreateDistrict")]
     public async Task<District> CreateDistrict(District district)
     {
 
@@ -109,7 +114,7 @@ public class AddressController : ControllerBase
     }
 
     [HttpDelete("DeleteCountry")]
-      public async Task<Country> DeleteCountry(Country country)
+    public async Task<Country> DeleteCountry(Country country)
     {
 
 
@@ -118,12 +123,30 @@ public class AddressController : ControllerBase
     }
 
 
+    [HttpDelete("DeleteCity")]
+    public async Task<City> DeleteCity(City city)
+    {
 
 
+        return await _IAddressService.DeleteCity(city);
+
+    }
+
+    [HttpDelete("DeleteState")]
+    public async Task<State> DeleteState(State state)
+    {
 
 
+        return await _IAddressService.DeleteState(state);
+
+    }
+    [HttpDelete("DeleteDistrict")]
+    public async Task<District> DeleteDistrict(District district)
+    {
 
 
+        return await _IAddressService.DeleteDistrict(district);
 
+    }
 
 }

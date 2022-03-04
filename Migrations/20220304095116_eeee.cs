@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PetCity.Migrations
 {
-    public partial class first : Migration
+    public partial class eeee : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -373,11 +373,11 @@ namespace PetCity.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    AddressName = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OpenAddres1 = table.Column<string>(type: "longtext", nullable: false)
+                    OpenAddress1 = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    OpenAddres2 = table.Column<string>(type: "longtext", nullable: false)
+                    OpenAddress2 = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CountryId = table.Column<int>(type: "int", nullable: false),
                     CityId = table.Column<int>(type: "int", nullable: false),
@@ -611,6 +611,15 @@ namespace PetCity.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Address",
+                columns: new[] { "Id", "CityId", "CountryId", "DistrictId", "Name", "OpenAddress1", "OpenAddress2", "StateId" },
+                values: new object[,]
+                {
+                    { 1, 2, 1, 3, "Adems", "bagcilar sok mahalllesi", "caminin arkasi", null },
+                    { 2, 6, 4, 11, "Hayris", "Pendik sok mahalllesi", "caminin karsisi", null }
+                });
+
+            migrationBuilder.InsertData(
                 table: "District",
                 columns: new[] { "Id", "CityId", "Name" },
                 values: new object[,]
@@ -622,6 +631,16 @@ namespace PetCity.Migrations
                     { 9, 5, "Altstadt" },
                     { 10, 5, "Neuhausen" }
                 });
+
+            migrationBuilder.InsertData(
+                table: "Address",
+                columns: new[] { "Id", "CityId", "CountryId", "DistrictId", "Name", "OpenAddress1", "OpenAddress2", "StateId" },
+                values: new object[] { 3, 4, 2, 8, "Muhammed", "Bahçelievler sok mahalllesi", "kepacinin karsisi", 2 });
+
+            migrationBuilder.InsertData(
+                table: "Address",
+                columns: new[] { "Id", "CityId", "CountryId", "DistrictId", "Name", "OpenAddress1", "OpenAddress2", "StateId" },
+                values: new object[] { 4, 5, 3, 10, "fatihs", "sıcak denizler", "bir tatil yeri", 3 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Account_Role_RoleId",

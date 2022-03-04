@@ -1,7 +1,6 @@
 public class AddressService : IAddressService
 {
     private IAddressRepository _addressRepository;
-    public PetCityContext _petCityContext;
 
     public AddressService(IAddressRepository addressRepository)
     {
@@ -55,9 +54,9 @@ public class AddressService : IAddressService
     {
         return await _addressRepository.DeleteAddress(id);
     }
-    public async Task<Address> RegisterAddress()
+    public async Task<Address> RegisterAddress(Address address)
     {
-        return await _addressRepository.RegisterAddress();
+        return await _addressRepository.RegisterAddress(address);
     }
 
     public async Task<Address> UpdateAddress(int id)
@@ -66,91 +65,116 @@ public class AddressService : IAddressService
     }
 
 
-    Task<Country> IAddressService.CreateCountry(Country country)
+    async Task<Country> IAddressService.CreateCountry(Country country)
     {
-        _petCityContext = new PetCityContext();
 
-        var controller = _petCityContext.Country.FirstOrDefault(x => x.Name == country.Name);
-        if (controller == null)
+        var ExistCountry = await _addressRepository.FindCountryByName(country.Name);
+        if (ExistCountry == null)
         {
-
-            return _addressRepository.CreateCountry(country);
+            return await _addressRepository.CreateCountry(country);
         }
         else
         {
-            //Hata mesajı verilecek
-            return null;
+            throw new Exception();
         }
 
 
     }
 
-    Task<City> IAddressService.CreateCity(City city)
+    async Task<City> IAddressService.CreateCity(City city)
     {
-        _petCityContext = new PetCityContext();
-
-        var controller = _petCityContext.City.FirstOrDefault(x => x.Name == city.Name);
-        if (controller == null)
+        var ExistCity = await _addressRepository.FindCityByName(city.Name);
+        if (ExistCity == null)
         {
-
-            return _addressRepository.CreateCity(city);
+            return await _addressRepository.CreateCity(city);
         }
         else
         {
-            //Hata mesajı verilecek
-            return null;
+            throw new Exception();
         }
     }
 
-    Task<State> IAddressService.CreateState(State state)
+    async Task<State> IAddressService.CreateState(State state)
     {
-        _petCityContext = new PetCityContext();
-
-        var controller = _petCityContext.State.FirstOrDefault(x => x.Name == state.Name);
-        if (controller == null)
+        var ExistState = await _addressRepository.FindStateByName(state.Name);
+        if (ExistState == null)
         {
-
-            return _addressRepository.CreateState(state);
+            return await _addressRepository.CreateState(state);
         }
         else
         {
-            //Hata mesajı verilecek
-            return null;
+            throw new Exception();
         }
     }
 
-    Task<District> IAddressService.CreateDistrict(District district)
+    async Task<District> IAddressService.CreateDistrict(District district)
     {
-        _petCityContext = new PetCityContext();
-
-        var controller = _petCityContext.District.FirstOrDefault(x => x.Name == district.Name);
-        if (controller == null)
+        var ExistState = await _addressRepository.FindDistrictByName(district.Name);
+        if (ExistState == null)
         {
-
-            return _addressRepository.CreateDistrict(district);
+            return await _addressRepository.CreateDistrict(district);
         }
         else
         {
-            //Hata mesajı verilecek
-            return null;
+            throw new Exception();
         }
     }
 
-    Task<Country> IAddressService.DeleteCountry(Country country)
+    async Task<Country> IAddressService.DeleteCountry(Country country)
     {
-        _petCityContext = new PetCityContext();
-        var controller = _petCityContext.Country.FirstOrDefault(x => x.Name== country.Name);
-        if (controller != null)
+        var ExistCountry = await _addressRepository.FindCountryByName(country.Name);
+        if (ExistCountry != null)
         {
-            return _addressRepository.DeleteCountry(country);
+            return await _addressRepository.DeleteCountry(country);
         }
         else
         {
-        
-         //Hata mesajı verilecek
-            return null;
+            throw new Exception();
         }
-       
+
+
+    }
+
+    async Task<City> IAddressService.DeleteCity(City city)
+    {
+
+        var ExistCity = await _addressRepository.FindCityByName(city.Name);
+        if (ExistCity != null)
+        {
+            return await _addressRepository.DeleteCity(city);
+        }
+        else
+        {
+            throw new Exception();
+        }
+    }
+
+    async Task<State> IAddressService.DeleteState(State state)
+    {
+        var ExistState = await _addressRepository.FindStateByName(state.Name);
+        if (ExistState != null)
+        {
+            return await _addressRepository.DeleteState(state);
+        }
+        else
+        {
+            throw new Exception();
+        }
+    }
+
+    async Task<District> IAddressService.DeleteDistrict(District district)
+    {
+        var ExistState = await _addressRepository.FindDistrictByName(district.Name);
+        if (ExistState != null)
+        {
+            return await _addressRepository.DeleteDistrict(district);
+        }
+        else
+        {
+            throw new Exception();
+        }
+
+
     }
 }
 

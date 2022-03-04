@@ -2,6 +2,7 @@
 public class AddressRepository : IAddressRepository
 {
 
+
     PetCityContext _petCityContext;
 
     public AddressRepository()
@@ -9,9 +10,36 @@ public class AddressRepository : IAddressRepository
         _petCityContext = new PetCityContext();
     }
 
-    public async Task<Address> RegisterAddress()
+    async Task<Country> IAddressRepository.FindCountryByName(string countryName)
     {
-        return null;
+        return await _petCityContext.Set<Country>().FirstOrDefaultAsync(c => c.Name == countryName);
+
+    }
+    async Task<City> IAddressRepository.FindCityByName(string CityName)
+    {
+        return await _petCityContext.Set<City>().FirstOrDefaultAsync(c => c.Name == CityName);
+
+    }
+
+    async Task<State> IAddressRepository.FindStateByName(string StateName)
+    {
+        return await _petCityContext.Set<State>().FirstOrDefaultAsync(c => c.Name == StateName);
+
+    }
+
+    async Task<District> IAddressRepository.FindDistrictByName(string DistirctName)
+    {
+        return await _petCityContext.Set<District>().FirstOrDefaultAsync(c => c.Name == DistirctName);
+
+    }
+
+
+
+    public async Task<Address> RegisterAddress(Address address)
+    {
+        _petCityContext.Address.AddAsync(address);
+        _petCityContext.SaveChangesAsync();
+        return address;
     }
 
 
@@ -39,12 +67,12 @@ public class AddressRepository : IAddressRepository
     public async Task<Country> GetCountry(string name)
     {
 
-        var countrycontroller =await _petCityContext.Set<Country>().FirstOrDefaultAsync(p => p.Name == name );
-        if(countrycontroller != null)
+        var countrycontroller = await _petCityContext.Set<Country>().FirstOrDefaultAsync(p => p.Name == name);
+        if (countrycontroller != null)
         {
             return countrycontroller;
         }
-         return null;
+        return null;
     }
 
 
@@ -53,12 +81,12 @@ public class AddressRepository : IAddressRepository
 
         return await _petCityContext.Set<Country>().ToListAsync();
     }
-   
+
 
     string name;
     public async Task<List<State>> GetAllStatesByCountryId(int id)
     {
-    
+
         var getState = await _petCityContext.Set<State>().Where(p => p.CountryId == id).ToListAsync();
         if (getState != null)
         {
@@ -130,52 +158,66 @@ public class AddressRepository : IAddressRepository
     }
 
 
-    public async Task<Address> RegisterAddress(Address address)
-    {
-        address.City.Name = name;
-
-
-
-        return null;
-    }
-
     Task<Address> IAddressRepository.UpdateAddress(int id)
     {
         throw new NotImplementedException();
     }
 
-     async Task<Country> IAddressRepository.CreateCountry(Country country)
+    async Task<Country> IAddressRepository.CreateCountry(Country country)
     {
-        _petCityContext.Country.AddAsync(country);
-        _petCityContext.SaveChangesAsync();
+
+        await _petCityContext.Set<Country>().AddAsync(country);
+        await _petCityContext.SaveChangesAsync();
         return country;
-        
     }
     async Task<City> IAddressRepository.CreateCity(City city)
     {
-           _petCityContext.City.AddAsync(city);
+        await _petCityContext.Set<City>().AddAsync(city);
+        await _petCityContext.SaveChangesAsync();
+        return city;
+    }
+
+    async Task<State> IAddressRepository.CreateState(State state)
+    {
+           await _petCityContext.Set<State>().AddAsync(state);
+        await _petCityContext.SaveChangesAsync();
+        return state;
+    }
+
+    async Task<District> IAddressRepository.CreateDistrict(District district)
+    {
+           await _petCityContext.Set<District>().AddAsync(district);
+        await _petCityContext.SaveChangesAsync();
+        return district;
+    }
+
+    async Task<Country> IAddressRepository.DeleteCountry(Country country)
+    {
+        _petCityContext.Set<Country>().Remove(country);
+        _petCityContext.SaveChangesAsync();
+        return country;
+    }
+
+    async Task<City> IAddressRepository.DeleteCity(City city)
+    {
+        _petCityContext.Set<City>().Remove(city);
         _petCityContext.SaveChangesAsync();
         return city;
     }
 
-   async Task<State> IAddressRepository.CreateState(State state)
+    async Task<State> IAddressRepository.DeleteState(State state)
     {
-           _petCityContext.State.AddAsync(state);
+        _petCityContext.Set<State>().Remove(state);
         _petCityContext.SaveChangesAsync();
         return state;
     }
 
-   async Task<District> IAddressRepository.CreateDistrict(District district)
+    async Task<District> IAddressRepository.DeleteDistrict(District district)
     {
-           _petCityContext.District.AddAsync(district);
+        _petCityContext.Set<District>().Remove(district);
         _petCityContext.SaveChangesAsync();
         return district;
     }
 
-   async Task<Country> IAddressRepository.DeleteCountry(Country country)
-    {
-       _petCityContext.Country.Remove(country);
-       _petCityContext.SaveChangesAsync();
-       return country;
-    }
+
 }
