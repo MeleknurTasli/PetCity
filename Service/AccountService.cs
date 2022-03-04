@@ -3,49 +3,53 @@ public class AccountService : IAccountService
     private readonly IAccountRepository _accountRepository;
     public AccountService(IAccountRepository accountRepository)
     {
-        _accountRepository= accountRepository;
+        _accountRepository = accountRepository; 
     }
 
-    public Account BlockAccount()
+    public Task<Account> BlockAccount()
     {
         throw new NotImplementedException();
     }
 
-    public Account ChangeVisibilityOfAccount()
+    public Task<Account> ChangeVisibilityOfAccount()
     {
         throw new NotImplementedException();
     }
 
-    public AccountDTO CreateNewAccount(AccountDTO account)
+    public   async Task<Account> CreateNewAccount(Account account)
     {
-        return _accountRepository.CreateAccount(account);
+        return await _accountRepository.CreateAccount(account);
     }
 
-    public Account GetAccountByEmail(string email)
+    public async Task<Account> GetAccountByEmail(string email)
     {
-        throw new NotImplementedException();
+        return await _accountRepository.GetAccountByEmail(email);
+
     }
 
-    public List<Account> GetAllAccounts()
+    public async  Task<List<Account>> GetAllAccounts()
     {
-        throw new NotImplementedException();
+        return await _accountRepository.GetAllAccounts();
     }
 
-    public Account Role()
+    public async Task<Account> Role()
     {
-        throw new NotImplementedException();
+        throw new NotImplementedException();        //halledicez
     }
 
-    public Account UpdateAccountByEmail(Account account, string email)
+    public  async Task<Account> UpdateAccountByEmail(Account account, string email)
     {
-        throw new NotImplementedException();
+        return await _accountRepository.UpdateAccountByEmail(email, account);
     }
 
-    public Account UpdateAccountPassword(string oldpassword, string newpassword)
+    public  async Task<Account> UpdateAccountPassword(Account account, string oldpassword, string newpassword)
     {
-        throw new NotImplementedException();
+        return await _accountRepository.UpdateAccountPassword(account, oldpassword, newpassword);     //sonradan bir kontrol yap tekrardan ve repoda daraltma yapacaz unutma...
+
     }
+
+
 }
 
-    
+
 
