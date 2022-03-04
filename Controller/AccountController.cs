@@ -12,9 +12,16 @@ public class AccountController : ControllerBase
         _accountService=accountService;
     }
     [HttpPost]
-    public async Task<Account> CreateNewAccount(Account account)
+    public async Task<Account> CreateNewAccount(AccountDTO account)
     {
-        return await _accountService.CreateNewAccount(account);
+        Account accountresult=new Account()
+        {
+         Email=account.Email,
+         Password=account.Password,
+         IsBlocked=account.IsBlocked,
+         Visibility=account.Visibility  
+        };
+        return await _accountService.CreateNewAccount(accountresult);
     }
 
         
