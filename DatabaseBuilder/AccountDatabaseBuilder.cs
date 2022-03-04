@@ -21,20 +21,20 @@ public static class AccountDatabaseBuilder
              Visibility = true
          }
      );
-    //     modelBuilder.Entity<Role>().HasData(
-    //       new Role
-    //       {
-    //           Id = 1,
-    //           Name = "admin"
+        modelBuilder.Entity<Role>().HasData(
+          new Role
+          {
+              Id = 1,
+              Name = "admin"
 
-    //       },
-    //       new Role
-    //       {
-    //           Id = 2,
-    //           Name = "moderator"
+          },
+          new Role
+          {
+              Id = 2,
+              Name = "moderator"
 
-    //       }
-    //   );
+          }
+      );
     }
 
     public static void TableBuilder(ModelBuilder modelBuilder)

@@ -54,53 +54,76 @@ public static class AddressDatabaseBuilder
            entity.HasOne(c => c.City).WithMany(c => c.District).HasForeignKey(c => c.CityId);
        });
 
-       modelBuilder.Entity<Address>().HasData(
-    new Address
-    {
-        Id = 1,
-        Name = "Adems",
-        OpenAddress1="bagcilar sok mahalllesi",
-        OpenAddress2="caminin arkasi",
-        CountryId=1,
-        CityId=2,
-        DistrictId=3
+        modelBuilder.Entity<Address>().HasData(
+     new Address
+     {
+         Id = 1,
+         Name = "Adems",
+         OpenAddress1 = "bagcilar sok mahalllesi",
+         OpenAddress2 = "caminin arkasi",
+         CountryId = 1,
+         CityId = 2,
+         DistrictId = 3
 
-    },
-    new Address
-    {
-        Id = 2,
-        Name = "Hayris",
-        OpenAddress1="Pendik sok mahalllesi",
-        OpenAddress2="caminin karsisi",
-        CountryId=4,
-        CityId=6,
-        DistrictId=11
+     },
+     new Address
+     {
+         Id = 2,
+         Name = "Hayris",
+         OpenAddress1 = "Pendik sok mahalllesi",
+         OpenAddress2 = "caminin karsisi",
+         CountryId = 4,
+         CityId = 6,
+         DistrictId = 11
 
-    },
-    new Address
-    {
-        Id = 3,
-        Name = "Muhammed",
-        OpenAddress1="Bahçelievler sok mahalllesi",
-        OpenAddress2="kepacinin karsisi",
-        CountryId=2,
-        StateId=2,
-        CityId=4,
-        DistrictId=8
+     },
+     new Address
+     {
+         Id = 3,
+         Name = "Muhammed",
+         OpenAddress1 = "Bahçelievler sok mahalllesi",
+         OpenAddress2 = "kepacinin karsisi",
+         CountryId = 2,
+         StateId = 2,
+         CityId = 4,
+         DistrictId = 8
 
-    },
-    new Address
-    {
-        Id = 4,
-        Name = "fatihs",
-        OpenAddress1="sıcak denizler",
-        OpenAddress2="bir tatil yeri",
-        CountryId=3,
-        StateId=3,
-        CityId=5,
-        DistrictId=10
+     },
+     new Address
+     {
+         Id = 4,
+         Name = "fatihs",
+         OpenAddress1 = "sıcak denizler",
+         OpenAddress2 = "bir tatil yeri",
+         CountryId = 3,
+         StateId = 3,
+         CityId = 5,
+         DistrictId = 10
 
-    });
+     },
+      new Address
+      {
+          Id = 5,
+          Name = "Ademiş",
+          OpenAddress1 = "bagcilar  iş sok mahalllesi",
+          OpenAddress2 = "caminin arkasi",
+          CountryId = 1,
+          CityId = 1,
+          DistrictId = 1
+
+      },
+      new Address
+      {
+          Id = 6,
+          Name = "Hayri iş",
+          OpenAddress1 = "İş adresi sk mahalllesi",
+          OpenAddress2 = " sahabt plaza",
+          CountryId = 1,
+          CityId = 2,
+          DistrictId = 4
+
+      }
+     );
 
 
 
@@ -302,22 +325,7 @@ public static class AddressDatabaseBuilder
 
           }
 
-        );
 
-
-        modelBuilder.Entity<Role>().HasData(
-           new Role
-           {
-               Id = 1,
-               Name = "admin"
-
-           },
-           new Role
-           {
-               Id = 2,
-               Name = "moderator"
-
-           }
        );
 
 
