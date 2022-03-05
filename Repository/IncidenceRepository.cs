@@ -202,7 +202,7 @@ public class IncidenceRepository : IIncidenceRepository
     public async Task<Incidence> GetIncidencesById(int Id)
     {
         try{
-        //Incidence incidence =  await _petCityContext.Incidences.Where(p=> p.Id == Id).Where(p=>p.Visibility == true).FirstOrDefaultAsync();
+        //Incidence incidence =  await _petCityContext.Incidences.Where(p=> p.Id == Id).FirstOrDefaultAsync();
         var Incidence = await (from x in _petCityContext.Incidences
                                                    join u in _petCityContext.Users on x.UserId equals u.Id
                                                    join d in _petCityContext.District on x.DistrictId equals d.Id
