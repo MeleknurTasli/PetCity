@@ -1,15 +1,11 @@
-public class Country{
-    public int CountryId{ get; set; }
-    public string? CountryName { get; set; }
-    public int? CountryCode { get; set; }
-    public Address? Address { get; set; }
-    public int? AddressId { get; set; }
-    public virtual ICollection<State>? State { get; set; }
-    public virtual ICollection<City>? City { get; set; }
+public class Country
+{
+    public int Id { get; set; }
+    public string? Name { get; set; }
+    public int? Code { get; set; }
+    public virtual ICollection<City>? city { get; set; }
+    public virtual ICollection<State>? state { get; set; }
+    public virtual ICollection<Address>? Addresses {get;set;}
 
-    public Country()
-    {
-    
-    }
 
 }

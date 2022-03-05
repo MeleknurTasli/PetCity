@@ -1,19 +1,97 @@
-public class AddressRepository
+
+public class AddressRepository : IAddressRepository
 {
 
-    public List<Address> GetAllAddresses()
-    {
 
-        return MockData.ListOfAddress;
+    PetCityContext _petCityContext;
+
+    public AddressRepository()
+    {
+        _petCityContext = new PetCityContext();
     }
-    public Address GetAddress(int id)
-    {
-        var addresscontroller = MockData.ListOfAddress.FirstOrDefault(x => x.AddressId == id);
 
-        if (addresscontroller != null)
+    async Task<Country> IAddressRepository.FindCountryByName(string countryName)
+    {
+        return await _petCityContext.Set<Country>().FirstOrDefaultAsync(c => c.Name == countryName);
+
+    }
+    async Task<City> IAddressRepository.FindCityByName(string CityName)
+    {
+        return await _petCityContext.Set<City>().FirstOrDefaultAsync(c => c.Name == CityName);
+
+    }
+
+    async Task<State> IAddressRepository.FindStateByName(string StateName)
+    {
+        return await _petCityContext.Set<State>().FirstOrDefaultAsync(c => c.Name == StateName);
+
+    }
+
+    async Task<District> IAddressRepository.FindDistrictByName(string DistirctName)
+    {
+        return await _petCityContext.Set<District>().FirstOrDefaultAsync(c => c.Name == DistirctName);
+
+    }
+
+
+
+    public async Task<Address> RegisterAddress(Address address)
+    {
+        _petCityContext.Address.AddAsync(address);
+        _petCityContext.SaveChangesAsync();
+        return address;
+    }
+
+
+    public async Task<List<Address>> GetAllAddress()
+    {
+
+        return await _petCityContext.Set<Address>().ToListAsync();
+    }
+    public async Task<Address> GetAddress(int id)
+    {
+
+        var getAddress = await _petCityContext.Set<Address>().SingleOrDefaultAsync(p => p.Id == id);
+
+        if (getAddress != null)
         {
 
-            return addresscontroller;
+            return getAddress;
+
+        }
+        else
+        {
+            return null;
+        }
+    }
+    public async Task<Country> GetCountry(string name)
+    {
+
+        var countrycontroller = await _petCityContext.Set<Country>().FirstOrDefaultAsync(p => p.Name == name);
+        if (countrycontroller != null)
+        {
+            return countrycontroller;
+        }
+        return null;
+    }
+
+
+    public async Task<List<Country>> GetAllCountry()
+    {
+
+        return await _petCityContext.Set<Country>().ToListAsync();
+    }
+
+
+    string name;
+    public async Task<List<State>> GetAllStatesByCountryId(int id)
+    {
+
+        var getState = await _petCityContext.Set<State>().Where(p => p.CountryId == id).ToListAsync();
+        if (getState != null)
+        {
+
+            return getState;
 
         }
         else
@@ -22,21 +100,13 @@ public class AddressRepository
         }
     }
 
-    public List<Country> GetAllCountry()
+    public async Task<List<City>> GetAllCitiesByStateId(int id)
     {
-
-        return MockData.ListOfCountry;
-    }
-
-
-    public Country GetCountry(int id)
-    {
-        var Countrycontroller = MockData.ListOfCountry.FirstOrDefault(x => x.CountryId == id);
-
-        if (Countrycontroller != null)
+        var getCity = await _petCityContext.Set<City>().Where(p => p.StateId == id).ToListAsync();
+        if (getCity != null)
         {
 
-            return Countrycontroller;
+            return getCity;
 
         }
         else
@@ -45,21 +115,13 @@ public class AddressRepository
         }
     }
 
-    public List<City> GetAllCity()
+    public async Task<List<City>> GetAllCitiesByContryId(int id)
     {
-
-        return MockData.ListOfCity;
-    }
-
-
-    public City GetCity(int id)
-    {
-        var Citycontroller = MockData.ListOfCity.FirstOrDefault(x => x.CityId == id);
-
-        if (Citycontroller != null)
+        var getCity = await _petCityContext.Set<City>().Where(p => p.CountryId == id).ToListAsync();
+        if (getCity != null)
         {
 
-            return Citycontroller;
+            return getCity;
 
         }
         else
@@ -68,21 +130,13 @@ public class AddressRepository
         }
     }
 
-    public List<State> GetAllState()
+    public async Task<List<District>> GetAllDistrictsByCityId(int id)
     {
-
-        return MockData.ListOfState;
-    }
-
-
-    public State GetState(int id)
-    {
-        var Statecontroller = MockData.ListOfState.FirstOrDefault(x => x.StateId== id);
-
-        if (Statecontroller != null)
+        var getDistricts = await _petCityContext.Set<District>().Where(p => p.CityId == id).ToListAsync();
+        if (getDistricts != null)
         {
 
-            return Statecontroller;
+            return getDistricts;
 
         }
         else
@@ -90,74 +144,80 @@ public class AddressRepository
             return null;
         }
     }
-
-    public List<District> GetAllDistricts()
+    public async Task<Address> DeleteAddress(int id)
     {
 
-        return MockData.ListOfDistrict;
+
+        var DeletedAddress = await _petCityContext.Address.FirstOrDefaultAsync(x => x.Id == id);
+        _petCityContext.Address.Remove(DeletedAddress);
+        _petCityContext.SaveChangesAsync();
+
+        return null;
+
+
     }
 
 
-    public District GetDistrict(int id)
+    Task<Address> IAddressRepository.UpdateAddress(int id)
     {
-        var Districtcontroller = MockData.ListOfDistrict.FirstOrDefault(x => x.DistrictId == id);
-
-        if (Districtcontroller != null)
-        {
-
-            return Districtcontroller;
-
-        }
-        else
-        {
-            return null;
-        }
+        throw new NotImplementedException();
     }
 
-
-    public List<Neighborhood> GetAllNeigborhoods()
+    async Task<Country> IAddressRepository.CreateCountry(Country country)
     {
 
-        return MockData.ListOfNeighborhood;
+        await _petCityContext.Set<Country>().AddAsync(country);
+        await _petCityContext.SaveChangesAsync();
+        return country;
     }
-
-
-    public Neighborhood GetAllNeigborhood(int id)
+    async Task<City> IAddressRepository.CreateCity(City city)
     {
-        var Neigborhoodcontroller = MockData.ListOfNeighborhood.FirstOrDefault(x => x.NeighborhoodId== id);
-
-        if (Neigborhoodcontroller != null)
-        {
-
-            return Neigborhoodcontroller;
-
-        }
-        else
-        {
-            return null;
-        }
+        await _petCityContext.Set<City>().AddAsync(city);
+        await _petCityContext.SaveChangesAsync();
+        return city;
     }
 
-    public List<Street> GetAllStreets()
+    async Task<State> IAddressRepository.CreateState(State state)
     {
-
-        return MockData.ListOfStreet;
+           await _petCityContext.Set<State>().AddAsync(state);
+        await _petCityContext.SaveChangesAsync();
+        return state;
     }
 
-    public Street GetAllStreet(int id)
+    async Task<District> IAddressRepository.CreateDistrict(District district)
     {
-        var Streetcontroller = MockData.ListOfStreet.FirstOrDefault(x => x.StreetId == id);
-
-        if (Streetcontroller != null)
-        {
-
-            return Streetcontroller;
-
-        }
-        else
-        {
-            return null;
-        }
+           await _petCityContext.Set<District>().AddAsync(district);
+        await _petCityContext.SaveChangesAsync();
+        return district;
     }
+
+    async Task<Country> IAddressRepository.DeleteCountry(Country country)
+    {
+        _petCityContext.Set<Country>().Remove(country);
+        _petCityContext.SaveChangesAsync();
+        return country;
+    }
+
+    async Task<City> IAddressRepository.DeleteCity(City city)
+    {
+        _petCityContext.Set<City>().Remove(city);
+        _petCityContext.SaveChangesAsync();
+        return city;
+    }
+
+    async Task<State> IAddressRepository.DeleteState(State state)
+    {
+        _petCityContext.Set<State>().Remove(state);
+        _petCityContext.SaveChangesAsync();
+        return state;
+    }
+
+    async Task<District> IAddressRepository.DeleteDistrict(District district)
+    {
+        _petCityContext.Set<District>().Remove(district);
+        _petCityContext.SaveChangesAsync();
+        return district;
+    }
+
 
 }
