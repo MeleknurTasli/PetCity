@@ -218,7 +218,6 @@ public class IncidenceRepository : IIncidenceRepository
         return Incidences; 
     }
 
-    //TODO
     public async Task<IEnumerable<Incidence>> GetIncidencesByDistrictName(string districtName)
     {
         //IEnumerable<Incidence> Incidences =  await _petCityContext.Incidences.Where(p=> p.District.Name == districtName).Where(p=>p.Visibility == true).OrderByDescending(p=>p.Date).ToListAsync();

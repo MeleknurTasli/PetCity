@@ -15,7 +15,6 @@ public class IncidenceService : IIncidenceService
              return ConvertToIncedenceDTO(Incidences);
         }
 
-        //todo
         return new List<IncidenceDTO> { new IncidenceDTO(null) };
 
     }
