@@ -179,14 +179,14 @@ public class AddressRepository : IAddressRepository
 
     async Task<State> IAddressRepository.CreateState(State state)
     {
-           await _petCityContext.Set<State>().AddAsync(state);
+        await _petCityContext.Set<State>().AddAsync(state);
         await _petCityContext.SaveChangesAsync();
         return state;
     }
 
     async Task<District> IAddressRepository.CreateDistrict(District district)
     {
-           await _petCityContext.Set<District>().AddAsync(district);
+        await _petCityContext.Set<District>().AddAsync(district);
         await _petCityContext.SaveChangesAsync();
         return district;
     }
