@@ -1,13 +1,11 @@
 public class District
 {
-    public int DistrictId { get; set; }
+    public int Id { get; set; }
     public string? Name { get; set; }
-    public City? City { get; set; }
     public int CityId { get; set; }
-    public List<Neighborhood>? Neighborhood { get; set; }
+    public City City { get; set; }
 
+    public virtual ICollection<Address>? Addresses {get;set;}
 
-
-    public virtual List<Incidence> IncidenceList {get; set; }
 
 }

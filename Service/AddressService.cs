@@ -1,166 +1,182 @@
-// public class AddressService : IAddressService
+public class AddressService : IAddressService
+{
+    private IAddressRepository _addressRepository;
+
+    public AddressService(IAddressRepository addressRepository)
+    {
+        _addressRepository = addressRepository;
+    }
 
 
-// {
-//     private AddressRepository addressRepository;
+    public async Task<Address> GetAddress(int id)
+    {
+        if (id != null)
+        {
+            return await _addressRepository.GetAddress(id);
 
+        }
+        return null;
+    }
 
-//     public AddressService()
-//     {
-//         addressRepository = new AddressRepository();
-//     }
-//     List<Address> GetAllAdress()
-//     {
+    public async Task<List<Address>> GetAllAddresses()
+    {
+        return await _addressRepository.GetAllAddress();
+    }
 
+    public async Task<List<City>> GetAllCitiesByContryId(int id)
+    {
+        return await _addressRepository.GetAllCitiesByContryId(id);
+    }
 
-//         return addressRepository.GetAllAddress();
-//     }
+    public async Task<List<City>> GetAllCitiesByStateId(int id)
+    {
+        return await _addressRepository.GetAllCitiesByStateId(id);
+    }
 
-//     Address IAddressService.GetAdress(int id)
-//     {
-//         if (id != null)
-//         {
-//             return addressRepository.GetAdress(id);
+    public async Task<List<Country>> GetAllCountries()
+    {
+        return await _addressRepository.GetAllCountry();
+    }
 
-//         }
-//         return null;
-
-//     }
-
-//     List<City> IAddressService.GetAllCity()
-//     {
-
-//         return addressRepository.GetAllCity();
-//     }
-
-//     List<Country> IAddressService.GetAllCountry()
-//     {
-//          return addressRepository.GetAllCountry();
-//     }
-
-//     List<District> IAddressService.GetAllDistricts()
-//     {
-//          return addressRepository.GetAllDistricts();
-//     }
-
-//     List<State> IAddressService.GetAllState()
-//     {
-    
-//          return addressRepository.GetAllState();
-//     }
-
-//     City IAddressService.GetCity(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetCity(id);
-
-//         }
-//         return null;
-
-//     Country IAddressService.GetCountry(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetAdress(id);
-
-//         }
-//         return null;
-//     }
-
-//    District IAddressService.GetDistrict(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetDistrict(id);
-
-//         }
-//         return null;
-//     }
-
-//     State IAddressService.GetState(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetState(id);
-
-//         }
-//         return null;
-//     }
-//     Neighborhood IAddressService.GetNeigborhood(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetNeigborhood(id);
-
-//         }
-//         return null;
-//     }
-//     List<Neighborhood> IAddressService.GetAllNeighborhood()
-//     {
-//          return addressRepository.GetAllCountry();
-//     }
-//     List<Country> IAddressService.GetAllCountry()
-//     {
-//          return addressRepository.GetAllCountry();
-//     }
-
-//     Street IAddressService.GetStreet(int id)
-//     {
-//          if (id != null)
-//         {
-//             return addressRepository.GetStreet(id);
-
-//         }
-//         return null;
-//     }
+    public async Task<List<District>> GetAllDistrictsByCityId(int id)
+    {
+        return await _addressRepository.GetAllDistrictsByCityId(id);
+    }
 
 
 
-// }
+    public async Task<List<State>> GetAllStatesByCountryId(int id)
+    {
+        return await _addressRepository.GetAllStatesByCountryId(id);
+    }
 
-//     List<Address> IAddressService.GetAllAdress()
-//     {
-//         throw new NotImplementedException();
-//     }
+    public async Task<Address> DeleteAddress(int id)
+    {
+        return await _addressRepository.DeleteAddress(id);
+    }
+    public async Task<Address> RegisterAddress(Address address)
+    {
+        return await _addressRepository.RegisterAddress(address);
+    }
 
-//     public Country GetCountry(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
+    public async Task<Address> UpdateAddress(int id)
+    {
+        return await _addressRepository.UpdateAddress(id);
+    }
 
-//     public State GetState(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
 
-//     public List<District> GetAllDistrict()
-//     {
-//         throw new NotImplementedException();
-//     }
+    async Task<Country> IAddressService.CreateCountry(Country country)
+    {
 
-//     public District GetDistrict(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
+        var ExistCountry = await _addressRepository.FindCountryByName(country.Name);
+        if (ExistCountry == null)
+        {
+            return await _addressRepository.CreateCountry(country);
+        }
+        else
+        {
+            throw new Exception();
+        }
 
-//     public List<Neighborhood> GetAllNeigborhood()
-//     {
-//         throw new NotImplementedException();
-//     }
 
-//     public Neighborhood GetNeigborhood(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
+    }
 
-//     public List<Street> GetAllStreet()
-//     {
-//         throw new NotImplementedException();
-//     }
+    async Task<City> IAddressService.CreateCity(City city)
+    {
+        var ExistCity = await _addressRepository.FindCityByName(city.Name);
+        if (ExistCity == null)
+        {
+            return await _addressRepository.CreateCity(city);
+        }
+        else
+        {
+            throw new Exception();
+        }
+    }
 
-//     public Street GetStreet(int id)
-//     {
-//         throw new NotImplementedException();
-//     }
-// }
+    async Task<State> IAddressService.CreateState(State state)
+    {
+        var ExistState = await _addressRepository.FindStateByName(state.Name);
+        if (ExistState == null)
+        {
+            return await _addressRepository.CreateState(state);
+        }
+        else
+        {
+            throw new Exception();
+        }
+    }
+
+    async Task<District> IAddressService.CreateDistrict(District district)
+    {
+        var ExistState = await _addressRepository.FindDistrictByName(district.Name);
+        if (ExistState == null)
+        {
+            return await _addressRepository.CreateDistrict(district);
+        }
+        else
+        {
+            throw new Exception();
+        }
+    }
+
+    async Task<Country> IAddressService.DeleteCountry(Country country)
+    {
+        var ExistCountry = await _addressRepository.FindCountryByName(country.Name);
+        if (ExistCountry != null)
+        {
+            return await _addressRepository.DeleteCountry(country);
+        }
+        else
+        {
+            throw new Exception();
+        }
+
+
+    }
+
+    async Task<City> IAddressService.DeleteCity(City city)
+    {
+
+        var ExistCity = await _addressRepository.FindCityByName(city.Name);
+        if (ExistCity != null)
+        {
+            return await _addressRepository.DeleteCity(city);
+        }
+        else
+        {
+            throw new Exception();
+        }
+    }
+
+    async Task<State> IAddressService.DeleteState(State state)
+    {
+        var ExistState = await _addressRepository.FindStateByName(state.Name);
+        if (ExistState != null)
+        {
+            return await _addressRepository.DeleteState(state);
+        }
+        else
+        {
+            throw new Exception();
+        }
+    }
+
+    async Task<District> IAddressService.DeleteDistrict(District district)
+    {
+        var ExistState = await _addressRepository.FindDistrictByName(district.Name);
+        if (ExistState != null)
+        {
+            return await _addressRepository.DeleteDistrict(district);
+        }
+        else
+        {
+            throw new Exception();
+        }
+
+
+    }
+}
+
+
+

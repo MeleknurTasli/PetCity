@@ -1,10 +1,15 @@
 using System.Collections.Generic;
 
-public interface IAddressService
+public interface IAddressRepository
 {
-    Task<List<Address>> GetAllAddresses();
+
+    Task<Country> FindCountryByName(string countryName);
+    Task<City> FindCityByName(string CityName);
+    Task<State> FindStateByName(string StateName);
+    Task<District> FindDistrictByName(string DistirctName);
+    Task<List<Address>> GetAllAddress();
     Task<Address> GetAddress(int id);
-    Task<List<Country>> GetAllCountries();
+    Task<List<Country>> GetAllCountry();
     Task<List<State>> GetAllStatesByCountryId(int id);
     Task<List<City>> GetAllCitiesByStateId(int id);
     Task<List<City>> GetAllCitiesByContryId(int id);

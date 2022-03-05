@@ -15,9 +15,8 @@ public class PetCityContext : DbContext
     public DbSet<Address>? Address { get; set; }
     public DbSet<Country>? Country { get; set; }
     public DbSet<City>? City { get; set; }
-    public DbSet<Neighborhood>? Neighborhood { get; set; }
     public DbSet<State>? State { get; set; }
-    public DbSet<Street>? Street { get; set; }
+    public DbSet<District> District { get; set; }
 
     public DbSet<Supplier>? Suppliers {get; set;}
 
