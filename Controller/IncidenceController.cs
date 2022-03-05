@@ -29,7 +29,7 @@ public class IncidenceController : ControllerBase
          return await _incidenceService.GetIncidencesByUserName(username);
     }
 
-    [HttpGet("{FirstDate}/{LastDate}")]
+    [HttpGet("Date")]//Date?FirstDate=2022-03-04T18:25:43.511Z&LastDate=2022-03-06T18:25:43.511
     public async Task<IEnumerable<IncidenceDTO>> GetIncidencesByDate(DateTime FirstDate, DateTime LastDate)
     {
         return await _incidenceService.GetIncidencesByDate(FirstDate,LastDate);
@@ -54,13 +54,13 @@ public class IncidenceController : ControllerBase
     }
  
     [HttpPost]
-    public async Task<IncidenceDTO> CreateIncidence(IncidenceDTO incidence)
+    public async Task<IncidenceDTO> CreateIncidence(Incidence incidence)
     {
         return await _incidenceService.CreateIncidence(incidence);
     }
 
-    [HttpPut()]
-    public async Task<IncidenceDTO> ChangeIncidence(Incidence incidence)
+    [HttpPut]
+    public async Task<IncidenceDTO> ChangeIncidence(IncidenceDTO incidence)
     {
         return await _incidenceService.ChangeIncidence(incidence);
     }

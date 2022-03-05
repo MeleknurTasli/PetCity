@@ -7,6 +7,6 @@ public interface IIncidenceRepository
     Task<Incidence> GetIncidencesById(int Id);
     Task<IEnumerable<Incidence>> GetIncidencesByName(string name);
     Task<Incidence> ChangeIncidenceVisibilityById(int Id);
-    Task<Incidence> CreateIncidence(IncidenceDTO incidence);
-    Task<Incidence> ChangeIncidence(Incidence incidence); 
+    Task<Incidence> CreateIncidence(Incidence incidence);
+    Task<Incidence> ChangeIncidence(IncidenceDTO incidence); 
 }

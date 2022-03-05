@@ -5,17 +5,23 @@ public static class IncidenceDatabaseBuilder
         modelBuilder.Entity<Incidence>().HasData(
             new Incidence{
                 Id=1,
-                Name="Kedi ac",
+                Name="Kedi kotu durumda",
                 Visibility=true,
-                Description = "kedi çok aç",
-                UserId = 1
+                Description = "kedi çok aç ve susuz ayrıca ayagı yaralı olabilir",
+                UserId = 1,
+                DistrictId = 1,
+                OpenAddress = "adres sokak no=4",
+                Date = DateTime.Today
             },
             new Incidence{
                 Id=2,
                 Name="Kopek ac",
                 Visibility=true ,
-                Description = "köpek çok aç",
-                UserId = 2
+                Description = "köpek çok aç acil yardım",
+                UserId = 2,
+                DistrictId = 4,
+                OpenAddress = "abc sokak no=8",
+                Date = DateTime.Today
             }
         );
 
