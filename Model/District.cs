@@ -6,6 +6,6 @@ public class District
     public City City { get; set; }
 
     public virtual ICollection<Address>? Addresses {get;set;}
-
+    public virtual ICollection<Incidence>? IncidenceList { get; set; }
 
 }
