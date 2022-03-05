@@ -26,6 +26,7 @@ public static class AddressDatabaseBuilder
            entity.HasKey(e => e.Id);
            entity.Property(e => e.Name).IsRequired();
            entity.Property(e => e.Code);
+           entity.Property(e=> e.HasState);
        });
 
         modelBuilder.Entity<State>(entity =>
@@ -124,38 +125,37 @@ public static class AddressDatabaseBuilder
 
       }
      );
-
-
-
-
-
         modelBuilder.Entity<Country>().HasData(
     new Country
     {
         Id = 1,
         Name = "Turkey",
-        Code = 001
+        Code = 001,
+        HasState=false
 
     },
     new Country
     {
         Id = 2,
         Name = "Usa",
-        Code = 002
+        Code = 002,
+        HasState=true
 
     },
       new Country
       {
           Id = 3,
           Name = "Germany",
-          Code = 003
+          Code = 003,
+          HasState=true
 
       },
       new Country
       {
           Id = 4,
           Name = "England",
-          Code = 004
+          Code = 004,
+          HasState=false
 
       }
 );
@@ -324,12 +324,8 @@ public static class AddressDatabaseBuilder
               CityId = 6
 
           }
-
-
        );
-
-
-        SetDataToDB(modelBuilder);
+       SetDataToDB(modelBuilder);
     }
 }
 
