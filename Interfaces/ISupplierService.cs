@@ -13,8 +13,8 @@ public interface ISupplierService
 
     IEnumerable<SupplierDTO> SupplierToSupplierDTO(IEnumerable<Supplier> suppliers);
 
-    Task<SupplierDTO> CreateSupplierOperation(SupplierDTO supplier);
-    Task<SupplierDTO> UpdateSupplierOperation(int id, SupplierDTO supplier);
+    Task<SupplierDTO> CreateSupplierOperation(Supplier supplier);
+    Task<SupplierDTO> UpdateSupplierOperation(int id, Supplier supplier);
     Task<SupplierDTO> DeleteSupplierOperation(int id);
 
 }

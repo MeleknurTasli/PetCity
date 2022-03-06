@@ -5,11 +5,14 @@ public class Account
     public string Password { get; set; }
     public bool IsBlocked { get; set; }
     public bool Visibility { get; set; }
-    public virtual ICollection<Role>? Role { get; set; }        
+    public virtual ICollection<Role>? Role { get; set; }
+
+
+    public virtual ICollection<Supplier> Suppliers { get; set; }        
 
     public Account()
     {
-
+        Suppliers = new List<Supplier>();
     }
 
     public Account(AccountDTO incomingAccount) {

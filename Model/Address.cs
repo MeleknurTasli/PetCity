@@ -13,4 +13,7 @@ public class Address
     public int DistrictId { get; set; }
     public District District { get; set; }
 
+
+    public virtual ICollection<Supplier> Suppliers { get; set; }
+
 }

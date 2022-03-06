@@ -57,26 +57,19 @@ public class SupplierService : ISupplierService
     }
 
     public IEnumerable<SupplierDTO> SupplierToSupplierDTO(IEnumerable<Supplier> suppliers)
-    {
+    {//TODO degisecek
         List<SupplierDTO> supplierDTOs = new List<SupplierDTO>();
         foreach(Supplier item in suppliers)
         {
-            SupplierDTO temp = new SupplierDTO();
-            temp.Name = item.Name;
-            temp.Account = item.Account;
-            temp.Address = item.Address;
-            temp.Brand = item.Brand;
-            temp.Rating = item.Rating;
-            temp.IsVisibility = item.IsVisibility;
-            supplierDTOs.Add(temp);
+            supplierDTOs.Add(new SupplierDTO(item));
         }
         return supplierDTOs;
     }
 
-    async Task<SupplierDTO> ISupplierService.CreateSupplierOperation(SupplierDTO supplier)
+    async Task<SupplierDTO> ISupplierService.CreateSupplierOperation(Supplier supplier)
     {
-        SupplierDTO supplierDTO = new SupplierDTO(await _supplierRepository.GetSupplierByName(supplier.Name));
-        if (supplierDTO == null)
+        Supplier supplierResponse = await _supplierRepository.GetSupplierByName(supplier.Name);
+        if (supplierResponse == null)
         {
             return new SupplierDTO(await _supplierRepository.CreateSupplierOperation(supplier));
         }
@@ -123,7 +116,7 @@ public class SupplierService : ISupplierService
         return new SupplierDTO(null);
     }
 
-    async Task<SupplierDTO> ISupplierService.UpdateSupplierOperation(int id, SupplierDTO supplier)
+    async Task<SupplierDTO> ISupplierService.UpdateSupplierOperation(int id, Supplier supplier)
     {
         SupplierDTO supplierDTO = new SupplierDTO(await _supplierRepository.GetSupplierById(id));
         if (supplierDTO != null)

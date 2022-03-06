@@ -1,29 +1,33 @@
 
 public class Supplier
 { 
-    private double _rating;
-
     public int Id { get; set; }
-    public string?  Name { get; set; }
-    public virtual Account? Account {get; set;}
-    public virtual Address? Address { get; set; }
-    public virtual ICollection<Brand>? Brand { get; set; } // virtual denildigi icin db de karsiligi yoktur.
-    public double Rating { get; set; }  
-
+    public string Name { get; set; }
+    public string Email { get; set; }
+    public double Rating { get; set; } 
     public bool IsVisibility { get; set; }
+    public virtual ICollection<Account>? Account {get; set;}    
+    public virtual ICollection<Brand>? Brand { get; set; }
+    public int? AddressId { get; set; }
+    public virtual Address? Address { get; set; }
+     
+
+    
 
     public Supplier()
     {        
     }
 
-    public Supplier(SupplierDTO supplierDTO)
+    public Supplier(Supplier supplier)
     {
-        this.Name = supplierDTO.Name;
-        this.Account = supplierDTO.Account;
-        this.Address = supplierDTO.Address;
-        this.Brand = supplierDTO.Brand;
-        this.Rating = supplierDTO.Rating;
-        this.IsVisibility = supplierDTO.IsVisibility;
+        this.Id = supplier.Id;
+        this.Name = supplier.Name;
+        this.Email = supplier.Email;
+        this.Account = supplier.Account;
+        this.Address = supplier.Address;
+        this.Brand = supplier.Brand;
+        this.Rating = supplier.Rating;
+        this.IsVisibility = supplier.IsVisibility;
     }
 
 }

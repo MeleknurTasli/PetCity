@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.AspNetCore.Mvc;
+using System.Text.Json.Serialization;
 
 
 using System.Net;
@@ -23,7 +24,7 @@ builder.Services.AddControllers().AddFluentValidation(opt =>
                 {
                     return new CustomBadRequest(context);
                 };
-            });
+            }).AddJsonOptions(x=>x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.Configure<AppSettings>(builder.Configuration.GetSection("AppSettings"));
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

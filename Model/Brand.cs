@@ -5,6 +5,13 @@ public class Brand
     public virtual ICollection<Product>? Products { get; set; }   
     public virtual ICollection<Supplier>? Suppliers { get; set; } 
 
+
+
+    public Brand()
+    {
+        Suppliers = new List<Supplier>();
+    }
+
     public override string ToString()
     {
         var txt = new StringBuilder();
