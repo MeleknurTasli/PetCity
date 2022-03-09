@@ -22,7 +22,12 @@ public class SupplierAddressDTO
         this.OpenAddress2 = address.OpenAddress2;
         this.CountryCode = address.Country.Code;
         this.Country = address.Country.Name;
-        this.State = address.State.Name;
+        if( address.State != null)
+        {
+            this.State = address.State.Name;
+        }else{
+            this.State = null;
+        }        
         this.City = address.City.Name;
         this.District = address.District.Name;
     }

@@ -7,7 +7,8 @@ public class SupplierDTOValidator : AbstractValidator<SupplierDTO>
                         .Matches(@"^[a-zA-Z ]+$").WithMessage("Supplier Name İçerisinde Harf ve Boşluk Karakterine İzin Verilir !!!")
                         .Length(5,50).WithMessage("Supplier Name 5 ile 50 Karakter Uzunlukta Olmalıdır !!!");
         
-        RuleFor(x=>x.Rating).Must(RatingControl).WithMessage("Rating 0-10 Aralığında Girilmesi Gerekmektedir !!!");        
+        RuleFor(x=>x.Rating).Must(RatingControl).WithMessage("Rating 0-10 Aralığında Girilmesi Gerekmektedir !!!");
+        RuleFor(x=>x.Email).NotNull().WithMessage("Supplier Email Alanı Boş Geçilemez !!!");        
     }
 
     private bool RatingControl(double Rating)

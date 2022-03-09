@@ -7,9 +7,7 @@ public class SupplierDTO
     public bool IsVisibility { get; set; }
     public List<SupplierAccountDTO>? Account { get; set; }
     public List<SupplierBrandDTO>? Brand { get; set; }
-    public Address? Address { get; set; }
-
-
+    public SupplierAddressDTO? Address { get; set; }
 
 
 
@@ -36,7 +34,13 @@ public class SupplierDTO
                 this.Account = new List<SupplierAccountDTO>();
                 this.Account.Add(new SupplierAccountDTO());
             }           
-            this.Address = supplier.Address;
+            
+            if(supplier.Address != null)
+            {
+                this.Address = new SupplierAddressDTO(supplier.Address);
+            }else{
+                this.Address = new SupplierAddressDTO();
+            }
             
             if( supplier.Brand != null)
             {
@@ -55,17 +59,5 @@ public class SupplierDTO
         }
     }
 
-
-    public SupplierDTO(string name, Account account, Address address, ICollection<Brand> brand, double rating, bool IsVisibility)
-    {
-        /*
-        this.Name = name;
-        this.Account = account;
-        this.Address = address;
-        this.Brand = brand;
-        this.Rating = rating;
-        this.IsVisibility = IsVisibility;*/
-
-    }
 
 }

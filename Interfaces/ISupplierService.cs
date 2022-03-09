@@ -4,7 +4,7 @@ public interface ISupplierService
 {
     Task<IEnumerable<SupplierDTO>> GetAllSupplier();
     Task<SupplierDTO> GetSupplierById(int id);
-    Task<SupplierDTO> GetSupplierByName(string name);
+    Task<SupplierDTO> GetSupplierByName(string Name);
     Task<SupplierDTO> GetSupplierByEmail(string email);
 
     Task<IEnumerable<SupplierDTO>> GetSupplierByRating(string Rating);

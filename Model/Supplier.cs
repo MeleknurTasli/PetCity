@@ -15,7 +15,8 @@ public class Supplier
     
 
     public Supplier()
-    {        
+    {
+         
     }
 
     public Supplier(Supplier supplier)
