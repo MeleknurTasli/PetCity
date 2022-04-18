@@ -84,7 +84,7 @@ public class IncidenceService : IIncidenceService
     public async Task<IncidenceDTO> CreateIncidence(Incidence incidence)
     {
         Incidence Incidence = await _IncidenceRepository.GetIncidencesById(incidence.Id);
-        if(incidence == null)
+        if(Incidence == null)
         {
             Incidence _Incidence=  await _IncidenceRepository.CreateIncidence(incidence);
             return new IncidenceDTO(_Incidence);
